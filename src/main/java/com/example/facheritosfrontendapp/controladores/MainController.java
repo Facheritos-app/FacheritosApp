@@ -28,9 +28,9 @@ public class MainController {
     }
 
     protected void switchToDashBoard(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("dashboard-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("welcomeManager.fxml"));
         stage = (Stage)((Node) event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
+        Scene scene = new Scene(fxmlLoader.load());
         stage.setScene(scene);
         stage.show();
     }
