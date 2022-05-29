@@ -61,7 +61,7 @@
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>
-                                com.example.facheritosfrontendapp/com.example.facheritosfrontendapp.HelloApplication
+                                com.example.facheritosfrontendapp/com.example.facheritosfrontendapp.vistas.Main
                             </mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
