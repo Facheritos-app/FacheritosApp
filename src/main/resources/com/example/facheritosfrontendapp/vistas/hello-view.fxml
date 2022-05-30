@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.facheritosfrontendapp.controladores.MainController">
+   <children>
+      <Button layoutX="188.0" layoutY="298.0" mnemonicParsing="false" onAction="#boton" prefHeight="38.0" prefWidth="222.0" text="Button" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font size="20.0" />
+         </font></Button>
+      <Label alignment="CENTER" layoutY="30.0" prefHeight="25.0" prefWidth="600.0" text="FT Corp." textAlignment="CENTER">
+         <font>
+            <Font size="28.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="-1.0" layoutY="70.0" prefHeight="21.0" prefWidth="600.0" text="Inicie sesión con su cédula y contraseña" textFill="#9e9d9d" />
+      <PasswordField layoutX="189.0" layoutY="239.0" prefHeight="31.0" prefWidth="222.0" />
+      <Label layoutX="189.0" layoutY="218.0" text="Contraseña" textFill="#9e9d9d" />
+      <TextField layoutX="189.0" layoutY="155.0" prefHeight="31.0" prefWidth="222.0" />
+      <Label fx:id="Label" layoutX="189.0" layoutY="134.0" text="Cédula" textFill="#9e9d9d" />
+   </children>
+</Pane>
