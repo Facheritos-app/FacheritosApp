@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Accordion?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="564.0" prefWidth="842.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
@@ -33,7 +37,7 @@
             <Separator layoutX="-5.0" layoutY="1.0" orientation="VERTICAL" prefHeight="516.0" prefWidth="8.0" />
             <ImageView fitHeight="313.0" fitWidth="489.0" layoutX="163.0" layoutY="130.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../../java/com/example/facheritosfrontendapp/icons/welcome-manager.png" />
+                  <Image url="@../icons/welcome-manager.png" />
                </image></ImageView>
          </children>
       </Pane>
@@ -41,17 +45,175 @@
    <left>
       <Pane prefHeight="521.0" prefWidth="181.0" BorderPane.alignment="CENTER">
          <children>
-            <VBox layoutX="41.0" prefHeight="200.0" prefWidth="100.0" styleClass="bold">
+            <HBox layoutX="2.0" layoutY="14.0" prefHeight="100.0" prefWidth="180.0">
                <children>
-                  <Label text="Nombre">
-                     <font>
-                        <Font name="System Bold" size="15.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets top="20.0" />
-                     </VBox.margin>
-                  </Label>
-                  <Label text="Rol" textFill="#9e9d9d" />
+                  <ImageView fitHeight="57.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../icons/user-64.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets left="10.0" top="22.0" />
+                     </HBox.margin>
+                  </ImageView>
+                  <VBox prefHeight="90.0" prefWidth="89.0" styleClass="bold">
+                     <children>
+                        <Label text="Nombre">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets top="20.0" />
+                           </VBox.margin>
+                        </Label>
+                        <Label text="Rol" textFill="#9e9d9d">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label text="Ver perfil" textFill="#9e9d9d" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <VBox layoutX="14.0" layoutY="114.0" prefHeight="394.0" prefWidth="150.0">
+               <children>
+                  <Line endX="63.799957275390625" endY="1.52587890625E-5" startX="-89.8000259399414" startY="1.52587890625E-5" stroke="LIGHTGRAY" />
+                  <Accordion />
+                  <HBox prefHeight="51.0" prefWidth="155.0" styleClass="nav-item" stylesheets="@style.css">
+                     <children>
+                        <ImageView fitHeight="35.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true" styleClass="nav-item-icon">
+                           <image>
+                              <Image url="@../icons/home-48.png" />
+                           </image>
+                           <cursor>
+                              <Cursor fx:constant="DEFAULT" />
+                           </cursor>
+                           <HBox.margin>
+                              <Insets left="10.0" top="10.0" />
+                           </HBox.margin>
+                        </ImageView>
+                        <Label prefHeight="35.0" prefWidth="55.0" text="Inicio">
+                           <padding>
+                              <Insets left="10.0" top="15.0" />
+                           </padding>
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <Line endX="63.799957275390625" endY="1.52587890625E-5" startX="-89.8000259399414" startY="1.52587890625E-5" stroke="LIGHTGRAY" />
+                  <HBox prefHeight="51.0" prefWidth="155.0" styleClass="nav-item" stylesheets="@style.css">
+                     <children>
+                        <ImageView fitHeight="35.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true" styleClass="nav-item-icon">
+                           <image>
+                              <Image url="@../icons/users-50.png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets left="10.0" top="10.0" />
+                           </HBox.margin>
+                        </ImageView>
+                        <Label prefHeight="35.0" prefWidth="74.0" text="Usuarios">
+                           <padding>
+                              <Insets left="10.0" top="15.0" />
+                           </padding>
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <Line endX="63.799957275390625" endY="1.52587890625E-5" startX="-89.8000259399414" startY="1.52587890625E-5" stroke="LIGHTGRAY" />
+                  <HBox prefHeight="51.0" prefWidth="200.0" styleClass="nav-item" stylesheets="@style.css">
+                     <children>
+                        <ImageView fitHeight="36.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true" styleClass="nav-item-icon" />
+                        <Label prefHeight="35.0" prefWidth="74.0" text="Reportes">
+                           <padding>
+                              <Insets left="10.0" top="15.0" />
+                           </padding>
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <Line endX="63.799957275390625" endY="1.52587890625E-5" startX="-89.8000259399414" startY="1.52587890625E-5" stroke="LIGHTGRAY" />
+                  <HBox prefHeight="100.0" prefWidth="200.0" styleClass="nav-item" stylesheets="@style.css">
+                     <children>
+                        <ImageView fitHeight="36.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true" styleClass="nav-item-icon" />
+                        <Label prefHeight="35.0" prefWidth="74.0" text="Sedes">
+                           <padding>
+                              <Insets left="10.0" top="15.0" />
+                           </padding>
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <Line endX="63.799957275390625" endY="1.52587890625E-5" startX="-89.8000259399414" startY="1.52587890625E-5" stroke="LIGHTGRAY" />
+                  <HBox prefHeight="100.0" prefWidth="200.0" styleClass="nav-item" stylesheets="@style.css">
+                     <children>
+                        <ImageView fitHeight="35.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true" styleClass="nav-item-icon">
+                           <image>
+                              <Image url="@../icons/page-48.png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets left="10.0" top="10.0" />
+                           </HBox.margin>
+                        </ImageView>
+                        <Label prefHeight="35.0" prefWidth="74.0" text="Inventario">
+                           <padding>
+                              <Insets left="10.0" top="15.0" />
+                           </padding>
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <Line endX="63.799957275390625" endY="1.52587890625E-5" startX="-89.8000259399414" startY="1.52587890625E-5" stroke="LIGHTGRAY" />
+                  <HBox prefHeight="100.0" prefWidth="200.0" styleClass="nav-item" stylesheets="@style.css">
+                     <children>
+                        <ImageView fitHeight="35.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true" styleClass="nav-item-icon">
+                           <image>
+                              <Image url="@../icons/page-48.png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets left="10.0" top="10.0" />
+                           </HBox.margin>
+                        </ImageView>
+                        <Label prefHeight="35.0" prefWidth="74.0" text="Ventas">
+                           <padding>
+                              <Insets left="10.0" top="15.0" />
+                           </padding>
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <Line endX="63.799957275390625" endY="1.52587890625E-5" startX="-89.8000259399414" startY="1.52587890625E-5" stroke="LIGHTGRAY" />
+                  <HBox prefHeight="100.0" prefWidth="200.0" styleClass="nav-item" stylesheets="@style.css">
+                     <children>
+                        <ImageView fitHeight="35.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true" styleClass="nav-item-icon">
+                           <image>
+                              <Image url="@../icons/page-48.png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets left="10.0" top="10.0" />
+                           </HBox.margin>
+                        </ImageView>
+                        <Label prefHeight="35.0" prefWidth="74.0" text="Órdenes">
+                           <padding>
+                              <Insets left="10.0" top="15.0" />
+                           </padding>
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
                </children>
             </VBox>
          </children></Pane>
