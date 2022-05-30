@@ -1,0 +1,23 @@
+Button {
+
+    -fx-border-radius: 20px;
+    -fx-border-color: #005296;
+
+
+
+}
+
+
+/*Navbar*/
+.nav-item {
+    -fx-pref-width: 155;
+    -fx-pref-height: 51;
+    -fx-cursor: hand;
+}
+.nav-item-icon {
+    -fx-fit-to-width: 26;
+
+}
+/**
+  -fx-background-color: #005296;
+ */

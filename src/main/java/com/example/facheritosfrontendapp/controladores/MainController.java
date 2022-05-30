@@ -14,6 +14,9 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class MainController {
+
+    @FXML
+    private Label Label;
     private Stage stage;
     private Scene scene;
     @FXML
@@ -21,11 +24,12 @@ public class MainController {
 
     @FXML
     private Button button;
+
     @FXML
-    protected void onHelloButtonClick(ActionEvent event) throws IOException {
-        welcomeText.setText("Welcome to JavaFX Application!");
+    protected void boton(ActionEvent event) throws IOException {
+        Label.setText("hola");
         switchToDashBoard(event);
-    }
+    } ;
 
     protected void switchToDashBoard(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("welcomeManager.fxml"));
