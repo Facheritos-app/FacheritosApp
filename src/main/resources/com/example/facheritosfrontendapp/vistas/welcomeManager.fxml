@@ -29,7 +29,7 @@
    <center>
       <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <Label layoutX="30.0" layoutY="14.0" prefHeight="72.0" prefWidth="217.0" text="Bienvenido" textFill="#1f1f1f">
+            <Label layoutX="30.0" layoutY="14.0" prefHeight="72.0" prefWidth="217.0" styleClass="poppins" stylesheets="@style.css" text="Bienvenido" textFill="#1f1f1f">
                <font>
                   <Font name="System Bold" size="36.0" />
                </font>
@@ -92,7 +92,7 @@
                               <Insets left="10.0" top="10.0" />
                            </HBox.margin>
                         </ImageView>
-                        <Label prefHeight="35.0" prefWidth="55.0" text="Inicio">
+                        <Label prefHeight="35.0" prefWidth="55.0" styleClass="poppins" stylesheets="@style.css" text="Inicio">
                            <padding>
                               <Insets left="10.0" top="15.0" />
                            </padding>
@@ -113,7 +113,7 @@
                               <Insets left="10.0" top="10.0" />
                            </HBox.margin>
                         </ImageView>
-                        <Label prefHeight="35.0" prefWidth="74.0" text="Usuarios">
+                        <Label prefHeight="35.0" prefWidth="74.0" styleClass="poppins" stylesheets="@style.css" text="Usuarios">
                            <padding>
                               <Insets left="10.0" top="15.0" />
                            </padding>
@@ -133,7 +133,7 @@
                            <HBox.margin>
                               <Insets left="10.0" top="15.0" />
                            </HBox.margin></ImageView>
-                        <Label prefHeight="35.0" prefWidth="74.0" text="Reportes">
+                        <Label prefHeight="35.0" prefWidth="74.0" styleClass="poppins" stylesheets="@style.css" text="Reportes">
                            <padding>
                               <Insets left="10.0" top="15.0" />
                            </padding>
@@ -153,7 +153,7 @@
                            <HBox.margin>
                               <Insets left="10.0" top="10.0" />
                            </HBox.margin></ImageView>
-                        <Label prefHeight="35.0" prefWidth="74.0" text="Sedes">
+                        <Label prefHeight="35.0" prefWidth="74.0" styleClass="poppins" stylesheets="@style.css" text="Sedes">
                            <padding>
                               <Insets left="10.0" top="15.0" />
                            </padding>
@@ -174,7 +174,7 @@
                               <Insets left="10.0" top="10.0" />
                            </HBox.margin>
                         </ImageView>
-                        <Label prefHeight="35.0" prefWidth="74.0" text="Inventario">
+                        <Label prefHeight="35.0" prefWidth="74.0" styleClass="poppins" stylesheets="@style.css" text="Inventario">
                            <padding>
                               <Insets left="10.0" top="15.0" />
                            </padding>
@@ -195,7 +195,7 @@
                               <Insets left="10.0" top="10.0" />
                            </HBox.margin>
                         </ImageView>
-                        <Label prefHeight="35.0" prefWidth="74.0" text="Ventas">
+                        <Label prefHeight="35.0" prefWidth="74.0" styleClass="poppins" stylesheets="@style.css" text="Ventas">
                            <padding>
                               <Insets left="10.0" top="15.0" />
                            </padding>
@@ -216,7 +216,7 @@
                               <Insets left="10.0" top="10.0" />
                            </HBox.margin>
                         </ImageView>
-                        <Label prefHeight="35.0" prefWidth="74.0" text="Órdenes">
+                        <Label prefHeight="35.0" prefWidth="74.0" styleClass="poppins" stylesheets="@style.css" text="Órdenes">
                            <padding>
                               <Insets left="10.0" top="15.0" />
                            </padding>
