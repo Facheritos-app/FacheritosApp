@@ -7,21 +7,30 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.facheritosfrontendapp.controladores.MainController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.facheritosfrontendapp.controladores.MainController">
    <children>
-      <Button layoutX="188.0" layoutY="298.0" mnemonicParsing="false" onAction="#boton" prefHeight="38.0" prefWidth="222.0" text="Button" textAlignment="CENTER" textFill="WHITE">
+      <Button layoutX="168.0" layoutY="296.0" mnemonicParsing="false" onAction="#boton" prefHeight="47.0" prefWidth="265.0" style="-fx-background-color: #005296; -fx-background-radius: 10;" text="Iniciar sesión" textAlignment="CENTER" textFill="WHITE">
          <font>
-            <Font size="20.0" />
+            <Font name="Poppins Bold" size="12.0" />
          </font></Button>
-      <Label alignment="CENTER" layoutY="30.0" prefHeight="25.0" prefWidth="600.0" text="FT Corp." textAlignment="CENTER">
+      <Label alignment="CENTER" layoutY="54.0" prefHeight="25.0" prefWidth="600.0" text="FT Corp." textAlignment="CENTER">
          <font>
-            <Font size="28.0" />
+            <Font name="Poppins Bold" size="48.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="-1.0" layoutY="70.0" prefHeight="21.0" prefWidth="600.0" text="Inicie sesión con su cédula y contraseña" textFill="#9e9d9d" />
-      <PasswordField layoutX="189.0" layoutY="239.0" prefHeight="31.0" prefWidth="222.0" />
-      <Label layoutX="189.0" layoutY="218.0" text="Contraseña" textFill="#9e9d9d" />
-      <TextField layoutX="189.0" layoutY="155.0" prefHeight="31.0" prefWidth="222.0" />
-      <Label fx:id="Label" layoutX="189.0" layoutY="134.0" text="Cédula" textFill="#9e9d9d" />
+      <Label alignment="CENTER" layoutY="129.0" prefHeight="21.0" prefWidth="600.0" text="Inicie sesión con su cédula y contraseña" textFill="#838383">
+         <font>
+            <Font name="Poppins Regular" size="12.0" />
+         </font></Label>
+      <PasswordField layoutX="168.0" layoutY="232.0" prefHeight="47.0" prefWidth="265.0" style="-fx-background-radius: 10;" />
+      <Label layoutX="189.0" layoutY="247.0" text="Contraseña" textFill="#9e9d9d">
+         <font>
+            <Font name="Poppins Regular" size="12.0" />
+         </font></Label>
+      <TextField layoutX="168.0" layoutY="164.0" prefHeight="47.0" prefWidth="265.0" style="-fx-background-radius: 10;" />
+      <Label fx:id="Label" layoutX="189.0" layoutY="179.0" text="Cédula" textFill="#9e9d9d">
+         <font>
+            <Font name="Poppins Regular" size="12.0" />
+         </font></Label>
    </children>
 </Pane>
