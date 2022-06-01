@@ -27,7 +27,6 @@ public class MainController {
 
     @FXML
     protected void boton(ActionEvent event) throws IOException {
-        Label.setText("hola");
         switchToDashBoard(event);
     } ;
 
