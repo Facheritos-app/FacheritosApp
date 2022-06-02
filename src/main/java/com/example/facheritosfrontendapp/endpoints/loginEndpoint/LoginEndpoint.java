@@ -1,9 +1,14 @@
 package com.example.facheritosfrontendapp.endpoints.loginEndpoint;
 
 import com.example.facheritosfrontendapp.dto.loginDTO.LoginDTO;
+import com.example.facheritosfrontendapp.dto.otherDTO.ErrorDTO;
+import com.example.facheritosfrontendapp.dto.personDTO.TypePersonDTO;
 import com.example.facheritosfrontendapp.dto.personDTO.WorkerDTO;
 import com.google.gson.Gson;
 import okhttp3.*;
+
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class LoginEndpoint {
@@ -12,7 +17,7 @@ public class LoginEndpoint {
 
     private final OkHttpClient httpClient = new OkHttpClient();
 
-    public WorkerDTO sendCredentials(LoginDTO loginDTO) throws Exception {
+    public Map<Integer, Object> sendCredentials(LoginDTO loginDTO) throws Exception {
 
         Gson gson = new Gson();
 
@@ -24,10 +29,18 @@ public class LoginEndpoint {
 
         Response response = httpClient.newCall(loginRequest).execute(); //Execute the request
 
+        HashMap<Integer, Object> mapReturn = new HashMap<Integer, Object>();
 
-        WorkerDTO responseObject = gson.fromJson(response.body().string(), WorkerDTO.class); //Cast the response from json string to object
-
-        return responseObject;
+        if(response.code() == 200){
+            WorkerDTO responseObject = gson.fromJson(response.body().string(), WorkerDTO.class); //Cast the response from json string to object
+            mapReturn.put(response.code(), responseObject);
+            return mapReturn;
+        }else{
+            ErrorDTO responseError = gson.fromJson(response.body().string(), ErrorDTO.class);
+            mapReturn.put(response.code(), responseError);
+            return mapReturn;
+        }
     }
+
 
 }

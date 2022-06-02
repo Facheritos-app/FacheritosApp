@@ -7,53 +7,72 @@ import com.example.facheritosfrontendapp.views.Main;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-import com.google.gson.Gson;
-
-public class MainController {
+public class MainController implements Initializable {
 
     @FXML
     private Label Label;
-    private Stage stage;
-    private Scene scene;
+
     @FXML
     private Label welcomeText;
 
     @FXML
     private Button button;
 
-    private LoginEndpoint loginEndpoint = new LoginEndpoint();
+    @FXML
+    private TextField cc;
+
+    @FXML
+    private PasswordField password;
+
+    private Stage stage;
+    private Scene scene;
+    private Parent root;
+
 
 
     @FXML
     protected void boton(ActionEvent event) throws IOException {
-        switchToDashBoard(event);
         LoginDTO loginDTO = new LoginDTO();
 
-        loginDTO.setCc("1234567");
-        loginDTO.setPassword("Admin123+");
+        loginDTO.setCc(cc.getText());
+        loginDTO.setPassword(password.getText());
 
-        try {
-            WorkerDTO responseWorker = loginEndpoint.sendCredentials(loginDTO);
-            System.out.println(responseWorker.getFirst_name());
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+        switchToDashBoard(event, loginDTO);
     } ;
 
-    protected void switchToDashBoard(ActionEvent event) throws IOException {
+    protected void switchToDashBoard(ActionEvent event, LoginDTO loginDTO) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("welcomeManager.fxml"));
-        stage = (Stage)((Node) event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(fxmlLoader.load());
-        stage.setScene(scene);
-        stage.show();
+        root = fxmlLoader.load();
+
+        DashboardController dashboardController = fxmlLoader.getController();
+
+        if(dashboardController.setDashboard(loginDTO)){
+            stage = (Stage)((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        }
+
+
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle rb){
+
     }
 
 }

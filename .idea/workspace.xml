@@ -5,24 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7274220f-8915-429f-8837-43f331e925ac" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/facheritosfrontendapp/controladores/DashboardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/facheritosfrontendapp/controller/DashboardController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/facheritosfrontendapp/controladores/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/facheritosfrontendapp/controller/MainController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/facheritosfrontendapp/dto/LoginDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/facheritosfrontendapp/dto/loginDTO/LoginDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/facheritosfrontendapp/dto/PersonDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/facheritosfrontendapp/dto/personDTO/PersonDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/facheritosfrontendapp/dto/WorkerDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/facheritosfrontendapp/dto/personDTO/WorkerDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/facheritosfrontendapp/endpoints/LoginEndpoint.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/facheritosfrontendapp/endpoints/loginEndpoint/LoginEndpoint.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/facheritosfrontendapp/vistas/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/facheritosfrontendapp/views/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/facheritosfrontendapp/vistas/modulo1/Modulo1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/facheritosfrontendapp/views/modulo1/Modulo1.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/facheritosfrontendapp/dto/otherDTO/ErrorDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/facheritosfrontendapp/dto/personDTO/TypePersonDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/facheritosfrontendapp/endpoints/typePersonEndpoint/TypePersonEndpoint.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/facheritosfrontendapp/controller/DashboardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/facheritosfrontendapp/controller/DashboardController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/facheritosfrontendapp/controller/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/facheritosfrontendapp/controller/MainController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/facheritosfrontendapp/endpoints/loginEndpoint/LoginEndpoint.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/facheritosfrontendapp/endpoints/loginEndpoint/LoginEndpoint.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/facheritosfrontendapp/vistas/hello-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/facheritosfrontendapp/views/hello-view.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/facheritosfrontendapp/vistas/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/facheritosfrontendapp/views/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/facheritosfrontendapp/vistas/welcomeManager.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/facheritosfrontendapp/views/welcomeManager.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/facheritosfrontendapp/views/hello-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/facheritosfrontendapp/views/hello-view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/facheritosfrontendapp/views/welcomeManager.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/facheritosfrontendapp/views/welcomeManager.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,8 +25,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="package-info" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -42,8 +35,10 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/src/main/java/com/example/facheritosfrontendapp/controller/MainController.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/com/example/facheritosfrontendapp/endpoints/loginEndpoint/LoginEndpoint.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/main/java/com/example/facheritosfrontendapp/views/Main.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/main/java/com/example/facheritosfrontendapp/views/modulo1/Modulo1.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/module-info.java" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -62,18 +57,19 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Usuario/Documents/Sexto semestre/Desarrollo de Software/Frontend-App-Facheritos&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.35632184&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.repository.indices&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/Users/Usuario/Documents/Sexto semestre/Desarrollo de Software/Frontend-App-Facheritos",
+    "project.structure.last.edited": "Libraries",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.35632184",
+    "settings.editor.selected.configurable": "preferences.JavaFX"
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.example.facheritosfrontendapp.views.Main" />
@@ -123,7 +119,7 @@
       <workItem from="1654091470649" duration="1702000" />
       <workItem from="1654093221325" duration="5848000" />
       <workItem from="1654127383088" duration="1308000" />
-      <workItem from="1654128829279" duration="297000" />
+      <workItem from="1654128829279" duration="11976000" />
     </task>
     <servers />
   </component>
@@ -140,5 +136,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

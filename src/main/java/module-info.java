@@ -17,5 +17,6 @@ module com.example.facheritosfrontendapp {
     opens com.example.facheritosfrontendapp.controller to javafx.fxml;
     opens com.example.facheritosfrontendapp.dto.loginDTO to com.google.gson;
     opens com.example.facheritosfrontendapp.dto.personDTO to com.google.gson;
+    opens com.example.facheritosfrontendapp.dto.otherDTO to com.google.gson;
 
 }
