@@ -17,6 +17,7 @@ import java.util.ResourceBundle;
 
 public class DashboardController implements Initializable {
 
+
     @FXML
     private Label welcomeLabel;
 
@@ -41,12 +42,10 @@ public class DashboardController implements Initializable {
                 TypePersonDTO responseTypePerson = typePersonEndpoint.getTypePerson(String.valueOf(responseWorker.getId_type_person()));
                 name.setText(responseWorker.getFirst_name() + responseWorker.getLast_name());
                 rol.setText(responseTypePerson.getRol_person());
+
                 return true;
             }else{
                 ErrorDTO responseError = (ErrorDTO) responseLogin.values().stream().findFirst().get();
-                /**
-                 * Codigo de Jennyfer iria aqui, puedes usar el objeto responseError para mostrar el error que viene del backend.
-                 **/
                 return false;
             }
 

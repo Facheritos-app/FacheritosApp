@@ -23,8 +23,9 @@ import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
 
+
     @FXML
-    private Label Label;
+    private Label error;
 
     @FXML
     private Label welcomeText;
@@ -41,32 +42,36 @@ public class MainController implements Initializable {
     private Stage stage;
     private Scene scene;
     private Parent root;
+    @FXML
+    private Button inicio;
 
 
 
     @FXML
     protected void boton(ActionEvent event) throws IOException {
         LoginDTO loginDTO = new LoginDTO();
-
         loginDTO.setCc(cc.getText());
         loginDTO.setPassword(password.getText());
-
         switchToDashBoard(event, loginDTO);
     } ;
 
     protected void switchToDashBoard(ActionEvent event, LoginDTO loginDTO) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("welcomeManager.fxml"));
         root = fxmlLoader.load();
-
         DashboardController dashboardController = fxmlLoader.getController();
-
-        if(dashboardController.setDashboard(loginDTO)){
-            stage = (Stage)((Node) event.getSource()).getScene().getWindow();
+        if(dashboardController.setDashboard(loginDTO)) {
+            inicio.setDisable(false); //Deshabilitar boton inciar sesion
+            error.setVisible(false);
+            inicio.setStyle("-fx-background-color: #006FC9; ");
+            inicio.setText("Cargando");
+            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
+        }else{
+            error.setStyle("-fx-text-fill: #C02130; ");
+            error.setText("Error: Datos incorrectos, intente de nuevo");
         }
-
 
     }
 
