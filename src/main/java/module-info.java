@@ -11,10 +11,11 @@ module com.example.facheritosfrontendapp {
     //opens com.example.facheritosfrontendapp to javafx.fxml;
     //exports com.example.facheritosfrontendapp;
 
-    exports com.example.facheritosfrontendapp.vistas;
-    opens com.example.facheritosfrontendapp.vistas to javafx.fxml;
-    exports com.example.facheritosfrontendapp.controladores;
-    opens com.example.facheritosfrontendapp.controladores to javafx.fxml;
-    opens com.example.facheritosfrontendapp.dto to com.google.gson;
+    exports com.example.facheritosfrontendapp.views;
+    opens com.example.facheritosfrontendapp.views to javafx.fxml;
+    exports com.example.facheritosfrontendapp.controller;
+    opens com.example.facheritosfrontendapp.controller to javafx.fxml;
+    opens com.example.facheritosfrontendapp.dto.loginDTO to com.google.gson;
+    opens com.example.facheritosfrontendapp.dto.personDTO to com.google.gson;
 
 }

@@ -1,4 +1,4 @@
-package com.example.facheritosfrontendapp.dto;
+package com.example.facheritosfrontendapp.dto.loginDTO;
 
 import lombok.Getter;
 import okhttp3.MediaType;

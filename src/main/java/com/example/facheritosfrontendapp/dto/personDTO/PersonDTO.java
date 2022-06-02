@@ -1,4 +1,4 @@
-package com.example.facheritosfrontendapp.dto;
+package com.example.facheritosfrontendapp.dto.personDTO;
 
 import java.util.Date;
 

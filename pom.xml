@@ -80,7 +80,7 @@
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>
-                                com.example.facheritosfrontendapp/com.example.facheritosfrontendapp.vistas.Main
+                                com.example.facheritosfrontendapp/com.example.facheritosfrontendapp.views.Main
                             </mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>

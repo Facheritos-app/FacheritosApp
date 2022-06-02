@@ -1,4 +1,4 @@
-package com.example.facheritosfrontendapp.vistas;
+package com.example.facheritosfrontendapp.views;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

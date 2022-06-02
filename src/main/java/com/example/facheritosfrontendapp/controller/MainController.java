@@ -1,9 +1,9 @@
-package com.example.facheritosfrontendapp.controladores;
+package com.example.facheritosfrontendapp.controller;
 
-import com.example.facheritosfrontendapp.dto.LoginDTO;
-import com.example.facheritosfrontendapp.dto.WorkerDTO;
-import com.example.facheritosfrontendapp.endpoints.LoginEndpoint;
-import com.example.facheritosfrontendapp.vistas.Main;
+import com.example.facheritosfrontendapp.dto.loginDTO.LoginDTO;
+import com.example.facheritosfrontendapp.dto.personDTO.WorkerDTO;
+import com.example.facheritosfrontendapp.endpoints.loginEndpoint.LoginEndpoint;
+import com.example.facheritosfrontendapp.views.Main;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -40,12 +40,8 @@ public class MainController {
         loginDTO.setCc("1234567");
         loginDTO.setPassword("Admin123+");
 
-        Gson gson = new Gson();
-
-        String jsonObject = gson.toJson(loginDTO);
-
         try {
-            WorkerDTO responseWorker = loginEndpoint.sendCredentials(jsonObject);
+            WorkerDTO responseWorker = loginEndpoint.sendCredentials(loginDTO);
             System.out.println(responseWorker.getFirst_name());
         } catch (Exception e) {
             throw new RuntimeException(e);

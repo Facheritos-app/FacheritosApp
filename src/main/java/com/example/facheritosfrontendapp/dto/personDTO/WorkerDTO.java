@@ -1,4 +1,6 @@
-package com.example.facheritosfrontendapp.dto;
+package com.example.facheritosfrontendapp.dto.personDTO;
+
+import com.example.facheritosfrontendapp.dto.personDTO.PersonDTO;
 
 import java.util.Date;
 
