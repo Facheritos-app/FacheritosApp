@@ -6,6 +6,7 @@ module com.example.facheritosfrontendapp {
     requires okio;
     requires lombok;
     requires com.google.gson;
+    requires java.dotenv;
 
 
     //opens com.example.facheritosfrontendapp to javafx.fxml;

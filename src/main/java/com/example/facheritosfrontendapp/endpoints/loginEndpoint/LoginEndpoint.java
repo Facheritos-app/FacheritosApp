@@ -4,12 +4,13 @@ import com.example.facheritosfrontendapp.dto.loginDTO.LoginDTO;
 import com.example.facheritosfrontendapp.dto.otherDTO.ErrorDTO;
 import com.example.facheritosfrontendapp.dto.personDTO.TypePersonDTO;
 import com.example.facheritosfrontendapp.dto.personDTO.WorkerDTO;
+import com.example.facheritosfrontendapp.util.DotEnv;
 import com.google.gson.Gson;
 import okhttp3.*;
 
 import java.util.HashMap;
 import java.util.Map;
-
+import io.github.cdimascio.dotenv.Dotenv;
 
 public class LoginEndpoint {
 
@@ -21,11 +22,13 @@ public class LoginEndpoint {
 
         Gson gson = new Gson();
 
+
+
         String loginDtoJson = gson.toJson(loginDTO); //From object to string value in json format
 
         RequestBody body = RequestBody.create(loginDtoJson, JSON); //Create the json from the string format
 
-        Request loginRequest = new Request.Builder().url("http://localhost:8092/facheritosapp/api/login/auth").post(body).build(); //Set up the request
+        Request loginRequest = new Request.Builder().url(DotEnv.getEnv("URL_API")+"/login/auth").post(body).build(); //Set up the request
 
         Response response = httpClient.newCall(loginRequest).execute(); //Execute the request
 
