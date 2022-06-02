@@ -5,8 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5f49d571-a74c-4244-90f5-d1284478321e" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/facheritosfrontendapp/views/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/facheritosfrontendapp/views/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/facheritosfrontendapp/controller/DashboardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/facheritosfrontendapp/controller/DashboardController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -104,7 +106,7 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="7274220f-8915-429f-8837-43f331e925ac" name="Changes" comment="" />
+      <changelist id="5f49d571-a74c-4244-90f5-d1284478321e" name="Changes" comment="" />
       <created>1653934621402</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -119,6 +121,7 @@
       <workItem from="1654127383088" duration="1308000" />
       <workItem from="1654128829279" duration="11976000" />
       <workItem from="1654182055057" duration="824000" />
+      <workItem from="1654197639556" duration="749000" />
     </task>
     <servers />
   </component>

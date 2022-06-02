@@ -31,6 +31,7 @@ public class DashboardController implements Initializable {
 
     private TypePersonEndpoint typePersonEndpoint = new TypePersonEndpoint();
 
+    private WorkerDTO currentWorker;
 
 
     public boolean setDashboard(LoginDTO loginDTO){
@@ -38,9 +39,10 @@ public class DashboardController implements Initializable {
         try {
             Map<Integer, Object> responseLogin = loginEndpoint.sendCredentials(loginDTO);
             if(responseLogin.containsKey(200)){
-                WorkerDTO responseWorker = (WorkerDTO) responseLogin.get(200);
-                TypePersonDTO responseTypePerson = typePersonEndpoint.getTypePerson(String.valueOf(responseWorker.getId_type_person()));
-                name.setText(responseWorker.getFirst_name() + responseWorker.getLast_name());
+                currentWorker = (WorkerDTO) responseLogin.get(200);
+                TypePersonDTO responseTypePerson = typePersonEndpoint.getTypePerson(String.valueOf(currentWorker.getId_type_person()));
+                String trimName = currentWorker.getFirst_name();
+                name.setText(trimName.contains(" ") ? trimName.split(" ")[0] : trimName);
                 rol.setText(responseTypePerson.getRol_person());
 
                 return true;
