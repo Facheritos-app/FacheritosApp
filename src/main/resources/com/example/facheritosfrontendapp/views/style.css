@@ -31,9 +31,7 @@ Button {
 }
 
 /*TableView*/
-.table-view {
-    -fx-background-radius: 50px;
-}
+
 .table-view .column-header{
     -fx-background-color: #005296;
 
