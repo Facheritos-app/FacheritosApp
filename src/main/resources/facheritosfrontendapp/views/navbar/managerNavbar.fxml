@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Accordion?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="379.0" prefWidth="153.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="facheritosfrontendapp.controller.navbar.ManagerNavbar">
+   <children>
+      <VBox prefHeight="394.0" prefWidth="150.0">
+         <children>
+            <Line endX="63.799957275390625" endY="1.52587890625E-5" startX="-89.8000259399414" startY="1.52587890625E-5" stroke="LIGHTGRAY" />
+            <Accordion />
+            <HBox prefHeight="51.0" prefWidth="155.0" styleClass="nav-item" stylesheets="@../style.css">
+               <children>
+                  <ImageView fitHeight="35.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true" styleClass="nav-item-icon">
+                     <image>
+                        <Image url="@../../icons/home-48.png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="DEFAULT" />
+                     </cursor>
+                     <HBox.margin>
+                        <Insets left="10.0" top="10.0" />
+                     </HBox.margin>
+                  </ImageView>
+                  <Label prefHeight="35.0" prefWidth="55.0" styleClass="poppins" stylesheets="@../style.css" text="Inicio">
+                     <padding>
+                        <Insets left="10.0" top="15.0" />
+                     </padding>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <Line endX="63.799957275390625" endY="1.52587890625E-5" startX="-89.8000259399414" startY="1.52587890625E-5" stroke="LIGHTGRAY" />
+            <HBox fx:id="users"  prefHeight="51.0" prefWidth="155.0" styleClass="nav-item" stylesheets="@../style.css">
+               <children>
+                  <ImageView fitHeight="35.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true" styleClass="nav-item-icon">
+                     <image>
+                        <Image url="@../../icons/users-50.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets left="10.0" top="10.0" />
+                     </HBox.margin>
+                  </ImageView>
+                  <Label prefHeight="35.0" prefWidth="74.0" styleClass="poppins" stylesheets="@../style.css" text="Usuarios">
+                     <padding>
+                        <Insets left="10.0" top="15.0" />
+                     </padding>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <Line endX="63.799957275390625" endY="1.52587890625E-5" startX="-89.8000259399414" startY="1.52587890625E-5" stroke="LIGHTGRAY" />
+            <HBox prefHeight="51.0" prefWidth="200.0" styleClass="nav-item" stylesheets="@../style.css">
+               <children>
+                  <ImageView fitHeight="35.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true" styleClass="nav-item-icon">
+                     <image>
+                        <Image url="@../../icons/report-90.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets left="10.0" top="15.0" />
+                     </HBox.margin>
+                  </ImageView>
+                  <Label prefHeight="35.0" prefWidth="74.0" styleClass="poppins" stylesheets="@../style.css" text="Reportes">
+                     <padding>
+                        <Insets left="10.0" top="15.0" />
+                     </padding>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <Line endX="63.799957275390625" endY="1.52587890625E-5" startX="-89.8000259399414" startY="1.52587890625E-5" stroke="LIGHTGRAY" />
+            <HBox prefHeight="100.0" prefWidth="200.0" styleClass="nav-item" stylesheets="@../style.css">
+               <children>
+                  <ImageView fitHeight="25.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true" styleClass="nav-item-icon">
+                     <image>
+                        <Image url="@../../icons/business-building-96.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets left="10.0" top="10.0" />
+                     </HBox.margin>
+                  </ImageView>
+                  <Label prefHeight="35.0" prefWidth="74.0" styleClass="poppins" stylesheets="@../style.css" text="Sedes">
+                     <padding>
+                        <Insets left="10.0" top="15.0" />
+                     </padding>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <Line endX="63.799957275390625" endY="1.52587890625E-5" startX="-89.8000259399414" startY="1.52587890625E-5" stroke="LIGHTGRAY" />
+            <HBox prefHeight="100.0" prefWidth="200.0" styleClass="nav-item" stylesheets="@../style.css">
+               <children>
+                  <ImageView fitHeight="35.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true" styleClass="nav-item-icon">
+                     <image>
+                        <Image url="@../../icons/bill-90.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets left="10.0" top="10.0" />
+                     </HBox.margin>
+                  </ImageView>
+                  <Label prefHeight="35.0" prefWidth="74.0" styleClass="poppins" stylesheets="@../style.css" text="Inventario">
+                     <padding>
+                        <Insets left="10.0" top="15.0" />
+                     </padding>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <Line endX="63.799957275390625" endY="1.52587890625E-5" startX="-89.8000259399414" startY="1.52587890625E-5" stroke="LIGHTGRAY" />
+            <HBox prefHeight="100.0" prefWidth="200.0" styleClass="nav-item" stylesheets="@../style.css">
+               <children>
+                  <ImageView fitHeight="35.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true" styleClass="nav-item-icon">
+                     <image>
+                        <Image url="@../../icons/sales-90.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets left="10.0" top="10.0" />
+                     </HBox.margin>
+                  </ImageView>
+                  <Label prefHeight="35.0" prefWidth="74.0" styleClass="poppins" stylesheets="@../style.css" text="Ventas">
+                     <padding>
+                        <Insets left="10.0" top="15.0" />
+                     </padding>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <Line endX="63.799957275390625" endY="1.52587890625E-5" startX="-89.8000259399414" startY="1.52587890625E-5" stroke="LIGHTGRAY" />
+            <HBox prefHeight="100.0" prefWidth="200.0" styleClass="nav-item" stylesheets="@../style.css">
+               <children>
+                  <ImageView fitHeight="35.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true" styleClass="nav-item-icon">
+                     <image>
+                        <Image url="@../../icons/order-64.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets left="10.0" top="10.0" />
+                     </HBox.margin>
+                  </ImageView>
+                  <Label prefHeight="35.0" prefWidth="74.0" styleClass="poppins" stylesheets="@../style.css" text="Órdenes">
+                     <padding>
+                        <Insets left="10.0" top="15.0" />
+                     </padding>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</VBox>

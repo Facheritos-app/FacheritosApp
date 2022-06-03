@@ -1,0 +1,45 @@
+/*
+Button {
+
+    -fx-border-radius: 20px;
+    -fx-border-color: #005296;
+
+}
+*/
+
+/*Navbar*/
+.nav-item {
+    -fx-pref-width: 155;
+    -fx-pref-height: 51;
+    -fx-cursor: hand;
+}
+.nav-item-icon {
+    -fx-fit-to-width: 26;
+
+}
+
+/*Buttons*/
+.red-button {
+    -fx-background-color: #C02130;
+    -fx-border-radius: 7px;
+    -fx-background-radius: 7px;
+}
+
+/*Tabpane*/
+.tab-pane:top {
+
+}
+
+/*TableView*/
+
+.table-view .column-header{
+    -fx-background-color: #005296;
+
+}
+.table-view .column-header .label {
+    -fx-text-fill: #fff;
+}
+
+/**
+  -fx-background-color: #005296;
+ */

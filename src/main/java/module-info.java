@@ -1,14 +1,25 @@
-module com.example.facheritosfrontendapp {
+module  facheritosfrontendapp {
     requires javafx.controls;
     requires javafx.fxml;
+    requires okhttp3;
+    requires annotations;
+    requires okio;
+    requires lombok;
+    requires com.google.gson;
+    requires java.dotenv;
 
 
-    //opens com.example.facheritosfrontendapp to javafx.fxml;
-    //exports com.example.facheritosfrontendapp;
+    //opens  facheritosfrontendapp to javafx.fxml;
+    //exports  facheritosfrontendapp;
 
-    exports com.example.facheritosfrontendapp.vistas;
-    opens com.example.facheritosfrontendapp.vistas to javafx.fxml;
-    exports com.example.facheritosfrontendapp.controladores;
-    opens com.example.facheritosfrontendapp.controladores to javafx.fxml;
+    exports  facheritosfrontendapp.views;
+    opens  facheritosfrontendapp.views to javafx.fxml;
+    exports  facheritosfrontendapp.controller;
+    opens  facheritosfrontendapp.controller to javafx.fxml;
+    exports  facheritosfrontendapp.controller.navbar;
+    opens  facheritosfrontendapp.controller.navbar to javafx.fxml;
+    opens  facheritosfrontendapp.dto.loginDTO to com.google.gson;
+    opens  facheritosfrontendapp.dto.personDTO to com.google.gson;
+    opens  facheritosfrontendapp.dto.otherDTO to com.google.gson;
 
 }
