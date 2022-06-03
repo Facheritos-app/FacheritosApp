@@ -5,26 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5f49d571-a74c-4244-90f5-d1284478321e" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/navbar/ManagerNavbar.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/navbar/MechanicNavbar.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/navbar/SellerNavbar.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/icons/customers.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/icons/engineer-60.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/icons/quote.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/navbar/managerNavbar.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/navbar/mechanicNavbar.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/navbar/sellerNavbar.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/facheritosfrontendapp/controller/DashboardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/DashboardController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/facheritosfrontendapp/controller/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/MainController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/facheritosfrontendapp/controller/UsersController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/UsersController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/facheritosfrontendapp/dto/loginDTO/LoginDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/dto/loginDTO/LoginDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/facheritosfrontendapp/dto/otherDTO/ErrorDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/dto/otherDTO/ErrorDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/facheritosfrontendapp/dto/personDTO/PersonDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/dto/personDTO/PersonDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/facheritosfrontendapp/dto/personDTO/TypePersonDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/dto/personDTO/TypePersonDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/facheritosfrontendapp/dto/personDTO/WorkerDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/dto/personDTO/WorkerDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/facheritosfrontendapp/endpoints/loginEndpoint/LoginEndpoint.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/endpoints/loginEndpoint/LoginEndpoint.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/facheritosfrontendapp/endpoints/typePersonEndpoint/TypePersonEndpoint.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/endpoints/typePersonEndpoint/TypePersonEndpoint.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/facheritosfrontendapp/util/DotEnv.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/util/DotEnv.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/facheritosfrontendapp/views/FxmlLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/views/FxmlLoader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/facheritosfrontendapp/views/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/views/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/facheritosfrontendapp/views/modulo1/Modulo1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/views/modulo1/Modulo1.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/DashboardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/DashboardController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/facheritosfrontendapp/views/hello-view.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/facheritosfrontendapp/views/style.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/facheritosfrontendapp/views/users.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/facheritosfrontendapp/views/welcomeManager.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/welcomeManager.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/welcomeManager.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -86,7 +79,11 @@
   }
 }</component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Univalle\Semestre 6\Desarrollo de software I\proyecto\FacheritosFrontendApp\src\main\resources\facheritosfrontendapp\views" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Univalle\Semestre 6\Desarrollo de software I\proyecto\FacheritosFrontendApp\src\main\resources\facheritosfrontendapp\views\navbar" />
       <recent name="D:\Univalle\Semestre 6\Desarrollo de software I\proyecto\FacheritosFrontendApp\target\classes\facheritosfrontendapp\controller" />
       <recent name="D:\Univalle\Semestre 6\Desarrollo de software I\proyecto\FacheritosFrontendApp\src\main\resources" />
       <recent name="D:\Univalle\Semestre 6\Desarrollo de software I\proyecto\FacheritosFrontendApp\src\main\resources\" />
@@ -165,6 +162,8 @@
       <workItem from="1654128829279" duration="11976000" />
       <workItem from="1654182055057" duration="824000" />
       <workItem from="1654197639556" duration="749000" />
+      <workItem from="1654263773342" duration="601000" />
+      <workItem from="1654284439875" duration="5440000" />
     </task>
     <servers />
   </component>
@@ -187,7 +186,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/DashboardController.java</url>
-          <line>52</line>
+          <line>119</line>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
         <breakpoint enabled="true" type="java-exception">
