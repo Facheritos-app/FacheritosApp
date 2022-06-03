@@ -7,6 +7,7 @@
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
@@ -14,7 +15,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="564.0" prefWidth="842.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.facheritosfrontendapp.controller.DashboardController">
+<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="564.0" prefWidth="842.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.facheritosfrontendapp.controller.DashboardController">
    <top>
       <Pane prefHeight="43.0" prefWidth="680.0" style="-fx-background-color: #005296;" BorderPane.alignment="CENTER">
          <children>
@@ -26,22 +27,6 @@
          </children>
       </Pane>
    </top>
-   <center>
-      <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-         <children>
-            <Label fx:id="welcomeLabel" layoutX="30.0" layoutY="14.0" prefHeight="72.0" prefWidth="217.0" styleClass="poppins" stylesheets="@style.css" text="Bienvenido" textFill="#1f1f1f">
-               <font>
-                  <Font name="System Bold" size="36.0" />
-               </font>
-            </Label>
-            <Separator layoutX="-5.0" layoutY="1.0" orientation="VERTICAL" prefHeight="516.0" prefWidth="8.0" />
-            <ImageView fitHeight="313.0" fitWidth="489.0" layoutX="163.0" layoutY="130.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../icons/welcome-manager.png" />
-               </image></ImageView>
-         </children>
-      </Pane>
-   </center>
    <left>
       <Pane prefHeight="521.0" prefWidth="181.0" BorderPane.alignment="CENTER">
          <children>
@@ -103,7 +88,7 @@
                      </children>
                   </HBox>
                   <Line endX="63.799957275390625" endY="1.52587890625E-5" startX="-89.8000259399414" startY="1.52587890625E-5" stroke="LIGHTGRAY" />
-                  <HBox prefHeight="51.0" prefWidth="155.0" styleClass="nav-item" stylesheets="@style.css">
+                  <HBox fx:id="users" onMouseClicked="#usersClicked" prefHeight="51.0" prefWidth="155.0" styleClass="nav-item" stylesheets="@style.css">
                      <children>
                         <ImageView fitHeight="35.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true" styleClass="nav-item-icon">
                            <image>
@@ -230,4 +215,21 @@
             </VBox>
          </children></Pane>
    </left>
+   <right>
+      <AnchorPane fx:id="welcomePane" prefHeight="517.0" prefWidth="647.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label fx:id="welcomeLabel" layoutX="20.0" layoutY="22.0" prefHeight="72.0" prefWidth="217.0" styleClass="poppins" stylesheets="@style.css" text="Bienvenido" textFill="#1f1f1f">
+               <font>
+                  <Font name="System Bold" size="36.0" />
+               </font>
+            </Label>
+            <Separator orientation="VERTICAL" prefHeight="516.0" prefWidth="8.0" />
+            <ImageView fitHeight="313.0" fitWidth="489.0" layoutX="141.0" layoutY="125.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../icons/welcome-manager.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+   </right>
 </BorderPane>

@@ -7,17 +7,27 @@ import com.example.facheritosfrontendapp.dto.personDTO.WorkerDTO;
 import com.example.facheritosfrontendapp.endpoints.loginEndpoint.LoginEndpoint;
 
 import com.example.facheritosfrontendapp.endpoints.typePersonEndpoint.TypePersonEndpoint;
+import com.example.facheritosfrontendapp.views.FxmlLoader;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.Map;
 import java.util.ResourceBundle;
 
 public class DashboardController implements Initializable {
 
-
+    @FXML
+    private AnchorPane welcomePane;
+    @FXML
+    private BorderPane borderPane;
     @FXML
     private Label welcomeLabel;
 
@@ -26,6 +36,9 @@ public class DashboardController implements Initializable {
 
     @FXML
     private Label rol;
+
+    @FXML
+    private HBox users;
 
     private LoginEndpoint loginEndpoint = new LoginEndpoint();
 
@@ -57,7 +70,15 @@ public class DashboardController implements Initializable {
         }
     }
 
+    @FXML
+    protected void usersClicked() throws IOException {
+        System.out.println(users.getChildren());
+        name.setText("Hola");
+
+        borderPane.setRight( new FxmlLoader().getPage("users"));
+    }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
     }
 }
+
