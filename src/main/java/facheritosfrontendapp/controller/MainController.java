@@ -18,6 +18,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.concurrent.ExecutionException;
 
 public class MainController implements Initializable {
 
@@ -46,14 +47,14 @@ public class MainController implements Initializable {
 
 
     @FXML
-    protected void boton(ActionEvent event) throws IOException {
+    protected void boton(ActionEvent event) throws IOException, ExecutionException, InterruptedException {
         LoginDTO loginDTO = new LoginDTO();
         loginDTO.setCc(cc.getText());
         loginDTO.setPassword(password.getText());
         switchToDashBoard(event, loginDTO);
     } ;
 
-    protected void switchToDashBoard(ActionEvent event, LoginDTO loginDTO) throws IOException {
+    protected void switchToDashBoard(ActionEvent event, LoginDTO loginDTO) throws IOException, ExecutionException, InterruptedException {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("welcomeManager.fxml"));
         root = fxmlLoader.load();
         DashboardController dashboardController = fxmlLoader.getController();

@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="517.0" prefWidth="647.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="facheritosfrontendapp.controller.UsersController">
+<AnchorPane prefHeight="517.0" prefWidth="647.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="facheritosfrontendapp.controller.UsersController">
    <children>
       <Label layoutX="34.0" layoutY="23.0" prefHeight="72.0" prefWidth="217.0" styleClass="poppins" stylesheets="@style.css" text="Usuarios" textFill="#1f1f1f">
          <font>
