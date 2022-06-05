@@ -9,6 +9,7 @@ import facheritosfrontendapp.endpoints.loginEndpoint.LoginEndpoint;
 import facheritosfrontendapp.endpoints.typePersonEndpoint.TypePersonEndpoint;
 import facheritosfrontendapp.views.FxmlLoader;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
@@ -91,10 +92,12 @@ public class DashboardController implements Initializable {
         }).handle((result, ex) -> null != ex ? false : result).get();
     }
 
-    @FXML
-    protected void usersClicked() throws IOException {
-        System.out.println(users.getChildren());
-        borderPane.setRight(new FxmlLoader().getPage("users"));
+    /**
+     * This methods manages the event of clicking on any element of the Navbar
+     */
+
+    public void navbarClicked(String subpage) throws IOException {
+        borderPane.setCenter(new FxmlLoader().getPage(subpage));
     }
 
 
@@ -155,10 +158,8 @@ public class DashboardController implements Initializable {
             case 3:
                 navbar.getChildren().add(new FxmlLoader().getPage("navbar/mechanicNavbar"));
                 break;
-            //Customer
-            case 4:
-                break;
             default:
+                /*THIS SHOULD THROW AN ERROR*/
                 break;
         }
 

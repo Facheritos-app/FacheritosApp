@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="517.0" prefWidth="647.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="facheritosfrontendapp.controller.headquarters.HeadquartersController">
+    <children>
+        <Label layoutX="34.0" layoutY="23.0" prefHeight="72.0" prefWidth="217.0" styleClass="poppins" text="Sedes" textFill="#1f1f1f">
+            <font>
+                <Font name="System Bold" size="36.0" />
+            </font>
+        </Label>
+        <Button layoutX="503.0" layoutY="115.0" mnemonicParsing="false" styleClass="red-button" stylesheets="@../style.css" text="Agregar sede +" textFill="WHITE">
+            <font>
+                <Font name="System Bold" size="12.0" />
+            </font>
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </Button>
+            <TableView layoutX="57.0" layoutY="169.0" prefHeight="218.0" prefWidth="550.0" stylesheets="@../style.css">
+                <columns>
+                    <TableColumn prefWidth="100.0" text="Identificación" />
+                    <TableColumn prefWidth="90.0" text="Nombre" />
+                    <TableColumn prefWidth="90.0" text="Celular" />
+                    <TableColumn prefWidth="90.0" text="Dirección" />
+                    <TableColumn prefWidth="90.0" text="Correo" />
+                    <TableColumn prefWidth="90.0" text="Opciones" />
+                </columns>
+            </TableView>
+    </children>
+</AnchorPane>

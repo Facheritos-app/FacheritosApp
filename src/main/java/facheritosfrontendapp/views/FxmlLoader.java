@@ -12,7 +12,9 @@ public class FxmlLoader {
     private FXMLLoader fxmlLoader;
 
     public Pane getPage(String fileName) throws IOException {
-        URL fileURL = Main.class.getResource(fileName+".fxml");
+        System.out.println(fileName);
+        URL fileURL = Main.class.getResource("/facheritosfrontendapp/views/"+fileName+".fxml");
+        System.out.println(fileURL);
         if(fileURL == null){
             throw new FileNotFoundException("FXML not found");
         }
