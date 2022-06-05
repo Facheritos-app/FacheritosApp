@@ -21,10 +21,15 @@ Button {
 /*Buttons*/
 .red-button {
     -fx-background-color: #C02130;
-    -fx-border-radius: 7px;
-    -fx-background-radius: 7px;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
 }
 
+.blue-button {
+    -fx-background-color: #005296;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+}
 /*Tabpane*/
 .tab-pane:top {
 
