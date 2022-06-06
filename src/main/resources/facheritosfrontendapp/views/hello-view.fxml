@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="facheritosfrontendapp.controller.MainController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="facheritosfrontendapp.controller.MainController">
    <children>
       <Button fx:id="inicio" layoutX="168.0" layoutY="321.0" mnemonicParsing="false" onAction="#boton" prefHeight="47.0" prefWidth="265.0" style="-fx-background-color: #005296; -fx-background-radius: 10;" text="Iniciar sesión" textAlignment="CENTER" textFill="WHITE">
          <font>
@@ -26,8 +26,14 @@
          <font>
             <Font name="Poppins Regular" size="12.0" />
          </font></Label>
-      <PasswordField fx:id="password" layoutX="168.0" layoutY="232.0" prefHeight="47.0" prefWidth="265.0" promptText="Contraseña" style="-fx-background-radius: 10;" />
-      <TextField fx:id="cc" layoutX="168.0" layoutY="164.0" prefHeight="47.0" prefWidth="265.0" promptText="Cédula" style="-fx-background-radius: 10;" />
+      <PasswordField fx:id="password" layoutX="168.0" layoutY="232.0" prefHeight="47.0" prefWidth="265.0" promptText="Contraseña" style="-fx-background-radius: 10;">
+         <cursor>
+            <Cursor fx:constant="TEXT" />
+         </cursor></PasswordField>
+      <TextField fx:id="cc" layoutX="168.0" layoutY="164.0" prefHeight="47.0" prefWidth="265.0" promptText="Cédula" style="-fx-background-radius: 10;">
+         <cursor>
+            <Cursor fx:constant="TEXT" />
+         </cursor></TextField>
       <Label layoutX="172.0" layoutY="135.0" prefHeight="21.0" prefWidth="0.0" />
       <Label fx:id="error" alignment="CENTER" layoutX="173.0" layoutY="279.0" prefHeight="21.0" prefWidth="252.0" text=" " />
    </children>

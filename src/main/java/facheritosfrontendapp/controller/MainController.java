@@ -44,6 +44,7 @@ public class MainController implements Initializable {
     @FXML
     private Button inicio;
 
+    private static DashboardController dashboardController;
 
 
     @FXML
@@ -57,7 +58,7 @@ public class MainController implements Initializable {
     protected void switchToDashBoard(ActionEvent event, LoginDTO loginDTO) throws IOException, ExecutionException, InterruptedException {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("welcomeManager.fxml"));
         root = fxmlLoader.load();
-        DashboardController dashboardController = fxmlLoader.getController();
+        dashboardController = fxmlLoader.getController();
         if(dashboardController.setDashboard(loginDTO)) {
             inicio.setDisable(false); //Deshabilitar boton inciar sesion
             error.setVisible(false);
@@ -72,6 +73,10 @@ public class MainController implements Initializable {
             error.setText("Error: Datos incorrectos, intente de nuevo");
         }
 
+    }
+
+    public static DashboardController getDashboardController() {
+        return dashboardController;
     }
 
     @Override

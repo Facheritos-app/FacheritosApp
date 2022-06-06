@@ -4,12 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6654abf1-0931-48a9-aa07-d37cbbe4ed58" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/UsersSingleViewController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/usersSingleView.fxml" afterDir="false" />
+
+
+    <list default="true" id="5f49d571-a74c-4244-90f5-d1284478321e" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/headquarters/HeadquartersController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/headquarters/HeadquartersController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/headquarters/headquartersAdd.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/headquarters/headquartersAdd.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/hello-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/hello-view.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/welcomeManager.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/welcomeManager.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -91,7 +94,7 @@
       <option name="ALTERNATIVE_JRE_PATH" value="temurin-11" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <option name="MAIN_CLASS_NAME" value="facheritosfrontendapp.views.Main" />
-      <module name="FacheritosAppFrontend" />
+      <module name="FacheritosFrontendApp" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="facheritosfrontendapp.views.*" />
@@ -158,8 +161,10 @@
       <workItem from="1654197639556" duration="749000" />
       <workItem from="1654263773342" duration="601000" />
       <workItem from="1654284439875" duration="5440000" />
+
       <workItem from="1654449501929" duration="290000" />
       <workItem from="1654450934682" duration="10105000" />
+
     </task>
     <servers />
   </component>
