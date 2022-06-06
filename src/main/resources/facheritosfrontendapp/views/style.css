@@ -19,6 +19,9 @@ Button {
 }
 
 /*Buttons*/
+Button {
+    -fx-cursor: hand;
+}
 .red-button {
     -fx-background-color: #C02130;
     -fx-border-radius: 7px;
@@ -37,14 +40,7 @@ Button {
     -fx-text-fill: white;
 }
 
-.buttons-footer {
 
-}
-
-/*Tabpane*/
-.tab-pane:top {
-
-}
 
 /*TableView*/
 
@@ -54,6 +50,13 @@ Button {
 }
 .table-view .column-header .label {
     -fx-text-fill: #fff;
+}
+
+
+/*Textfields*/
+.input-text {
+    -fx-background-radius: 10px;
+    -fx-border-radius: 10px;
 }
 
 /**
