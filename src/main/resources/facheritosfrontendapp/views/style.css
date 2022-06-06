@@ -7,6 +7,7 @@ Button {
 }
 */
 
+
 /*Navbar*/
 .nav-item {
     -fx-pref-width: 155;
@@ -24,8 +25,6 @@ Button {
 }
 .red-button {
     -fx-background-color: #C02130;
-<<<<<<< Updated upstream
-=======
     -fx-border-radius: 10px;
     -fx-background-radius: 10px;
 }
@@ -38,7 +37,6 @@ Button {
 /*Tabpane*/
 
 .tab-pane:top {
->>>>>>> Stashed changes
     -fx-border-radius: 7px;
     -fx-background-radius: 7px;
     -fx-text-fill: white;
@@ -70,8 +68,9 @@ Button {
 
 /*Textfields*/
 .input-text {
-    -fx-background-radius: 10px;
-    -fx-border-radius: 10px;
+    -fx-background-radius: 7px;
+    -fx-border-radius: 7px;
+    -fx-background-color: #D3D3D3;
 }
 
 /**

@@ -6,21 +6,20 @@
   <component name="ChangeListManager">
     <list default="true" id="5f49d571-a74c-4244-90f5-d1284478321e" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-<<<<<<< Updated upstream
-      <change beforePath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/headquarters/HeadquartersController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/headquarters/HeadquartersController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/headquarters/headquartersAdd.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/headquarters/headquartersAdd.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/hello-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/hello-view.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/welcomeManager.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/welcomeManager.fxml" afterDir="false" />
-=======
       <change beforePath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/DashboardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/DashboardController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/UsersController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/users/UsersController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/headquarters/HeadquartersController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/headquarters/HeadquartersController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/navbar/ManagerNavbar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/navbar/ManagerNavbar.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/views/FxmlLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/views/FxmlLoader.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/headquarters/headquarters.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/headquarters/headquarters.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/headquarters/headquartersAdd.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/headquarters/headquartersAdd.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/hello-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/hello-view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/navbar/managerNavbar.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/navbar/managerNavbar.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/users.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/users/users.fxml" afterDir="false" />
->>>>>>> Stashed changes
+      <change beforePath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/users/users.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/users/users.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/users/usersAdd.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/users/usersAdd.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/welcomeManager.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/welcomeManager.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -170,13 +169,9 @@
       <workItem from="1654197639556" duration="749000" />
       <workItem from="1654263773342" duration="601000" />
       <workItem from="1654284439875" duration="5440000" />
-<<<<<<< Updated upstream
-      <workItem from="1654463771642" duration="8482000" />
-=======
       <workItem from="1654449501929" duration="290000" />
       <workItem from="1654450934682" duration="10105000" />
       <workItem from="1654541928542" duration="3906000" />
->>>>>>> Stashed changes
     </task>
     <servers />
   </component>

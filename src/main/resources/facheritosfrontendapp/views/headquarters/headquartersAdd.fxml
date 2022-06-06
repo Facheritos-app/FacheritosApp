@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="517.0" prefWidth="647.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="facheritosfrontendapp.controller.headquarters.HeadquartersController">
+<AnchorPane prefHeight="517.0" prefWidth="647.0" xmlns="http://javafx.com/javafx/" xmlns:fx="http://javafx.com/fxml/" fx:controller="facheritosfrontendapp.controller.headquarters.HeadquartersController">
    <children>
       <VBox layoutX="-1.0" layoutY="-3.0" prefHeight="334.0" prefWidth="647.0" spacing="10.0">
          <children>
@@ -35,7 +35,7 @@
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <TextField prefHeight="36.0" prefWidth="273.0" styleClass="input" stylesheets="@../style.css" />
+                        <TextField prefHeight="36.0" prefWidth="273.0" styleClass="input-text" stylesheets="@../style.css" />
                      </children>
                      <HBox.margin>
                         <Insets left="40.0" />
@@ -48,7 +48,7 @@
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <TextField prefHeight="36.0" prefWidth="297.0" styleClass="input" stylesheets="@../style.css" />
+                        <TextField prefHeight="36.0" prefWidth="297.0" styleClass="input-text" stylesheets="@../style.css" />
                      </children>
                   </VBox>
                </children>
@@ -62,7 +62,7 @@
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <TextField prefHeight="36.0" prefWidth="273.0" styleClass="input" stylesheets="@../style.css" />
+                        <TextField prefHeight="36.0" prefWidth="273.0" styleClass="input-text" stylesheets="@../style.css" />
                      </children>
                      <HBox.margin>
                         <Insets left="40.0" />
@@ -75,7 +75,7 @@
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <TextField prefHeight="36.0" prefWidth="297.0" styleClass="input" stylesheets="@../style.css" />
+                        <TextField prefHeight="36.0" prefWidth="297.0" styleClass="input-text" stylesheets="@../style.css" />
                      </children>
                   </VBox>
                </children>
