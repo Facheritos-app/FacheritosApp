@@ -23,6 +23,22 @@ Button {
     -fx-background-color: #C02130;
     -fx-border-radius: 7px;
     -fx-background-radius: 7px;
+    -fx-text-fill: white;
+}
+.select-button {
+    -fx-pref-width: 120px;
+    -fx-pref-height: 36px;
+    -fx-font-weight: bold;
+}
+.blue-button {
+    -fx-background-color: #005296;
+    -fx-border-radius: 7px;
+    -fx-background-radius: 7px;
+    -fx-text-fill: white;
+}
+
+.buttons-footer {
+
 }
 
 /*Tabpane*/
