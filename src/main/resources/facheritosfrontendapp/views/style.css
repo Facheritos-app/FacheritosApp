@@ -24,6 +24,21 @@ Button {
 }
 .red-button {
     -fx-background-color: #C02130;
+<<<<<<< Updated upstream
+=======
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+}
+
+.blue-button {
+    -fx-background-color: #005296;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+}
+/*Tabpane*/
+
+.tab-pane:top {
+>>>>>>> Stashed changes
     -fx-border-radius: 7px;
     -fx-background-radius: 7px;
     -fx-text-fill: white;

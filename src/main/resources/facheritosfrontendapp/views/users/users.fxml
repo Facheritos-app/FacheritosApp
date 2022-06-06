@@ -10,14 +10,14 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="517.0" prefWidth="647.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="facheritosfrontendapp.controller.UsersController">
+<AnchorPane prefHeight="517.0" prefWidth="647.0" xmlns="http://javafx.com/javafx/" xmlns:fx="http://javafx.com/fxml/" fx:controller="facheritosfrontendapp.controller.users.UsersController">
    <children>
-      <Label layoutX="34.0" layoutY="23.0" prefHeight="72.0" prefWidth="217.0" styleClass="poppins" stylesheets="@style.css" text="Usuarios" textFill="#1f1f1f">
+      <Label layoutX="34.0" layoutY="23.0" prefHeight="72.0" prefWidth="217.0" styleClass="poppins" stylesheets="@../style.css" text="Usuarios" textFill="#1f1f1f">
          <font>
             <Font name="System Bold" size="36.0" />
          </font>
       </Label>
-      <Button layoutX="440.0" layoutY="104.0" mnemonicParsing="false" styleClass="red-button" stylesheets="@style.css" text="Agregar usuario +" textFill="WHITE">
+      <Button fx:id="addUser" layoutX="440.0" layoutY="104.0" mnemonicParsing="false" onMouseClicked="#addUserClicked" styleClass="red-button" stylesheets="@../style.css" text="Agregar usuario +" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
@@ -25,7 +25,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <TabPane layoutX="86.0" layoutY="157.0" prefHeight="246.0" prefWidth="474.0" stylesheets="@style.css">
+      <TabPane fx:id="usersTabpane" layoutX="86.0" layoutY="157.0" prefHeight="246.0" prefWidth="474.0" stylesheets="@../style.css">
         <tabs>
           <Tab text="Empleados">
                <content>
