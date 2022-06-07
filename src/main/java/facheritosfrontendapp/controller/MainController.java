@@ -1,6 +1,6 @@
 package facheritosfrontendapp.controller;
 
-import facheritosfrontendapp.dto.loginDTO.LoginDTO;
+import backend.dto.loginDTO.LoginDTO;
 import facheritosfrontendapp.views.Main;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -45,6 +45,7 @@ public class MainController implements Initializable {
     private Button inicio;
 
     private static DashboardController dashboardController;
+
 
 
     @FXML

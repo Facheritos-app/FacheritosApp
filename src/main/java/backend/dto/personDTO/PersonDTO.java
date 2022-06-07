@@ -1,4 +1,4 @@
-package facheritosfrontendapp.dto.personDTO;
+package backend.dto.personDTO;
 
 import java.util.Date;
 

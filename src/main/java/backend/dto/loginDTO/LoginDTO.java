@@ -1,4 +1,4 @@
-package facheritosfrontendapp.dto.loginDTO;
+package backend.dto.loginDTO;
 
 import okhttp3.MediaType;
 import okhttp3.RequestBody;

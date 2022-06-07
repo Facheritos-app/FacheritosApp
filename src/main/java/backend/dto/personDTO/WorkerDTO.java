@@ -1,4 +1,4 @@
-package facheritosfrontendapp.dto.personDTO;
+package backend.dto.personDTO;
 
 import java.util.Date;
 
@@ -9,11 +9,17 @@ public class WorkerDTO extends PersonDTO {
 
     private String password;
 
+    private Integer id_rol;
+
+    private String rol;
+
     private Boolean state;
 
-    protected Double salary;
+    private Double salary;
 
-    protected Date hired_date;
+    private Date hired_date;
+
+
 
     public Integer getId_worker() {
         return id_worker;
@@ -37,6 +43,22 @@ public class WorkerDTO extends PersonDTO {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Integer getId_rol() {
+        return id_rol;
+    }
+
+    public void setId_rol(Integer id_rol) {
+        this.id_rol = id_rol;
+    }
+
+    public String getRol() {
+        return rol;
+    }
+
+    public void setRol(String rol) {
+        this.rol = rol;
     }
 
     public Boolean getState() {
