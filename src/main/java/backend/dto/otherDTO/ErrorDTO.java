@@ -1,4 +1,4 @@
-package facheritosfrontendapp.dto.otherDTO;
+package backend.dto.otherDTO;
 
 public class ErrorDTO {
 
