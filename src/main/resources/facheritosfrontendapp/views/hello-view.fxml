@@ -19,7 +19,7 @@
          </cursor></Button>
       <Label alignment="CENTER" layoutY="54.0" prefHeight="25.0" prefWidth="600.0" text="FT Corp." textAlignment="CENTER">
          <font>
-            <Font name="Poppins Bold" size="48.0" />
+            <Font name="System Bold" size="48.0" />
          </font>
       </Label>
       <Label alignment="CENTER" layoutX="1.0" layoutY="125.0" prefHeight="21.0" prefWidth="600.0" text="Inicie sesión con su cédula y contraseña" textFill="#838383">

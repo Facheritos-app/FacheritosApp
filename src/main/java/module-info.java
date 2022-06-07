@@ -21,6 +21,8 @@ module  facheritosfrontendapp {
     opens  facheritosfrontendapp.controller to javafx.fxml;
     exports  facheritosfrontendapp.controller.navbar;
     opens  facheritosfrontendapp.controller.navbar to javafx.fxml;
+    exports  facheritosfrontendapp.controller.users;
+    opens  facheritosfrontendapp.controller.users to javafx.fxml;
     exports  facheritosfrontendapp.controller.headquarters;
     opens  facheritosfrontendapp.controller.headquarters to javafx.fxml;
     opens  backend.dto.loginDTO to com.google.gson;

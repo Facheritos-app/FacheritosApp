@@ -7,6 +7,7 @@ Button {
 }
 */
 
+
 /*Navbar*/
 .nav-item {
     -fx-pref-width: 155;
@@ -26,14 +27,17 @@ Button {
     -fx-background-color: #C02130;
     -fx-border-radius: 10px;
     -fx-background-radius: 10px;
+    -fx-text-fill: white;
 }
 
 .blue-button {
     -fx-background-color: #005296;
     -fx-border-radius: 10px;
     -fx-background-radius: 10px;
+    -fx-text-fill: white;
 }
 /*Tabpane*/
+
 .tab-pane:top {
     -fx-border-radius: 7px;
     -fx-background-radius: 7px;
@@ -44,13 +48,6 @@ Button {
     -fx-pref-height: 36px;
     -fx-font-weight: bold;
 }
-.blue-button {
-    -fx-background-color: #005296;
-    -fx-border-radius: 7px;
-    -fx-background-radius: 7px;
-    -fx-text-fill: white;
-}
-
 
 /*TableView*/
 
@@ -67,6 +64,7 @@ Button {
 .input-text {
     -fx-background-radius: 10px;
     -fx-border-radius: 10px;
+    -fx-background-color: #D3D3D3;
 }
 
 /**

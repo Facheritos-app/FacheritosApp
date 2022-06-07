@@ -25,7 +25,7 @@ public class HeadquartersController implements Initializable {
 
     @FXML
     protected void addHeadquarterClicked() throws IOException {
-        dashboardController.navbarClicked("headquarters/headquartersAdd");
+        dashboardController.changeContent("headquarters/headquartersAdd");
     }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -35,13 +35,13 @@ public class HeadquartersController implements Initializable {
 
     /*Add headquarters window functions*/
     @FXML
-    protected void cancelButtonClicked(){
+    protected void cancelButtonClicked() throws IOException {
         confirmation.setContentText("¿Está seguro que desea cancelar?");
         confirmation.setTitle("Confirme su respuesta");
         confirmation.setHeaderText("Cancelar");
         confirmation.showAndWait();
         if(confirmation.getResult() == ButtonType.YES){
-            System.out.println("Sí");
+            dashboardController.changeContent("headquarters/headquarters");
         } else {
             System.out.println("No");
         }
