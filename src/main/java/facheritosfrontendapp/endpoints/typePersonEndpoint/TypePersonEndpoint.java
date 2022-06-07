@@ -16,7 +16,7 @@ public class TypePersonEndpoint {
 
         Gson gson = new Gson();
 
-        Request loginRequest = new Request.Builder().url(DotEnv.getEnv("URL_API")+"/type-person/get/"+id).build(); //Set up the request
+        Request loginRequest = new Request.Builder().url(DotEnv.getEnv("URL_API")+"/typePerson/get/"+id).build(); //Set up the request
 
         Response response = httpClient.newCall(loginRequest).execute(); //Execute the request
 
