@@ -1,11 +1,9 @@
-package facheritosfrontendapp.controller;
+package facheritosfrontendapp.controller.users;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -22,10 +20,10 @@ public class UsersSingleViewController implements Initializable {
     private TextField lastNameField;
 
     @FXML
-    private TextField roleField;
+    private ComboBox roleCombo;
 
     @FXML
-    private TextField seatField;
+    private ComboBox seatCombo;
 
     @FXML
     private TextField phoneField;
@@ -34,16 +32,19 @@ public class UsersSingleViewController implements Initializable {
     private TextField mailField;
 
     @FXML
-    private TextField bornField;
+    private DatePicker bornPicker;
 
     @FXML
     private TextField idField;
 
     @FXML
-    private TextField statusField;
+    private ComboBox statusCombo;
 
     @FXML
     private TextField salaryField;
+
+    @FXML
+    private ComboBox cityCombo;
 
     @FXML
     private Button deleteUserButton;
@@ -59,7 +60,7 @@ public class UsersSingleViewController implements Initializable {
 
     @FXML
     /*
-    editButton: event -> void
+    editAction: event -> void
     Purpose: By pressing the 'Editar usuario' button the text fields are enabled,
     the title becomes visible and the 'Guardar' and 'Cancelar' buttons are enabled.
     * */
@@ -68,14 +69,15 @@ public class UsersSingleViewController implements Initializable {
         
         nameField.setDisable(false);
         lastNameField.setDisable(false);
-        roleField.setDisable(false);
-        seatField.setDisable(false);
+        roleCombo.setDisable(false);
+        seatCombo.setDisable(false);
         phoneField.setDisable(false);
         mailField.setDisable(false);
-        bornField.setDisable(false);
+        bornPicker.setDisable(false);
         idField.setDisable(false);
-        statusField.setDisable(false);
+        statusCombo.setDisable(false);
         salaryField.setDisable(false);
+        cityCombo.setDisable(false);
 
         deleteUserButton.setVisible(false);
         editUserButton.setVisible(false);
