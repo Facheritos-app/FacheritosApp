@@ -48,9 +48,9 @@ public class DashboardController implements Initializable {
     }
 
     /**
-     * This method contains all the requests to the API to set the Dashboard
-     * First, we authenticate the user, if successful,
-     * we proceed to set the Dashboard by making the request to the API to get their rol.
+     * setDashBoard: LoginDTO -> Boolean
+     * Purpose: This method contains the call to the BD (line 59) and sets the currentWorker on the dashboard,
+     * then it sets the rol and the right navbar for the user.
      */
 
 
@@ -65,7 +65,6 @@ public class DashboardController implements Initializable {
         return loginCall.thenApply((response) -> {
             if(response.containsKey(true)){
                 setCurrentWorker(response.get(true)); //Set the worker in the dashboard
-                System.out.println(currentWorker.getFirst_name());
                 setRol(currentWorker.getRol());
                 try {
                     selectNavbar();
@@ -77,31 +76,11 @@ public class DashboardController implements Initializable {
             }
             return true;
         }).handle((result, ex) -> null != ex ? false : true).get();
-
-        //CompletableFuture<Map<Integer, Object>> loginCall = CompletableFuture.supplyAsync(() -> sendLogin(loginDTO));
-
-        /**
-        return loginCall.thenAccept((responseLogin) -> {
-            if (responseLogin.containsKey(200)) {
-                getRol(responseLogin);
-            } else {
-                ErrorDTO responseError = (ErrorDTO) responseLogin.values().stream().findFirst().get();
-                throw new RuntimeException(responseError.getErrorMessage());
-            }
-        }).thenApply((bool) -> {
-            setRol(typePerson.getRol_person());
-            try {
-                selectNavbar();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-            return true;
-        }).handle((result, ex) -> null != ex ? false : result).get();
-         **/
     }
 
     /**
-     * This method changes the content of the main page
+     * changeContent: String -> Void.
+     * Purpose: this method changes the content of the main page
      */
 
     public void changeContent(String subpage) throws IOException {
@@ -110,7 +89,8 @@ public class DashboardController implements Initializable {
 
 
     /**
-     * This method sends the credentials to the API, it returns the response from the API modified by the sendCredentials method
+     * sendLogin: LoginDTO -> Map<Boolean, WorkerDTO>
+     * Purpose: this method sends the credentials to the BD and returns the response
      */
     protected Map<Boolean, WorkerDTO> sendLogin(LoginDTO loginDTO) {
         try {
@@ -123,7 +103,8 @@ public class DashboardController implements Initializable {
     }
 
     /**
-     * This function sets all the information about the user on the dashboard.
+     * setRol: String -> void
+     * Purpose: this method sets all the information about the user on the dashboard.
      */
     protected void setRol(String rolUser) {
         String trimName = currentWorker.getFirst_name();
@@ -132,7 +113,8 @@ public class DashboardController implements Initializable {
     }
 
     /**
-     * This method decides which navbar show depending on user's rol.
+     * selectNavbar: void -> void
+     * Purpose: this method decides which navbar show depending on the user's rol.
      */
     protected void selectNavbar() throws IOException {
         switch (currentWorker.getId_rol()) {
@@ -157,7 +139,6 @@ public class DashboardController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        //System.out.print("CC: "+ loginDTO.getCc());
     }
     public WorkerDTO getCurrentWorker() {
         return currentWorker;
