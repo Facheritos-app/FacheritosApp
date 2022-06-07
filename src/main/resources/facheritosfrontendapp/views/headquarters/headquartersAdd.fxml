@@ -35,7 +35,7 @@
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <TextField prefHeight="36.0" prefWidth="273.0" styleClass="input" stylesheets="@../style.css" />
+                        <TextField prefHeight="36.0" prefWidth="273.0" styleClass="input-text" stylesheets="@../style.css" />
                      </children>
                      <HBox.margin>
                         <Insets left="40.0" />
@@ -48,7 +48,7 @@
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <TextField prefHeight="36.0" prefWidth="297.0" styleClass="input" stylesheets="@../style.css" />
+                        <TextField prefHeight="36.0" prefWidth="297.0" styleClass="input-text" stylesheets="@../style.css" />
                      </children>
                   </VBox>
                </children>
@@ -62,7 +62,7 @@
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <TextField prefHeight="36.0" prefWidth="273.0" styleClass="input" stylesheets="@../style.css" />
+                        <TextField prefHeight="36.0" prefWidth="273.0" styleClass="input-text" stylesheets="@../style.css" />
                      </children>
                      <HBox.margin>
                         <Insets left="40.0" />
@@ -75,7 +75,7 @@
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <TextField prefHeight="36.0" prefWidth="297.0" styleClass="input" stylesheets="@../style.css" />
+                        <TextField prefHeight="36.0" prefWidth="297.0" styleClass="input-text" stylesheets="@../style.css" />
                      </children>
                   </VBox>
                </children>

@@ -93,10 +93,10 @@ public class DashboardController implements Initializable {
     }
 
     /**
-     * This methods manages the event of clicking on any element of the Navbar
+     * This method changes the content of the main page
      */
 
-    public void navbarClicked(String subpage) throws IOException {
+    public void changeContent(String subpage) throws IOException {
         borderPane.setCenter(new FxmlLoader().getPage(subpage));
     }
 
@@ -159,8 +159,7 @@ public class DashboardController implements Initializable {
                 navbar.getChildren().add(new FxmlLoader().getPage("navbar/mechanicNavbar"));
                 break;
             default:
-                /*THIS SHOULD THROW AN ERROR*/
-                break;
+                throw new RuntimeException("Wrong user type");
         }
 
     }

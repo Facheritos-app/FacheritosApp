@@ -18,7 +18,7 @@ public class FxmlLoader {
         if(fileURL == null){
             throw new FileNotFoundException("FXML not found");
         }
-        view = new FXMLLoader(fileURL).load();
+        view =  new FXMLLoader(fileURL).load();
         return view;
     }
 }

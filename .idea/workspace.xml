@@ -23,8 +23,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="package-info" />
-        <option value="FxmlFile" />
         <option value="Class" />
+        <option value="FxmlFile" />
       </list>
     </option>
   </component>
@@ -75,9 +75,14 @@
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\Univalle\Semestre 6\Desarrollo de software I\proyecto\FacheritosFrontendApp\src\main\resources\facheritosfrontendapp\views" />
+      <recent name="C:\Users\Jennyfer\Desktop\archivos_actuales\sexto\proyectoDesarrolloFrontend\FacheritosAppFrontend\src\main\resources\facheritosfrontendapp\views" />
+      <recent name="C:\Users\Jennyfer\Desktop\archivos_actuales\sexto\proyectoDesarrolloFrontend\FacheritosAppFrontend\src\main\resources\facheritosfrontendapp\views\orders" />
+      <recent name="C:\Users\Jennyfer\Desktop\archivos_actuales\sexto\proyectoDesarrolloFrontend\FacheritosAppFrontend\src\main\resources\facheritosfrontendapp\views\sales" />
+      <recent name="C:\Users\Jennyfer\Desktop\archivos_actuales\sexto\proyectoDesarrolloFrontend\FacheritosAppFrontend\src\main\resources\facheritosfrontendapp\views\users" />
+      <recent name="C:\Users\Jennyfer\Desktop\archivos_actuales\sexto\proyectoDesarrolloFrontend\FacheritosAppFrontend\src\main\resources\facheritosfrontendapp\views\inventory" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Univalle\Semestre 6\Desarrollo de software I\proyecto\FacheritosFrontendApp\src\main\resources\facheritosfrontendapp\views\users" />
       <recent name="D:\Univalle\Semestre 6\Desarrollo de software I\proyecto\FacheritosFrontendApp\src\main\resources\facheritosfrontendapp\views\navbar" />
       <recent name="D:\Univalle\Semestre 6\Desarrollo de software I\proyecto\FacheritosFrontendApp\target\classes\facheritosfrontendapp\controller" />
       <recent name="D:\Univalle\Semestre 6\Desarrollo de software I\proyecto\FacheritosFrontendApp\src\main\resources" />
@@ -163,6 +168,7 @@
       <workItem from="1654284439875" duration="5440000" />
       <workItem from="1654449501929" duration="290000" />
       <workItem from="1654450934682" duration="10105000" />
+
     </task>
     <servers />
   </component>

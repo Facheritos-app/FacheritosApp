@@ -1,32 +1,32 @@
-package facheritosfrontendapp.controller.navbar;
+package facheritosfrontendapp.controller.users;
 
 import facheritosfrontendapp.controller.DashboardController;
 import facheritosfrontendapp.controller.MainController;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.layout.HBox;
+import javafx.scene.control.TabPane;
+import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class ManagerNavbar implements Initializable {
+public class UsersController implements Initializable {
+
     @FXML
-    private HBox users;
+    private TabPane usersTabpane;
 
     private DashboardController dashboardController;
 
     @FXML
-    protected void usersClicked() throws IOException {
-        dashboardController.changeContent("users/users");
-    }
+    protected void addUserClicked() throws IOException {
+        dashboardController.changeContent("users/usersAdd");
 
-    @FXML
-    protected void headquartersClicked() throws IOException {
-        dashboardController.changeContent("headquarters/headquarters");
     }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         dashboardController = MainController.getDashboardController();
+        usersTabpane.setTabClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);
     }
+
 }
