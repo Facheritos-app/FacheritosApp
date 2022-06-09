@@ -1,14 +1,6 @@
 package backend.dto.loginDTO;
 
-import okhttp3.MediaType;
-import okhttp3.RequestBody;
-import okio.BufferedSink;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-import java.io.IOException;
-
-public class LoginDTO extends RequestBody {
+public class LoginDTO {
 
     protected String cc; //Username
 
@@ -28,16 +20,5 @@ public class LoginDTO extends RequestBody {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    @Nullable
-    @Override
-    public MediaType contentType() {
-        return null;
-    }
-
-    @Override
-    public void writeTo(@NotNull BufferedSink bufferedSink) throws IOException {
-
     }
 }

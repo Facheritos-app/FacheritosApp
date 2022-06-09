@@ -47,13 +47,12 @@ public class DashboardController implements Initializable {
         loginEndpoint = new LoginEndpoint();
     }
 
+
     /**
      * setDashBoard: LoginDTO -> Boolean
      * Purpose: This method contains the call to the BD (line 59) and sets the currentWorker on the dashboard,
      * then it sets the rol and the right navbar for the user.
      */
-
-
     public boolean setDashboard(LoginDTO loginDTO) throws ExecutionException, InterruptedException {
 
 
@@ -63,7 +62,6 @@ public class DashboardController implements Initializable {
          * which won't let the user log in. Otherwise, return true and let the user log in.
          */
         return loginCall.thenApply((response) -> {
-            System.out.println("hilo en llamada "+Thread.currentThread().getName());
             if(response.containsKey(true)){
                 setCurrentWorker(response.get(true)); //Set the worker in the dashboard
                 setRol(currentWorker.getRol());

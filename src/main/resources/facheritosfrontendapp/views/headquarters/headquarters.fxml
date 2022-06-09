@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="517.0" prefWidth="647.0" xmlns="http://javafx.com/javafx/" xmlns:fx="http://javafx.com/fxml/" fx:controller="facheritosfrontendapp.controller.headquarters.HeadquartersController">
+<AnchorPane prefHeight="517.0" prefWidth="647.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="facheritosfrontendapp.controller.headquarters.HeadquartersController">
     <children>
         <Label layoutX="34.0" layoutY="23.0" prefHeight="72.0" prefWidth="217.0" styleClass="poppins" text="Sedes" textFill="#1f1f1f">
             <font>
@@ -25,14 +25,15 @@
             </cursor>
         </Button>
       <Separator layoutX="10.0" layoutY="20.0" orientation="VERTICAL" prefHeight="516.0" prefWidth="8.0" />
-            <TableView layoutX="57.0" layoutY="169.0" prefHeight="218.0" prefWidth="550.0" stylesheets="@../style.css">
+            <TableView fx:id="headquarterTableView" layoutX="18.0" layoutY="169.0" prefHeight="218.0" prefWidth="626.0" stylesheets="@../style.css">
                 <columns>
-                    <TableColumn prefWidth="100.0" text="Identificación" />
-                    <TableColumn prefWidth="90.0" text="Nombre" />
-                    <TableColumn prefWidth="90.0" text="Celular" />
-                    <TableColumn prefWidth="90.0" text="Dirección" />
-                    <TableColumn prefWidth="90.0" text="Correo" />
-                    <TableColumn prefWidth="90.0" text="Opciones" />
+                    <TableColumn fx:id="colId" prefWidth="100.0" text="Identificación" />
+                    <TableColumn fx:id="colName" prefWidth="90.0" text="Nombre" />
+                    <TableColumn fx:id="colCellphone" prefWidth="90.0" text="Celular" />
+                    <TableColumn fx:id="colAddress" prefWidth="90.0" text="Dirección" />
+                    <TableColumn fx:id="colEmail" prefWidth="90.0" text="Correo" />
+            <TableColumn fx:id="colCity" prefWidth="75.0" text="Ciudad" />
+                    <TableColumn fx:id="colOptions" prefWidth="90.0" text="Opciones" />
                 </columns>
             </TableView>
     </children>

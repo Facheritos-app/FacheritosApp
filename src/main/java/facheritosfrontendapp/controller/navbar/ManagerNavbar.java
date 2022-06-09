@@ -2,13 +2,17 @@ package facheritosfrontendapp.controller.navbar;
 
 import facheritosfrontendapp.controller.DashboardController;
 import facheritosfrontendapp.controller.MainController;
+import facheritosfrontendapp.controller.headquarters.HeadquartersController;
+import facheritosfrontendapp.views.Main;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.HBox;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.concurrent.ExecutionException;
 
 public class ManagerNavbar implements Initializable {
     @FXML
@@ -16,13 +20,15 @@ public class ManagerNavbar implements Initializable {
 
     private DashboardController dashboardController;
 
+    private HeadquartersController headquarterController;
+
     @FXML
     protected void usersClicked() throws IOException {
         dashboardController.changeContent("users/users");
     }
 
     @FXML
-    protected void headquartersClicked() throws IOException {
+    protected void headquartersClicked() throws IOException, ExecutionException, InterruptedException {
         dashboardController.changeContent("headquarters/headquarters");
     }
     @Override
