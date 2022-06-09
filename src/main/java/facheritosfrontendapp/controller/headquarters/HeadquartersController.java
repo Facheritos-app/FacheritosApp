@@ -66,7 +66,7 @@ public class HeadquartersController implements Initializable {
     }
 
     public HeadquartersController(){
-        headquarterEndpoint = new HeadquarterEndpoint();
+            headquarterEndpoint = new HeadquarterEndpoint();
         headquarterRowsArray = new ArrayList<>();
         headquarterObList = FXCollections.observableArrayList();
     }

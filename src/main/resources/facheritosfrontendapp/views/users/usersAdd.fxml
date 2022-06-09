@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="623.0" prefWidth="646.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="facheritosfrontendapp.controller.users.UsersAddController">
+<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="623.0" prefWidth="646.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="facheritosfrontendapp.controller.users.UsersAddController">
    <children>
       <VBox layoutX="-6.0" layoutY="-1.0" prefHeight="515.0" prefWidth="634.0" spacing="1.0">
          <children>
@@ -37,31 +37,12 @@
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <TextField prefHeight="36.0" prefWidth="273.0" styleClass="input-text" stylesheets="@../style.css" />
+                        <TextField prefHeight="36.0" prefWidth="273.0" promptText="Nombre de usuario" styleClass="input-text" stylesheets="@../style.css" />
                      </children>
                      <HBox.margin>
                         <Insets left="40.0" />
                      </HBox.margin>
                   </VBox>
-                  <VBox prefHeight="83.0" prefWidth="246.0" spacing="10.0">
-                     <children>
-                        <Label prefHeight="27.0" prefWidth="110.0" text="Apellidos:">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                        <TextField prefHeight="36.0" prefWidth="297.0" stylesheets="@../style.css">
-                           <styleClass>
-                              <String fx:value="input" />
-                              <String fx:value="input-text" />
-                           </styleClass>
-                        </TextField>
-                     </children>
-                  </VBox>
-               </children>
-            </HBox>
-            <HBox prefHeight="83.0" prefWidth="515.0" spacing="50.0">
-               <children>
                   <VBox prefHeight="67.0" prefWidth="246.0" spacing="10.0">
                      <children>
                         <Label prefHeight="20.0" prefWidth="77.0" text="Rol:">
@@ -69,7 +50,29 @@
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <ComboBox prefHeight="23.0" prefWidth="247.0" />
+                        <ComboBox fx:id="typeCombobox" prefHeight="23.0" prefWidth="247.0" styleClass="input-text" stylesheets="@../style.css" />
+                     </children>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </VBox>
+               </children>
+            </HBox>
+            <HBox prefHeight="83.0" prefWidth="515.0" spacing="50.0">
+               <children>
+                  <VBox prefHeight="83.0" prefWidth="246.0" spacing="10.0">
+                     <children>
+                        <Label prefHeight="27.0" prefWidth="110.0" text="Apellidos:">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <TextField prefHeight="36.0" prefWidth="297.0" promptText="Apellidos de usuario" stylesheets="@../style.css">
+                           <styleClass>
+                              <String fx:value="input" />
+                              <String fx:value="input-text" />
+                           </styleClass>
+                        </TextField>
                      </children>
                      <HBox.margin>
                         <Insets left="40.0" />
@@ -82,7 +85,7 @@
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <ComboBox prefHeight="22.0" prefWidth="255.0" />
+                        <ComboBox fx:id="headquarterCombobox" prefHeight="22.0" prefWidth="255.0" styleClass="input-text" stylesheets="@../style.css" />
                      </children>
                   </VBox>
                </children>
@@ -96,26 +99,12 @@
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <TextField prefHeight="36.0" prefWidth="273.0" styleClass="input-text" stylesheets="@../style.css" />
+                        <TextField prefHeight="36.0" prefWidth="273.0" promptText="Ej: 3002221231" styleClass="input-text" stylesheets="@../style.css" />
                      </children>
                      <HBox.margin>
                         <Insets left="40.0" />
                      </HBox.margin>
                   </VBox>
-                  <VBox prefHeight="83.0" prefWidth="246.0" spacing="10.0">
-                     <children>
-                        <Label prefHeight="27.0" prefWidth="110.0" text="Correo:">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                        <TextField prefHeight="36.0" prefWidth="273.0" styleClass="input-text" stylesheets="@../style.css" />
-                     </children>
-                  </VBox>
-               </children>
-            </HBox>
-            <HBox prefHeight="83.0" prefWidth="515.0" spacing="50.0">
-               <children>
                   <VBox prefHeight="100.0" prefWidth="246.0" spacing="10.0">
                      <children>
                         <Label prefHeight="26.0" prefWidth="171.0" text="Fecha de nacimiento:">
@@ -123,7 +112,24 @@
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <DatePicker prefHeight="33.0" prefWidth="251.0" />
+                        <DatePicker prefHeight="33.0" prefWidth="251.0" styleClass="input-text" stylesheets="@../style.css" />
+                     </children>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </VBox>
+               </children>
+            </HBox>
+            <HBox prefHeight="83.0" prefWidth="515.0" spacing="50.0">
+               <children>
+                  <VBox prefHeight="83.0" prefWidth="246.0" spacing="10.0">
+                     <children>
+                        <Label prefHeight="27.0" prefWidth="110.0" text="Correo:">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <TextField prefHeight="36.0" prefWidth="273.0" promptText="ejemplo@mail.com" styleClass="input-text" stylesheets="@../style.css" />
                      </children>
                      <HBox.margin>
                         <Insets left="40.0" />
@@ -136,7 +142,7 @@
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <TextField prefHeight="36.0" prefWidth="273.0" styleClass="input-text" stylesheets="@../style.css" />
+                        <TextField prefHeight="36.0" prefWidth="273.0" promptText="Ej: 31293867" styleClass="input-text" stylesheets="@../style.css" />
                      </children>
                   </VBox>
                </children>
@@ -150,7 +156,7 @@
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <TextField prefHeight="36.0" prefWidth="273.0" styleClass="input-text" stylesheets="@../style.css" />
+                        <TextField prefHeight="36.0" prefWidth="273.0" promptText="3000000" styleClass="input-text" stylesheets="@../style.css" />
                      </children>
                      <HBox.margin>
                         <Insets left="40.0" />
