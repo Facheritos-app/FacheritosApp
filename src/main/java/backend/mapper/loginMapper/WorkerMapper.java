@@ -11,6 +11,8 @@ public class WorkerMapper {
     public static WorkerDTO map(ResultSet resultSet) throws SQLException {
         WorkerDTO workerDTO = new WorkerDTO();
 
+        workerDTO.setId_person(resultSet.getInt("id_person"));
+        workerDTO.setId_worker(resultSet.getInt("id_worker"));
         workerDTO.setFirst_name(resultSet.getString("first_name"));
         workerDTO.setLast_name(resultSet.getString("last_name"));
         workerDTO.setCc(resultSet.getString("cc"));

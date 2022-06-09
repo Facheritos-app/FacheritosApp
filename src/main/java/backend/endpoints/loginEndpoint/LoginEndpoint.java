@@ -22,15 +22,13 @@ public class LoginEndpoint {
 
     private final OkHttpClient httpClient = new OkHttpClient();
 
-    private final ConnectionBD connectionBD = new ConnectionBD();
-
     public Map<Boolean, WorkerDTO> getCredentials(LoginDTO loginDTO) {
 
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         HashMap<Boolean, WorkerDTO> response = new HashMap<>();
         WorkerDTO workerDTO = new WorkerDTO();
-        try(Connection conn = connectionBD.connectDB().getConnection();){
+        try(Connection conn = ConnectionBD.connectDB().getConnection();){
             preparedStatement = conn.prepareStatement("SELECT * FROM person JOIN worker USING(id_person) JOIN type_person USING(id_type_person)" +
                     "WHERE person.cc = ?");
             preparedStatement.setString(1, loginDTO.getCc());

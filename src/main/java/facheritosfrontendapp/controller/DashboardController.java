@@ -41,7 +41,7 @@ public class DashboardController implements Initializable {
 
 
 
-    private WorkerDTO currentWorker;
+    public static WorkerDTO currentWorker;
 
     public DashboardController() {
         loginEndpoint = new LoginEndpoint();
@@ -140,7 +140,7 @@ public class DashboardController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
     }
-    public WorkerDTO getCurrentWorker() {
+    public static synchronized WorkerDTO getCurrentWorker() {
         return currentWorker;
     }
 

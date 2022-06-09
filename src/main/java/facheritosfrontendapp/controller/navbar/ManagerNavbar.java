@@ -27,6 +27,7 @@ public class ManagerNavbar implements Initializable {
     }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        System.out.println(DashboardController.getCurrentWorker().getId_worker());
         dashboardController = MainController.getDashboardController();
     }
 }
