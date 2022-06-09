@@ -31,8 +31,6 @@ public class HeadquartersController implements Initializable {
     private HeadquarterEndpoint headquarterEndpoint;
 
     private ObservableList<HeadquarterRowView> headquarterObList;
-    @FXML
-    private Button addHeadquarter;
 
     @FXML
     private TableView headquarterTableView;
@@ -60,11 +58,6 @@ public class HeadquartersController implements Initializable {
 
     private ArrayList<HeadquarterRowView> headquarterRowsArray;
 
-
-
-
-    /*Add headquarter*/
-    Alert confirmation = new Alert(Alert.AlertType.CONFIRMATION,"?", ButtonType.YES, ButtonType.NO);
 
 
     @FXML
@@ -167,31 +160,4 @@ public class HeadquartersController implements Initializable {
         headquarterTableView.setItems(headquarterObList);
     }
 
-    /*Add headquarters window functions*/
-    @FXML
-    protected void cancelButtonClicked() throws IOException {
-        confirmation.setContentText("¿Está seguro que desea cancelar?");
-        confirmation.setTitle("Confirme su respuesta");
-        confirmation.setHeaderText("Cancelar");
-        confirmation.showAndWait();
-        if(confirmation.getResult() == ButtonType.YES){
-            dashboardController.changeContent("headquarters/headquarters");
-        } else {
-            System.out.println("No");
-        }
-
-    }
-
-    @FXML
-    protected void saveButtonClicked(){
-        confirmation.setContentText("¿Está seguro que desea guardar?");
-        confirmation.setTitle("Confirme su respuesta");
-        confirmation.setHeaderText("Guardar");
-        confirmation.showAndWait();
-        if(confirmation.getResult() == ButtonType.YES){
-            System.out.println("Sí");
-        } else {
-            System.out.println("No");
-        }
-    }
 }
