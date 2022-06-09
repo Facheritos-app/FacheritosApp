@@ -50,7 +50,9 @@ Button {
 }
 
 /*TableView*/
-
+.table-column {
+    -fx-alignment: CENTER;
+}
 .table-view .column-header{
     -fx-background-color: #005296;
 

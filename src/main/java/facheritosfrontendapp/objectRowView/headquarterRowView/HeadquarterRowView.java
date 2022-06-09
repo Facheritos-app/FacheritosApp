@@ -1,6 +1,7 @@
 package facheritosfrontendapp.objectRowView.headquarterRowView;
 
 import facheritosfrontendapp.views.Main;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -122,8 +123,13 @@ public class HeadquarterRowView {
         URL iconEditURL = Main.class.getResource("/facheritosfrontendapp/icons/icon-edit.png");
         Image deleteImage = new Image(String.valueOf(iconDeleteURL));
         Image editImage = new Image(String.valueOf(iconEditURL));
-        options.getChildren().add(new HBox(new ImageView(editImage), new Label("Editar")));
-        options.getChildren().add(new HBox(new ImageView(deleteImage), new Label("Eliminar")));
+        HBox hboxEdit = new HBox(new ImageView(editImage), new Label("Editar"));
+        HBox hboxDelete = new HBox(new ImageView(deleteImage), new Label("Eliminar"));
+        hboxEdit.setAlignment(Pos.CENTER);
+        hboxDelete.setAlignment(Pos.CENTER);
+        options.getChildren().add(hboxEdit);
+        options.getChildren().add(hboxDelete);
+        options.setAlignment(Pos.CENTER);
     }
 
 

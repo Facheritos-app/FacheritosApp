@@ -66,7 +66,7 @@ public class HeadquartersController implements Initializable {
     }
 
     public HeadquartersController(){
-            headquarterEndpoint = new HeadquarterEndpoint();
+        headquarterEndpoint = new HeadquarterEndpoint();
         headquarterRowsArray = new ArrayList<>();
         headquarterObList = FXCollections.observableArrayList();
     }
@@ -130,7 +130,7 @@ public class HeadquartersController implements Initializable {
             HeadquarterRowView headquarter = new HeadquarterRowView(resultSet.getInt("id_headquarter"), resultSet.getInt("id_city"),
                                                                     resultSet.getString("name"), resultSet.getString("cellphone"),
                                                                     resultSet.getString("email"), resultSet.getString("address"),
-                                                                    resultSet.getString("city_name"));
+                                                                     resultSet.getString("city_name"));
             headquarterRowsArray.add(headquarter); //Add every element to the array.
         }
 
