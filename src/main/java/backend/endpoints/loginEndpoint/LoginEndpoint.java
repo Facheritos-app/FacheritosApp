@@ -24,6 +24,7 @@ public class LoginEndpoint {
 
     public Map<Boolean, WorkerDTO> getCredentials(LoginDTO loginDTO) {
 
+        //Pura chachara
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         HashMap<Boolean, WorkerDTO> response = new HashMap<>();
@@ -33,7 +34,7 @@ public class LoginEndpoint {
                     "WHERE person.cc = ?");
             preparedStatement.setString(1, loginDTO.getCc());
             resultSet = preparedStatement.executeQuery();
-            resultSet.next();
+            resultSet.next();//there must be a call to next for every row
             if(resultSet.getString("password").equals(loginDTO.getPassword())){
                 workerDTO = WorkerMapper.map(resultSet);
                 response.put(true, workerDTO);

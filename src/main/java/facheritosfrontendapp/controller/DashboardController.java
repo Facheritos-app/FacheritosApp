@@ -63,6 +63,7 @@ public class DashboardController implements Initializable {
          * which won't let the user log in. Otherwise, return true and let the user log in.
          */
         return loginCall.thenApply((response) -> {
+            System.out.println("hilo en llamada "+Thread.currentThread().getName());
             if(response.containsKey(true)){
                 setCurrentWorker(response.get(true)); //Set the worker in the dashboard
                 setRol(currentWorker.getRol());

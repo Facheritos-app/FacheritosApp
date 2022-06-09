@@ -60,6 +60,8 @@ public class MainController implements Initializable {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("welcomeManager.fxml"));
         root = fxmlLoader.load();
         dashboardController = fxmlLoader.getController();
+        System.out.println("hilo en MainController "+Thread.currentThread().getName());
+
         if(dashboardController.setDashboard(loginDTO)) {
             inicio.setDisable(false); //Deshabilitar boton inciar sesion
             error.setVisible(false);
