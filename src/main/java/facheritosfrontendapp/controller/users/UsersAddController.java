@@ -60,7 +60,10 @@ public class UsersAddController implements Initializable {
             return true;
         }).get();
     }
-
+    /**
+     * showHeaders: ResultSet -> void
+     * Purpose: This method set the items of the headquarters combobox according to the DB
+     */
     public void setHeadquarterCombobox(ResultSet resultSet) throws SQLException {
         while(resultSet.next()) {
             headquarterComboboxList.add(resultSet.getString("name"));

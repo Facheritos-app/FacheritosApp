@@ -20,7 +20,7 @@ public class UsersController implements Initializable {
 
     @FXML
     protected void addUserClicked() throws IOException {
-        dashboardController.changeContent("users/usersAdd");
+        dashboardController.changeContent("users/usersAdd", true);
 
     }
     @Override

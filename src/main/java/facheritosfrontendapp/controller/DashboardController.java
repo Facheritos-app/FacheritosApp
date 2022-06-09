@@ -85,6 +85,15 @@ public class DashboardController implements Initializable {
     public void changeContent(String subpage) throws IOException {
         borderPane.setCenter(new FxmlLoader().getPage(subpage));
     }
+    /**
+     * changeContent: String -> Void.
+     * Purpose: this method changes the content of the main page but with a scrollpane
+     */
+    public void changeContent(String subpage, boolean withScrollpane) throws IOException {
+        if(withScrollpane) {
+            borderPane.setCenter(new FxmlLoader().getPage(subpage, true));
+        }
+    }
 
 
     /**
@@ -138,6 +147,11 @@ public class DashboardController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        try {
+            this.changeContent("home");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
     public static synchronized WorkerDTO getCurrentWorker() {
         return currentWorker;

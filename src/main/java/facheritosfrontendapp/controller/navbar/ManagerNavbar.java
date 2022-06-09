@@ -20,8 +20,11 @@ public class ManagerNavbar implements Initializable {
 
     private DashboardController dashboardController;
 
-    private HeadquartersController headquarterController;
 
+    @FXML
+    protected void homeClicked() throws IOException {
+        dashboardController.changeContent("home");
+    }
     @FXML
     protected void usersClicked() throws IOException {
         dashboardController.changeContent("users/users");
