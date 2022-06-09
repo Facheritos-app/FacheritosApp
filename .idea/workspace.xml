@@ -5,12 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5f49d571-a74c-4244-90f5-d1284478321e" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/backend/endpoints/headquarterEndpoint/HeadquarterEndpoint.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/objectRowView/headquarterRowView/HeadquarterRowView.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/icons/icon-delete.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/icons/icon-edit.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/backend/connectionBD/ConnectionBD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/backend/connectionBD/ConnectionBD.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/backend/dto/loginDTO/LoginDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/backend/dto/loginDTO/LoginDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/backend/endpoints/loginEndpoint/LoginEndpoint.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/backend/endpoints/loginEndpoint/LoginEndpoint.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/backend/mapper/loginMapper/WorkerMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/backend/mapper/loginMapper/WorkerMapper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/DashboardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/DashboardController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/MainController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/headquarters/HeadquartersController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/headquarters/HeadquartersController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/navbar/ManagerNavbar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/navbar/ManagerNavbar.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/headquarters/headquarters.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/headquarters/headquarters.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,8 +29,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="package-info" />
-        <option value="Class" />
         <option value="FxmlFile" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -58,23 +66,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/Usuario/Documents/Sexto semestre/Desarrollo de Software/FacheritosAppFrontend",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.35632184",
-    "settings.editor.selected.configurable": "preferences.JavaFX"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Usuario/Documents/Sexto semestre/Desarrollo de Software/FacheritosAppFrontend&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.35632184&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.JavaFX&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Jennyfer\Desktop\archivos_actuales\sexto\proyectoDesarrolloFrontend\FacheritosAppFrontend\src\main\resources\facheritosfrontendapp\views" />
@@ -84,11 +92,11 @@
       <recent name="C:\Users\Jennyfer\Desktop\archivos_actuales\sexto\proyectoDesarrolloFrontend\FacheritosAppFrontend\src\main\resources\facheritosfrontendapp\views\inventory" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Usuario\Documents\Sexto semestre\Desarrollo de Software\FacheritosApp\src\main\resources\facheritosfrontendapp\icons" />
       <recent name="C:\Users\Asus\Facheritos-app\FacheritosAppFrontend\src\main\resources\facheritosfrontendapp\views\users" />
       <recent name="D:\Univalle\Semestre 6\Desarrollo de software I\proyecto\FacheritosFrontendApp\src\main\resources\facheritosfrontendapp\views\users" />
       <recent name="D:\Univalle\Semestre 6\Desarrollo de software I\proyecto\FacheritosFrontendApp\src\main\resources\facheritosfrontendapp\views\navbar" />
       <recent name="D:\Univalle\Semestre 6\Desarrollo de software I\proyecto\FacheritosFrontendApp\target\classes\facheritosfrontendapp\controller" />
-      <recent name="D:\Univalle\Semestre 6\Desarrollo de software I\proyecto\FacheritosFrontendApp\src\main\resources" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="" />
@@ -101,7 +109,7 @@
       <option name="ALTERNATIVE_JRE_PATH" value="temurin-11" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <option name="MAIN_CLASS_NAME" value="facheritosfrontendapp.views.Main" />
-      <module name="FacheritosFrontendApp" />
+      <module name="FacheritosAppFrontend" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="facheritosfrontendapp.views.*" />
@@ -208,6 +216,10 @@
         <breakpoint enabled="true" type="java-exception">
           <properties class="java.lang.ClassNotFoundException" package="java.lang" />
           <option name="timeStamp" value="3" />
+        </breakpoint>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.NullPointerException" package="java.lang" />
+          <option name="timeStamp" value="5" />
         </breakpoint>
       </breakpoints>
     </breakpoint-manager>

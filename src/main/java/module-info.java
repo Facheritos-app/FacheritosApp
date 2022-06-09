@@ -2,11 +2,8 @@ module  facheritosfrontendapp {
     requires java.naming;
     requires javafx.controls;
     requires javafx.fxml;
-    requires okhttp3;
     requires annotations;
-    requires okio;
     requires lombok;
-    requires com.google.gson;
     requires java.dotenv;
     requires org.postgresql.jdbc;
     requires java.sql;
@@ -25,8 +22,6 @@ module  facheritosfrontendapp {
     opens  facheritosfrontendapp.controller.users to javafx.fxml;
     exports  facheritosfrontendapp.controller.headquarters;
     opens  facheritosfrontendapp.controller.headquarters to javafx.fxml;
-    opens  backend.dto.loginDTO to com.google.gson;
-    opens  backend.dto.personDTO to com.google.gson;
-    opens  backend.dto.otherDTO to com.google.gson;
+    opens facheritosfrontendapp.objectRowView.headquarterRowView to javafx.base;
 
 }
