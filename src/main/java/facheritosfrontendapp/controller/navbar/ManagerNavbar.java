@@ -32,6 +32,7 @@ public class ManagerNavbar implements Initializable {
 
     @FXML
     protected void headquartersClicked() throws IOException, ExecutionException, InterruptedException {
+        System.out.println("Thread en headquartersClicked: "+ Thread.currentThread().getName());
         headquarterController = (HeadquarterController) dashboardController.changeContent("headquarters/headquarters");
         headquarterController.showHeadquarters();
     }

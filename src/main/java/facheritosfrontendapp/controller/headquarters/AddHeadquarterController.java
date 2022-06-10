@@ -35,7 +35,7 @@ public class AddHeadquarterController implements Initializable {
         confirmation.showAndWait();
         if(confirmation.getResult() == ButtonType.YES){
             headquarterController = (HeadquarterController) dashboardController.changeContent("headquarters/headquarters");
-            //headquarterController.showHeadquarters();
+            headquarterController.showHeadquarters();
         } else {
             System.out.println("No");
         }

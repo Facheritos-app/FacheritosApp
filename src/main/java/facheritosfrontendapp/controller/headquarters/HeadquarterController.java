@@ -105,25 +105,35 @@ public class HeadquarterController implements Initializable {
      * showHeaders: void -> void
      * Purpose: This method contains all the steps to show all the headquarters on the table.
      */
-    public void showHeadquarters() throws ExecutionException, InterruptedException {
-        System.out.println("Entro a showHeadquarters");
-        //Set the call to the DB.
-        CompletableFuture<Map<Boolean, ResultSet>> headquartersCall = CompletableFuture.supplyAsync(() -> headquarterEndpoint.getHeadquarters());
 
-        //Concatenate the response of the previous call from the BD to actually populate the table with the data
-        headquartersCall.thenApply((response) -> {
-            if(response.containsKey(true)){
-                ResultSet resultSet = response.get(true);
-                try {
-                    setDataTable(resultSet);
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                } catch (FileNotFoundException e) {
-                    throw new RuntimeException(e);
-                }
+    public  void showHeadquarters() throws ExecutionException, InterruptedException {
+        //Every update to the GUI from the DB must be encapsuled by Thread
+        //This means that another thread different from the JavaFX app thread will update the required items with the data.
+        new Thread(() -> {
+            //Set the call to the DB.
+            CompletableFuture<Map<Boolean, ResultSet>> headquartersCall = CompletableFuture.supplyAsync(() -> headquarterEndpoint.getHeadquarters());
+
+            //Concatenate the response of the previous call from the BD to actually populate the table with the data
+            try {
+                headquartersCall.thenApply((response) -> {
+                    if(response.containsKey(true)){
+                        ResultSet resultSet = response.get(true);
+                        try {
+                            setDataTable(resultSet);
+                        } catch (SQLException e) {
+                            throw new RuntimeException(e);
+                        } catch (FileNotFoundException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                    return true;
+                }).get();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            } catch (ExecutionException e) {
+                throw new RuntimeException(e);
             }
-            return true;
-        }).get();
+        }).start();
     }
 
     public void setDataTable(ResultSet resultSet) throws SQLException, FileNotFoundException {
