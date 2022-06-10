@@ -74,7 +74,6 @@ public class HeadquarterController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         dashboardController = MainController.getDashboardController();
-        System.out.println("Entro a initialize");
         /**
         try {
             this.showHeadquarters();
