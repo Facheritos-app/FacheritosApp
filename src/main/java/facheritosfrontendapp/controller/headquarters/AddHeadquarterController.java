@@ -11,11 +11,14 @@ import javafx.scene.control.ButtonType;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.concurrent.ExecutionException;
 
-public class AddHeadquartersController implements Initializable {
+public class AddHeadquarterController implements Initializable {
 
 
     private DashboardController dashboardController;
+
+    private HeadquarterController headquarterController;
 
     @FXML
     private Button addHeadquarter;
@@ -25,13 +28,14 @@ public class AddHeadquartersController implements Initializable {
 
     /*Add headquarters window functions*/
     @FXML
-    protected void cancelButtonClicked() throws IOException {
+    protected void cancelButtonClicked() throws IOException, ExecutionException, InterruptedException {
         confirmation.setContentText("¿Está seguro que desea cancelar?");
         confirmation.setTitle("Confirme su respuesta");
         confirmation.setHeaderText("Cancelar");
         confirmation.showAndWait();
         if(confirmation.getResult() == ButtonType.YES){
-            dashboardController.changeContent("headquarters/headquarters");
+            headquarterController = (HeadquarterController) dashboardController.changeContent("headquarters/headquarters");
+            //headquarterController.showHeadquarters();
         } else {
             System.out.println("No");
         }

@@ -4,10 +4,8 @@ import backend.dto.loginDTO.LoginDTO;
 import backend.dto.personDTO.WorkerDTO;
 import backend.endpoints.loginEndpoint.LoginEndpoint;
 
-import facheritosfrontendapp.controller.headquarters.HeadquartersController;
 import facheritosfrontendapp.views.FxmlLoader;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
@@ -80,13 +78,14 @@ public class DashboardController implements Initializable {
     }
 
     /**
-     * changeContent: String -> Void.
+     * changeContent: String -> Object.
      * Purpose: this method changes the content of the main page
      */
 
-    public void changeContent(String subpage) throws IOException {
+    public Object changeContent(String subpage) throws IOException {
         FxmlLoader loader = new FxmlLoader();
         borderPane.setCenter(loader.getPage(subpage));
+        return loader.getController();
     }
     /**
      * changeContent: String -> Void.

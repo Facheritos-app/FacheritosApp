@@ -13,6 +13,8 @@ public class FxmlLoader {
     private ScrollPane scrollpane;
     private FXMLLoader loader;
 
+    private Object controller;
+
     public Pane getPage(String fileName) throws IOException {
         System.out.println(fileName);
         URL fileURL = Main.class.getResource("/facheritosfrontendapp/views/"+fileName+".fxml");
@@ -23,6 +25,11 @@ public class FxmlLoader {
         view = loader.load();
         return view;
     }
+
+    public Object getController(){
+        return loader.getController();
+    }
+
     public ScrollPane getPage(String fileName, boolean withScrollpane) throws IOException {
         System.out.println(fileName);
         URL fileURL = Main.class.getResource("/facheritosfrontendapp/views/"+fileName+".fxml");

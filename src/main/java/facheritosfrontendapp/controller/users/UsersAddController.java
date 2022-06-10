@@ -1,14 +1,12 @@
 package facheritosfrontendapp.controller.users;
 
 import backend.endpoints.headquarterEndpoint.HeadquarterEndpoint;
-import facheritosfrontendapp.controller.headquarters.HeadquartersController;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.input.MouseEvent;
 
-import java.io.FileNotFoundException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;

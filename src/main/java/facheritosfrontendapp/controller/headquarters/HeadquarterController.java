@@ -24,7 +24,7 @@ import java.util.ResourceBundle;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
-public class HeadquartersController implements Initializable {
+public class HeadquarterController implements Initializable {
 
     private DashboardController dashboardController;
 
@@ -65,7 +65,7 @@ public class HeadquartersController implements Initializable {
         dashboardController.changeContent("headquarters/headquartersAdd");
     }
 
-    public HeadquartersController(){
+    public HeadquarterController(){
         headquarterEndpoint = new HeadquarterEndpoint();
         headquarterRowsArray = new ArrayList<>();
         headquarterObList = FXCollections.observableArrayList();
@@ -74,6 +74,8 @@ public class HeadquartersController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         dashboardController = MainController.getDashboardController();
+        System.out.println("Entro a initialize");
+        /**
         try {
             this.showHeadquarters();
         } catch (ExecutionException e) {
@@ -81,6 +83,7 @@ public class HeadquartersController implements Initializable {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
+         **/
     }
 
     /**
@@ -103,6 +106,7 @@ public class HeadquartersController implements Initializable {
      * Purpose: This method contains all the steps to show all the headquarters on the table.
      */
     public void showHeadquarters() throws ExecutionException, InterruptedException {
+        System.out.println("Entro a showHeadquarters");
         //Set the call to the DB.
         CompletableFuture<Map<Boolean, ResultSet>> headquartersCall = CompletableFuture.supplyAsync(() -> headquarterEndpoint.getHeadquarters());
 
