@@ -4,8 +4,10 @@ import backend.dto.loginDTO.LoginDTO;
 import backend.dto.personDTO.WorkerDTO;
 import backend.endpoints.loginEndpoint.LoginEndpoint;
 
+import facheritosfrontendapp.controller.headquarters.HeadquartersController;
 import facheritosfrontendapp.views.FxmlLoader;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
@@ -83,7 +85,8 @@ public class DashboardController implements Initializable {
      */
 
     public void changeContent(String subpage) throws IOException {
-        borderPane.setCenter(new FxmlLoader().getPage(subpage));
+        FxmlLoader loader = new FxmlLoader();
+        borderPane.setCenter(loader.getPage(subpage));
     }
     /**
      * changeContent: String -> Void.
