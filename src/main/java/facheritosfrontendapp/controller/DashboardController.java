@@ -88,7 +88,7 @@ public class DashboardController implements Initializable {
         return loader.getController();
     }
     /**
-     * changeContent: String -> Void.
+     * changeContent: String -> Object.
      * Purpose: this method changes the content of the main page but with a scrollpane
      */
     public Object changeContent(String subpage, boolean withScrollpane) throws IOException {

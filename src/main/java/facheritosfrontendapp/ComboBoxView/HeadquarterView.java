@@ -28,6 +28,10 @@ public class HeadquarterView {
         this.name = name;
     }
 
+    /**
+     * toString: void -> String
+     * purpose: This method maps the object to a string attribute for the combobox view
+     */
     @Override
     public String toString(){
         return this.getName();

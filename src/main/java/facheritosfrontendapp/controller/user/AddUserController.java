@@ -131,7 +131,7 @@ public class AddUserController implements Initializable {
 
     }
     /**
-     * showHeaders: ResultSet -> void
+     * setHeadquarterCombobox: ResultSet -> void
      * Purpose: This method set the items of the headquarters combobox according to the DB
      */
     public void setHeadquarterCombobox(ResultSet resultSet) throws SQLException {
@@ -145,16 +145,6 @@ public class AddUserController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        /**
-        typeCombobox.setItems(FXCollections.observableArrayList("Gerente", "Vendedor", "Jefe de taller"));
-        try {
-            this.showHeadquarters();
-        } catch (ExecutionException e) {
-            throw new RuntimeException(e);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-         */
     }
 
     /**
