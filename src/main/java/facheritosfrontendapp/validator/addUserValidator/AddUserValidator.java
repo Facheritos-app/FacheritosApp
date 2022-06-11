@@ -1,19 +1,19 @@
-package facheritosfrontendapp.validator.createUserValidator;
+package facheritosfrontendapp.validator.addUserValidator;
 
 import facheritosfrontendapp.util.Regex;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import org.w3c.dom.Text;
 
-public class CreateUserValidator {
+public class AddUserValidator {
 
     private String errorStyle;
 
     private String errorMessageStyle;
 
 
-    public CreateUserValidator() {
+    public AddUserValidator() {
         errorStyle = String.format("-fx-border-color: RED; -fx-border-width: 2; -fx-border-radius: 5;");
         errorMessageStyle = String.format("-fx-text-fill: RED;");
     }
@@ -28,6 +28,12 @@ public class CreateUserValidator {
         comboBox.setStyle(getErrorStyle());
         label.setStyle(getErrorMessageStyle());
         new animatefx.animation.Shake(comboBox).play();
+    }
+
+    public void setErrorStyles(DatePicker datePicker, Label label){
+        datePicker.setStyle(getErrorStyle());
+        label.setStyle(getErrorMessageStyle());
+        new animatefx.animation.Shake(datePicker).play();
     }
 
     public Boolean name(TextField nameTextField, Label nameLabel, String nameLabelContent){
@@ -83,6 +89,21 @@ public class CreateUserValidator {
             correct = true;
         }
         return correct;
+    }
+
+    public Boolean cc(TextField ccTextField, Label ccLabel, String ccLabelContent){
+        Boolean correct = false;
+        String cc = ccTextField.getText();
+        Boolean sucessRegex = Regex.onlyDigits(cc);
+
+        if(cc.isEmpty() || !sucessRegex || cc.length() < 5 ){
+            ccLabel.setText(ccLabelContent);
+        }else{
+            correct = true;
+        }
+
+        return correct;
+
     }
 
     public String getErrorStyle() {

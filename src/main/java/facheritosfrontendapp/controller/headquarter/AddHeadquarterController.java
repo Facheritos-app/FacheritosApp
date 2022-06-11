@@ -1,4 +1,4 @@
-package facheritosfrontendapp.controller.headquarters;
+package facheritosfrontendapp.controller.headquarter;
 
 import facheritosfrontendapp.controller.DashboardController;
 import facheritosfrontendapp.controller.MainController;

@@ -1,27 +1,28 @@
-package facheritosfrontendapp.controller.users;
+package facheritosfrontendapp.controller.user;
 
 import facheritosfrontendapp.controller.DashboardController;
 import facheritosfrontendapp.controller.MainController;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TabPane;
-import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class UsersController implements Initializable {
+public class UserController implements Initializable {
 
     @FXML
     private TabPane usersTabpane;
 
     private DashboardController dashboardController;
 
+    private AddUserController addUserController;
+
     @FXML
     protected void addUserClicked() throws IOException {
-        dashboardController.changeContent("users/usersAdd", true);
-
+        addUserController = (AddUserController) dashboardController.changeContent("users/usersAdd", true);
+        addUserController.setView();
     }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

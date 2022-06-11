@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="517.0" prefWidth="647.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="facheritosfrontendapp.controller.users.UsersAddController">
+<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="517.0" prefWidth="647.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="facheritosfrontendapp.controller.user.AddUserController">
    <content>
       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="641.0" prefWidth="654.0">
          <children>
@@ -120,7 +120,7 @@
                                     <Font size="16.0" />
                                  </font>
                               </Label>
-                              <DatePicker fx:id="birthdateTextField" prefHeight="33.0" prefWidth="251.0" styleClass="input-text" stylesheets="@../style.css" />
+                              <DatePicker fx:id="birthdateDatePicker" prefHeight="33.0" prefWidth="251.0" styleClass="input-text" stylesheets="@../style.css" />
                               <Label fx:id="birthdateLabel" />
                            </children>
                            <HBox.margin>

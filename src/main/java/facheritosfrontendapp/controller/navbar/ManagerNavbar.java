@@ -2,7 +2,7 @@ package facheritosfrontendapp.controller.navbar;
 
 import facheritosfrontendapp.controller.DashboardController;
 import facheritosfrontendapp.controller.MainController;
-import facheritosfrontendapp.controller.headquarters.HeadquarterController;
+import facheritosfrontendapp.controller.headquarter.HeadquarterController;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.HBox;
@@ -32,7 +32,6 @@ public class ManagerNavbar implements Initializable {
 
     @FXML
     protected void headquartersClicked() throws IOException, ExecutionException, InterruptedException {
-        System.out.println("Thread en headquartersClicked: "+ Thread.currentThread().getName());
         headquarterController = (HeadquarterController) dashboardController.changeContent("headquarters/headquarters");
         headquarterController.showHeadquarters();
     }
