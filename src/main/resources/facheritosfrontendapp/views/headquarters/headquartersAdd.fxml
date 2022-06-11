@@ -3,6 +3,7 @@
 <?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
@@ -11,9 +12,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="517.0" prefWidth="647.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="facheritosfrontendapp.controller.headquarters.AddHeadquarterController">
+<AnchorPane prefHeight="517.0" prefWidth="633.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="facheritosfrontendapp.controller.headquarters.AddHeadquarterController">
    <children>
-      <VBox layoutX="-1.0" layoutY="-3.0" prefHeight="334.0" prefWidth="647.0" spacing="10.0">
+      <VBox layoutX="-1.0" layoutY="-3.0" prefHeight="438.0" prefWidth="647.0" spacing="10.0">
          <children>
             <Label prefHeight="106.0" prefWidth="264.0" styleClass="poppins" text="Agregar sede" textFill="#1f1f1f">
                <font>
@@ -35,7 +36,7 @@
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <TextField prefHeight="36.0" prefWidth="273.0" styleClass="input-text" stylesheets="@../style.css" />
+                        <TextField fx:id="nam" prefHeight="36.0" prefWidth="273.0" promptText="ej. Sede 5" styleClass="input-text" stylesheets="@../style.css" />
                      </children>
                      <HBox.margin>
                         <Insets left="40.0" />
@@ -48,21 +49,27 @@
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <TextField prefHeight="36.0" prefWidth="297.0" styleClass="input-text" stylesheets="@../style.css" />
+                        <TextField fx:id="addr" prefHeight="36.0" prefWidth="297.0" promptText="ej. Cra 14D # 67-98" styleClass="input-text" stylesheets="@../style.css" />
                      </children>
                   </VBox>
                </children>
             </HBox>
-            <HBox prefHeight="83.0" prefWidth="515.0" spacing="50.0">
+            <HBox prefHeight="191.0" prefWidth="647.0" spacing="50.0">
                <children>
-                  <VBox prefHeight="100.0" prefWidth="246.0" spacing="10.0">
+                  <VBox prefHeight="180.0" prefWidth="246.0" spacing="10.0">
                      <children>
                         <Label prefHeight="20.0" prefWidth="77.0" text="Celular:">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <TextField prefHeight="36.0" prefWidth="273.0" styleClass="input-text" stylesheets="@../style.css" />
+                        <TextField fx:id="cellp" prefHeight="36.0" prefWidth="273.0" promptText="ej. 3726289" styleClass="input-text" stylesheets="@../style.css" />
+                        <Label prefHeight="20.0" prefWidth="77.0" text="Ciudad:">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <ChoiceBox fx:id="city" prefHeight="31.0" prefWidth="252.0" />
                      </children>
                      <HBox.margin>
                         <Insets left="40.0" />
@@ -75,7 +82,7 @@
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <TextField prefHeight="36.0" prefWidth="297.0" styleClass="input-text" stylesheets="@../style.css" />
+                        <TextField fx:id="eml" prefHeight="36.0" prefWidth="297.0" promptText="ej. sede5@gmail.com" styleClass="input-text" stylesheets="@../style.css" />
                      </children>
                   </VBox>
                </children>
