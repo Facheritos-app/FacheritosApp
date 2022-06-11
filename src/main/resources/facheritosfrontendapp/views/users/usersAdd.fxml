@@ -40,8 +40,8 @@
                                     <Font size="16.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="nameTextField" prefHeight="36.0" prefWidth="273.0" promptText="Nombre de usuario" styleClass="input-text" stylesheets="@../style.css" />
-                              <Label fx:id="nameLabel" />
+                              <TextField fx:id="firstnameTextField" prefHeight="36.0" prefWidth="273.0" promptText="Nombre de usuario" styleClass="input-text" stylesheets="@../style.css" />
+                              <Label fx:id="firstnameLabel" />
                            </children>
                            <HBox.margin>
                               <Insets left="40.0" />
@@ -54,8 +54,8 @@
                                     <Font size="16.0" />
                                  </font>
                               </Label>
-                              <ComboBox fx:id="typeCombobox" prefHeight="23.0" prefWidth="247.0" styleClass="input-text" stylesheets="@../style.css" />
-                              <Label fx:id="rolLabel" />
+                              <ComboBox fx:id="typeCombobox" prefHeight="25.0" prefWidth="255.0" styleClass="input-text" stylesheets="@../style.css" />
+                              <Label fx:id="typeLabel" />
                            </children>
                            <HBox.margin>
                               <Insets />

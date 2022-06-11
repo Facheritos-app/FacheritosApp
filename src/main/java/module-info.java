@@ -7,6 +7,7 @@ module  facheritosfrontendapp {
     requires java.dotenv;
     requires org.postgresql.jdbc;
     requires java.sql;
+    requires AnimateFX;
 
 
     //opens  facheritosfrontendapp to javafx.fxml;

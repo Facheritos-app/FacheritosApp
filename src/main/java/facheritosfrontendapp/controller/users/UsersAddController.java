@@ -1,10 +1,13 @@
 package facheritosfrontendapp.controller.users;
 
 import backend.endpoints.headquarterEndpoint.HeadquarterEndpoint;
+import facheritosfrontendapp.validator.createUserValidator.CreateUserValidator;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 
 import java.net.URL;
@@ -18,23 +21,55 @@ import java.util.concurrent.ExecutionException;
 
 public class UsersAddController implements Initializable {
 
-    @FXML
-    private ComboBox<String> typeCombobox;
-    @FXML
-    private ComboBox<String> headquarterCombobox;
     private HeadquarterEndpoint headquarterEndpoint;
 
     private ArrayList<String> headquarterComboboxList;
 
+    private CreateUserValidator inputValidator;
+
+    @FXML
+    private TextField firstnameTextField;
+    @FXML
+    private Label firstnameLabel;
+    @FXML
+    private TextField lastnameTextField;
+    @FXML
+    private Label lastnameLabel;
+    @FXML
+    private TextField celTextField;
+    @FXML
+    private Label celLabel;
+    @FXML
+    private TextField emailTextField;
+    @FXML
+    private Label emailLabel;
+    @FXML
+    private TextField salaryTextField;
+    @FXML
+    private Label salaryLabel;
+    @FXML
+    private ComboBox<String> typeCombobox;
+    @FXML
+    private Label typeLabel;
+    @FXML
+    private ComboBox<String> headquarterCombobox;
+    @FXML
+    private Label headquarterLabel;
+
+
+
+
     public UsersAddController(){
         headquarterEndpoint = new HeadquarterEndpoint();
         headquarterComboboxList = new ArrayList<String>();
+        inputValidator = new CreateUserValidator();
     }
     @FXML
     public void cancelButtonAddUserClicked(MouseEvent mouseEvent) {
     }
     @FXML
     public void saveButtonAddUserClicked(MouseEvent mouseEvent) {
+        allValidations();
     }
 
     /**
@@ -80,5 +115,42 @@ public class UsersAddController implements Initializable {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public Boolean allValidations(){
+        Boolean everythingCorrect = true;
+        if(!inputValidator.name(firstnameTextField, firstnameLabel, "Escriba un nombre valido, por favor")){
+            everythingCorrect = false;
+            inputValidator.setErrorStyles(firstnameTextField, firstnameLabel);
+        }
+        if(!inputValidator.name(lastnameTextField, lastnameLabel, "Escriba un nombre valido, por favor")){
+            everythingCorrect = false;
+            inputValidator.setErrorStyles(lastnameTextField, lastnameLabel);
+        }
+        if(!inputValidator.cellphone(celTextField, celLabel, "Escriba un numero valido, por favor")){
+            everythingCorrect = false;
+            inputValidator.setErrorStyles(celTextField, celLabel);
+        }
+        if(!inputValidator.email(emailTextField, emailLabel, "Escriba un correo valido, por favor")){
+            everythingCorrect = false;
+            inputValidator.setErrorStyles(emailTextField, emailLabel);
+        }
+        if(!inputValidator.salary(salaryTextField, salaryLabel, "Escriba un salario valido, por favor")){
+            everythingCorrect = false;
+            inputValidator.setErrorStyles(salaryTextField, salaryLabel);
+        }
+        if(typeCombobox.getSelectionModel().isEmpty()){
+            everythingCorrect = false;
+            typeLabel.setText("Por favor indique el rol del usuario");
+            inputValidator.setErrorStyles(typeCombobox, typeLabel);
+        }
+        if(headquarterCombobox.getSelectionModel().isEmpty()){
+            everythingCorrect = false;
+            headquarterLabel.setText("Por favor indique una sede");
+            inputValidator.setErrorStyles(headquarterCombobox, headquarterLabel);
+        }
+
+
+        return everythingCorrect;
     }
 }
