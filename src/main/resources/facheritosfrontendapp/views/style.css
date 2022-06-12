@@ -68,7 +68,43 @@ Button {
     -fx-border-radius: 10px;
     -fx-background-color: #D3D3D3;
 }
+/*Dialog*/
 
+.dialog-pane{
+
+}
+
+/**Costumization of The Bar where the buttons are located**/
+.dialog-pane > .button-bar > .container {
+
+}
+
+.dialog-pane > .content.label {
+
+}
+
+/**Costumization of DialogPane Header**/
+.dialog-pane:header .header-panel {
+
+}
+
+.dialog-pane:header .header-panel .label{
+
+}
+
+
+/**Costumization of Buttons**/
+.dialog-pane .button{
+
+    -fx-text-fill:white;
+    -fx-wrap-text: true;
+    -fx-cursor:hand;
+
+}
+
+.dialog-pane .button:hover{
+
+}
 /**
   -fx-background-color: #005296;
  */
