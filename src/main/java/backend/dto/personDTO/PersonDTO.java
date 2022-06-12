@@ -1,5 +1,6 @@
 package backend.dto.personDTO;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class PersonDTO {
@@ -8,16 +9,13 @@ public class PersonDTO {
 
 
     protected String cc;
-
-
-
     protected String first_name;
 
     protected String last_name;
 
     protected String cellphone;
 
-    protected Date birthday;
+    protected LocalDate birthday;
 
     protected String email;
 
@@ -65,11 +63,11 @@ public class PersonDTO {
         this.cellphone = cellphone;
     }
 
-    public Date getBirthday() {
+    public LocalDate getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(Date birthday) {
+    public void setBirthday(LocalDate birthday) {
         this.birthday = birthday;
     }
 

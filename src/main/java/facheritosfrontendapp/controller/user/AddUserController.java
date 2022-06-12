@@ -1,6 +1,8 @@
 package facheritosfrontendapp.controller.user;
 
+import backend.dto.personDTO.WorkerDTO;
 import backend.endpoints.headquarterEndpoint.HeadquarterEndpoint;
+import backend.endpoints.workerEndpoint.WorkerEndpoint;
 import facheritosfrontendapp.ComboBoxView.HeadquarterView;
 import facheritosfrontendapp.validator.addUserValidator.AddUserValidator;
 import javafx.collections.FXCollections;
@@ -24,6 +26,8 @@ import java.util.concurrent.ExecutionException;
 public class AddUserController implements Initializable {
 
     private HeadquarterEndpoint headquarterEndpoint;
+
+    private WorkerEndpoint workerEndpoint;
 
     private ArrayList<HeadquarterView> headquarterComboboxList;
 
@@ -74,13 +78,19 @@ public class AddUserController implements Initializable {
         headquarterEndpoint = new HeadquarterEndpoint();
         headquarterComboboxList = new ArrayList<HeadquarterView>();
         inputValidator = new AddUserValidator();
+        workerEndpoint = new WorkerEndpoint();
     }
     @FXML
     public void cancelButtonAddUserClicked(MouseEvent mouseEvent) {
     }
     @FXML
-    public void saveButtonAddUserClicked(MouseEvent mouseEvent) {
-        allValidations();
+    public void saveButtonAddUserClicked(MouseEvent mouseEvent) throws ExecutionException, InterruptedException {
+        if(allValidations()){
+            WorkerDTO worker = populateWorkerObject();
+            Boolean createUser = CompletableFuture.supplyAsync(() -> workerEndpoint.createWorker(worker)).get();
+        }
+
+
     }
 
     /**
@@ -97,6 +107,38 @@ public class AddUserController implements Initializable {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public WorkerDTO populateWorkerObject(){
+        WorkerDTO worker = new WorkerDTO();
+        worker.setFirst_name(firstnameTextField.getText());
+        worker.setLast_name(lastnameTextField.getText());
+        worker.setCellphone(celTextField.getText());
+        worker.setEmail(emailTextField.getText());
+        worker.setSalary(Double.parseDouble(salaryTextField.getText()));
+        worker.setId_type_person(getRolId(typeCombobox.getSelectionModel().getSelectedItem()));
+        worker.setRol(typeCombobox.getSelectionModel().getSelectedItem());
+        worker.setId_headquarter(headquarterCombobox.getSelectionModel().getSelectedItem().getIdHeadquarter());
+        worker.setBirthday(birthdateDatePicker.getValue());
+        worker.setCc(ccTextField.getText());
+        worker.setState(true);
+        return worker;
+    }
+
+    public Integer getRolId(String rol){
+        Integer rolId = 0;
+        switch (rol){
+            case "Gerente":
+                rolId = 1;
+                break;
+            case "Vendedor":
+                rolId = 2;
+                break;
+            case "Jefe de taller":
+                rolId = 3;
+                break;
+        }
+        return rolId;
     }
 
     /**
