@@ -12,9 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="517.0" prefWidth="647.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="facheritosfrontendapp.controller.headquarter.AddHeadquarterController">
->>>>>>> aba6a485aea15339987a549d2e97e47c1d3494ec
+<AnchorPane prefHeight="517.0" prefWidth="633.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="facheritosfrontendapp.controller.headquarter.AddHeadquarterController">
    <children>
       <VBox layoutX="-1.0" layoutY="-3.0" prefHeight="438.0" prefWidth="647.0" spacing="10.0">
          <children>
@@ -71,7 +69,7 @@
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <ChoiceBox fx:id="city" prefHeight="31.0" prefWidth="252.0" />
+                        <ChoiceBox fx:id="city" prefHeight="31.0" prefWidth="252.0" style="-fx-background-color: D3D3D3;" />
                      </children>
                      <HBox.margin>
                         <Insets left="40.0" />
