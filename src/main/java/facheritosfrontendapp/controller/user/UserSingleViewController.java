@@ -1,4 +1,4 @@
-package facheritosfrontendapp.controller.users;
+package facheritosfrontendapp.controller.user;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -8,7 +8,7 @@ import javafx.scene.control.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class UsersSingleViewController implements Initializable {
+public class UserSingleViewController implements Initializable {
 
     @FXML
     private Label editUserLabel;

@@ -1,4 +1,4 @@
-package facheritosfrontendapp.controller.headquarters;
+package facheritosfrontendapp.controller.headquarter;
 
 import backend.endpoints.headquarterEndpoint.HeadquarterEndpoint;
 import facheritosfrontendapp.controller.DashboardController;

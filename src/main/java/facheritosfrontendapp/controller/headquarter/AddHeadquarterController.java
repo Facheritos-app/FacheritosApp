@@ -1,4 +1,4 @@
-package facheritosfrontendapp.controller.headquarters;
+package facheritosfrontendapp.controller.headquarter;
 
 import backend.connectionBD.ConnectionBD;
 import backend.dto.city.CityDTO;

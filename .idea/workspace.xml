@@ -5,6 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5f49d571-a74c-4244-90f5-d1284478321e" name="Changes" comment="I changed the view users view with the combo boxes and the city field.">
+<<<<<<< HEAD
       <change afterPath="$PROJECT_DIR$/src/main/java/backend/dto/city/CityDTO.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/main/java/backend/dto/headquarterDTO/HeadquarterDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
@@ -12,6 +13,11 @@
       <change beforePath="$PROJECT_DIR$/src/main/java/backend/endpoints/headquarterEndpoint/HeadquarterEndpoint.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/backend/endpoints/headquarterEndpoint/HeadquarterEndpoint.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/headquarters/AddHeadquarterController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/headquarters/AddHeadquarterController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/headquarters/headquartersAdd.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/headquarters/headquartersAdd.fxml" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/ComboBoxView/HeadquarterView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/ComboBoxView/HeadquarterView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/DashboardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/DashboardController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/user/AddUserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/user/AddUserController.java" afterDir="false" />
+>>>>>>> aba6a485aea15339987a549d2e97e47c1d3494ec
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

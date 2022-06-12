@@ -88,13 +88,13 @@ public class DashboardController implements Initializable {
         return loader.getController();
     }
     /**
-     * changeContent: String -> Void.
+     * changeContent: String -> Object.
      * Purpose: this method changes the content of the main page but with a scrollpane
      */
-    public void changeContent(String subpage, boolean withScrollpane) throws IOException {
-        if(withScrollpane) {
-            borderPane.setCenter(new FxmlLoader().getPage(subpage, true));
-        }
+    public Object changeContent(String subpage, boolean withScrollpane) throws IOException {
+        FxmlLoader loader = new FxmlLoader();
+        borderPane.setCenter(loader.getPage(subpage, true));
+        return loader.getController();
     }
 
 
