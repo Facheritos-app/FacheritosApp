@@ -83,14 +83,25 @@ public class AddUserController implements Initializable {
     @FXML
     public void cancelButtonAddUserClicked(MouseEvent mouseEvent) {
     }
+
+    /**
+     * saveButtonAddUserClicked: MouseEvent -> void
+     * Purpose: This method contains the logic and the calls to the DB in order to create a worker
+     */
     @FXML
     public void saveButtonAddUserClicked(MouseEvent mouseEvent) throws ExecutionException, InterruptedException {
         if(allValidations()){
-            WorkerDTO worker = populateWorkerObject();
-            Boolean createUser = CompletableFuture.supplyAsync(() -> workerEndpoint.createWorker(worker)).get();
+            new Thread(() -> {
+                WorkerDTO worker = populateWorkerObject();
+                try {
+                    Boolean createUser = CompletableFuture.supplyAsync(() -> workerEndpoint.createWorker(worker)).get();
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                } catch (ExecutionException e) {
+                    throw new RuntimeException(e);
+                }
+            }).start();
         }
-
-
     }
 
     /**
@@ -109,6 +120,11 @@ public class AddUserController implements Initializable {
         }
     }
 
+    /**
+     * populateWorkerObject: void -> WorkerDTO
+     * Purpose: This method populates a WorkerDTO object from all the information on the create-worker form
+     * @return
+     */
     public WorkerDTO populateWorkerObject(){
         WorkerDTO worker = new WorkerDTO();
         worker.setFirst_name(firstnameTextField.getText());
