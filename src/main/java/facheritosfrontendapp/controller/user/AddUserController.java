@@ -5,20 +5,21 @@ import backend.endpoints.headquarterEndpoint.HeadquarterEndpoint;
 import backend.endpoints.workerEndpoint.WorkerEndpoint;
 import facheritosfrontendapp.ComboBoxView.HeadquarterView;
 import facheritosfrontendapp.validator.addUserValidator.AddUserValidator;
+import facheritosfrontendapp.views.FxmlLoader;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
@@ -32,6 +33,8 @@ public class AddUserController implements Initializable {
     private ArrayList<HeadquarterView> headquarterComboboxList;
 
     private AddUserValidator inputValidator;
+
+    private FxmlLoader fxmlLoader;
 
     //Here are all the @FXML components
     @FXML
@@ -79,6 +82,7 @@ public class AddUserController implements Initializable {
         headquarterComboboxList = new ArrayList<HeadquarterView>();
         inputValidator = new AddUserValidator();
         workerEndpoint = new WorkerEndpoint();
+        fxmlLoader = new FxmlLoader();
     }
     @FXML
     public void cancelButtonAddUserClicked(MouseEvent mouseEvent) {
@@ -90,16 +94,25 @@ public class AddUserController implements Initializable {
      */
     @FXML
     public void saveButtonAddUserClicked(MouseEvent mouseEvent) throws ExecutionException, InterruptedException {
+
         if(allValidations()){
             new Thread(() -> {
                 WorkerDTO worker = populateWorkerObject();
-                try {
-                    Boolean createUser = CompletableFuture.supplyAsync(() -> workerEndpoint.createWorker(worker)).get();
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                } catch (ExecutionException e) {
-                    throw new RuntimeException(e);
-                }
+                    Platform.runLater(() -> {
+                        try {
+                            Optional<ButtonType> buttonClicked = setConfirmationWindow();
+                            if(buttonClicked.get() == ButtonType.APPLY) {
+                                //DB call to save worker
+                                CompletableFuture.supplyAsync(() -> workerEndpoint.createWorker(worker)).get();
+                            }
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        } catch (ExecutionException e) {
+                            throw new RuntimeException(e);
+                        } catch (InterruptedException e) {
+                            throw new RuntimeException(e);
+                        }
+                    });
             }).start();
         }
     }
@@ -118,6 +131,15 @@ public class AddUserController implements Initializable {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
+    }
+
+
+    public Optional<ButtonType> setConfirmationWindow() throws IOException {
+        DialogPane dialogPane = (DialogPane) fxmlLoader.getPage("confirmationSave");
+        Dialog<ButtonType> dialog = new Dialog<>();
+        dialog.setDialogPane(dialogPane);
+        Optional<ButtonType> clickedButton = dialog.showAndWait();
+        return clickedButton;
     }
 
     /**
@@ -141,6 +163,10 @@ public class AddUserController implements Initializable {
         return worker;
     }
 
+    /**
+     * getRolId: String -> Integer
+     * Purpose: This method returns the id of the user's rol given its rol name
+     */
     public Integer getRolId(String rol){
         Integer rolId = 0;
         switch (rol){
