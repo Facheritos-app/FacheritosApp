@@ -2,26 +2,33 @@ package facheritosfrontendapp.controller.user;
 
 import backend.endpoints.headquarterEndpoint.HeadquarterEndpoint;
 import facheritosfrontendapp.ComboBoxView.HeadquarterView;
+import facheritosfrontendapp.controller.DashboardController;
+import facheritosfrontendapp.controller.MainController;
+import facheritosfrontendapp.controller.headquarter.HeadquarterController;
 import facheritosfrontendapp.validator.addUserValidator.AddUserValidator;
+import facheritosfrontendapp.views.MyDialogPane;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
 public class AddUserController implements Initializable {
+
+    private DashboardController dashboardController;
+
+    private UserController userController;
 
     private HeadquarterEndpoint headquarterEndpoint;
 
@@ -76,11 +83,31 @@ public class AddUserController implements Initializable {
         inputValidator = new AddUserValidator();
     }
     @FXML
-    public void cancelButtonAddUserClicked(MouseEvent mouseEvent) {
+    public void cancelButtonAddUserClicked(MouseEvent mouseEvent) throws IOException {
+        /*Show dialogPane to confirm*/
+        MyDialogPane dialogPane = new MyDialogPane("confirmationCancel");
+        Optional<ButtonType> clickedButton = dialogPane.getClickedButton();
+        if(clickedButton.get() == ButtonType.YES){
+            userController = (UserController) dashboardController.changeContent("users/users");
+            //SHOW THE USERS IN TABLEVIEW
+        } else {
+            System.out.println("No");
+        }
     }
     @FXML
-    public void saveButtonAddUserClicked(MouseEvent mouseEvent) {
-        allValidations();
+    public void saveButtonAddUserClicked(MouseEvent mouseEvent) throws IOException {
+        //Show dialogPane only if all validations are correct
+        if(allValidations()) {
+            //Show dialogPane to confirm
+            MyDialogPane dialogPane = new MyDialogPane("confirmationSave");
+            Optional<ButtonType> clickedButton = dialogPane.getClickedButton();
+            if(clickedButton.get() == ButtonType.YES){
+                userController = (UserController) dashboardController.changeContent("users/users");
+                //SHOW THE USERS IN TABLEVIEW
+            } else {
+                System.out.println("No");
+            }
+        }
     }
 
     /**
@@ -145,6 +172,7 @@ public class AddUserController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        dashboardController = MainController.getDashboardController();
     }
 
     /**
