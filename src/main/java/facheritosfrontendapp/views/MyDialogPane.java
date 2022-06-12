@@ -25,7 +25,7 @@ public class MyDialogPane extends DialogPane {
 
         Dialog<ButtonType> dialog = new Dialog<>();
         dialog.setDialogPane(dialogPane);
-        dialog.setTitle("Confirme");
+        dialog.setTitle("¿Desea continuar?");
 
 
         clickedButton = dialog.showAndWait();
