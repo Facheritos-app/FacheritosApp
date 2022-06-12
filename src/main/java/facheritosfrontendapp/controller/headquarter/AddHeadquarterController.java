@@ -2,13 +2,9 @@ package facheritosfrontendapp.controller.headquarter;
 
 import facheritosfrontendapp.controller.DashboardController;
 import facheritosfrontendapp.controller.MainController;
-import facheritosfrontendapp.views.ConfirmationCancel;
-import facheritosfrontendapp.views.ConfirmationCancelController;
 import facheritosfrontendapp.views.MyDialogPane;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Pos;
 import javafx.scene.control.*;
 
 import java.io.IOException;
@@ -27,7 +23,6 @@ public class AddHeadquarterController implements Initializable {
     @FXML
     private Button addHeadquarter;
 
-    private ConfirmationCancel confirmationCancel;
 
     /*Add headquarter*/
 
