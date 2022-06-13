@@ -4,9 +4,13 @@ import backend.dto.personDTO.WorkerDTO;
 import backend.endpoints.headquarterEndpoint.HeadquarterEndpoint;
 import backend.endpoints.workerEndpoint.WorkerEndpoint;
 import facheritosfrontendapp.ComboBoxView.HeadquarterView;
+import facheritosfrontendapp.controller.DashboardController;
+import facheritosfrontendapp.controller.MainController;
+import facheritosfrontendapp.controller.headquarter.HeadquarterController;
 import facheritosfrontendapp.validator.addUserValidator.AddUserValidator;
 import facheritosfrontendapp.views.FxmlLoader;
 import javafx.application.Platform;
+import facheritosfrontendapp.views.MyDialogPane;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -25,6 +29,10 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
 public class AddUserController implements Initializable {
+
+    private DashboardController dashboardController;
+
+    private UserController userController;
 
     private HeadquarterEndpoint headquarterEndpoint;
 
@@ -85,7 +93,16 @@ public class AddUserController implements Initializable {
         fxmlLoader = new FxmlLoader();
     }
     @FXML
-    public void cancelButtonAddUserClicked(MouseEvent mouseEvent) {
+    public void cancelButtonAddUserClicked(MouseEvent mouseEvent) throws IOException {
+        /*Show dialogPane to confirm*/
+        MyDialogPane dialogPane = new MyDialogPane("confirmationCancel");
+        Optional<ButtonType> clickedButton = dialogPane.getClickedButton();
+        if(clickedButton.get() == ButtonType.YES){
+            userController = (UserController) dashboardController.changeContent("users/users");
+            //SHOW THE USERS IN TABLEVIEW
+        } else {
+            System.out.println("No");
+        }
     }
 
     /**
@@ -100,10 +117,13 @@ public class AddUserController implements Initializable {
                 WorkerDTO worker = populateWorkerObject();
                     Platform.runLater(() -> {
                         try {
-                            Optional<ButtonType> buttonClicked = setConfirmationWindow();
-                            if(buttonClicked.get() == ButtonType.APPLY) {
+                            MyDialogPane dialogPane = new MyDialogPane("confirmationSave");
+                            Optional<ButtonType> clickedButton = dialogPane.getClickedButton();
+                            if(clickedButton.get() == ButtonType.YES) {
                                 //DB call to save worker
                                 CompletableFuture.supplyAsync(() -> workerEndpoint.createWorker(worker)).get();
+                                //Go to main user view
+                                userController = (UserController) dashboardController.changeContent("users/users");
                             }
                         } catch (IOException e) {
                             throw new RuntimeException(e);
@@ -132,16 +152,6 @@ public class AddUserController implements Initializable {
             throw new RuntimeException(e);
         }
     }
-
-
-    public Optional<ButtonType> setConfirmationWindow() throws IOException {
-        DialogPane dialogPane = (DialogPane) fxmlLoader.getPage("confirmationSave");
-        Dialog<ButtonType> dialog = new Dialog<>();
-        dialog.setDialogPane(dialogPane);
-        Optional<ButtonType> clickedButton = dialog.showAndWait();
-        return clickedButton;
-    }
-
     /**
      * populateWorkerObject: void -> WorkerDTO
      * Purpose: This method populates a WorkerDTO object from all the information on the create-worker form
@@ -229,6 +239,7 @@ public class AddUserController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        dashboardController = MainController.getDashboardController();
     }
 
     /**

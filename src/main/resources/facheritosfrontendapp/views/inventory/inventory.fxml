@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="517.0" prefWidth="647.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="facheritosfrontendapp.controller.inventory.InventoryController">
+    <children>
+        <Label layoutX="34.0" layoutY="23.0" prefHeight="72.0" prefWidth="217.0" styleClass="poppins" stylesheets="@../style.css" text="Inventario" textFill="#1f1f1f">
+            <font>
+                <Font name="System Bold" size="36.0" />
+            </font>
+        </Label>
+        <Button layoutX="466.0" layoutY="106.0" mnemonicParsing="false" onMouseClicked="#addClicked" prefHeight="26.0" prefWidth="94.0" styleClass="red-button" stylesheets="@../style.css" text="Agregar  +" textFill="WHITE">
+            <font>
+                <Font name="System Bold" size="12.0" />
+            </font>
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </Button>
+        <TabPane fx:id="inventoryTabpane" layoutX="86.0" layoutY="157.0" prefHeight="245.0" prefWidth="476.0" stylesheets="@../style.css">
+            <tabs>
+                <Tab text="Vehículos">
+                    <content>
+                        <TableView prefHeight="228.0" prefWidth="491.0">
+                            <columns>
+                                <TableColumn text="Tipo" />
+                                <TableColumn text="Nombre" />
+                                <TableColumn text="Precio" />
+                                <TableColumn text="Sede" />
+                                <TableColumn text="Cantidad" />
+                                <TableColumn text="Opciones" />
+                            </columns>
+                        </TableView>
+                    </content>
+                </Tab>
+                <Tab text="Repuestos" />
+            </tabs>
+        </TabPane>
+        <Separator layoutX="10.0" layoutY="22.0" orientation="VERTICAL" prefHeight="516.0" prefWidth="8.0" />
+    </children>
+</AnchorPane>
