@@ -1,33 +1,48 @@
 package facheritosfrontendapp.controller.user;
 
+import backend.dto.personDTO.WorkerDTO;
 import backend.endpoints.headquarterEndpoint.HeadquarterEndpoint;
+import backend.endpoints.workerEndpoint.WorkerEndpoint;
 import facheritosfrontendapp.ComboBoxView.HeadquarterView;
+import facheritosfrontendapp.controller.DashboardController;
+import facheritosfrontendapp.controller.MainController;
+import facheritosfrontendapp.controller.headquarter.HeadquarterController;
 import facheritosfrontendapp.validator.addUserValidator.AddUserValidator;
+import facheritosfrontendapp.views.FxmlLoader;
+import javafx.application.Platform;
+import facheritosfrontendapp.views.MyDialogPane;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
 public class AddUserController implements Initializable {
 
+    private DashboardController dashboardController;
+
+    private UserController userController;
+
     private HeadquarterEndpoint headquarterEndpoint;
+
+    private WorkerEndpoint workerEndpoint;
 
     private ArrayList<HeadquarterView> headquarterComboboxList;
 
     private AddUserValidator inputValidator;
+
+    private FxmlLoader fxmlLoader;
 
     //Here are all the @FXML components
     @FXML
@@ -74,13 +89,57 @@ public class AddUserController implements Initializable {
         headquarterEndpoint = new HeadquarterEndpoint();
         headquarterComboboxList = new ArrayList<HeadquarterView>();
         inputValidator = new AddUserValidator();
+        workerEndpoint = new WorkerEndpoint();
+        fxmlLoader = new FxmlLoader();
     }
     @FXML
-    public void cancelButtonAddUserClicked(MouseEvent mouseEvent) {
+    public void cancelButtonAddUserClicked(MouseEvent mouseEvent) throws IOException {
+        /*Show dialogPane to confirm*/
+        MyDialogPane dialogPane = new MyDialogPane("confirmationCancel");
+        Optional<ButtonType> clickedButton = dialogPane.getClickedButton();
+        if(clickedButton.get() == ButtonType.YES){
+            userController = (UserController) dashboardController.changeContent("users/users");
+            //SHOW THE USERS IN TABLEVIEW
+        } else {
+            System.out.println("No");
+        }
     }
+
+    /**
+     * saveButtonAddUserClicked: MouseEvent -> void
+     * Purpose: This method contains the logic and the calls to the DB in order to create a worker
+     */
     @FXML
-    public void saveButtonAddUserClicked(MouseEvent mouseEvent) {
-        allValidations();
+    public void saveButtonAddUserClicked(MouseEvent mouseEvent) throws ExecutionException, InterruptedException {
+
+        if(allValidations()){
+            new Thread(() -> {
+                WorkerDTO worker = populateWorkerObject();
+                    Platform.runLater(() -> {
+                        try {
+                            MyDialogPane dialogPane = new MyDialogPane("confirmationSave");
+                            Optional<ButtonType> clickedButton = dialogPane.getClickedButton();
+                            if(clickedButton.get() == ButtonType.YES) {
+                                //DB call to save worker
+                                new Thread(() -> {
+                                    try {
+                                        CompletableFuture.supplyAsync(() -> workerEndpoint.createWorker(worker)).get();
+                                    } catch (InterruptedException e) {
+                                        throw new RuntimeException(e);
+                                    } catch (ExecutionException e) {
+                                        throw new RuntimeException(e);
+                                    }
+                                }).start();
+
+                                //Go to main user view
+                                userController = (UserController) dashboardController.changeContent("users/users");
+                            }
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
+                    });
+            }).start();
+        }
     }
 
     /**
@@ -97,6 +156,46 @@ public class AddUserController implements Initializable {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
+    }
+    /**
+     * populateWorkerObject: void -> WorkerDTO
+     * Purpose: This method populates a WorkerDTO object from all the information on the create-worker form
+     * @return
+     */
+    public WorkerDTO populateWorkerObject(){
+        WorkerDTO worker = new WorkerDTO();
+        worker.setFirst_name(firstnameTextField.getText());
+        worker.setLast_name(lastnameTextField.getText());
+        worker.setCellphone(celTextField.getText());
+        worker.setEmail(emailTextField.getText());
+        worker.setSalary(Double.parseDouble(salaryTextField.getText()));
+        worker.setId_type_person(getRolId(typeCombobox.getSelectionModel().getSelectedItem()));
+        worker.setRol(typeCombobox.getSelectionModel().getSelectedItem());
+        worker.setId_headquarter(headquarterCombobox.getSelectionModel().getSelectedItem().getIdHeadquarter());
+        worker.setBirthday(birthdateDatePicker.getValue());
+        worker.setCc(ccTextField.getText());
+        worker.setState(true);
+        return worker;
+    }
+
+    /**
+     * getRolId: String -> Integer
+     * Purpose: This method returns the id of the user's rol given its rol name
+     */
+    public Integer getRolId(String rol){
+        Integer rolId = 0;
+        switch (rol){
+            case "Gerente":
+                rolId = 1;
+                break;
+            case "Vendedor":
+                rolId = 2;
+                break;
+            case "Jefe de taller":
+                rolId = 3;
+                break;
+        }
+        return rolId;
     }
 
     /**
@@ -145,6 +244,7 @@ public class AddUserController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        dashboardController = MainController.getDashboardController();
     }
 
     /**

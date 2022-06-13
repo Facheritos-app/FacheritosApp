@@ -5,6 +5,7 @@ import backend.dto.personDTO.WorkerDTO;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 
 public class WorkerMapper {
 
@@ -16,7 +17,7 @@ public class WorkerMapper {
         workerDTO.setFirst_name(resultSet.getString("first_name"));
         workerDTO.setLast_name(resultSet.getString("last_name"));
         workerDTO.setCc(resultSet.getString("cc"));
-        workerDTO.setBirthday(resultSet.getDate("birthday"));
+        workerDTO.setBirthday(resultSet.getDate("birthday").toLocalDate());
         workerDTO.setEmail(resultSet.getString("email"));
         workerDTO.setId_headquarter(resultSet.getInt("id_headquarter"));
         workerDTO.setState(resultSet.getBoolean("state"));
