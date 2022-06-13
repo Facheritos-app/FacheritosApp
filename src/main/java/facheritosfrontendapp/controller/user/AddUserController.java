@@ -121,15 +121,20 @@ public class AddUserController implements Initializable {
                             Optional<ButtonType> clickedButton = dialogPane.getClickedButton();
                             if(clickedButton.get() == ButtonType.YES) {
                                 //DB call to save worker
-                                CompletableFuture.supplyAsync(() -> workerEndpoint.createWorker(worker)).get();
+                                new Thread(() -> {
+                                    try {
+                                        CompletableFuture.supplyAsync(() -> workerEndpoint.createWorker(worker)).get();
+                                    } catch (InterruptedException e) {
+                                        throw new RuntimeException(e);
+                                    } catch (ExecutionException e) {
+                                        throw new RuntimeException(e);
+                                    }
+                                }).start();
+
                                 //Go to main user view
                                 userController = (UserController) dashboardController.changeContent("users/users");
                             }
                         } catch (IOException e) {
-                            throw new RuntimeException(e);
-                        } catch (ExecutionException e) {
-                            throw new RuntimeException(e);
-                        } catch (InterruptedException e) {
                             throw new RuntimeException(e);
                         }
                     });

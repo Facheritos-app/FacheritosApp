@@ -24,7 +24,7 @@ public class WorkerEndpoint {
                         "VALUES (?,?,?,?,?)");
                 preparedStatement.setInt(1, worker.getId_person());
                 preparedStatement.setInt(2, worker.getId_headquarter());
-                preparedStatement.setString(3, worker.getPassword());
+                preparedStatement.setString(3, "hola123");
                 preparedStatement.setBoolean(4, worker.getState());
                 preparedStatement.setDouble(5, worker.getSalary());
                 preparedStatement.executeUpdate();
