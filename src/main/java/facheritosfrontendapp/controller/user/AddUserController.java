@@ -28,6 +28,8 @@ import java.util.ResourceBundle;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
+import static javafx.scene.control.ButtonType.*;
+
 public class AddUserController implements Initializable {
 
     private DashboardController dashboardController;
@@ -83,21 +85,20 @@ public class AddUserController implements Initializable {
     private Label ccLabel;
 
 
-
-
-    public AddUserController(){
+    public AddUserController() {
         headquarterEndpoint = new HeadquarterEndpoint();
         headquarterComboboxList = new ArrayList<HeadquarterView>();
         inputValidator = new AddUserValidator();
         workerEndpoint = new WorkerEndpoint();
         fxmlLoader = new FxmlLoader();
     }
+
     @FXML
     public void cancelButtonAddUserClicked(MouseEvent mouseEvent) throws IOException {
         /*Show dialogPane to confirm*/
         MyDialogPane dialogPane = new MyDialogPane("confirmationCancel");
         Optional<ButtonType> clickedButton = dialogPane.getClickedButton();
-        if(clickedButton.get() == ButtonType.YES){
+        if (clickedButton.get() == YES) {
             userController = (UserController) dashboardController.changeContent("users/users");
             //SHOW THE USERS IN TABLEVIEW
         } else {
@@ -112,32 +113,45 @@ public class AddUserController implements Initializable {
     @FXML
     public void saveButtonAddUserClicked(MouseEvent mouseEvent) throws ExecutionException, InterruptedException {
 
-        if(allValidations()){
+        if (allValidations()) {
             new Thread(() -> {
                 WorkerDTO worker = populateWorkerObject();
-                    Platform.runLater(() -> {
-                        try {
-                            MyDialogPane dialogPane = new MyDialogPane("confirmationSave");
-                            Optional<ButtonType> clickedButton = dialogPane.getClickedButton();
-                            if(clickedButton.get() == ButtonType.YES) {
-                                //DB call to save worker
-                                new Thread(() -> {
-                                    try {
-                                        CompletableFuture.supplyAsync(() -> workerEndpoint.createWorker(worker)).get();
-                                    } catch (InterruptedException e) {
-                                        throw new RuntimeException(e);
-                                    } catch (ExecutionException e) {
-                                        throw new RuntimeException(e);
-                                    }
-                                }).start();
+                Platform.runLater(() -> {
+                    try {
+                        MyDialogPane dialogPane = new MyDialogPane("confirmationSave");
+                        Optional<ButtonType> clickedButton = dialogPane.getClickedButton();
+                        if (clickedButton.get() == YES) {
+                            //DB call to save worker
+                            new Thread(() -> {
+                                Boolean result = null;
+                                try {
+                                    result = CompletableFuture.supplyAsync(() -> workerEndpoint.createWorker(worker)).get();
+                                } catch (InterruptedException e) {
+                                    throw new RuntimeException(e);
+                                } catch (ExecutionException e) {
+                                    throw new RuntimeException(e);
+                                }
+                                if (result) {
+                                    Platform.runLater(() -> {
+                                        Alert success = new Alert(Alert.AlertType.CONFIRMATION, "Usuario agregado exitosamente", OK);
+                                        success.show();
+                                        //Go to main user view
+                                        try {
+                                            userController = (UserController) dashboardController.changeContent("users/users");
+                                        } catch (IOException e) {
+                                            throw new RuntimeException(e);
+                                        }
+                                    });
 
-                                //Go to main user view
-                                userController = (UserController) dashboardController.changeContent("users/users");
-                            }
-                        } catch (IOException e) {
-                            throw new RuntimeException(e);
+                                } else {
+                                    Alert fail = new Alert(Alert.AlertType.ERROR, "Ha habido un problema, por favor intenta nuevamente", OK);
+                                }
+                            }).start();
                         }
-                    });
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                });
             }).start();
         }
     }
@@ -146,7 +160,7 @@ public class AddUserController implements Initializable {
      * setView: Void -> Void
      * Purpose: This method contains all the other methods that help set the view
      */
-    public void setView(){
+    public void setView() {
         //Set items for Rol combobox
         typeCombobox.setItems(FXCollections.observableArrayList("Gerente", "Vendedor", "Jefe de taller"));
         try {
@@ -157,12 +171,14 @@ public class AddUserController implements Initializable {
             throw new RuntimeException(e);
         }
     }
+
     /**
      * populateWorkerObject: void -> WorkerDTO
      * Purpose: This method populates a WorkerDTO object from all the information on the create-worker form
+     *
      * @return
      */
-    public WorkerDTO populateWorkerObject(){
+    public WorkerDTO populateWorkerObject() {
         WorkerDTO worker = new WorkerDTO();
         worker.setFirst_name(firstnameTextField.getText());
         worker.setLast_name(lastnameTextField.getText());
@@ -182,9 +198,9 @@ public class AddUserController implements Initializable {
      * getRolId: String -> Integer
      * Purpose: This method returns the id of the user's rol given its rol name
      */
-    public Integer getRolId(String rol){
+    public Integer getRolId(String rol) {
         Integer rolId = 0;
-        switch (rol){
+        switch (rol) {
             case "Gerente":
                 rolId = 1;
                 break;
@@ -211,7 +227,7 @@ public class AddUserController implements Initializable {
             //Use the response from the BD to fill the combobox
             try {
                 headquartersCall.thenApply((response) -> {
-                    if(response.containsKey(true)){
+                    if (response.containsKey(true)) {
                         ResultSet resultSet = response.get(true);
                         try {
                             setHeadquarterCombobox(resultSet);
@@ -229,12 +245,13 @@ public class AddUserController implements Initializable {
         }).start();
 
     }
+
     /**
      * setHeadquarterCombobox: ResultSet -> void
      * Purpose: This method set the items of the headquarters combobox according to the DB
      */
     public void setHeadquarterCombobox(ResultSet resultSet) throws SQLException {
-        while(resultSet.next()) {
+        while (resultSet.next()) {
             Integer idHeadquarter = resultSet.getInt("id_headquarter");
             String name = resultSet.getString("name");
             headquarterComboboxList.add(new HeadquarterView(idHeadquarter, name));
@@ -251,44 +268,44 @@ public class AddUserController implements Initializable {
      * allValidations: Void -> Boolean
      * Purpose: Group all the validations from the create-user form
      */
-    public Boolean allValidations(){
+    public Boolean allValidations() {
         Boolean everythingCorrect = true;
-        if(!inputValidator.name(firstnameTextField, firstnameLabel, "Escriba un nombre valido, por favor")){
+        if (!inputValidator.name(firstnameTextField, firstnameLabel, "Escriba un nombre valido, por favor")) {
             everythingCorrect = false;
             inputValidator.setErrorStyles(firstnameTextField, firstnameLabel);
         }
-        if(!inputValidator.name(lastnameTextField, lastnameLabel, "Escriba un nombre valido, por favor")){
+        if (!inputValidator.name(lastnameTextField, lastnameLabel, "Escriba un nombre valido, por favor")) {
             everythingCorrect = false;
             inputValidator.setErrorStyles(lastnameTextField, lastnameLabel);
         }
-        if(!inputValidator.cellphone(celTextField, celLabel, "Escriba un numero valido, por favor")){
+        if (!inputValidator.cellphone(celTextField, celLabel, "Escriba un numero valido, por favor")) {
             everythingCorrect = false;
             inputValidator.setErrorStyles(celTextField, celLabel);
         }
-        if(!inputValidator.email(emailTextField, emailLabel, "Escriba un correo valido, por favor")){
+        if (!inputValidator.email(emailTextField, emailLabel, "Escriba un correo valido, por favor")) {
             everythingCorrect = false;
             inputValidator.setErrorStyles(emailTextField, emailLabel);
         }
-        if(!inputValidator.salary(salaryTextField, salaryLabel, "Escriba un salario valido, por favor")){
+        if (!inputValidator.salary(salaryTextField, salaryLabel, "Escriba un salario valido, por favor")) {
             everythingCorrect = false;
             inputValidator.setErrorStyles(salaryTextField, salaryLabel);
         }
-        if(typeCombobox.getSelectionModel().isEmpty()){
+        if (typeCombobox.getSelectionModel().isEmpty()) {
             everythingCorrect = false;
             typeLabel.setText("Por favor indique el rol del usuario");
             inputValidator.setErrorStyles(typeCombobox, typeLabel);
         }
-        if(headquarterCombobox.getSelectionModel().isEmpty()){
+        if (headquarterCombobox.getSelectionModel().isEmpty()) {
             everythingCorrect = false;
             headquarterLabel.setText("Por favor indique una sede");
             inputValidator.setErrorStyles(headquarterCombobox, headquarterLabel);
         }
-        if(birthdateDatePicker.getValue() == null){
+        if (birthdateDatePicker.getValue() == null) {
             everythingCorrect = false;
             birthdateLabel.setText("Por favor indique una fecha");
             inputValidator.setErrorStyles(birthdateDatePicker, birthdateLabel);
         }
-        if(!inputValidator.cc(ccTextField, ccLabel, "Ingrese una cedula valida")){
+        if (!inputValidator.cc(ccTextField, ccLabel, "Ingrese una cedula valida")) {
             everythingCorrect = false;
             inputValidator.setErrorStyles(ccTextField, ccLabel);
         }

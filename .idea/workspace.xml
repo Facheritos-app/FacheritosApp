@@ -4,8 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5f49d571-a74c-4244-90f5-d1284478321e" name="Changes" comment="I changed the view users view with the combo boxes and the city field.">
-<<<<<<< HEAD
+    <list default="true" id="5f49d571-a74c-4244-90f5-d1284478321e" name="Changes" comment="">
       <change afterPath="$PROJECT_DIR$/src/main/java/backend/dto/city/CityDTO.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/main/java/backend/dto/headquarterDTO/HeadquarterDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
@@ -16,12 +15,6 @@
       <change beforePath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/headquarters/AddHeadquarterController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/headquarters/AddHeadquarterController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/user/AddUserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/user/AddUserController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/headquarters/headquartersAdd.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/headquarters/headquartersAdd.fxml" afterDir="false" />
-=======
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/backend/endpoints/workerEndpoint/WorkerEndpoint.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/backend/endpoints/workerEndpoint/WorkerEndpoint.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/user/AddUserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/user/AddUserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/confirmationSave.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/confirmationSave.fxml" afterDir="false" />
->>>>>>> f8fd786acaab9cbdb10c67328986df29105b05c9
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -188,12 +181,8 @@
       <workItem from="1654805183146" duration="243000" />
       <workItem from="1654808008940" duration="909000" />
       <workItem from="1654888799627" duration="4909000" />
-<<<<<<< HEAD
-      <workItem from="1654899608665" duration="13557000" />
-=======
       <workItem from="1655044209331" duration="5880000" />
       <workItem from="1655068513328" duration="2954000" />
->>>>>>> f8fd786acaab9cbdb10c67328986df29105b05c9
     </task>
     <task id="LOCAL-00001" summary="I changed the view users view with the combo boxes and the city field.">
       <created>1654630629606</created>
