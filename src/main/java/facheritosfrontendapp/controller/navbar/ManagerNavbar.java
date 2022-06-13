@@ -4,6 +4,7 @@ import facheritosfrontendapp.controller.DashboardController;
 import facheritosfrontendapp.controller.MainController;
 import facheritosfrontendapp.controller.headquarter.HeadquarterController;
 import facheritosfrontendapp.controller.inventory.InventoryController;
+import facheritosfrontendapp.controller.user.UserController;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.HBox;
@@ -22,13 +23,16 @@ public class ManagerNavbar implements Initializable {
     private HeadquarterController headquarterController;
     private InventoryController inventoryController;
 
+    private UserController userController;
+
     @FXML
     protected void homeClicked() throws IOException {
         dashboardController.changeContent("home");
     }
     @FXML
     protected void usersClicked() throws IOException {
-        dashboardController.changeContent("users/users");
+        userController = (UserController) dashboardController.changeContent("users/users");
+        userController.showWorkers();
     }
 
     @FXML

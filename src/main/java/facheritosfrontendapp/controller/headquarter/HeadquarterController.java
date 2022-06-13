@@ -92,10 +92,10 @@ public class HeadquarterController implements Initializable {
     private void handleOptionLabel(MouseEvent mouseEvent) {
         for(Integer i = 0; i < headquarterRowsArray.size(); i++){
             if(mouseEvent.getSource() == headquarterRowsArray.get(i).getEditLabel()){
-                //Here will load the component to edit a headquarter
+                //Here we will load the component to edit a headquarter
             }
             if(mouseEvent.getSource() == headquarterRowsArray.get(i).getDeleteLabel()){
-                //Here will load the component to delete a headquarter
+                //Here we will load the component to delete a headquarter
             }
         }
     }

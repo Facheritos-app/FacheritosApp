@@ -101,6 +101,7 @@ public class AddUserController implements Initializable {
         if (clickedButton.get() == YES) {
             userController = (UserController) dashboardController.changeContent("users/users");
             //SHOW THE USERS IN TABLEVIEW
+            userController.showWorkers();
         } else {
             System.out.println("No");
         }
@@ -138,6 +139,8 @@ public class AddUserController implements Initializable {
                                         //Go to main user view
                                         try {
                                             userController = (UserController) dashboardController.changeContent("users/users");
+                                            //Show users in table
+                                            userController.showWorkers();
                                         } catch (IOException e) {
                                             throw new RuntimeException(e);
                                         }

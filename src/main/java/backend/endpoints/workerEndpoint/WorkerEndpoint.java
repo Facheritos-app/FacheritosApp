@@ -13,7 +13,11 @@ public class WorkerEndpoint {
 
     private PersonEndpoint personEndpoint = new PersonEndpoint();
 
-
+    /**
+     * createWorker: WorkerDTO -> Boolean
+     * Purpose: This method connects to the DB and saves a worker,
+     * if successful, it returns true, if not it returns false
+     */
     public Boolean createWorker(WorkerDTO worker){
         PreparedStatement preparedStatement = null;
         HashMap<Boolean, Integer> responsePerson = (HashMap<Boolean, Integer>) personEndpoint.createPerson(worker);
@@ -37,5 +41,27 @@ public class WorkerEndpoint {
             System.out.println("No se ha podido crear la persona en la BD");
             return false;
         }
+    }
+
+    /**
+     * getWorkers: void -> Map<Boolean, ResultSet>
+     * Purpose: This method contains all the logic to connect the DB and get all the workers,
+     * if everything went alright, it returns a hashmap with true and the required ResultSet,
+     * if not, it returns a hashmap with false and a ResultSet with null
+     */
+    public Map<Boolean, ResultSet> getWorkersForTableView(){
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        HashMap<Boolean, ResultSet> response = new HashMap<>();
+        try(Connection conn = ConnectionBD.connectDB().getConnection()){
+            preparedStatement = conn.prepareStatement("SELECT * FROM person JOIN worker USING(id_person) JOIN headquarter USING(id_headquarter)" +
+                    "JOIN type_person USING(id_type_person)");
+            resultSet = preparedStatement.executeQuery();
+            response.put(true, resultSet);
+        }catch (SQLException e){
+            e.printStackTrace();
+            response.put(false, resultSet);
+        }
+        return response;
     }
 }
