@@ -64,4 +64,23 @@ public class WorkerEndpoint {
         }
         return response;
     }
+
+    public Map<Boolean, ResultSet> getWorkerById(Integer idPerson){
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        HashMap<Boolean, ResultSet> response = new HashMap<>();
+        try(Connection conn = ConnectionBD.connectDB().getConnection()){
+            preparedStatement = conn.prepareStatement("SELECT * FROM person JOIN worker USING(id_person) JOIN headquarter USING(id_headquarter)" +
+                    "JOIN city USING(id_city)" +
+                    "WHERE id_person = ?");
+            preparedStatement.setInt(1,idPerson);
+            resultSet = preparedStatement.executeQuery();
+            resultSet.next();
+            response.put(true, resultSet);
+        }catch (SQLException e){
+            e.printStackTrace();
+            response.put(false, resultSet);
+        }
+        return response;
+    }
 }

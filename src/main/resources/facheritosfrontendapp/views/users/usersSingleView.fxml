@@ -93,7 +93,7 @@
             <Font name="Poppins Regular" size="12.0" />
          </font>
       </TextField>
-      <TextField fx:id="mailField" disable="true" layoutX="308.0" layoutY="222.0" prefHeight="25.0" prefWidth="224.0" style="-fx-background-radius: 10; -fx-background-color: D3D3D3;" text="Correo">
+      <TextField fx:id="emailField" disable="true" layoutX="308.0" layoutY="222.0" prefHeight="25.0" prefWidth="224.0" style="-fx-background-radius: 10; -fx-background-color: D3D3D3;" text="Correo">
          <font>
             <Font name="Poppins Regular" size="12.0" />
          </font>
@@ -134,7 +134,7 @@
             <Insets />
          </opaqueInsets>
       </ComboBox>
-      <ComboBox fx:id="seatCombo" disable="true" layoutX="308.0" layoutY="161.0" prefHeight="25.0" prefWidth="224.0" promptText="Sede" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-background-color: D3D3D3; -fx-font-family: Poppins; -fx-font-size: 12;" stylesheets="@../style.css" visibleRowCount="3">
+      <ComboBox fx:id="headquarterCombo" disable="true" layoutX="308.0" layoutY="161.0" prefHeight="25.0" prefWidth="224.0" promptText="Sede" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-background-color: D3D3D3; -fx-font-family: Poppins; -fx-font-size: 12;" stylesheets="@../style.css" visibleRowCount="3">
          <opaqueInsets>
             <Insets />
          </opaqueInsets>
@@ -144,7 +144,7 @@
             <Insets />
          </opaqueInsets>
       </ComboBox>
-      <DatePicker fx:id="bornPicker" disable="true" editable="false" layoutX="44.0" layoutY="284.0" prefHeight="25.0" prefWidth="224.0" promptText="Fecha" style="-fx-font-size: 12; -fx-font-family: Poppins;" stylesheets="@../style.css" />
+      <DatePicker fx:id="birthdayPicker" disable="true" editable="false" layoutX="44.0" layoutY="284.0" prefHeight="25.0" prefWidth="224.0" promptText="Fecha" style="-fx-font-size: 12; -fx-font-family: Poppins;" stylesheets="@../style.css" />
       <ComboBox fx:id="cityCombo" disable="true" layoutX="44.0" layoutY="404.0" prefHeight="25.0" prefWidth="224.0" promptText="Ciudad" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-background-color: D3D3D3; -fx-font-family: Poppins; -fx-font-size: 12;" stylesheets="@../style.css" visibleRowCount="2">
          <opaqueInsets>
             <Insets />
