@@ -31,6 +31,8 @@ public class UserController implements Initializable {
 
     private AddUserController addUserController;
 
+    private UserSingleViewController userSingleViewController;
+
     private WorkerEndpoint workerEndpoint;
     private ArrayList<WorkerRowView> workerRowsArray;
 
@@ -55,6 +57,7 @@ public class UserController implements Initializable {
 
     public UserController(){
         workerEndpoint = new WorkerEndpoint();
+        userSingleViewController = new UserSingleViewController();
         workerRowsArray = new ArrayList<>();
     }
 
@@ -100,25 +103,24 @@ public class UserController implements Initializable {
      * handleOptionLabel: mouseEvent -> void
      * Purpose: Listens to the events of both the view, edit and delete label.
      */
-    private void handleOptionLabel(MouseEvent mouseEvent) {
+    private void handleOptionLabel(MouseEvent mouseEvent)  {
         for(Integer i = 0; i < workerRowsArray.size(); i++){
-            if(mouseEvent.getSource() == workerRowsArray.get(i).getViewLabel()){
-                //Here we will load the component to view the worker
+            if(mouseEvent.getSource() == workerRowsArray.get(i).getOptionsLabel()){
+                //Here we will load the component to view, edit and delete the worker
+                try {
+                    userSingleViewController = (UserSingleViewController) dashboardController.changeContent("users/usersSingleView");
+                    userSingleViewController.showForm(workerRowsArray.get(i).getIdPerson());
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
             }
-            if(mouseEvent.getSource() == workerRowsArray.get(i).getEditLabel()){
-                //Here we will load the component to edit a worker
-            }
-            if(mouseEvent.getSource() == workerRowsArray.get(i).getDeleteLabel()){
-                //Here we will load the component to delete a worker
-            }
-
         }
     }
 
     public void setData(ResultSet resultSet) throws SQLException {
         //As long as there are records left to show
         while(resultSet.next()){
-            WorkerRowView workerRow = new WorkerRowView(resultSet.getString("cc"), resultSet.getString("first_name"),
+            WorkerRowView workerRow = new WorkerRowView(resultSet.getInt("id_person"), resultSet.getString("cc"), resultSet.getString("first_name"),
                                     resultSet.getString("last_name"), resultSet.getString("rol_person"),
                                     resultSet.getString("name"));
             workerRowsArray.add(workerRow);
@@ -126,9 +128,7 @@ public class UserController implements Initializable {
 
         //Set the handle events for the labels
         for(Integer i = 0; i < workerRowsArray.size(); i++){
-                workerRowsArray.get(i).getViewLabel().setOnMouseClicked(this::handleOptionLabel);
-                workerRowsArray.get(i).getEditLabel().setOnMouseClicked(this::handleOptionLabel);
-                workerRowsArray.get(i).getDeleteLabel().setOnMouseClicked(this::handleOptionLabel);
+                workerRowsArray.get(i).getOptionsLabel().setOnMouseClicked(this::handleOptionLabel);
         }
 
         colId.setCellValueFactory(new PropertyValueFactory<>("id"));

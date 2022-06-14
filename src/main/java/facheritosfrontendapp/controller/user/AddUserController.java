@@ -87,7 +87,7 @@ public class AddUserController implements Initializable {
 
     public AddUserController() {
         headquarterEndpoint = new HeadquarterEndpoint();
-        headquarterComboboxList = new ArrayList<HeadquarterView>();
+        headquarterComboboxList = new ArrayList<>();
         inputValidator = new AddUserValidator();
         workerEndpoint = new WorkerEndpoint();
         fxmlLoader = new FxmlLoader();
