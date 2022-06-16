@@ -92,7 +92,10 @@ public class AddCustomerController implements Initializable {
     public void cancelButtonAddCustomerClicked(MouseEvent mouseEvent) {
     }
 
-
+    /**
+     * createCustomer: PersonDTO -> Boolean
+     * Purpose: This method calls the DB to create a customer
+     */
     public Boolean createCustomer(PersonDTO customer) {
         try {
             return CompletableFuture.supplyAsync(() -> personEndpoint.createCustomer(customer)).get();
@@ -103,6 +106,7 @@ public class AddCustomerController implements Initializable {
             return false;
         }
     }
+
 
     public void setFeedbackWindow(Boolean result) {
         if (result) {
@@ -117,7 +121,10 @@ public class AddCustomerController implements Initializable {
         }
     }
 
-
+    /**
+     * allValidations: Void -> Boolean
+     * Purpose: Group all the validations from the create-customer form
+     */
     public Boolean allValidations() {
         cleanErrors();
         Boolean everythingCorrect = true;
@@ -168,7 +175,10 @@ public class AddCustomerController implements Initializable {
         ccLabel.setText("");
     }
 
-
+    /**
+     * populateCustomerObject: void -> PersonDTO
+     * Purpose: This method creates a customer object from all the form's input
+     */
     public PersonDTO populateCustomerObject() {
         PersonDTO customer = new PersonDTO();
         customer.setFirst_name(firstnameTextField.getText());
