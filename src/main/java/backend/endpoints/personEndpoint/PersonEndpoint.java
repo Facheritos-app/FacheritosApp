@@ -35,6 +35,28 @@ public class PersonEndpoint {
         return response;
     }
 
+    public Boolean createCustomer(PersonDTO customer){
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        Integer idPerson = null;
+        HashMap<Boolean, Integer> responseIdPerson = (HashMap<Boolean, Integer>) createPerson(customer);
+        if(responseIdPerson.containsKey(true)){
+            idPerson = responseIdPerson.get(true);
+            try(Connection conn = ConnectionBD.connectDB().getConnection()){
+                preparedStatement = conn.prepareStatement("INSERT INTO person_confirmation(id_person, id_confirmation) VALUES(?,2)");
+                preparedStatement.setInt(1,idPerson);
+                preparedStatement.executeUpdate();
+                return true;
+            } catch (SQLException e) {
+                e.printStackTrace();
+                return false;
+            }
+        }else{
+            System.out.print("Algo salio mal creando al cliente :(");
+            return false;
+        }
+    }
+
     public Map<Boolean, ResultSet> getPeople(){
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
