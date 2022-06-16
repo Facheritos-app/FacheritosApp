@@ -180,6 +180,7 @@ public class AddHeadquarterController implements Initializable {
     }
 
     public Boolean allValidations() {
+        cleanErrors();
         Boolean everythingCorrect = true;
         if (!inputValidator.name(nam, nameLabel, "Escriba un nombre valido, por favor")) {
             everythingCorrect = false;
@@ -208,5 +209,19 @@ public class AddHeadquarterController implements Initializable {
         }
 
         return everythingCorrect;
+    }
+
+    public void cleanErrors() {
+        nameLabel.setText("");
+        nam.setStyle("");
+        emailLabel.setText("");
+        eml.setStyle("");
+        cellphoneLabel.setText("");
+        cellp.setStyle("");
+        addressLabel.setText("");
+        addr.setStyle("");
+        cityLabel.setText("");
+        city.setStyle("");
+
     }
 }

@@ -39,7 +39,6 @@ public class AddHeadquarterValidator {
         return correct;
 
     }
-
     public Boolean cellphone(TextField cellphoneTextField, Label cellphoneLabel, String cellphoneLabelContent){
         Boolean correct = false;
         Boolean successRegex = Regex.onlyDigits(cellphoneTextField.getText());
