@@ -2,6 +2,7 @@ package facheritosfrontendapp.objectRowView.headquarterRowView;
 
 import facheritosfrontendapp.views.Main;
 import javafx.geometry.Pos;
+import javafx.scene.Cursor;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -35,6 +36,7 @@ public class WorkerRowView {
         this.headquarter = headquarter;
         this.options = new VBox();
         setOptions();
+        getOptionsLabel().setCursor(Cursor.HAND); //Cursor hand when mouse hover
     }
 
     public Integer getIdPerson() {
@@ -107,7 +109,8 @@ public class WorkerRowView {
     public void setOptions() {
         URL iconEditURL = Main.class.getResource("/facheritosfrontendapp/icons/icon-edit.png");
         Image editImage = new Image(String.valueOf(iconEditURL));
-        HBox hboxOptions = new HBox(new ImageView(editImage), new Label("  Mas opciones"));
+        HBox hboxOptions = new HBox(new ImageView(editImage), new Label("Ver más"));
+        hboxOptions.setSpacing(5); //Espaciado entre el ícono y el texto
         hboxOptions.setAlignment(Pos.CENTER);
         options.getChildren().add(hboxOptions);
         options.setAlignment(Pos.CENTER);
