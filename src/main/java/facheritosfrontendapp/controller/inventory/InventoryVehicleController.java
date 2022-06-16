@@ -10,8 +10,11 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLConnection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Map;
@@ -96,6 +99,8 @@ public class InventoryVehicleController implements Initializable {
                                 setData(resultSet);
                             } catch (SQLException e) {
                                 throw new RuntimeException(e);
+                            } catch (IOException e) {
+                                throw new RuntimeException(e);
                             }
                         });
                     }
@@ -113,7 +118,7 @@ public class InventoryVehicleController implements Initializable {
      * setData: ResultSet -> void
      * Purpose: This method contains sets all the data from the specific vehicle
      */
-    public void setData(ResultSet resultSet) throws SQLException {
+    public void setData(ResultSet resultSet) throws SQLException, IOException {
 
         modelLabel.setText(resultSet.getString("description"));
         assemblyYearLabel.setText(resultSet.getString("assemble_year"));
@@ -126,6 +131,28 @@ public class InventoryVehicleController implements Initializable {
         passengersLabel.setText(resultSet.getString("passenger_capacity"));
         transmissionLabel.setText(resultSet.getString("transmision"));
         priceLabel.setText(resultSet.getString("price"));
-        vehicleImage.setImage(new Image(resultSet.getString("image")));
+
+        //Intento de agregar la imagen, NO CARGA
+        new Thread(() -> {
+
+            URLConnection connection = null;
+            try {
+                connection = new URL(resultSet.getString("image")).openConnection();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+            connection.addRequestProperty("Use  r-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:25.0) Gecko/20100101 Firefox/25.0");
+            Image image = null;
+            try {
+                image = new Image(connection.getInputStream());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            vehicleImage.setImage(image);
+        }).start();
+
+
     }
 }
