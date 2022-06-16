@@ -116,7 +116,7 @@ public class AddUserController implements Initializable {
 
         if (allValidations()) {
             new Thread(() -> {
-                WorkerDTO worker = populateWorkerObject();
+                WorkerDTO worker = createWorkerObject();
                 Platform.runLater(() -> {
                     try {
                         MyDialogPane dialogPane = new MyDialogPane("confirmationSave");
@@ -177,12 +177,12 @@ public class AddUserController implements Initializable {
     }
 
     /**
-     * populateWorkerObject: void -> WorkerDTO
+     * createWorkerObject: void -> WorkerDTO
      * Purpose: This method populates a WorkerDTO object from all the information on the create-worker form
      *
      * @return
      */
-    public WorkerDTO populateWorkerObject() {
+    public WorkerDTO createWorkerObject() {
         WorkerDTO worker = new WorkerDTO();
         worker.setFirst_name(firstnameTextField.getText());
         worker.setLast_name(lastnameTextField.getText());

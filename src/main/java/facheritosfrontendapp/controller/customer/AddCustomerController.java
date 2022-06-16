@@ -69,7 +69,7 @@ public class AddCustomerController implements Initializable {
     @FXML
     public void saveButtonAddCustomerClicked(MouseEvent mouseEvent) {
         if (allValidations()) {
-            PersonDTO customer = populateCustomerObject();
+            PersonDTO customer = createCustomerObject();
             try {
                 MyDialogPane dialogPane = new MyDialogPane("confirmationSave");
                 Optional<ButtonType> clickedButton = dialogPane.getClickedButton();
@@ -176,10 +176,10 @@ public class AddCustomerController implements Initializable {
     }
 
     /**
-     * populateCustomerObject: void -> PersonDTO
+     * createCustomerObject: void -> PersonDTO
      * Purpose: This method creates a customer object from all the form's input
      */
-    public PersonDTO populateCustomerObject() {
+    public PersonDTO createCustomerObject() {
         PersonDTO customer = new PersonDTO();
         customer.setFirst_name(firstnameTextField.getText());
         customer.setLast_name(lastnameTextField.getText());
