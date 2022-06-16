@@ -273,6 +273,7 @@ public class AddUserController implements Initializable {
      * Purpose: Group all the validations from the create-user form
      */
     public Boolean allValidations() {
+        cleanErrors();
         Boolean everythingCorrect = true;
         if (!inputValidator.name(firstnameTextField, firstnameLabel, "Escriba un nombre valido, por favor")) {
             everythingCorrect = false;
@@ -316,5 +317,30 @@ public class AddUserController implements Initializable {
 
 
         return everythingCorrect;
+    }
+
+    /**
+     * cleanErrors: void -> void
+     * Purpose: This method cleans all the error messages presented to the user
+     */
+    public void cleanErrors() {
+        firstnameTextField.setStyle("");
+        firstnameLabel.setText("");
+        lastnameTextField.setStyle("");
+        lastnameLabel.setText("");
+        celTextField.setStyle("");
+        celLabel.setText("");
+        emailTextField.setStyle("");
+        emailLabel.setText("");
+        salaryTextField.setStyle("");
+        salaryLabel.setText("");
+        typeCombobox.setStyle("");
+        typeLabel.setText("");
+        headquarterCombobox.setStyle("");
+        headquarterLabel.setText("");
+        birthdateDatePicker.setStyle("");
+        birthdateLabel.setText("");
+        ccTextField.setStyle("");
+        ccLabel.setText("");
     }
 }
