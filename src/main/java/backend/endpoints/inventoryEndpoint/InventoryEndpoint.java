@@ -30,4 +30,23 @@ public class InventoryEndpoint {
 
         return response;
     }
+
+    public Map<Boolean, ResultSet> getVehicleById(Integer idCar){
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        HashMap<Boolean, ResultSet> response = new HashMap<>();
+        try(Connection conn = ConnectionBD.connectDB().getConnection()){
+            preparedStatement = conn.prepareStatement("SELECT * FROM car JOIN car_headquarter USING (id_car)" +
+                            "JOIN headquarter USING (id_headquarter) JOIN color USING (id_color)" +
+                            "JOIN model USING (id_model) WHERE id_car = ?");
+            preparedStatement.setInt(1, idCar);
+            resultSet = preparedStatement.executeQuery();
+            resultSet.next(); //show the row data
+            response.put(true, resultSet);
+        }catch (SQLException e){
+            e.printStackTrace();
+            response.put(false, resultSet);
+        }
+        return response;
+    }
 }

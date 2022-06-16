@@ -8,6 +8,12 @@ Button {
 */
 
 
+/*Back arrow*/
+.back-arrow {
+    -fx-cursor: HAND;
+    -fx-fit-to-width: 61;
+    -fx-fit-to-height: 53;
+}
 /*Navbar*/
 .nav-item {
     -fx-pref-width: 155;
@@ -103,13 +109,13 @@ Button {
 
 /*Gridpane*/
 .gridpane-hbox {
-    -fx-spacing: 30;
+    -fx-spacing: 20;
     -fx-padding: 10 0 10 15;
 
 }
 .gridpane-hbox-label {
     -fx-font-size: 14px;
-    -fx-pref-width: 160px;
+    -fx-pref-width: 180px;
 }
 
 /**

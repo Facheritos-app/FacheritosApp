@@ -21,17 +21,17 @@ public class VehicleRowView {
 
     private Integer quantity;
 
-    private Integer idModel;
+    private Integer idCar;
 
 
     private VBox options;
 
-    public VehicleRowView(String name, Double price, String headquarter, Integer quantity, Integer idModel) {
+    public VehicleRowView(String name, Double price, String headquarter, Integer quantity, Integer idCar) {
         this.name = name;
         this.price = price;
         this.headquarter = headquarter;
         this.quantity = quantity;
-        this.idModel = idModel;
+        this.idCar = idCar;
         this.options = new VBox();
         this.setOptions();
         this.getOptionsHBox().setCursor(Cursor.HAND); //Hand when mouse hover
@@ -69,12 +69,12 @@ public class VehicleRowView {
         this.quantity = quantity;
     }
 
-    public Integer getIdModel() {
-        return idModel;
+    public Integer getIdCar() {
+        return idCar;
     }
 
-    public void setIdModel(Integer idModel) {
-        this.idModel = idModel;
+    public void setIdCar(Integer idCar) {
+        this.idCar = idCar;
     }
 
     public VBox getOptions() {

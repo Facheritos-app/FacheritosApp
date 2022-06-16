@@ -120,10 +120,12 @@ public class InventoryController implements Initializable {
     private void handleOptionHbox(MouseEvent mouseEvent)  {
         for(Integer i = 0; i < vehicleRowViewList.size(); i++){
             if(mouseEvent.getSource() == vehicleRowViewList.get(i).getOptionsHBox()){
+                System.out.println("Id del carro");
+                System.out.println(vehicleRowViewList.get(i).getIdCar());
                 //Here we will load the component to view, edit and delete the vehicle
                 try {
-                    inventoryVehicleController = (InventoryVehicleController) dashboardController.changeContent("inventory/inventoryVehicle");
-                    //SHOW FORM
+                    inventoryVehicleController = (InventoryVehicleController) dashboardController.changeContent("inventory/inventoryVehicle", true);
+                    inventoryVehicleController.showVehicleData(vehicleRowViewList.get(i).getIdCar());
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
@@ -135,7 +137,7 @@ public class InventoryController implements Initializable {
         while(resultSet.next()){
             VehicleRowView vehicleRow = new VehicleRowView(resultSet.getString("description"), resultSet.getDouble("price"),
                                                             resultSet.getString("name"), resultSet.getInt("quantity"),
-                                                            resultSet.getInt("id_model"));
+                                                            resultSet.getInt("id_car"));
             //Add the data of every vehicle to the array
             vehicleRowViewList.add(vehicleRow);
         }
@@ -157,4 +159,5 @@ public class InventoryController implements Initializable {
         vehicleTableview.setItems(FXCollections.observableArrayList(vehicleRowViewList));
 
     }
+
 }
