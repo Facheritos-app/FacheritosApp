@@ -15,7 +15,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Map;
-import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
@@ -76,11 +75,7 @@ public class UserSingleViewController implements Initializable {
     @FXML
     private Button saveButton;
 
-
     @FXML
-
-
-
     /**
      * editAction: event -> void
      * Purpose: By pressing the 'Editar usuario' button the text fields are enabled,

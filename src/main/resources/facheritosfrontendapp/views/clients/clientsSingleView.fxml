@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="517.0" prefWidth="647.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="facheritosfrontendapp.controller.client.ClientSingleViewController">
+    <children>
+      <ImageView fitHeight="123.0" fitWidth="141.0" layoutX="39.0" layoutY="46.0" pickOnBounds="true" preserveRatio="true" styleClass="nav-item-icon">
+         <image>
+            <Image url="@../../icons/client.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor>
+      </ImageView>
+        <Label fx:id="nameLabel" layoutX="173.0" layoutY="55.0" prefHeight="0.0" prefWidth="459.0" styleClass="poppins" stylesheets="@../style.css" text="Carlos García Díaz" textFill="#1f1f1f">
+            <font>
+                <Font name="Poppins Bold" size="18.0" />
+            </font>
+        </Label>
+      <Label layoutX="172.0" layoutY="82.0" prefHeight="25.0" prefWidth="37.0" styleClass="poppins" stylesheets="@../style.css" text="C.C. " textFill="#1f1f1f">
+         <font>
+            <Font name="Poppins Regular" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="phoneLabel" layoutX="199.0" layoutY="109.0" prefHeight="25.0" prefWidth="95.0" styleClass="poppins" stylesheets="@../style.css" text="3200000000" textFill="#1f1f1f">
+         <font>
+            <Font name="Poppins Regular" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="emailLabel" layoutX="199.0" layoutY="135.0" prefHeight="25.0" prefWidth="425.0" styleClass="poppins" stylesheets="@../style.css" text="carlos92@hotmail.com" textFill="#1f1f1f">
+         <font>
+            <Font name="Poppins Regular" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="ccLabel" layoutX="209.0" layoutY="82.0" prefHeight="25.0" prefWidth="193.0" styleClass="poppins" stylesheets="@../style.css" text="18274426" textAlignment="RIGHT" textFill="#1f1f1f">
+         <font>
+            <Font name="Poppins Regular" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="55.0" layoutY="196.0" prefHeight="25.0" prefWidth="158.0" styleClass="poppins" stylesheets="@../style.css" text="Fecha de nacimiento:" textFill="#1f1f1f">
+         <font>
+            <Font name="Poppins Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="birthdayLabel" layoutX="235.0" layoutY="196.0" prefHeight="25.0" prefWidth="82.0" styleClass="poppins" stylesheets="@../style.css" text="dd/mm/aa" textFill="#1f1f1f">
+         <font>
+            <Font name="Poppins Regular" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="361.0" layoutY="196.0" prefHeight="25.0" prefWidth="141.0" styleClass="poppins" stylesheets="@../style.css" text="Fecha de creación:" textFill="#1f1f1f">
+         <font>
+            <Font name="Poppins Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="creationDateLabel" layoutX="523.0" layoutY="196.0" prefHeight="25.0" prefWidth="82.0" styleClass="poppins" stylesheets="@../style.css" text="dd/mm/aa" textFill="#1f1f1f">
+         <font>
+            <Font name="Poppins Regular" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="55.0" layoutY="246.0" prefHeight="25.0" prefWidth="158.0" styleClass="poppins" stylesheets="@../style.css" text="Servicios y compras:" textFill="#1f1f1f">
+         <font>
+            <Font name="Poppins Bold" size="14.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="17.0" fitWidth="14.0" layoutX="175.0" layoutY="115.0" pickOnBounds="true" preserveRatio="true" styleClass="nav-item-icon">
+         <image>
+            <Image url="@../../icons/client-phone.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor>
+      </ImageView>
+      <ImageView fitHeight="17.0" fitWidth="14.0" layoutX="175.0" layoutY="141.0" pickOnBounds="true" preserveRatio="true" styleClass="nav-item-icon">
+         <image>
+            <Image url="@../../icons/client-email.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor>
+      </ImageView>
+      <TableView fx:id="purchasesTable" cache="true" layoutX="55.0" layoutY="302.0" pickOnBounds="false" prefHeight="183.0" prefWidth="564.0" style="-fx-font-family: Poppins; -fx-font-size: 12; -fx-background-color: F4F4F4; -fx-background-radius: 10; -fx-border-radius: 10;" styleClass="purchasesTableView" stylesheets="@../style.css">
+         <columns>
+            <TableColumn fx:id="colType" prefWidth="70.0" sortable="false" style="-fx-background-color: F4F4F4;" text="Tipo" />
+            <TableColumn fx:id="colNumber" prefWidth="97.0" style="-fx-background-color: F4F4F4;" text="Número" />
+            <TableColumn fx:id="colDate" prefWidth="104.0" style="-fx-background-color: F4F4F4;" text="Fecha" />
+            <TableColumn fx:id="colPaymentMethod" prefWidth="117.0" sortable="false" style="-fx-background-color: F4F4F4;" text="Método de pago" />
+            <TableColumn fx:id="colSeat" style="-fx-background-color: F4F4F4;" text="Sede" />
+            <TableColumn fx:id="colOptions" prefWidth="108.0" sortable="false" style="-fx-background-color: F4F4F4;" text="Opciones" />
+         </columns>
+      </TableView>
+    </children>
+</AnchorPane>

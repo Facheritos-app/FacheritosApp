@@ -30,7 +30,7 @@
             <tabs>
                 <Tab text="Vehículos">
                     <content>
-                        <TableView prefHeight="228.0" prefWidth="491.0">
+                        <TableView prefHeight="228.0" prefWidth="491.0" styleClass="table-views" stylesheets="@../style.css">
                             <columns>
                                 <TableColumn text="Tipo" />
                                 <TableColumn text="Nombre" />
