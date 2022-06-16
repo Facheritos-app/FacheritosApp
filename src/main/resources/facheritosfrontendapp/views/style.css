@@ -84,14 +84,6 @@ Button {
 
 }
 
-/**Costumization of DialogPane Header**/
-.dialog-pane:header .header-panel {
-
-}
-
-.dialog-pane:header .header-panel .label{
-
-}
 
 
 /**Costumization of Buttons**/
@@ -106,6 +98,20 @@ Button {
 .dialog-pane .button:hover{
 
 }
+
+/* Show vehicle from inventory */
+
+/*Gridpane*/
+.gridpane-hbox {
+    -fx-spacing: 30;
+    -fx-padding: 10 0 10 15;
+
+}
+.gridpane-hbox-label {
+    -fx-font-size: 14px;
+    -fx-pref-width: 160px;
+}
+
 /**
   -fx-background-color: #005296;
  */

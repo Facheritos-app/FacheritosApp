@@ -10,6 +10,8 @@
       <change beforePath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/navbar/ManagerNavbar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/navbar/ManagerNavbar.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/objectRowView/headquarterRowView/WorkerRowView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/objectRowView/headquarterRowView/WorkerRowView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/inventory/inventory.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/inventory/inventory.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/inventory/inventoryVehicle.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/inventory/inventoryVehicle.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/style.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -179,6 +181,7 @@
       <workItem from="1655044209331" duration="5880000" />
       <workItem from="1655068513328" duration="2954000" />
       <workItem from="1655209735844" duration="6004000" />
+      <workItem from="1655334898842" duration="10787000" />
     </task>
     <task id="LOCAL-00001" summary="I changed the view users view with the combo boxes and the city field.">
       <created>1654630629606</created>

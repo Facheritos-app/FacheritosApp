@@ -34,4 +34,16 @@ public class Regex {
         return text.matches("[a-zA-Z ]+");
     }
 
+    public static Boolean noSymbol(String text) {
+        Pattern patternSymbol = Pattern.compile("(.)*[~!@#$%^&*()_+{}\\[\\]:;,.<>/?-](.)*", Pattern.CASE_INSENSITIVE);
+        if(patternSymbol.matcher(text).find()){
+            return false;
+        }
+        return true;
+    }
+
+    public static Boolean address(String text){
+        Pattern pattern = Pattern.compile("^[A-Z0-9 ]+#[A-Z0-9- ]",Pattern.CASE_INSENSITIVE);
+        return pattern.matcher(text).find();
+    }
 }
