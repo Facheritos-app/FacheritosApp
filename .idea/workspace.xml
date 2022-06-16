@@ -5,21 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5f49d571-a74c-4244-90f5-d1284478321e" name="Changes" comment="I changed the view users view with the combo boxes and the city field.">
-      <change afterPath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/client/ClientSingleViewController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/icons/client-email.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/icons/client-phone.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/icons/client.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/clients/clientsSingleView.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/headquarter/AddHeadquarterValidator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/user/UserSingleViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/user/UserSingleViewController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/headquarters/headquarters.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/headquarters/headquarters.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/hello-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/hello-view.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/inventory/inventory.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/inventory/inventory.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/users/users.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/users/users.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/users/usersSingleView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/users/usersSingleView.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/welcomeManager.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/welcomeManager.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/headquarter/AddHeadquarterController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/headquarter/AddHeadquarterController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/util/Regex.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/util/Regex.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/views/MyDialogPane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/views/MyDialogPane.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/headquarters/headquartersAdd.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/headquarters/headquartersAdd.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -189,6 +181,7 @@
       <workItem from="1655044209331" duration="5880000" />
       <workItem from="1655068513328" duration="2954000" />
       <workItem from="1655209735844" duration="6004000" />
+      <workItem from="1655334898842" duration="10787000" />
     </task>
     <task id="LOCAL-00001" summary="I changed the view users view with the combo boxes and the city field.">
       <created>1654630629606</created>

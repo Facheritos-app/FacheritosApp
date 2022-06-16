@@ -34,4 +34,6 @@ public class MyDialogPane extends DialogPane {
     public Optional<ButtonType> getClickedButton(){
         return clickedButton;
     }
+
+
 }

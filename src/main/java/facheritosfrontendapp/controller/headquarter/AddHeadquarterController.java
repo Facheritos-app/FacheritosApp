@@ -5,9 +5,10 @@ import backend.dto.city.CityDTO;
 import backend.dto.headquarterDTO.HeadquarterDTO;
 
 import backend.endpoints.headquarterEndpoint.HeadquarterEndpoint;
-import backend.endpoints.loginEndpoint.LoginEndpoint;
 import facheritosfrontendapp.controller.DashboardController;
 import facheritosfrontendapp.controller.MainController;
+import facheritosfrontendapp.controller.user.UserController;
+import facheritosfrontendapp.validator.addUserValidator.AddUserValidator;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import facheritosfrontendapp.views.MyDialogPane;
@@ -24,12 +25,16 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.concurrent.ExecutionException;
 
+import static javafx.scene.control.ButtonType.OK;
+
 public class AddHeadquarterController implements Initializable {
 
 
     private DashboardController dashboardController;
 
     private HeadquarterController headquarterController;
+
+    private AddHeadquarterValidator inputValidator;
 
     @FXML
     private Button addHeadquarter;
@@ -49,7 +54,22 @@ public class AddHeadquarterController implements Initializable {
     @FXML
     private ChoiceBox city;
 
+    @FXML
+    private Label nameLabel;
+
+    @FXML
+    private Label addressLabel;
+
+    @FXML
+    private Label cellphoneLabel;
+
+    @FXML
+    private Label emailLabel;
+
+    @FXML
+    private Label cityLabel;
     private HeadquarterEndpoint headquarterEndpoint;
+
 
     /*Add headquarter*/
 
@@ -95,19 +115,38 @@ public class AddHeadquarterController implements Initializable {
     @FXML
 
     protected void saveButtonClicked() throws IOException, ExecutionException, InterruptedException {
-        MyDialogPane dialogPane = new MyDialogPane("confirmationSave");
-        Optional<ButtonType> clickedButton = dialogPane.getClickedButton();
-        if(clickedButton.get() == ButtonType.YES){
-            //REALIZAR LOS CAMBIOS
-            createHeadquarter();
-            headquarterController = (HeadquarterController) dashboardController.changeContent("headquarters/headquarters");
-            headquarterController.showHeadquarters();
-        } else {
-            System.out.println("No");
+        if(allValidations()) {
+            MyDialogPane dialogPane = new MyDialogPane("confirmationSave");
+            Optional<ButtonType> clickedButton = dialogPane.getClickedButton();
+            if (clickedButton.get() == ButtonType.YES) {
+
+                try{
+                    createHeadquarter();
+                   // headquarterController = (HeadquarterController) dashboardController.changeContent("headquarters/headquarters");
+                    //headquarterController.showHeadquarters();
+                    Alert success = new Alert(Alert.AlertType.CONFIRMATION, "Sede agregada exitosamente", OK);
+                    success.show();
+                    //Go to main user view
+                    try {
+                        headquarterController = (HeadquarterController) dashboardController.changeContent("headquarters/headquarters");
+                        //Show users in table
+                        headquarterController.showHeadquarters();
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                }catch (Exception e){
+
+                }
 
 
+
+
+            } else {
+                System.out.println("No");
+
+
+            }
         }
-
     }
 
     public void llenadocombobox() {
@@ -135,6 +174,39 @@ public class AddHeadquarterController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         dashboardController = MainController.getDashboardController();
+        inputValidator = new AddHeadquarterValidator();
+        headquarterEndpoint = new HeadquarterEndpoint();
         llenadocombobox();
+    }
+
+    public Boolean allValidations() {
+        Boolean everythingCorrect = true;
+        if (!inputValidator.name(nam, nameLabel, "Escriba un nombre valido, por favor")) {
+            everythingCorrect = false;
+            inputValidator.setErrorStyles(nam, nameLabel);
+        }
+
+        if (!inputValidator.email(eml, emailLabel, "Escriba un correo valido, por favor")) {
+            everythingCorrect = false;
+            inputValidator.setErrorStyles(eml, emailLabel);
+        }
+
+        if (!inputValidator.cellphone(cellp, cellphoneLabel, "Escriba un numero valido, por favor")) {
+            everythingCorrect = false;
+            inputValidator.setErrorStyles(cellp, cellphoneLabel);
+        }
+
+        if (!inputValidator.addr(addr, addressLabel, "Escriba una direccion valida, por favor")) {
+            everythingCorrect = false;
+            inputValidator.setErrorStyles(addr, addressLabel);
+        }
+
+        if (city.getSelectionModel().isEmpty()) {
+            everythingCorrect = false;
+            cityLabel.setText("Por favor indique una ciudad");
+            inputValidator.setErrorStyles(city, cityLabel);
+        }
+
+        return everythingCorrect;
     }
 }

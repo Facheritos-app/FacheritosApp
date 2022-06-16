@@ -37,6 +37,7 @@
                            </font>
                         </Label>
                         <TextField fx:id="nam" prefHeight="36.0" prefWidth="273.0" promptText="ej. Sede 5" styleClass="input-text" stylesheets="@../style.css" />
+                        <Label fx:id="nameLabel" />
                      </children>
                      <HBox.margin>
                         <Insets left="40.0" />
@@ -50,13 +51,14 @@
                            </font>
                         </Label>
                         <TextField fx:id="addr" prefHeight="36.0" prefWidth="297.0" promptText="ej. Cra 14D # 67-98" styleClass="input-text" stylesheets="@../style.css" />
+                        <Label fx:id="addressLabel" />
                      </children>
                   </VBox>
                </children>
             </HBox>
-            <HBox prefHeight="191.0" prefWidth="647.0" spacing="50.0">
+            <HBox prefHeight="215.0" prefWidth="647.0" spacing="50.0">
                <children>
-                  <VBox prefHeight="180.0" prefWidth="246.0" spacing="10.0">
+                  <VBox prefHeight="188.0" prefWidth="246.0" spacing="10.0">
                      <children>
                         <Label prefHeight="20.0" prefWidth="77.0" text="Celular:">
                            <font>
@@ -64,12 +66,14 @@
                            </font>
                         </Label>
                         <TextField fx:id="cellp" prefHeight="36.0" prefWidth="273.0" promptText="ej. 3726289" styleClass="input-text" stylesheets="@../style.css" />
+                        <Label fx:id="cellphoneLabel" />
                         <Label prefHeight="20.0" prefWidth="77.0" text="Ciudad:">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </Label>
                         <ChoiceBox fx:id="city" prefHeight="31.0" prefWidth="252.0" style="-fx-background-color: D3D3D3;" />
+                        <Label fx:id="cityLabel" />
                      </children>
                      <HBox.margin>
                         <Insets left="40.0" />
@@ -83,6 +87,7 @@
                            </font>
                         </Label>
                         <TextField fx:id="eml" prefHeight="36.0" prefWidth="297.0" promptText="ej. sede5@gmail.com" styleClass="input-text" stylesheets="@../style.css" />
+                        <Label fx:id="emailLabel" />
                      </children>
                   </VBox>
                </children>
