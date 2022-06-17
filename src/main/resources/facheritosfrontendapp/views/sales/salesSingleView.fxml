@@ -25,10 +25,10 @@
                <columns>
                   <TableColumn fx:id="colId" prefWidth="38.0" text="Id" />
                   <TableColumn fx:id="colModel" prefWidth="56.0" text="Modelo" />
-                  <TableColumn fx:id="colColor" prefWidth="57.0" text="Color" />
-                  <TableColumn fx:id="colPrice" minWidth="9.0" prefWidth="86.0" text="Costo" />
-                  <TableColumn fx:id="colQuantity" minWidth="0.0" prefWidth="63.0" text="Cantidad" />
-                  <TableColumn fx:id="colOption" prefWidth="58.0" text="Opcion" />
+                  <TableColumn fx:id="colColor" prefWidth="74.0" text="Color" />
+                  <TableColumn fx:id="colPrice" minWidth="9.0" prefWidth="82.0" text="Costo" />
+                  <TableColumn fx:id="colQuantity" minWidth="0.0" prefWidth="108.0" text="Cantidad" />
+                  <TableColumn fx:id="colOption" minWidth="0.0" prefWidth="0.0" />
                </columns>
             </TableView>
             <Label layoutX="14.0" layoutY="337.0" prefHeight="30.0" prefWidth="354.0" style="-fx-background-color: black; -fx-background-radius: 10; -fx-border-radius: 10;" text=" Venta:" textFill="WHITE">

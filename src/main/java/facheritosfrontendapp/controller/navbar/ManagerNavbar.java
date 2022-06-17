@@ -52,9 +52,9 @@ public class ManagerNavbar implements Initializable {
     }
 
     @FXML
-    protected void salesClicked() throws IOException {
-        //saleController = (SaleController) dashboardController.changeContent("sales/sales");
-        //inventoryController.showVehicles();
+    protected void salesClicked() throws IOException, ExecutionException, InterruptedException {
+        saleController = (SaleController) dashboardController.changeContent("sales/sales");
+        saleController.showSales();
     }
 
     @Override
