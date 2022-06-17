@@ -30,5 +30,6 @@ module  facheritosfrontendapp {
     opens facheritosfrontendapp.objectRowView.headquarterRowView to javafx.base;
     exports facheritosfrontendapp.controller.customer to javafx.fxml;
     opens facheritosfrontendapp.controller.customer to javafx.fxml;
+    opens facheritosfrontendapp.objectRowView.headquarterRowView.customerRowView to javafx.base;
 
 }

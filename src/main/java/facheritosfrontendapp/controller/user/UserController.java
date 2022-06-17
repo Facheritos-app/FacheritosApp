@@ -1,8 +1,10 @@
 package facheritosfrontendapp.controller.user;
 
+import backend.endpoints.customerEndpoint.CustomerEndpoint;
 import backend.endpoints.workerEndpoint.WorkerEndpoint;
 import facheritosfrontendapp.controller.DashboardController;
 import facheritosfrontendapp.controller.MainController;
+import facheritosfrontendapp.objectRowView.headquarterRowView.customerRowView.CustomerRowView;
 import facheritosfrontendapp.objectRowView.headquarterRowView.WorkerRowView;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
@@ -12,7 +14,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
@@ -34,7 +35,12 @@ public class UserController implements Initializable {
     private UserSingleViewController userSingleViewController;
 
     private WorkerEndpoint workerEndpoint;
+
+    private CustomerEndpoint customerEndpoint;
+
     private ArrayList<WorkerRowView> workerRowsArray;
+
+    private ArrayList<CustomerRowView> customerRowsArray;
 
     //All the FXML imported components are here
     @FXML
@@ -54,11 +60,32 @@ public class UserController implements Initializable {
     @FXML
     private TableColumn<WorkerRowView, VBox> colOptions;
 
+    //Customer tab components
+    @FXML
+    private TableView customerTableView;
+
+    @FXML
+    private TableColumn<CustomerRowView, String> colIdCustomer;
+
+    @FXML
+    private TableColumn<CustomerRowView, String> colFirstnameCustomer;
+
+    @FXML
+    private TableColumn<CustomerRowView, String> colLastnameCustomer;
+
+    @FXML
+    private TableColumn<CustomerRowView, String> colCellphoneCustomer;
+
+    @FXML
+    private TableColumn<CustomerRowView, VBox> colOptionsCustomer;
+
 
     public UserController(){
         workerEndpoint = new WorkerEndpoint();
+        customerEndpoint = new CustomerEndpoint();
         userSingleViewController = new UserSingleViewController();
         workerRowsArray = new ArrayList<>();
+        customerRowsArray= new ArrayList<>();
     }
 
     @FXML
@@ -71,6 +98,8 @@ public class UserController implements Initializable {
         dashboardController = MainController.getDashboardController();
         usersTabpane.setTabClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);
     }
+
+    //For workers
 
     public void showWorkers(){
 
@@ -104,7 +133,7 @@ public class UserController implements Initializable {
      * Purpose: Listens to the events of both the view, edit and delete label.
      */
     private void handleOptionLabel(MouseEvent mouseEvent)  {
-        for(Integer i = 0; i < workerRowsArray.size(); i++){
+        for(int i = 0; i < workerRowsArray.size(); i++){
             if(mouseEvent.getSource() == workerRowsArray.get(i).getOptionsLabel()){
                 //Here we will load the component to view, edit and delete the worker
                 try {
@@ -127,7 +156,7 @@ public class UserController implements Initializable {
             }
 
         //Set the handle events for the labels
-        for(Integer i = 0; i < workerRowsArray.size(); i++){
+        for(int i = 0; i < workerRowsArray.size(); i++){
                 workerRowsArray.get(i).getOptionsLabel().setOnMouseClicked(this::handleOptionLabel);
         }
 
@@ -141,5 +170,64 @@ public class UserController implements Initializable {
         userTableView.setItems(FXCollections.observableArrayList(workerRowsArray));
 
     }
+
+    //For customers
+    /**
+     * showCustomers: void -> void
+     * Purpose: shows the customers in the customers tab
+     */
+    public void showCustomers(){
+
+        new Thread(() -> {
+            //Async call to the DB
+            CompletableFuture<Map<Boolean, ResultSet>> customersCall = CompletableFuture.supplyAsync(() -> customerEndpoint.getCustomersForTableView());
+
+            try {
+                customersCall.thenApply((response) -> {
+                    if(response.containsKey(true)){
+                        ResultSet resultSet = response.get(true);
+                        try {
+                            setCustomersData(resultSet);
+                        } catch (SQLException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                    return true; //Returns true because we're using thenApply.
+                }).get();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            } catch (ExecutionException e) {
+                throw new RuntimeException(e);
+            }
+        }).start();
+    }
+
+    /**
+     * setCustomersData: ResultSet -> void
+     * Purpose: showCustomers auxiliary, fill the customers table
+     */
+    public void setCustomersData(ResultSet resultSet) throws SQLException {
+        //As long as there are records left to show
+        while(resultSet.next()){
+            CustomerRowView customerRow = new CustomerRowView(resultSet.getInt("id_person"), resultSet.getString("cc"), resultSet.getString("first_name"),
+                    resultSet.getString("last_name"), resultSet.getString("cellphone"));
+            customerRowsArray.add(customerRow);
+        }
+
+        //Set the handle events for the labels
+        for(int i = 0; i < customerRowsArray.size(); i++){
+            customerRowsArray.get(i).getOptionsLabel().setOnMouseClicked(this::handleOptionLabel);
+        }
+
+        colIdCustomer.setCellValueFactory(new PropertyValueFactory<>("cc"));
+        colFirstnameCustomer.setCellValueFactory(new PropertyValueFactory<>("firstname"));
+        colLastnameCustomer.setCellValueFactory(new PropertyValueFactory<>("lastname"));
+        colCellphoneCustomer.setCellValueFactory(new PropertyValueFactory<>("cellphone"));
+        colOptionsCustomer.setCellValueFactory(new PropertyValueFactory<>("options"));
+
+        customerTableView.setItems(FXCollections.observableArrayList(customerRowsArray));
+
+    }
+
 
 }

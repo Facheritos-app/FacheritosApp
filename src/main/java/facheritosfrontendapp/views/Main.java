@@ -23,6 +23,8 @@ public class Main extends Application {
         String css = this.getClass().getResource("style.css").toExternalForm();
         scene.getStylesheets().add(css);
         stage.setScene(scene);
+        stage.setMinHeight(600.0); //to avoid the stage being resized less than the size of the scenes.
+        stage.setMinWidth(850.0);
         stage.show();
     }
 

@@ -85,7 +85,7 @@
             <Cursor fx:constant="DEFAULT" />
          </cursor>
       </ImageView>
-      <TableView fx:id="purchasesTable" cache="true" layoutX="55.0" layoutY="302.0" pickOnBounds="false" prefHeight="183.0" prefWidth="564.0" style="-fx-font-family: Poppins; -fx-font-size: 12; -fx-background-color: F4F4F4; -fx-background-radius: 10; -fx-border-radius: 10;" styleClass="purchasesTableView" stylesheets="@../style.css">
+      <TableView fx:id="purchasesTable" cache="true" layoutX="55.0" layoutY="302.0" pickOnBounds="false" prefHeight="183.0" prefWidth="564.0" style="-fx-font-family: Poppins; -fx-font-size: 12; -fx-background-color: F4F4F4; -fx-background-radius: 10; -fx-border-radius: 10;" stylesheets="@../style.css">
          <columns>
             <TableColumn fx:id="colType" prefWidth="70.0" sortable="false" style="-fx-background-color: F4F4F4;" text="Tipo" />
             <TableColumn fx:id="colNumber" prefWidth="97.0" style="-fx-background-color: F4F4F4;" text="Número" />

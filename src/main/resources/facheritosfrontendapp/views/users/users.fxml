@@ -16,29 +16,29 @@
    <children>
       <Label layoutX="34.0" layoutY="23.0" prefHeight="72.0" prefWidth="217.0" styleClass="poppins" stylesheets="@../style.css" text="Usuarios" textFill="#1f1f1f">
          <font>
-            <Font name="System Bold" size="36.0" />
+            <Font name="Poppins Bold" size="36.0" />
          </font>
       </Label>
-      <Button fx:id="addUser" layoutX="440.0" layoutY="104.0" mnemonicParsing="false" onMouseClicked="#addUserClicked" styleClass="red-button" stylesheets="@../style.css" text="Agregar usuario +" textFill="WHITE">
+      <Button fx:id="addUser" layoutX="498.0" layoutY="104.0" mnemonicParsing="false" onMouseClicked="#addUserClicked" styleClass="red-button" stylesheets="@../style.css" text="Agregar usuario +" textFill="WHITE">
          <font>
-            <Font name="System Bold" size="12.0" />
+            <Font name="Poppins Bold" size="12.0" />
          </font>
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <TabPane fx:id="usersTabpane" layoutX="33.0" layoutY="157.0" prefHeight="246.0" prefWidth="591.0" stylesheets="@../style.css">
+      <TabPane fx:id="usersTabpane" layoutX="33.0" layoutY="157.0" prefHeight="246.0" prefWidth="591.0" style="-fx-background-color: white; -fx-background-radius: 10; -fx-border-radius: 10;" stylesheets="@../style.css">
         <tabs>
-          <Tab text="Empleados">
+          <Tab closable="false" text="Empleados">
                <content>
                   <TableView fx:id="userTableView" prefHeight="217.0" prefWidth="608.0" stylesheets="@../style.css">
                     <columns>
-                      <TableColumn fx:id="colId" prefWidth="86.0" text="Identificacion" />
-                      <TableColumn fx:id="colFirstname" prefWidth="99.0" text="Nombre" />
-                        <TableColumn fx:id="colLastname" prefWidth="86.0" text="Apellidos" />
+                      <TableColumn fx:id="colId" prefWidth="103.0" text="Identificacion" />
+                      <TableColumn fx:id="colFirstname" prefWidth="103.0" text="Nombre" />
+                        <TableColumn fx:id="colLastname" prefWidth="65.0" text="Apellidos" />
                         <TableColumn fx:id="colRol" prefWidth="132.0" text="Rol" />
                         <TableColumn fx:id="colHeadquarter" prefWidth="65.0" text="Sede" />
-                        <TableColumn fx:id="colOptions" prefWidth="123.0" text="Opciones" />
+                        <TableColumn fx:id="colOptions" editable="false" prefWidth="123.0" sortable="false" text="Opciones" />
                     </columns>
                      <styleClass>
                         <String fx:value="table-views" />
@@ -47,9 +47,24 @@
                   </TableView>
                </content>
           </Tab>
-          <Tab text="Clientes" />
+          <Tab closable="false" text="Clientes">
+               <content>
+                  <TableView fx:id="customerTableView" prefHeight="217.0" prefWidth="608.0" stylesheets="@../style.css">
+                     <columns>
+                        <TableColumn fx:id="colIdCustomer" prefWidth="105.0" text="Identificacion" />
+                        <TableColumn fx:id="colFirstnameCustomer" prefWidth="127.0" text="Nombres" />
+                        <TableColumn fx:id="colLastnameCustomer" prefWidth="143.0" text="Apellidos" />
+                        <TableColumn fx:id="colCellphoneCustomer" minWidth="3.0" prefWidth="104.0" text="Telefono" />
+                        <TableColumn fx:id="colOptionsCustomer" prefWidth="112.0" text="Opciones" />
+                     </columns>
+                     <styleClass>
+                        <String fx:value="table-views" />
+                        <String fx:value="table-columns" />
+                     </styleClass>
+                  </TableView>
+               </content></Tab>
         </tabs>
       </TabPane>
-      <Separator layoutX="10.0" layoutY="22.0" orientation="VERTICAL" prefHeight="516.0" prefWidth="8.0" />
+      <Separator layoutY="10.0" orientation="VERTICAL" prefHeight="528.0" prefWidth="8.0" />
    </children>
 </AnchorPane>

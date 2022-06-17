@@ -33,6 +33,7 @@ public class ManagerNavbar implements Initializable {
     protected void usersClicked() throws IOException {
         userController = (UserController) dashboardController.changeContent("users/users");
         userController.showWorkers();
+        userController.showCustomers();
     }
 
     @FXML
