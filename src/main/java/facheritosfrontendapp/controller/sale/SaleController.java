@@ -83,7 +83,7 @@ public class SaleController implements Initializable {
 
     @FXML
     protected void addSaleClicked() throws IOException {
-        //dashboardController.changeContent("headquarters/headquartersAdd");
+        //dashboardController.changeContent("sales/salesAdd");
     }
 
 
@@ -94,7 +94,9 @@ public class SaleController implements Initializable {
             if(mouseEvent.getSource() == saleRowsArray.get(i).getEditLabel()){
                 try {
                     saleSingleViewController = (SaleSingleViewController) dashboardController.changeContent("sales/salesSingleView", true);
-                    saleSingleViewController.showVehicleData(saleRowsArray.get(i).getIdSale());
+                    saleSingleViewController.showSaleData(saleRowsArray.get(i).getIdSale());
+                    saleSingleViewController.showQuantity(saleRowsArray.get(i).getIdSale());
+                    saleSingleViewController.showSaleCars(saleRowsArray.get(i).getIdSale());
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }

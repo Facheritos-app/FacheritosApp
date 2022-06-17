@@ -9,15 +9,20 @@ import facheritosfrontendapp.controller.DashboardController;
 import facheritosfrontendapp.controller.MainController;
 import facheritosfrontendapp.controller.inventory.InventoryController;
 import facheritosfrontendapp.objectRowView.saleRowView.SaleRowView;
+import facheritosfrontendapp.objectRowView.saleRowView.SaleSingleRowView;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
-import javafx.scene.image.Image;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.net.URLConnection;
@@ -77,6 +82,9 @@ public class SaleSingleViewController implements Initializable{
     private Label emailClient;
 
     @FXML
+    private TableView carTableView;
+
+    @FXML
     private TableColumn<SaleRowView, Integer> colId;
 
     @FXML
@@ -87,13 +95,16 @@ public class SaleSingleViewController implements Initializable{
 
     @FXML
     private TableColumn<SaleRowView,Double> colPrice;
-
+    @FXML
+    private TableColumn<SaleRowView,Integer> colQuantity;
     @FXML
     private TableColumn<SaleRowView, VBox> colOptions;
 
-   // private ObservableList<SaleSingleRowView> saleSingleObList;
+    private ObservableList<SaleSingleRowView> saleSingleObList;
 
     private DashboardController dashboardController;
+
+    private ArrayList<SaleSingleRowView> saleSingleRowsArray;
 
     private SaleEndpoint saleEndpoint;
 
@@ -101,7 +112,8 @@ public class SaleSingleViewController implements Initializable{
 
     public SaleSingleViewController() {
         saleEndpoint = new SaleEndpoint();
-
+        saleSingleObList = FXCollections.observableArrayList();
+        saleSingleRowsArray = new ArrayList<>();
     }
 
     @Override
@@ -115,7 +127,7 @@ public class SaleSingleViewController implements Initializable{
         saleController.showSales();
     }
 
-    public void showVehicleData(Integer idSale){
+    public void showSaleData(Integer idSale){
         new Thread(() -> {
             CompletableFuture<Map<Boolean, ResultSet>> vehicleCall = CompletableFuture.supplyAsync(() -> saleEndpoint.getSaleById(idSale));
             try {
@@ -158,5 +170,105 @@ public class SaleSingleViewController implements Initializable{
         cellphoneClient.setText(resultSet.getString("cellphone_client"));
         emailClient.setText(resultSet.getString("email_client"));
         cellphoneSeller.setText(resultSet.getString("cellphone_seller"));
+    }
+
+    public void showQuantity(Integer idSale){
+        new Thread(() -> {
+            CompletableFuture<Map<Boolean, ResultSet>> vehicleCall = CompletableFuture.supplyAsync(() -> saleEndpoint.getQunantityById(idSale));
+            try {
+                vehicleCall.thenApply((response) -> {
+                    if (response.containsKey(true)) {
+                        ResultSet resultSet = response.get(true);
+                        Platform.runLater(() -> {
+                            try {
+                                setQuantity(resultSet);
+                            } catch (SQLException e) {
+                                throw new RuntimeException(e);
+                            } catch (IOException e) {
+                                throw new RuntimeException(e);
+                            }
+                        });
+                    }
+                    return true;
+                }).get();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            } catch (ExecutionException e) {
+                throw new RuntimeException(e);
+            }
+        }).start();
+    }
+
+    public void setQuantity(ResultSet resultSet) throws SQLException, IOException {
+
+        labelCantidad.setText(String.valueOf(resultSet.getInt("sum")));
+
+    }
+
+    public void showSaleCars(Integer idSale){
+        new Thread(() -> {
+            CompletableFuture<Map<Boolean, ResultSet>> vehicleCall = CompletableFuture.supplyAsync(() -> saleEndpoint.getSalesCar(idSale));
+            try {
+                vehicleCall.thenApply((response) -> {
+                    if (response.containsKey(true)) {
+                        ResultSet resultSet = response.get(true);
+                        Platform.runLater(() -> {
+                            try {
+                                setDataCarTable(resultSet);
+                            } catch (SQLException e) {
+                                throw new RuntimeException(e);
+                            } catch (IOException e) {
+                                throw new RuntimeException(e);
+                            }
+                        });
+                    }
+                    return true;
+                }).get();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            } catch (ExecutionException e) {
+                throw new RuntimeException(e);
+            }
+        }).start();
+    }
+
+    private void handleOptionLabel(MouseEvent mouseEvent) {
+        for(Integer i = 0; i < saleSingleRowsArray.size(); i++){
+            if(mouseEvent.getSource() == saleSingleRowsArray.get(i).getEditLabel()){
+
+            }
+        }
+    }
+
+    public void setDataCarTable(ResultSet resultSet) throws SQLException, FileNotFoundException {
+
+       /* (Integer idSale, String nameSeller, String nameClient, Date dateSeller, String paymentMethod,String headquarter,
+                Double priceSale)*/
+        while(resultSet.next()){
+            //Create the object that will contain all the data shown on the table
+            SaleSingleRowView car = new SaleSingleRowView(resultSet.getInt("id_car"), resultSet.getInt("id_model"),
+                    resultSet.getString("color"), resultSet.getDouble("price"),
+                    resultSet.getInt("quantity"));
+            saleSingleRowsArray.add(car); //Add every element to the array.
+        }
+
+        //Set the handle events for the labels
+        for(Integer i = 0; i < saleSingleRowsArray.size(); i++){
+            saleSingleRowsArray.get(i).getEditLabel().setOnMouseClicked(this::handleOptionLabel);
+        }
+
+        //Add every element from our array to the observable list array that will show on the table
+        for(Integer i = 0; i < saleSingleRowsArray.size(); i++){
+            saleSingleObList.add(saleSingleRowsArray.get(i));
+        }
+
+        colId.setCellValueFactory(new PropertyValueFactory("idCar"));
+        colModel.setCellValueFactory(new PropertyValueFactory("model"));
+        colColor.setCellValueFactory(new PropertyValueFactory("color"));
+        colPrice.setCellValueFactory(new PropertyValueFactory("price"));
+        colQuantity.setCellValueFactory(new PropertyValueFactory("quantity"));
+        //colOptions.setCellValueFactory(new PropertyValueFactory("options"));
+
+        carTableView.setItems(saleSingleObList);
     }
 }

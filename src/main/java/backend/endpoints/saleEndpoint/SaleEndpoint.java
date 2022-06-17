@@ -40,7 +40,7 @@ public class SaleEndpoint {
         ResultSet resultSet = null;
         HashMap<Boolean, ResultSet> response = new HashMap<>();
         try(Connection conn = ConnectionBD.connectDB().getConnection()){
-            preparedStatement = conn.prepareStatement("Select Sale.id_sale, Sale.id_worker, Sale.id_customer, Sale.id_headquarter,Sale.id_payment_method, Sale.id_confirmation, Sale.quantity,Sale.sale_date,Sale.price, \n" +
+            preparedStatement = conn.prepareStatement("Select Sale.id_sale, Sale.id_worker, Sale.id_customer, Sale.id_headquarter,Sale.id_payment_method, Sale.id_confirmation,Sale.sale_date,Sale.price, \n" +
                     "\tHeadq.name as name_headq, \n" +
                     "\t\tClient.cc as cc_client, (Client.first_name || ' ' || Client.last_name) AS name_client, Client.cellphone as cellphone_client, Client.email as email_client,\n" +
                     "\t\t\tSeller.cc as cc_seller, (Seller.first_name || ' ' ||Seller.last_name) AS name_seller, Seller.cellphone as cellphone_seller, Seller.email as email_seller,\n" +
@@ -55,6 +55,43 @@ public class SaleEndpoint {
             e.printStackTrace();
             response.put(false, resultSet);
         }
+        return response;
+    }
+
+    public Map<Boolean, ResultSet> getQunantityById(Integer idSale){
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        HashMap<Boolean, ResultSet> response = new HashMap<>();
+        try(Connection conn = ConnectionBD.connectDB().getConnection()){
+            preparedStatement = conn.prepareStatement(" select sum(quantity)\n" +
+                    "  from sale_car WHERE id_sale = ?");
+            preparedStatement.setInt(1, idSale);
+            resultSet = preparedStatement.executeQuery();
+            resultSet.next(); //show the row data
+            response.put(true, resultSet);
+        }catch (SQLException e){
+            e.printStackTrace();
+            response.put(false, resultSet);
+        }
+        return response;
+    }
+
+    public Map<Boolean, ResultSet> getSalesCar(Integer idSale) {
+
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        HashMap<Boolean, ResultSet> response = new HashMap<>();
+        try (Connection conn = ConnectionBD.connectDB().getConnection()) {
+            preparedStatement = conn.prepareStatement("select sale_car.id_car, car.id_model,color.color, model.price, sale_car.quantity\n" +
+                    " from sale_car join car using(id_car) join color using (id_color) join model using (id_model) WHERE id_sale = ?");
+            preparedStatement.setInt(1, idSale);
+            resultSet = preparedStatement.executeQuery();
+            response.put(true, resultSet);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            response.put(false, resultSet);
+        }
+
         return response;
     }
 }
