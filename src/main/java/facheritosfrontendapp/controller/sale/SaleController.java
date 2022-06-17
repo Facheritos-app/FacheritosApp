@@ -5,6 +5,7 @@ import backend.endpoints.saleEndpoint.SaleEndpoint;
 import facheritosfrontendapp.controller.DashboardController;
 import facheritosfrontendapp.controller.MainController;
 
+import facheritosfrontendapp.controller.inventory.InventoryVehicleController;
 import facheritosfrontendapp.objectRowView.saleRowView.SaleRowView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -63,11 +64,14 @@ public class SaleController implements Initializable {
     @FXML
     private TableView saleTableView;
 
+    private SaleSingleViewController saleSingleViewController;
+
     private ArrayList<SaleRowView> saleRowsArray;
 
     public SaleController() {
         saleEndpoint = new SaleEndpoint();
         saleRowsArray = new ArrayList<>();
+        saleSingleViewController = new SaleSingleViewController();
         saleObList = FXCollections.observableArrayList();
     }
 
@@ -88,7 +92,12 @@ public class SaleController implements Initializable {
     private void handleOptionLabel(MouseEvent mouseEvent) {
         for(Integer i = 0; i < saleRowsArray.size(); i++){
             if(mouseEvent.getSource() == saleRowsArray.get(i).getEditLabel()){
-
+                try {
+                    saleSingleViewController = (SaleSingleViewController) dashboardController.changeContent("sales/salesSingleView", true);
+                    saleSingleViewController.showVehicleData(saleRowsArray.get(i).getIdSale());
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
             }
         }
     }

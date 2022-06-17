@@ -130,6 +130,7 @@ Button {
     -fx-padding: 10 0 10 15;
 
 }
+
 .gridpane-hbox-label {
     -fx-font-size: 14px;
     -fx-pref-width: 180px;

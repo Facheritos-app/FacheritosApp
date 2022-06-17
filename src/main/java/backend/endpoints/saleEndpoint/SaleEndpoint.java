@@ -34,4 +34,27 @@ public class SaleEndpoint {
 
         return response;
     }
+
+    public Map<Boolean, ResultSet> getSaleById(Integer idSale){
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        HashMap<Boolean, ResultSet> response = new HashMap<>();
+        try(Connection conn = ConnectionBD.connectDB().getConnection()){
+            preparedStatement = conn.prepareStatement("Select Sale.id_sale, Sale.id_worker, Sale.id_customer, Sale.id_headquarter,Sale.id_payment_method, Sale.id_confirmation, Sale.quantity,Sale.sale_date,Sale.price, \n" +
+                    "\tHeadq.name as name_headq, \n" +
+                    "\t\tClient.cc as cc_client, (Client.first_name || ' ' || Client.last_name) AS name_client, Client.cellphone as cellphone_client, Client.email as email_client,\n" +
+                    "\t\t\tSeller.cc as cc_seller, (Seller.first_name || ' ' ||Seller.last_name) AS name_seller, Seller.cellphone as cellphone_seller, Seller.email as email_seller,\n" +
+                    "\t\t\t\tpayment.payment_method as name_method,\n" +
+                    "\t\t\t\t\tconfirmation.confirmation_status\n" +
+                    "from sale as Sale join headquarter as Headq using(id_headquarter) join person as Client on Sale.id_customer = Client.id_person join person as Seller on Sale.id_worker = Seller.id_person join payment on Sale.id_payment_method = payment.id_payment join confirmation on Sale.id_confirmation = confirmation.id_confirmation WHERE id_sale = ?");
+            preparedStatement.setInt(1, idSale);
+            resultSet = preparedStatement.executeQuery();
+            resultSet.next(); //show the row data
+            response.put(true, resultSet);
+        }catch (SQLException e){
+            e.printStackTrace();
+            response.put(false, resultSet);
+        }
+        return response;
+    }
 }
