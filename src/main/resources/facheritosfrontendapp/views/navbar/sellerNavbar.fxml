@@ -11,7 +11,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="379.0" prefWidth="153.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="facheritosfrontendapp.controller.navbar.SellerNavbar">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="379.0" prefWidth="153.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="facheritosfrontendapp.controller.navbar.SellerNavbar">
     <children>
         <VBox prefHeight="394.0" prefWidth="150.0">
             <children>
@@ -83,7 +83,7 @@
                     </children>
                 </HBox>
                 <Line endX="63.799957275390625" endY="1.52587890625E-5" startX="-89.8000259399414" startY="1.52587890625E-5" stroke="LIGHTGRAY" />
-                <HBox prefHeight="100.0" prefWidth="200.0" styleClass="nav-item" stylesheets="@../style.css">
+                <HBox fx:id="sales" onMouseClicked="#salesClicked" prefHeight="100.0" prefWidth="200.0" styleClass="nav-item" stylesheets="@../style.css">
                     <children>
                         <ImageView fitHeight="25.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true" styleClass="nav-item-icon">
                             <image>

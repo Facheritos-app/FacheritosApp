@@ -4,9 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5f49d571-a74c-4244-90f5-d1284478321e" name="Changes" comment="">
+    <list default="true" id="5f49d571-a74c-4244-90f5-d1284478321e" name="Changes" comment="I changed the view users view with the combo boxes and the city field.">
+      <change afterPath="$PROJECT_DIR$/src/main/java/backend/endpoints/saleEndpoint/SaleEndpoint.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/sale/SaleController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/objectRowView/saleRowView/SaleRowView.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/sales/sales.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/inventory/InventoryVehicleController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/inventory/InventoryVehicleController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/navbar/ManagerNavbar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/navbar/ManagerNavbar.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/navbar/SellerNavbar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/navbar/SellerNavbar.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/navbar/managerNavbar.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/navbar/managerNavbar.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/navbar/sellerNavbar.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/navbar/sellerNavbar.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,8 +25,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="package-info" />
-        <option value="FxmlFile" />
         <option value="Class" />
+        <option value="FxmlFile" />
       </list>
     </option>
   </component>
@@ -47,6 +55,9 @@
         <option name="useMavenConfig" value="true" />
       </MavenGeneralSettings>
     </option>
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectId" id="29tZxgil2cvel57XAubp1IqS4Fv" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -98,7 +109,7 @@
       <option name="ALTERNATIVE_JRE_PATH" value="temurin-11" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <option name="MAIN_CLASS_NAME" value="facheritosfrontendapp.views.Main" />
-      <module name="FacheritosFrontendApp" />
+      <module name="FacheritosAppFrontend" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="facheritosfrontendapp.views.*" />
@@ -177,6 +188,9 @@
       <workItem from="1655068513328" duration="2954000" />
       <workItem from="1655209735844" duration="6004000" />
       <workItem from="1655334898842" duration="10787000" />
+      <workItem from="1655414405574" duration="13641000" />
+      <workItem from="1655470392817" duration="1517000" />
+      <workItem from="1655471938091" duration="893000" />
     </task>
     <task id="LOCAL-00001" summary="I changed the view users view with the combo boxes and the city field.">
       <created>1654630629606</created>
