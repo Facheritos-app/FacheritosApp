@@ -50,13 +50,13 @@ public class ManagerNavbar implements Initializable {
         inventoryController = (InventoryController) dashboardController.changeContent("inventory/inventory");
         inventoryController.showVehicles();
     }
-/*
+
     @FXML
     protected void salesClicked() throws IOException {
-        saleController = (SaleController) dashboardController.changeContent("sales/sales");
-        inventoryController.showVehicles();
+        //saleController = (SaleController) dashboardController.changeContent("sales/sales");
+        //inventoryController.showVehicles();
     }
-*/
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.println(DashboardController.getCurrentWorker().getId_worker());
