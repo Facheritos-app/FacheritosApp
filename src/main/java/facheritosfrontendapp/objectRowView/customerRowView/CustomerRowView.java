@@ -1,4 +1,4 @@
-package facheritosfrontendapp.objectRowView.headquarterRowView.customerRowView;
+package facheritosfrontendapp.objectRowView.customerRowView;
 
 import facheritosfrontendapp.views.Main;
 import javafx.geometry.Pos;

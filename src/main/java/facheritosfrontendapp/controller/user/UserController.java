@@ -4,7 +4,7 @@ import backend.endpoints.customerEndpoint.CustomerEndpoint;
 import backend.endpoints.workerEndpoint.WorkerEndpoint;
 import facheritosfrontendapp.controller.DashboardController;
 import facheritosfrontendapp.controller.MainController;
-import facheritosfrontendapp.objectRowView.headquarterRowView.customerRowView.CustomerRowView;
+import facheritosfrontendapp.objectRowView.customerRowView.CustomerRowView;
 import facheritosfrontendapp.objectRowView.headquarterRowView.WorkerRowView;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
