@@ -129,7 +129,7 @@ public class SaleController implements Initializable {
                 Double priceSale)*/
         while(resultSet.next()){
             //Create the object that will contain all the data shown on the table
-            SaleRowView sale = new SaleRowView(resultSet.getInt("id_sale"), resultSet.getString("name_saller"),
+            SaleRowView sale = new SaleRowView(resultSet.getInt("id_sale"), resultSet.getString("name_seller"),
                     resultSet.getString("name_client"), resultSet.getDate("sale_date"),
                     resultSet.getString("payment_method"), resultSet.getString("name"),
                     resultSet.getDouble("price"));
@@ -149,10 +149,10 @@ public class SaleController implements Initializable {
         colId.setCellValueFactory(new PropertyValueFactory("idSale"));
         colSeller.setCellValueFactory(new PropertyValueFactory("nameSeller"));
         colClient.setCellValueFactory(new PropertyValueFactory("nameClient"));
-       // colDate.setCellValueFactory(new PropertyValueFactory("dateSeller"));
+        colDate.setCellValueFactory(new PropertyValueFactory("dateSeller"));
         colPay.setCellValueFactory(new PropertyValueFactory("paymentMethod"));
         colHeadq.setCellValueFactory(new PropertyValueFactory("headquarter"));
-      //  colPriceSale.setCellValueFactory(new PropertyValueFactory("priceSale"));
+        colPriceSale.setCellValueFactory(new PropertyValueFactory("priceSale"));
         colOptions.setCellValueFactory(new PropertyValueFactory("options"));
 
         saleTableView.setItems(saleObList);

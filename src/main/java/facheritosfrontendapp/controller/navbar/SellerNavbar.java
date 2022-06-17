@@ -24,8 +24,7 @@ public class SellerNavbar implements Initializable {
     @FXML
     public void salesClicked() throws IOException, ExecutionException, InterruptedException {
         saleController = (SaleController) dashboardController.changeContent("sales/sales");
-        //saleController = (SaleController) dashboardController.changeContent("sales/sales");
-        //saleController.showSales();
+        saleController.showSales();
     }
 
     @Override
