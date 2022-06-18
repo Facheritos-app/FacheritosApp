@@ -4,6 +4,7 @@ import backend.endpoints.customerEndpoint.CustomerEndpoint;
 import backend.endpoints.workerEndpoint.WorkerEndpoint;
 import facheritosfrontendapp.controller.DashboardController;
 import facheritosfrontendapp.controller.MainController;
+import facheritosfrontendapp.controller.customer.CustomerSingleViewController;
 import facheritosfrontendapp.objectRowView.customerRowView.CustomerRowView;
 import facheritosfrontendapp.objectRowView.headquarterRowView.WorkerRowView;
 import javafx.collections.FXCollections;
@@ -33,6 +34,8 @@ public class UserController implements Initializable {
     private AddUserController addUserController;
 
     private UserSingleViewController userSingleViewController;
+
+    private CustomerSingleViewController customerSingleViewController;
 
     private WorkerEndpoint workerEndpoint;
 
@@ -127,25 +130,6 @@ public class UserController implements Initializable {
         }).start();
     }
 
-
-    /**
-     * handleOptionLabel: mouseEvent -> void
-     * Purpose: Listens to the events of both the view, edit and delete label.
-     */
-    private void handleOptionLabel(MouseEvent mouseEvent)  {
-        for(int i = 0; i < workerRowsArray.size(); i++){
-            if(mouseEvent.getSource() == workerRowsArray.get(i).getOptionsLabel()){
-                //Here we will load the component to view, edit and delete the worker
-                try {
-                    userSingleViewController = (UserSingleViewController) dashboardController.changeContent("users/usersSingleView");
-                    userSingleViewController.showForm(workerRowsArray.get(i).getIdPerson());
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-        }
-    }
-
     public void setData(ResultSet resultSet) throws SQLException {
         //As long as there are records left to show
         while(resultSet.next()){
@@ -227,6 +211,36 @@ public class UserController implements Initializable {
 
         customerTableView.setItems(FXCollections.observableArrayList(customerRowsArray));
 
+    }
+
+    /**
+     * handleOptionLabel: mouseEvent -> void
+     * Purpose: Listens to the events of both the view, edit and delete label.
+     */
+    private void handleOptionLabel(MouseEvent mouseEvent)  {
+        for(int i = 0; i < workerRowsArray.size(); i++){
+            if(mouseEvent.getSource() == workerRowsArray.get(i).getOptionsLabel()){
+                //Here we will load the component to view, edit and delete the worker
+                try {
+                    userSingleViewController = (UserSingleViewController) dashboardController.changeContent("users/usersSingleView");
+                    userSingleViewController.showForm(workerRowsArray.get(i).getIdPerson());
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
+
+        for(int i = 0; i < customerRowsArray.size(); i++){
+            if(mouseEvent.getSource() == customerRowsArray.get(i).getOptionsLabel()){
+                //Here we will load the component to view the worker
+                try {
+                    customerSingleViewController = (CustomerSingleViewController) dashboardController.changeContent("customers/customersSingleView");
+                    customerSingleViewController.showCustomer(customerRowsArray.get(i).getIdPerson());
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
     }
 
 

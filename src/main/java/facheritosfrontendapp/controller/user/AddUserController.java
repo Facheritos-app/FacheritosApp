@@ -6,7 +6,6 @@ import backend.endpoints.workerEndpoint.WorkerEndpoint;
 import facheritosfrontendapp.ComboBoxView.HeadquarterView;
 import facheritosfrontendapp.controller.DashboardController;
 import facheritosfrontendapp.controller.MainController;
-import facheritosfrontendapp.controller.headquarter.HeadquarterController;
 import facheritosfrontendapp.validator.addUserValidator.AddUserValidator;
 import facheritosfrontendapp.views.FxmlLoader;
 import javafx.application.Platform;
@@ -102,6 +101,7 @@ public class AddUserController implements Initializable {
             userController = (UserController) dashboardController.changeContent("users/users");
             //SHOW THE USERS IN TABLEVIEW
             userController.showWorkers();
+            userController.showCustomers();
         } else {
             System.out.println("No");
         }
@@ -141,6 +141,7 @@ public class AddUserController implements Initializable {
                                             userController = (UserController) dashboardController.changeContent("users/users");
                                             //Show users in table
                                             userController.showWorkers();
+                                            userController.showCustomers();
                                         } catch (IOException e) {
                                             throw new RuntimeException(e);
                                         }

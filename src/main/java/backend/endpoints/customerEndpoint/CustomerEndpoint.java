@@ -29,4 +29,26 @@ public class CustomerEndpoint {
         return response;
     }
 
+
+    /**
+     * getCustomerById: Integer -> void
+     * Purpose: gets a customer from the database according to an input Id.
+     */
+    public Map<Boolean, ResultSet> getCustomerById(Integer idPerson){
+        PreparedStatement preparedStatement;
+        ResultSet resultSet = null;
+        HashMap<Boolean, ResultSet> response = new HashMap<>();
+        try(Connection conn = ConnectionBD.connectDB().getConnection()){
+            preparedStatement = conn.prepareStatement("SELECT * FROM person WHERE id_person = ?");
+            preparedStatement.setInt(1,idPerson);
+            resultSet = preparedStatement.executeQuery();
+            resultSet.next();
+            response.put(true, resultSet);
+        }catch (SQLException e){
+            e.printStackTrace();
+            response.put(false, resultSet);
+        }
+        return response;
+    }
+
 }
