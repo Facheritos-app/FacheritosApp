@@ -6,7 +6,9 @@ import facheritosfrontendapp.controller.MainController;
 import facheritosfrontendapp.views.FxmlLoader;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Background;
 
 import java.io.IOException;
 import java.net.URL;
@@ -23,14 +25,39 @@ public class AddSaleController implements Initializable {
     @FXML
     private TextField ccSeller;
 
+    @FXML
+    private TextField nameSeller;
+
+    @FXML
+    private TextField emailSeller;
+
+    @FXML
+    private TextField numberSeller;
+
+    @FXML
+    private TextField ccClient;
+
+    @FXML
+    private TextField nameClient;
+
+    @FXML
+    private TextField emailClient;
+
+    @FXML
+    private TextField numberClient;
+
+    @FXML
+    private Button editClient;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        DashboardController.getCurrentWorker().getId_worker();
         dashboardController = MainController.getDashboardController();
+        setCurrentWorker(DashboardController.getCurrentWorker());
     }
 
     public AddSaleController() {
         fxmlLoader = new FxmlLoader();
-        setCurrentWorker(getCurrentWorker());
     }
 
     public static synchronized WorkerDTO getCurrentWorker() {
@@ -42,8 +69,21 @@ public class AddSaleController implements Initializable {
     }
 
     public void setSeller() throws SQLException, IOException {
+        ccSeller.setEditable(false);
+        nameSeller.setEditable(false);
+        emailSeller.setEditable(false);
+        numberSeller.setEditable(false);
+        nameClient.setEditable(false);
+        emailClient.setEditable(false);
+        numberClient.setEditable(false);
+
+        editClient.setDisable(false);
+        editClient.setStyle("-fx-background-color: #C24E59; ");
+
 
         ccSeller.setText(currentWorker.getCc());
-
+        nameSeller.setText(currentWorker.getFirst_name()+" "+currentWorker.getLast_name());
+        emailSeller.setText(currentWorker.getEmail());
+        numberSeller.setText(currentWorker.getCellphone());
     }
 }

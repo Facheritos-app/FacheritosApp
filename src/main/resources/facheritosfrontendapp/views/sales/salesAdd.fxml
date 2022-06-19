@@ -84,7 +84,7 @@
             <ComboBox layoutX="554.0" layoutY="134.0" prefHeight="31.0" prefWidth="204.0" styleClass="input-text" stylesheets="@../style.css" />
             <ComboBox layoutX="554.0" layoutY="172.0" prefHeight="31.0" prefWidth="206.0" styleClass="input-text" stylesheets="@../style.css" />
             <TextField fx:id="firstnameTextField" layoutX="550.0" layoutY="379.0" prefHeight="36.0" prefWidth="206.0" promptText="ej. 1569326" styleClass="input-text" stylesheets="@../style.css" />
-            <TextField fx:id="firstnameTextField1" layoutX="550.0" layoutY="428.0" prefHeight="36.0" prefWidth="209.0" promptText="..." styleClass="input-text" stylesheets="@../style.css" />
+            <TextField fx:id="nameClient" layoutX="550.0" layoutY="428.0" prefHeight="36.0" prefWidth="209.0" promptText="..." styleClass="input-text" stylesheets="@../style.css" />
             <Label layoutX="456.0" layoutY="378.0" prefHeight="38.0" prefWidth="54.0" text="Cedula:">
                <font>
                   <Font size="16.0" />
@@ -105,14 +105,14 @@
                   <Font size="16.0" />
                </font>
             </Label>
-            <TextField fx:id="firstnameTextField11" layoutX="550.0" layoutY="478.0" prefHeight="36.0" prefWidth="207.0" promptText="..." styleClass="input-text" stylesheets="@../style.css" />
-            <TextField fx:id="firstnameTextField111" layoutX="550.0" layoutY="526.0" prefHeight="36.0" prefWidth="209.0" promptText="..." styleClass="input-text" stylesheets="@../style.css" />
+            <TextField fx:id="emailClient" layoutX="550.0" layoutY="478.0" prefHeight="36.0" prefWidth="207.0" promptText="..." styleClass="input-text" stylesheets="@../style.css" />
+            <TextField fx:id="numberClient" layoutX="550.0" layoutY="526.0" prefHeight="36.0" prefWidth="209.0" promptText="..." styleClass="input-text" stylesheets="@../style.css" />
             <Label layoutX="33.0" layoutY="360.0" text="Vendedor">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
             </Label>
-            <TextField fx:id="ccSeller" layoutX="140.0" layoutY="387.0" prefHeight="36.0" prefWidth="206.0" promptText="cargando..." styleClass="input-text" stylesheets="@../style.css" text="h" />
+            <TextField fx:id="ccSeller" layoutX="140.0" layoutY="387.0" prefHeight="36.0" prefWidth="206.0" promptText="cargando..." styleClass="input-text" stylesheets="@../style.css" />
             <TextField fx:id="nameSeller" layoutX="140.0" layoutY="436.0" prefHeight="36.0" prefWidth="209.0" promptText="cargando..." styleClass="input-text" stylesheets="@../style.css" />
             <Label layoutX="46.0" layoutY="386.0" prefHeight="38.0" prefWidth="54.0" text="Cedula:">
                <font>
@@ -142,7 +142,7 @@
                   <String fx:value="select-button" />
                </styleClass>
             </Button>
-            <Button layoutX="625.0" layoutY="571.0" mnemonicParsing="false" prefWidth="147.0" stylesheets="@../style.css" text="Editar cliente">
+            <Button fx:id="editClient" layoutX="625.0" layoutY="571.0" mnemonicParsing="false" prefWidth="147.0" stylesheets="@../style.css" text="Editar cliente">
                <styleClass>
                   <String fx:value="red-button" />
                   <String fx:value="select-button" />
