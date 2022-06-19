@@ -81,7 +81,7 @@ public class InventoryVehicleController implements Initializable {
     @FXML
     protected void backArrowClicked() throws IOException {
         inventoryController = (InventoryController) dashboardController.changeContent("inventory/inventory");
-        inventoryController.showVehicles();
+        inventoryController.showInventory();
     }
     /**
      * showVehicleData: Integer -> void

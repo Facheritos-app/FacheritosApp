@@ -48,7 +48,7 @@ public class ManagerNavbar implements Initializable {
     @FXML
     protected void inventoryClicked() throws IOException {
         inventoryController = (InventoryController) dashboardController.changeContent("inventory/inventory");
-        inventoryController.showVehicles();
+        inventoryController.showInventory();
     }
 
     @FXML
