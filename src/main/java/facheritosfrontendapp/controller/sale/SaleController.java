@@ -5,7 +5,6 @@ import backend.endpoints.saleEndpoint.SaleEndpoint;
 import facheritosfrontendapp.controller.DashboardController;
 import facheritosfrontendapp.controller.MainController;
 
-import facheritosfrontendapp.controller.inventory.InventoryVehicleController;
 import facheritosfrontendapp.objectRowView.saleRowView.SaleRowView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -61,17 +60,20 @@ public class SaleController implements Initializable {
 
     private ObservableList<SaleRowView> saleObList;
 
+    private AddSaleController addSaleController;
     @FXML
     private TableView saleTableView;
 
     private SaleSingleViewController saleSingleViewController;
 
+
     private ArrayList<SaleRowView> saleRowsArray;
 
-    public SaleController() {
+    public SaleController()  {
         saleEndpoint = new SaleEndpoint();
         saleRowsArray = new ArrayList<>();
         saleSingleViewController = new SaleSingleViewController();
+        addSaleController =  new AddSaleController();
         saleObList = FXCollections.observableArrayList();
     }
 
@@ -82,8 +84,9 @@ public class SaleController implements Initializable {
     }
 
     @FXML
-    protected void addSaleClicked() throws IOException {
-        //dashboardController.changeContent("sales/salesAdd");
+    protected void addSaleClicked() throws IOException, SQLException {
+        addSaleController = (AddSaleController) dashboardController.changeContent("sales/salesAdd", true);
+        addSaleController.setSeller();
     }
 
 
