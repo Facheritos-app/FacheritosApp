@@ -47,6 +47,14 @@ public class MainController implements Initializable {
     private static DashboardController dashboardController;
 
 
+    @FXML
+    protected void ccAction() {
+        error.setVisible(false);
+    }
+    @FXML
+    protected void passwordAction() {
+        error.setVisible(false);
+    }
 
     @FXML
     protected void boton(ActionEvent event) throws IOException, ExecutionException, InterruptedException {
@@ -71,6 +79,7 @@ public class MainController implements Initializable {
             stage.setScene(scene);
             stage.show();
         }else{
+            error.setVisible(true);
             error.setStyle("-fx-text-fill: #C02130; ");
             error.setText("Error: Datos incorrectos, intente de nuevo");
         }

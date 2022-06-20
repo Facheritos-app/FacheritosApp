@@ -35,10 +35,13 @@
             <Font name="Poppins Regular" size="14.0" />
          </font>
       </Label>
-      <Label fx:id="emailLabel" layoutX="195.0" layoutY="135.0" prefHeight="25.0" prefWidth="425.0" styleClass="poppins" stylesheets="@../style.css" textFill="#1f1f1f">
+      <Label fx:id="emailLabel" layoutX="195.0" layoutY="135.0" onMouseClicked="#emailClicked" prefHeight="25.0" styleClass="poppins" stylesheets="@../style.css" textFill="#1f1f1f">
          <font>
             <Font name="Poppins Regular" size="14.0" />
          </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Label>
       <Label fx:id="ccLabel" layoutX="205.0" layoutY="82.0" prefHeight="25.0" prefWidth="197.0" styleClass="poppins" stylesheets="@../style.css" textAlignment="RIGHT" textFill="#1f1f1f">
          <font>
@@ -97,7 +100,15 @@
          </columns>
       </TableView>
       <Separator orientation="VERTICAL" prefHeight="516.0" prefWidth="8.0" />
-      <ImageView fitHeight="36.0" fitWidth="36.0" layoutX="583.0" layoutY="467.0" onMouseClicked="#backArrowClicked" pickOnBounds="true" preserveRatio="true" styleClass="back-arrow">
+      <ImageView fx:id="backToCustomers" fitHeight="36.0" fitWidth="36.0" layoutX="583.0" layoutY="467.0" onMouseClicked="#backToCustomersClicked" pickOnBounds="true" preserveRatio="true" styleClass="back-arrow" visible="false">
+         <image>
+            <Image url="@../../icons/back-arrow.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+      <ImageView fx:id="backToUsers" fitHeight="36.0" fitWidth="36.0" layoutX="583.0" layoutY="467.0" onMouseClicked="#backToUsersClicked" pickOnBounds="true" preserveRatio="true" styleClass="back-arrow" visible="false">
          <image>
             <Image url="@../../icons/back-arrow.png" />
          </image>

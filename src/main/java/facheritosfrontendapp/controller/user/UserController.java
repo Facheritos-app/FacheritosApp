@@ -236,6 +236,7 @@ public class UserController implements Initializable {
                 //Here we will load the component to view the worker
                 try {
                     customerSingleViewController = (CustomerSingleViewController) dashboardController.changeContent("customers/customersSingleView");
+                    customerSingleViewController.backToUsers.setVisible(true);
                     customerSingleViewController.showCustomer(customerRowsArray.get(i).getIdPerson());
                 } catch (IOException e) {
                     throw new RuntimeException(e);

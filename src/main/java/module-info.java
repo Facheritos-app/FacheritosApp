@@ -8,6 +8,7 @@ module  facheritosfrontendapp {
     requires org.postgresql.jdbc;
     requires java.sql;
     requires AnimateFX;
+    requires java.desktop;
 
 
     //opens  facheritosfrontendapp to javafx.fxml;
