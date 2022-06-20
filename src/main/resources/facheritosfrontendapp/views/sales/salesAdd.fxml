@@ -16,7 +16,7 @@
 
 <ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="532.0" prefWidth="718.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="facheritosfrontendapp.controller.sale.AddSaleController">
   <content>
-    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="657.0" prefWidth="872.0">
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="657.0" prefWidth="872.0" style="-fx-background-color: FFFFF;">
          <children>
             <Label layoutX="443.0" layoutY="105.0" text="Venta:">
                <font>
@@ -81,9 +81,9 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <ComboBox layoutX="554.0" layoutY="134.0" prefHeight="31.0" prefWidth="204.0" styleClass="input-text" stylesheets="@../style.css" />
-            <ComboBox layoutX="554.0" layoutY="172.0" prefHeight="31.0" prefWidth="206.0" styleClass="input-text" stylesheets="@../style.css" />
-            <TextField fx:id="firstnameTextField" layoutX="550.0" layoutY="379.0" prefHeight="36.0" prefWidth="206.0" promptText="ej. 1569326" styleClass="input-text" stylesheets="@../style.css" />
+            <ComboBox fx:id="headquarterCombobox" layoutX="554.0" layoutY="134.0" prefHeight="31.0" prefWidth="204.0" styleClass="input-text" stylesheets="@../style.css" />
+            <ComboBox fx:id="typeCombobox" layoutX="554.0" layoutY="172.0" prefHeight="31.0" prefWidth="206.0" styleClass="input-text" stylesheets="@../style.css" />
+            <TextField fx:id="ccClient" layoutX="550.0" layoutY="379.0" prefHeight="36.0" prefWidth="206.0" promptText="ej. 1569326" styleClass="input-text" stylesheets="@../style.css" />
             <TextField fx:id="nameClient" layoutX="550.0" layoutY="428.0" prefHeight="36.0" prefWidth="209.0" promptText="..." styleClass="input-text" stylesheets="@../style.css" />
             <Label layoutX="456.0" layoutY="378.0" prefHeight="38.0" prefWidth="54.0" text="Cedula:">
                <font>
@@ -136,19 +136,19 @@
             </Label>
             <TextField fx:id="emailSeller" layoutX="140.0" layoutY="486.0" prefHeight="36.0" prefWidth="207.0" promptText="cargando..." styleClass="input-text" stylesheets="@../style.css" />
             <TextField fx:id="numberSeller" layoutX="140.0" layoutY="534.0" prefHeight="36.0" prefWidth="209.0" promptText="cargando..." styleClass="input-text" stylesheets="@../style.css" />
-            <Button layoutX="479.0" layoutY="571.0" mnemonicParsing="false" prefWidth="129.0" stylesheets="@../style.css" text="Buscar cliente">
+            <Button fx:id="searchClient" layoutX="479.0" layoutY="571.0" mnemonicParsing="false" onMouseClicked="#searchClientClicked" prefWidth="129.0" stylesheets="@../style.css" text="Buscar cliente">
                <styleClass>
                   <String fx:value="red-button" />
                   <String fx:value="select-button" />
                </styleClass>
             </Button>
-            <Button fx:id="editClient" layoutX="625.0" layoutY="571.0" mnemonicParsing="false" prefWidth="147.0" stylesheets="@../style.css" text="Editar cliente">
+            <Button fx:id="editClient" layoutX="625.0" layoutY="571.0" mnemonicParsing="false" onMouseClicked="#editClientClicked" prefWidth="183.0" stylesheets="@../style.css" text="Cambiar cliente">
                <styleClass>
                   <String fx:value="red-button" />
                   <String fx:value="select-button" />
                </styleClass>
             </Button>
-            <Button layoutX="140.0" layoutY="615.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="137.0" styleClass="blue-button" stylesheets="@../style.css" text="Guardar venta" />
+            <Button fx:id="saveSale" layoutX="140.0" layoutY="615.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="137.0" styleClass="blue-button" stylesheets="@../style.css" text="Guardar venta" />
          </children></AnchorPane>
   </content>
 </ScrollPane>

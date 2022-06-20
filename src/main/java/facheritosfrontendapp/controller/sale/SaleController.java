@@ -87,6 +87,7 @@ public class SaleController implements Initializable {
     protected void addSaleClicked() throws IOException, SQLException {
         addSaleController = (AddSaleController) dashboardController.changeContent("sales/salesAdd", true);
         addSaleController.setSeller();
+        addSaleController.setView();
     }
 
 
