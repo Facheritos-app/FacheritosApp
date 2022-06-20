@@ -7,6 +7,7 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -23,6 +24,9 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
 public class InventoryVehicleController implements Initializable {
+
+    @FXML
+    private ScrollPane scrollpane;
 
     @FXML
     private Label assemblyYearLabel;
@@ -133,26 +137,8 @@ public class InventoryVehicleController implements Initializable {
         transmissionLabel.setText(resultSet.getString("transmision"));
         priceLabel.setText(resultSet.getString("price"));
 
-        //Intento de agregar la imagen, NO CARGA
-        new Thread(() -> {
 
-            URLConnection connection = null;
-            try {
-                connection = new URL(resultSet.getString("image")).openConnection();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
-            connection.addRequestProperty("Use  r-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:25.0) Gecko/20100101 Firefox/25.0");
-            Image image = null;
-            try {
-                image = new Image(connection.getInputStream());
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-            vehicleImage.setImage(image);
-        }).start();
+        vehicleImage.setImage(new Image("https://i.postimg.cc/tCyYd0Zz/raul-di-domenico-o-Yo-Ic-Sgs-GWI-unsplash.jpg"));
 
 
     }

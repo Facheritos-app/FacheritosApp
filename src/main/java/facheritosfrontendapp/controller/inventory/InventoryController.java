@@ -5,14 +5,12 @@ import facheritosfrontendapp.controller.DashboardController;
 import facheritosfrontendapp.controller.MainController;
 import facheritosfrontendapp.objectRowView.inventoryRowView.PartRowView;
 import facheritosfrontendapp.objectRowView.inventoryRowView.VehicleRowView;
+import facheritosfrontendapp.views.FxmlLoader;
 import facheritosfrontendapp.views.MyDialogPane;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.TabPane;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
@@ -81,6 +79,8 @@ public class InventoryController implements Initializable {
 
     private InventoryPartController inventoryPartController;
 
+    private InventoryAddPartController inventoryAddPartController;
+
     public InventoryController(){
         inventoryEndpoint = new InventoryEndpoint();
         vehicleRowViewList = new ArrayList<>();
@@ -90,15 +90,22 @@ public class InventoryController implements Initializable {
     }
 
     @FXML
-    protected void addClicked() throws IOException {
-        MyDialogPane dialogPane = new MyDialogPane("inventory/confirmationPart");
+    protected void addClicked() throws IOException, ExecutionException, InterruptedException {
+        MyDialogPane dialogPane = new MyDialogPane("inventory/confirmationPart",1);
         Optional<ButtonType> clickedButton = dialogPane.getClickedButton();
+        //Vehículo
         if(clickedButton.get() == ButtonType.APPLY){
             // CHANGE VIEW
             System.out.println("Apply");
-        } else {
-            //CHANGE VIEW
-            System.out.println("Cancel");
+        }
+        //Repuesto
+        else if (clickedButton.get() == ButtonType.OK){
+            //Show form to add car part
+            inventoryAddPartController = (InventoryAddPartController) dashboardController.changeContent("inventory/inventoryAddPart");
+            inventoryAddPartController.showHeadquarters(); //show headquarters in combobox
+        }
+        else {
+
         }
     }
     @Override
