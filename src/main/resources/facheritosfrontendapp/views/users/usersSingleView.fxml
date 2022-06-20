@@ -114,7 +114,7 @@
                 <Font name="Poppins Bold" size="36.0" />
             </font>
         </Label>
-        <Button fx:id="cancelButton" alignment="CENTER" layoutX="330.0" layoutY="448.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="132.0" styleClass="red-button" stylesheets="@../style.css" text="Cancelar" textFill="WHITE" visible="false">
+        <Button fx:id="cancelButton" alignment="CENTER" layoutX="330.0" layoutY="448.0" mnemonicParsing="false" onAction="#cancelAction" prefHeight="37.0" prefWidth="132.0" styleClass="red-button" stylesheets="@../style.css" text="Cancelar" textFill="WHITE" visible="false">
             <font>
                 <Font name="Poppins Bold" size="12.0" />
             </font>

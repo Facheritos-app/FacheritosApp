@@ -3,21 +3,27 @@ package facheritosfrontendapp.controller.user;
 import backend.endpoints.headquarterEndpoint.HeadquarterEndpoint;
 import backend.endpoints.workerEndpoint.WorkerEndpoint;
 import facheritosfrontendapp.ComboBoxView.HeadquarterView;
+import facheritosfrontendapp.controller.DashboardController;
+import facheritosfrontendapp.controller.MainController;
+import facheritosfrontendapp.views.MyDialogPane;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
+
+import static javafx.scene.control.ButtonType.YES;
 
 public class UserSingleViewController implements Initializable {
 
@@ -25,6 +31,10 @@ public class UserSingleViewController implements Initializable {
     private HeadquarterEndpoint headquarterEndpoint;
 
     private ArrayList<HeadquarterView> headquarterComboboxList;
+
+    private DashboardController dashboardController;
+
+    private UserController userController;
 
     //Here are all the @FXML components
     @FXML
@@ -81,7 +91,7 @@ public class UserSingleViewController implements Initializable {
      * Purpose: By pressing the 'Editar usuario' button the text fields are enabled,
      * the title becomes visible and the 'Guardar' and 'Cancelar' buttons are enabled.
      */
-    protected void editAction(ActionEvent event) {
+    protected void editAction() {
         editUserLabel.setVisible(true);
 
         nameField.setDisable(false);
@@ -101,6 +111,21 @@ public class UserSingleViewController implements Initializable {
 
         cancelButton.setVisible(true);
         saveButton.setVisible(true);
+    }
+
+    @FXML
+    protected void cancelAction() throws IOException {
+        /*Show dialogPane to confirm*/
+        MyDialogPane dialogPane = new MyDialogPane("confirmationCancel");
+        Optional<ButtonType> clickedButton = dialogPane.getClickedButton();
+        if (clickedButton.get() == YES) {
+            userController = (UserController) dashboardController.changeContent("users/users");
+            //SHOW THE USERS IN TABLEVIEW
+            userController.showWorkers();
+            userController.showCustomers();
+        } else {
+            System.out.println("No");
+        }
     }
 
     public UserSingleViewController() {
@@ -203,6 +228,7 @@ public class UserSingleViewController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        dashboardController = MainController.getDashboardController();
         statusCombo.setItems(FXCollections.observableArrayList("Activo", "Inactivo"));
         roleCombo.setItems(FXCollections.observableArrayList("Gerente", "Vendedor", "Jefe de taller"));
     }
