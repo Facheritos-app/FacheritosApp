@@ -5,10 +5,16 @@ import backend.dto.personDTO.WorkerDTO;
 import backend.endpoints.loginEndpoint.LoginEndpoint;
 
 import facheritosfrontendapp.views.FxmlLoader;
+import facheritosfrontendapp.views.Main;
+import javafx.application.Application;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.layout.*;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
@@ -39,14 +45,25 @@ public class DashboardController implements Initializable {
 
     private LoginEndpoint loginEndpoint;
 
-
-
     public static WorkerDTO currentWorker;
+
+    public Stage stage;
 
     public DashboardController() {
         loginEndpoint = new LoginEndpoint();
     }
 
+    /**
+     * logOutClicked: void -> void
+     * Purpose: displays the login screen when pressing the logout button
+     */
+    @FXML
+    public void logOutClicked() throws Exception {
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("hello-view.fxml"));
+        borderPane.setCenter(fxmlLoader.load());
+        borderPane.setLeft(null);
+        borderPane.setTop(null);
+    }
 
     /**
      * setDashBoard: LoginDTO -> Boolean

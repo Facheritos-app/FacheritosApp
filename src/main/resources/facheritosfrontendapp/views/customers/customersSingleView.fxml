@@ -2,6 +2,7 @@
 
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.Image?>
@@ -44,27 +45,27 @@
             <Font name="Poppins Regular" size="14.0" />
          </font>
       </Label>
-      <Label layoutX="55.0" layoutY="196.0" prefHeight="25.0" prefWidth="158.0" styleClass="poppins" stylesheets="@../style.css" text="Fecha de nacimiento:" textFill="#1f1f1f">
+      <Label layoutX="55.0" layoutY="184.0" prefHeight="25.0" prefWidth="158.0" styleClass="poppins" stylesheets="@../style.css" text="Fecha de nacimiento:" textFill="#1f1f1f">
          <font>
             <Font name="Poppins Bold" size="14.0" />
          </font>
       </Label>
-      <Label fx:id="birthdayLabel" layoutX="235.0" layoutY="196.0" prefHeight="25.0" prefWidth="82.0" styleClass="poppins" stylesheets="@../style.css" textFill="#1f1f1f">
+      <Label fx:id="birthdayLabel" layoutX="235.0" layoutY="184.0" prefHeight="25.0" prefWidth="82.0" styleClass="poppins" stylesheets="@../style.css" textFill="#1f1f1f">
          <font>
             <Font name="Poppins Regular" size="14.0" />
          </font>
       </Label>
-      <Label layoutX="361.0" layoutY="196.0" prefHeight="25.0" prefWidth="141.0" styleClass="poppins" stylesheets="@../style.css" text="Fecha de creación:" textFill="#1f1f1f">
+      <Label layoutX="361.0" layoutY="184.0" prefHeight="25.0" prefWidth="141.0" styleClass="poppins" stylesheets="@../style.css" text="Fecha de creación:" textFill="#1f1f1f">
          <font>
             <Font name="Poppins Bold" size="14.0" />
          </font>
       </Label>
-      <Label fx:id="creationDateLabel" layoutX="523.0" layoutY="196.0" prefHeight="25.0" prefWidth="82.0" styleClass="poppins" stylesheets="@../style.css" textFill="#1f1f1f">
+      <Label fx:id="creationDateLabel" layoutX="523.0" layoutY="184.0" prefHeight="25.0" prefWidth="82.0" styleClass="poppins" stylesheets="@../style.css" textFill="#1f1f1f">
          <font>
             <Font name="Poppins Regular" size="14.0" />
          </font>
       </Label>
-      <Label layoutX="55.0" layoutY="246.0" prefHeight="25.0" prefWidth="158.0" styleClass="poppins" stylesheets="@../style.css" text="Servicios y compras:" textFill="#1f1f1f">
+      <Label layoutX="55.0" layoutY="227.0" prefHeight="25.0" prefWidth="158.0" styleClass="poppins" stylesheets="@../style.css" text="Servicios y compras:" textFill="#1f1f1f">
          <font>
             <Font name="Poppins Bold" size="14.0" />
          </font>
@@ -85,7 +86,7 @@
             <Cursor fx:constant="DEFAULT" />
          </cursor>
       </ImageView>
-      <TableView fx:id="purchasesTable" cache="true" layoutX="55.0" layoutY="302.0" pickOnBounds="false" prefHeight="183.0" prefWidth="564.0" style="-fx-font-family: Poppins; -fx-font-size: 12; -fx-background-color: F4F4F4; -fx-background-radius: 10; -fx-border-radius: 10;" stylesheets="@../style.css">
+      <TableView fx:id="purchasesTable" cache="true" layoutX="55.0" layoutY="260.0" pickOnBounds="false" prefHeight="196.0" prefWidth="564.0" style="-fx-font-family: Poppins; -fx-font-size: 12; -fx-background-color: F4F4F4; -fx-background-radius: 10; -fx-border-radius: 10;" stylesheets="@../style.css">
          <columns>
             <TableColumn fx:id="colType" prefWidth="70.0" sortable="false" style="-fx-background-color: F4F4F4;" text="Tipo" />
             <TableColumn fx:id="colNumber" prefWidth="97.0" style="-fx-background-color: F4F4F4;" text="Número" />
@@ -95,5 +96,14 @@
             <TableColumn fx:id="colOptions" prefWidth="108.0" sortable="false" style="-fx-background-color: F4F4F4;" text="Opciones" />
          </columns>
       </TableView>
+      <Separator orientation="VERTICAL" prefHeight="516.0" prefWidth="8.0" />
+      <ImageView fitHeight="36.0" fitWidth="36.0" layoutX="583.0" layoutY="467.0" onMouseClicked="#backArrowClicked" pickOnBounds="true" preserveRatio="true" styleClass="back-arrow">
+         <image>
+            <Image url="@../../icons/back-arrow.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
     </children>
 </AnchorPane>

@@ -6,6 +6,7 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
@@ -155,5 +156,6 @@
                 <Font name="Poppins Regular" size="14.0" />
             </font>
         </Label>
+      <Separator orientation="VERTICAL" prefHeight="516.0" prefWidth="8.0" />
     </children>
 </AnchorPane>

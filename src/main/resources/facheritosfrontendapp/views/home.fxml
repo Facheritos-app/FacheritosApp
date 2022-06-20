@@ -9,9 +9,9 @@
 
 <AnchorPane fx:id="welcomePane" prefHeight="517.0" prefWidth="647.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label fx:id="welcomeLabel" layoutX="20.0" layoutY="22.0" prefHeight="72.0" prefWidth="217.0" styleClass="poppins" stylesheets="@style.css" text="Bienvenido" textFill="#1f1f1f">
+      <Label fx:id="welcomeLabel" layoutX="34.0" layoutY="23.0" prefHeight="72.0" prefWidth="217.0" styleClass="poppins" stylesheets="@style.css" text="Bienvenido" textFill="#1f1f1f">
          <font>
-            <Font name="System Bold" size="36.0" />
+            <Font name="Poppins Bold" size="36.0" />
          </font>
       </Label>
       <Separator orientation="VERTICAL" prefHeight="516.0" prefWidth="8.0" />

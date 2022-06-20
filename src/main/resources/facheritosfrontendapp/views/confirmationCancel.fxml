@@ -6,13 +6,13 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<DialogPane styleClass="myDialog" stylesheets="@style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" >
+<DialogPane style="-fx-background-color: FFFFFF;" styleClass="myDialog" stylesheets="@style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <content>
       <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="112.0" prefWidth="611.0">
          <children>
-            <Label alignment="CENTER" layoutX="1.0" layoutY="30.0" prefHeight="44.0" prefWidth="633.0" text="¿Está seguro que desea cancelar?">
+            <Label alignment="CENTER" layoutX="-11.0" layoutY="48.0" prefHeight="44.0" prefWidth="633.0" text="¿Está seguro que desea cancelar?">
                <font>
-                  <Font size="24.0" />
+                  <Font name="Poppins Regular" size="24.0" />
                </font>
             </Label>
          </children>

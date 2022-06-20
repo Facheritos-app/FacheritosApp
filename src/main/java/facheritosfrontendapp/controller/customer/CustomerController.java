@@ -1,16 +1,11 @@
-package facheritosfrontendapp.controller.user;
-
+package facheritosfrontendapp.controller.customer;
 import backend.endpoints.customerEndpoint.CustomerEndpoint;
-import backend.endpoints.workerEndpoint.WorkerEndpoint;
 import facheritosfrontendapp.controller.DashboardController;
 import facheritosfrontendapp.controller.MainController;
-import facheritosfrontendapp.controller.customer.CustomerSingleViewController;
 import facheritosfrontendapp.objectRowView.customerRowView.CustomerRowView;
-import facheritosfrontendapp.objectRowView.headquarterRowView.WorkerRowView;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -27,41 +22,16 @@ import java.util.ResourceBundle;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
-public class UserController implements Initializable {
+public class CustomerController implements Initializable {
 
     private DashboardController dashboardController;
 
-    private AddUserController addUserController;
-
-    private UserSingleViewController userSingleViewController;
+    private AddCustomerController addCustomerController;
 
     private CustomerSingleViewController customerSingleViewController;
-
-    private WorkerEndpoint workerEndpoint;
-
     private CustomerEndpoint customerEndpoint;
 
-    private ArrayList<WorkerRowView> workerRowsArray;
-
     private ArrayList<CustomerRowView> customerRowsArray;
-
-    //All the FXML imported components are here
-    @FXML
-    private TabPane usersTabpane;
-    @FXML
-    private TableView userTableView;
-    @FXML
-    private TableColumn<WorkerRowView, String> colId;
-    @FXML
-    private TableColumn<WorkerRowView, String> colFirstname;
-    @FXML
-    private TableColumn<WorkerRowView, String> colLastname;
-    @FXML
-    private TableColumn<WorkerRowView, String> colRol;
-    @FXML
-    private TableColumn<WorkerRowView, String> colHeadquarter;
-    @FXML
-    private TableColumn<WorkerRowView, VBox> colOptions;
 
     //Customer tab components
     @FXML
@@ -83,83 +53,25 @@ public class UserController implements Initializable {
     private TableColumn<CustomerRowView, VBox> colOptionsCustomer;
 
 
-    public UserController(){
-        workerEndpoint = new WorkerEndpoint();
+    public CustomerController(){
         customerEndpoint = new CustomerEndpoint();
-        userSingleViewController = new UserSingleViewController();
         customerSingleViewController = new CustomerSingleViewController();
-        workerRowsArray = new ArrayList<>();
         customerRowsArray= new ArrayList<>();
     }
 
     @FXML
-    protected void addUserClicked() throws IOException {
-        addUserController = (AddUserController) dashboardController.changeContent("users/usersAdd", true);
-        addUserController.setView();
+    protected void addCustomerAction() throws IOException {
+        addCustomerController = (AddCustomerController) dashboardController.changeContent("customers/customersAdd");
     }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         dashboardController = MainController.getDashboardController();
-        usersTabpane.setTabClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);
     }
 
-    //For workers
-
-    public void showWorkers(){
-
-        new Thread(() -> {
-            //Async call to the DB
-            CompletableFuture<Map<Boolean, ResultSet>> workersCall = CompletableFuture.supplyAsync(() -> workerEndpoint.getWorkersForTableView());
-
-            try {
-                workersCall.thenApply((response) -> {
-                    if(response.containsKey(true)){
-                        ResultSet resultSet = response.get(true);
-                        try {
-                            setData(resultSet);
-                        } catch (SQLException e) {
-                            throw new RuntimeException(e);
-                        }
-                    }
-                    return true; //Returns true because we're using thenApply.
-                }).get();
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            } catch (ExecutionException e) {
-                throw new RuntimeException(e);
-            }
-        }).start();
-    }
-
-    public void setData(ResultSet resultSet) throws SQLException {
-        //As long as there are records left to show
-        while(resultSet.next()){
-            WorkerRowView workerRow = new WorkerRowView(resultSet.getInt("id_person"), resultSet.getString("cc"), resultSet.getString("first_name"),
-                                    resultSet.getString("last_name"), resultSet.getString("rol_person"),
-                                    resultSet.getString("name"));
-            workerRowsArray.add(workerRow);
-            }
-
-        //Set the handle events for the labels
-        for(int i = 0; i < workerRowsArray.size(); i++){
-                workerRowsArray.get(i).getOptionsLabel().setOnMouseClicked(this::handleOptionLabel);
-        }
-
-        colId.setCellValueFactory(new PropertyValueFactory<>("id"));
-        colFirstname.setCellValueFactory(new PropertyValueFactory<>("firstname"));
-        colLastname.setCellValueFactory(new PropertyValueFactory<>("lastname"));
-        colRol.setCellValueFactory(new PropertyValueFactory<>("rol"));
-        colHeadquarter.setCellValueFactory(new PropertyValueFactory<>("headquarter"));
-        colOptions.setCellValueFactory(new PropertyValueFactory<>("options"));
-
-        userTableView.setItems(FXCollections.observableArrayList(workerRowsArray));
-
-    }
-
-    //For customers
     /**
      * showCustomers: void -> void
-     * Purpose: shows the customers in the customers tab
+     * Purpose: shows the customers in the tableview
      */
     public void showCustomers(){
 
@@ -179,9 +91,7 @@ public class UserController implements Initializable {
                     }
                     return true; //Returns true because we're using thenApply.
                 }).get();
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            } catch (ExecutionException e) {
+            } catch (InterruptedException | ExecutionException e) {
                 throw new RuntimeException(e);
             }
         }).start();
@@ -219,18 +129,6 @@ public class UserController implements Initializable {
      * Purpose: Listens to the events of both the view, edit and delete label.
      */
     private void handleOptionLabel(MouseEvent mouseEvent)  {
-        for(int i = 0; i < workerRowsArray.size(); i++){
-            if(mouseEvent.getSource() == workerRowsArray.get(i).getOptionsLabel()){
-                //Here we will load the component to view, edit and delete the worker
-                try {
-                    userSingleViewController = (UserSingleViewController) dashboardController.changeContent("users/usersSingleView");
-                    userSingleViewController.showForm(workerRowsArray.get(i).getIdPerson());
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-        }
-
         for(int i = 0; i < customerRowsArray.size(); i++){
             if(mouseEvent.getSource() == customerRowsArray.get(i).getOptionsLabel()){
                 //Here we will load the component to view the worker

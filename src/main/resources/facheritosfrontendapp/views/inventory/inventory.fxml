@@ -15,28 +15,20 @@
     <children>
         <Label layoutX="34.0" layoutY="23.0" prefHeight="72.0" prefWidth="217.0" styleClass="poppins" stylesheets="@../style.css" text="Inventario" textFill="#1f1f1f">
             <font>
-                <Font name="System Bold" size="36.0" />
+                <Font name="Poppins Bold" size="36.0" />
             </font>
         </Label>
-        <Button layoutX="466.0" layoutY="106.0" mnemonicParsing="false" onMouseClicked="#addClicked" prefHeight="26.0" prefWidth="94.0" styleClass="red-button" stylesheets="@../style.css" text="Agregar  +" textFill="WHITE">
-            <font>
-                <Font name="System Bold" size="12.0" />
-            </font>
-            <cursor>
-                <Cursor fx:constant="HAND" />
-            </cursor>
-        </Button>
-        <TabPane fx:id="inventoryTabpane" layoutX="86.0" layoutY="157.0" prefHeight="240.0" prefWidth="500.0" stylesheets="@../style.css">
+        <TabPane fx:id="inventoryTabpane" layoutX="33.0" layoutY="100.0" prefHeight="408.0" prefWidth="591.0" style="-fx-border-color: c9c9c9;" stylesheets="@../style.css">
             <tabs>
                 <Tab text="Vehículos">
                     <content>
                         <TableView fx:id="vehicleTableview" prefHeight="200.0" prefWidth="495.0" styleClass="table-views" stylesheets="@../style.css">
                             <columns>
-                                <TableColumn fx:id="colName" prefWidth="100.0" text="Nombre" />
-                                <TableColumn fx:id="colPrice" prefWidth="100.0" text="Precio" />
-                                <TableColumn fx:id="colHeadquarter" prefWidth="100.0" text="Sede" />
-                                <TableColumn fx:id="colQuantity" prefWidth="100.0" text="Cantidad" />
-                                <TableColumn fx:id="colOptions" prefWidth="100.0" text="Opciones" />
+                                <TableColumn fx:id="colName" prefWidth="158.0" text="Nombre" />
+                                <TableColumn fx:id="colPrice" prefWidth="149.0" text="Precio" />
+                                <TableColumn fx:id="colHeadquarter" prefWidth="87.0" text="Sede" />
+                                <TableColumn fx:id="colQuantity" prefWidth="93.0" text="Cantidad" />
+                                <TableColumn fx:id="colOptions" prefWidth="102.0" text="Opciones" />
                             </columns>
                         </TableView>
                     </content>
@@ -44,6 +36,14 @@
                 <Tab text="Repuestos" />
             </tabs>
         </TabPane>
-        <Separator layoutX="10.0" layoutY="22.0" orientation="VERTICAL" prefHeight="516.0" prefWidth="8.0" />
+        <Separator orientation="VERTICAL" prefHeight="516.0" prefWidth="8.0" />
+        <Button layoutX="539.0" layoutY="104.0" mnemonicParsing="false" onMouseClicked="#addClicked" prefHeight="26.0" prefWidth="84.0" styleClass="red-button" stylesheets="@../style.css" text="Agregar  +" textFill="WHITE">
+            <font>
+                <Font name="System Bold" size="12.0" />
+            </font>
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </Button>
     </children>
 </AnchorPane>

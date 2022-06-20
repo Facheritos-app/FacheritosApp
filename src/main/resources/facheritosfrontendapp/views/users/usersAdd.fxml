@@ -14,15 +14,15 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="517.0" prefWidth="647.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="facheritosfrontendapp.controller.user.AddUserController">
+<ScrollPane prefHeight="517.0" prefWidth="647.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="facheritosfrontendapp.controller.user.AddUserController">
    <content>
-      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="641.0" prefWidth="654.0">
+      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="641.0" prefWidth="654.0" style="-fx-background-color: white;">
          <children>
             <VBox layoutX="-6.0" layoutY="-1.0" prefHeight="515.0" prefWidth="634.0" spacing="1.0">
                <children>
-                  <Label prefHeight="69.0" prefWidth="310.0" styleClass="poppins" text="Agregar usuario" textFill="#1f1f1f">
+                  <Label prefHeight="69.0" prefWidth="335.0" styleClass="poppins" text="Agregar usuario" textFill="#1f1f1f">
                      <font>
-                        <Font name="System Bold" size="36.0" />
+                        <Font name="Poppins Bold" size="36.0" />
                      </font>
                      <padding>
                         <Insets left="20.0" />
@@ -37,7 +37,7 @@
                            <children>
                               <Label prefHeight="20.0" prefWidth="77.0" text="Nombre:">
                                  <font>
-                                    <Font size="16.0" />
+                                    <Font name="Poppins Regular" size="14.0" />
                                  </font>
                               </Label>
                               <TextField fx:id="firstnameTextField" prefHeight="36.0" prefWidth="273.0" promptText="Nombre de usuario" styleClass="input-text" stylesheets="@../style.css" />
@@ -51,7 +51,7 @@
                            <children>
                               <Label prefHeight="20.0" prefWidth="77.0" text="Rol:">
                                  <font>
-                                    <Font size="16.0" />
+                                    <Font name="Poppins Regular" size="14.0" />
                                  </font>
                               </Label>
                               <ComboBox fx:id="typeCombobox" prefHeight="25.0" prefWidth="255.0" styleClass="input-text" stylesheets="@../style.css" />
@@ -69,7 +69,7 @@
                            <children>
                               <Label prefHeight="27.0" prefWidth="110.0" text="Apellidos:">
                                  <font>
-                                    <Font size="16.0" />
+                                    <Font name="Poppins Regular" size="14.0" />
                                  </font>
                               </Label>
                               <TextField fx:id="lastnameTextField" prefHeight="36.0" prefWidth="297.0" promptText="Apellidos de usuario" stylesheets="@../style.css">
@@ -88,7 +88,7 @@
                            <children>
                               <Label prefHeight="27.0" prefWidth="110.0" text="Sede:">
                                  <font>
-                                    <Font size="16.0" />
+                                    <Font name="Poppins Regular" size="14.0" />
                                  </font>
                               </Label>
                               <ComboBox fx:id="headquarterCombobox" prefHeight="22.0" prefWidth="255.0" styleClass="input-text" stylesheets="@../style.css" />
@@ -103,7 +103,7 @@
                            <children>
                               <Label prefHeight="20.0" prefWidth="77.0" text="Celular:">
                                  <font>
-                                    <Font size="16.0" />
+                                    <Font name="Poppins Regular" size="14.0" />
                                  </font>
                               </Label>
                               <TextField fx:id="celTextField" prefHeight="36.0" prefWidth="273.0" promptText="Ej: 3002221231" styleClass="input-text" stylesheets="@../style.css" />
@@ -117,7 +117,7 @@
                            <children>
                               <Label prefHeight="26.0" prefWidth="171.0" text="Fecha de nacimiento:">
                                  <font>
-                                    <Font size="16.0" />
+                                    <Font name="Poppins Regular" size="14.0" />
                                  </font>
                               </Label>
                               <DatePicker fx:id="birthdateDatePicker" prefHeight="33.0" prefWidth="251.0" styleClass="input-text" stylesheets="@../style.css" />
@@ -135,7 +135,7 @@
                            <children>
                               <Label prefHeight="27.0" prefWidth="110.0" text="Correo:">
                                  <font>
-                                    <Font size="16.0" />
+                                    <Font name="Poppins Regular" size="14.0" />
                                  </font>
                               </Label>
                               <TextField fx:id="emailTextField" prefHeight="36.0" prefWidth="273.0" promptText="ejemplo@mail.com" styleClass="input-text" stylesheets="@../style.css" />
@@ -149,7 +149,7 @@
                            <children>
                               <Label prefHeight="27.0" prefWidth="170.0" text="No. de identificación:">
                                  <font>
-                                    <Font size="16.0" />
+                                    <Font name="Poppins Regular" size="14.0" />
                                  </font>
                               </Label>
                               <TextField fx:id="ccTextField" prefHeight="36.0" prefWidth="273.0" promptText="Ej: 31293867" styleClass="input-text" stylesheets="@../style.css" />
@@ -164,7 +164,7 @@
                            <children>
                               <Label prefHeight="26.0" prefWidth="171.0" text="Salario:">
                                  <font>
-                                    <Font size="16.0" />
+                                    <Font name="Poppins Regular" size="14.0" />
                                  </font>
                               </Label>
                               <TextField fx:id="salaryTextField" prefHeight="36.0" prefWidth="273.0" promptText="3000000" styleClass="input-text" stylesheets="@../style.css" />

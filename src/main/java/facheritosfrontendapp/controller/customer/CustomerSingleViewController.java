@@ -1,11 +1,15 @@
 package facheritosfrontendapp.controller.customer;
 
 import backend.endpoints.customerEndpoint.CustomerEndpoint;
+import facheritosfrontendapp.controller.DashboardController;
+import facheritosfrontendapp.controller.MainController;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
+
+import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -41,8 +45,23 @@ public class CustomerSingleViewController implements Initializable {
     @FXML
     private TableView purchasesTable;
 
+    private DashboardController dashboardController;
+
+    private CustomerController customerController;
+
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        dashboardController = MainController.getDashboardController();
+    }
+
     public CustomerSingleViewController() {
         customerEndpoint = new CustomerEndpoint();
+    }
+
+    @FXML
+    protected void backArrowClicked() throws IOException {
+        customerController = (CustomerController) dashboardController.changeContent("customers/customers");
+        customerController.showCustomers();
     }
 
     /**
@@ -86,7 +105,4 @@ public class CustomerSingleViewController implements Initializable {
         creationDateLabel.setText(resultSet.getDate("created_at").toLocalDate().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)));
     }
 
-    public void initialize(URL url, ResourceBundle rb) {
-
-    }
 }
