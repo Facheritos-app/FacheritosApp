@@ -2,7 +2,6 @@ package facheritosfrontendapp.objectRowView.inventoryRowView;
 
 import facheritosfrontendapp.views.Main;
 import javafx.geometry.Pos;
-import javafx.scene.Cursor;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -15,7 +14,7 @@ public class PartRowView {
 
     private String name;
 
-    private Double price;
+    private String price;
 
     private String headquarter;
 
@@ -25,7 +24,7 @@ public class PartRowView {
 
     private VBox options;
 
-    public PartRowView(String name, Double price, String headquarter, Integer quantity, Integer idPart) {
+    public PartRowView(String name, String price, String headquarter, Integer quantity, Integer idPart) {
         this.name = name;
         this.price = price;
         this.headquarter = headquarter;
@@ -44,11 +43,11 @@ public class PartRowView {
         this.name = name;
     }
 
-    public Double getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(String price) {
         this.price = price;
     }
 

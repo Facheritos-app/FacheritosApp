@@ -18,6 +18,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -206,7 +207,7 @@ public class InventoryController implements Initializable {
     }
     public void setPartsData(ResultSet resultSet) throws SQLException {
         while(resultSet.next()){
-            PartRowView partRow = new PartRowView(resultSet.getString("description"), resultSet.getDouble("price"),
+            PartRowView partRow = new PartRowView(resultSet.getString("description"), new BigDecimal(String.valueOf(resultSet.getDouble("price"))).toPlainString(),
                     resultSet.getString("name"), resultSet.getInt("quantity"),
                     resultSet.getInt("id_part"));
             //Add the data of every vehicle to the array
@@ -232,11 +233,12 @@ public class InventoryController implements Initializable {
     }
     public void setVehiclesData(ResultSet resultSet) throws SQLException {
         while(resultSet.next()){
-            VehicleRowView vehicleRow = new VehicleRowView(resultSet.getString("description"), resultSet.getDouble("price"),
+            VehicleRowView vehicleRow = new VehicleRowView(resultSet.getString("description"), new BigDecimal(String.valueOf(resultSet.getDouble("price"))).toPlainString(),
                                                             resultSet.getString("name"), resultSet.getInt("quantity"),
                                                             resultSet.getInt("id_car"));
             //Add the data of every vehicle to the array
             vehicleRowViewList.add(vehicleRow);
+            System.out.println(resultSet.getDouble("price"));
         }
 
         //Set the handle events for the boxes
