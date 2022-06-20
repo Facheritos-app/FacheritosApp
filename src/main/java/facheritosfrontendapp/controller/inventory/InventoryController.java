@@ -108,6 +108,13 @@ public class InventoryController implements Initializable {
         inventoryTabpane.setTabClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);
     }
     /**
+     * selectionTabpane: int -> void
+     * Purpose: selects which pane shows as default in the tabpane
+     */
+    public void selectionTabpane(int i){
+        inventoryTabpane.getSelectionModel().select(i);
+    }
+    /**
      * showVehicles: void -> void
      * Purpose: shows the vehicles data on the tableview
      */
@@ -198,7 +205,7 @@ public class InventoryController implements Initializable {
                 //Here we will load the component to view, edit and delete the vehicle
                 try {
                     inventoryPartController = (InventoryPartController) dashboardController.changeContent("inventory/inventoryPart");
-                    //SHOW PART DATA
+                    inventoryPartController.showPartData(partRowViewList.get(i).getIdPart());
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
@@ -207,8 +214,8 @@ public class InventoryController implements Initializable {
     }
     public void setPartsData(ResultSet resultSet) throws SQLException {
         while(resultSet.next()){
-            PartRowView partRow = new PartRowView(resultSet.getString("description"), new BigDecimal(String.valueOf(resultSet.getDouble("price"))).toPlainString(),
-                    resultSet.getString("name"), resultSet.getInt("quantity"),
+            PartRowView partRow = new PartRowView(resultSet.getString("name"), new BigDecimal(String.valueOf(resultSet.getDouble("price"))).toPlainString(),
+                    resultSet.getString("hq"), resultSet.getInt("quantity"),
                     resultSet.getInt("id_part"));
             //Add the data of every vehicle to the array
             partRowViewList.add(partRow);

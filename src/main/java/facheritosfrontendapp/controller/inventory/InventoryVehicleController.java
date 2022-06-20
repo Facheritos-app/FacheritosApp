@@ -82,6 +82,7 @@ public class InventoryVehicleController implements Initializable {
     protected void backArrowClicked() throws IOException {
         inventoryController = (InventoryController) dashboardController.changeContent("inventory/inventory");
         inventoryController.showInventory();
+        inventoryController.selectionTabpane(0);
     }
     /**
      * showVehicleData: Integer -> void

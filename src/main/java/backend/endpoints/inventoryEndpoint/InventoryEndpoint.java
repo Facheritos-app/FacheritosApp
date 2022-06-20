@@ -55,7 +55,7 @@ public class InventoryEndpoint {
         ResultSet resultSet = null;
         HashMap<Boolean, ResultSet> response = new HashMap<>();
         try (Connection conn = ConnectionBD.connectDB().getConnection()) {
-            preparedStatement = conn.prepareStatement("SELECT * FROM part JOIN part_inventory USING(id_part)" +
+            preparedStatement = conn.prepareStatement("SELECT *, headquarter.name AS hq FROM part JOIN part_inventory USING(id_part)" +
                     "JOIN headquarter USING(id_headquarter)" +
                     "JOIN city USING(id_city)");
             resultSet = preparedStatement.executeQuery();
@@ -72,8 +72,7 @@ public class InventoryEndpoint {
         ResultSet resultSet = null;
         HashMap<Boolean, ResultSet> response = new HashMap<>();
         try(Connection conn = ConnectionBD.connectDB().getConnection()){
-            preparedStatement = conn.prepareStatement("SELECT * FROM part" +
-                    "JOIN part_inventory USING(id_part)" +
+            preparedStatement = conn.prepareStatement("SELECT *, headquarter.name AS hq FROM part JOIN part_inventory USING(id_part)" +
                     "JOIN headquarter USING(id_headquarter)" +
                     "JOIN city USING(id_city) WHERE id_part = ?");
             preparedStatement.setInt(1, idPart);
