@@ -33,7 +33,18 @@
                         </TableView>
                     </content>
                 </Tab>
-                <Tab text="Repuestos" />
+                <Tab text="Repuestos">
+               <content>
+                  <TableView fx:id="partTableview" prefHeight="200.0" prefWidth="495.0" styleClass="table-views" stylesheets="@../style.css">
+                     <columns>
+                        <TableColumn fx:id="colNamePart" prefWidth="100.0" text="Nombre" />
+                        <TableColumn fx:id="colPricePart" prefWidth="100.0" text="Precio" />
+                        <TableColumn fx:id="colHeadquarterPart" prefWidth="100.0" text="Sede" />
+                        <TableColumn fx:id="colQuantityPart" prefWidth="100.0" text="Cantidad" />
+                        <TableColumn fx:id="colOptionsPart" prefWidth="100.0" text="Opciones" />
+                     </columns>
+                  </TableView>
+               </content></Tab>
             </tabs>
         </TabPane>
         <Separator orientation="VERTICAL" prefHeight="516.0" prefWidth="8.0" />

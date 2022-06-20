@@ -13,6 +13,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -27,10 +28,7 @@ public class MainController implements Initializable {
     private Label error;
 
     @FXML
-    private Label welcomeText;
-
-    @FXML
-    private Button button;
+    private Label header;
 
     @FXML
     private TextField cc;

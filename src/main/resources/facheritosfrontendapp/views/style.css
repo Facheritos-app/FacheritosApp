@@ -6,7 +6,21 @@ Button {
 
 }
 */
+/*
+@font-face {
+    font-family: Poppins;
+    src: url('../fonts/Poppins_Bold.ttf');
+}
+*/
 
+.bold {
+    -fx-font-weight: bold;
+}
+/*
+.poppins {
+    -fx-font-family: Poppins;
+}
+*/
 
 /*Back arrow*/
 .back-arrow {
@@ -140,6 +154,14 @@ Button {
     -fx-font-size: 14px;
     -fx-pref-width: 180px;
 }
+
+/*DialogPane*/
+.dialog-pane .button {
+    -fx-background-color: #005296;
+    -fx-text-fill: white;
+}
+
+
 
 /**
   -fx-background-color: #005296;

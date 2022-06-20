@@ -3,17 +3,18 @@ package facheritosfrontendapp.controller.inventory;
 import backend.endpoints.inventoryEndpoint.InventoryEndpoint;
 import facheritosfrontendapp.controller.DashboardController;
 import facheritosfrontendapp.controller.MainController;
+import facheritosfrontendapp.views.Main;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-
+import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.sql.ResultSet;
@@ -23,80 +24,81 @@ import java.util.ResourceBundle;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
-public class InventoryVehicleController implements Initializable {
+public class InventoryPartController implements Initializable {
 
     @FXML
-    private ScrollPane scrollpane;
+    private Label header;
 
     @FXML
-    private Label assemblyYearLabel;
+    private Button editBtn;
 
     @FXML
-    private Label batteryCapacityLabel;
+    private Button cancelBtn;
 
     @FXML
-    private Label colorLabel;
+    private Button saveBtn;
 
     @FXML
-    private Label headquarterLabel;
+    private Button deleteBtn;
 
     @FXML
-    private Label launchYearLabel;
+    private TextField name;
 
     @FXML
-    private Label maxSpeedLabel;
+    private TextField price;
 
     @FXML
-    private Label modelLabel;
+    private TextField quantity;
 
     @FXML
-    private Label passengersLabel;
+    private TextField headquarter;
 
     @FXML
-    private Label quantityLabel;
-
-    @FXML
-    private Label transmissionLabel;
-
-    @FXML
-    private Label priceLabel;
-
-    @FXML
-    private ImageView vehicleImage;
+    private TextArea description;
 
     private InventoryEndpoint inventoryEndpoint;
 
-    private DashboardController dashboardController;
-
     private InventoryController inventoryController;
 
-    public InventoryVehicleController(){
+    private DashboardController dashboardController;
 
+    public InventoryPartController(){
         inventoryEndpoint = new InventoryEndpoint();
     }
-
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         dashboardController = MainController.getDashboardController();
-
     }
 
     @FXML
-    protected void backArrowClicked() throws IOException {
+    void backArrowClicked(MouseEvent event) throws IOException {
         inventoryController = (InventoryController) dashboardController.changeContent("inventory/inventory");
         inventoryController.showInventory();
-        inventoryController.selectionTabpane(0);
+        inventoryController.selectionTabpane(1); //parts tab
+    }
+
+    @FXML
+    void editClicked(MouseEvent event) {
+        name.setEditable(true);
+        headquarter.setEditable(true);
+        price.setEditable(true);
+        quantity.setEditable(true);
+        description.setEditable(true);
+        header.setText("Editar repuesto");
+        deleteBtn.setVisible(false);
+        editBtn.setVisible(false);
+        cancelBtn.setVisible(true);
+        saveBtn.setVisible(true);
     }
     /**
-     * showVehicleData: Integer -> void
-     * Purpose: This method contains all the other methods that together make showing the vehicle data possible
+     * showPartData: Integer -> void
+     * Purpose: This method contains all the other methods that together make showing the part data possible
      */
-    public void showVehicleData(Integer idCar){
+    public void showPartData(Integer idPart){
         new Thread(() -> {
-            CompletableFuture<Map<Boolean, ResultSet>> vehicleCall = CompletableFuture.supplyAsync(() -> inventoryEndpoint.getVehicleById(idCar));
+            CompletableFuture<Map<Boolean, ResultSet>> partCall = CompletableFuture.supplyAsync(() -> inventoryEndpoint.getPartById(idPart));
             try {
-                vehicleCall.thenApply((response) -> {
+                partCall.thenApply((response) -> {
                     if (response.containsKey(true)) {
                         ResultSet resultSet = response.get(true);
                         Platform.runLater(() -> {
@@ -118,28 +120,18 @@ public class InventoryVehicleController implements Initializable {
             }
         }).start();
     }
-
     /**
      * setData: ResultSet -> void
      * Purpose: This method contains sets all the data from the specific vehicle
      */
     public void setData(ResultSet resultSet) throws SQLException, IOException {
-
-        modelLabel.setText(resultSet.getString("description"));
-        assemblyYearLabel.setText(resultSet.getString("assemble_year"));
-        colorLabel.setText(resultSet.getString("color"));
-        headquarterLabel.setText(resultSet.getString("name"));
-        quantityLabel.setText(resultSet.getString("quantity"));
-        launchYearLabel.setText(resultSet.getString("year"));
-        batteryCapacityLabel.setText(resultSet.getString("battery_capacity"));
-        maxSpeedLabel.setText(resultSet.getString("max_speed"));
-        passengersLabel.setText(resultSet.getString("passenger_capacity"));
-        transmissionLabel.setText(resultSet.getString("transmision"));
-        priceLabel.setText(resultSet.getString("price"));
-
-
-        vehicleImage.setImage(new Image("https://i.postimg.cc/tCyYd0Zz/raul-di-domenico-o-Yo-Ic-Sgs-GWI-unsplash.jpg"));
-
+        name.setText(resultSet.getString("name"));
+        headquarter.setText(resultSet.getString("hq"));
+        price.setText(resultSet.getString("price"));
+        quantity.setText(resultSet.getString("quantity"));
+        description.setText(resultSet.getString("description"));
 
     }
+
+
 }

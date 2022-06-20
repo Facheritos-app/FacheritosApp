@@ -15,7 +15,8 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<ScrollPane prefHeight="517.0" prefWidth="700.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="facheritosfrontendapp.controller.inventory.InventoryVehicleController">
+
+<ScrollPane fx:id="scrollpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="517.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="facheritosfrontendapp.controller.inventory.InventoryVehicleController">
    <content>
       <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="620.0" prefWidth="700.0" style="-fx-background-color: white;">
          <columnConstraints>
@@ -57,10 +58,14 @@
                <children>
                   <HBox prefHeight="36.0" prefWidth="318.0" spacing="70.0" styleClass="gridpane-hbox" stylesheets="@../style.css">
                      <children>
-                        <Label prefHeight="26.0" prefWidth="100.0" styleClass="gridpane-hbox-label" stylesheets="@../style.css" text="Modelo:">
+                        <Label prefHeight="26.0" prefWidth="100.0" stylesheets="@../style.css" text="Modelo:">
                            <font>
-                              <Font size="16.0" />
+                              <Font name="System Bold" size="16.0" />
                            </font>
+                           <styleClass>
+                              <String fx:value="gridpane-hbox-label" />
+                              <String fx:value="bold" />
+                           </styleClass>
                         </Label>
                         <Label fx:id="modelLabel" prefHeight="26.0" prefWidth="145.0" styleClass="gridpane-hbox-label" stylesheets="@../style.css" text="Cargando...">
                            <font>
@@ -80,10 +85,14 @@
                   </HBox>
                   <HBox prefHeight="36.0" prefWidth="318.0" spacing="70.0" styleClass="gridpane-hbox" stylesheets="@../style.css">
                      <children>
-                        <Label styleClass="gridpane-hbox-label" stylesheets="@../style.css" text="Color:">
+                        <Label stylesheets="@../style.css" text="Color:">
                            <font>
                               <Font size="16.0" />
                            </font>
+                           <styleClass>
+                              <String fx:value="gridpane-hbox-label" />
+                              <String fx:value="bold" />
+                           </styleClass>
                         </Label>
                         <Label fx:id="colorLabel" styleClass="gridpane-hbox-label" stylesheets="@../style.css" text="Cargando...">
                            <font>
@@ -100,10 +109,14 @@
                   </HBox>
                   <HBox prefHeight="36.0" prefWidth="318.0" spacing="70.0" styleClass="gridpane-hbox" stylesheets="@../style.css">
                      <children>
-                        <Label styleClass="gridpane-hbox-label" stylesheets="@../style.css" text="Año de ensamblaje:">
+                        <Label stylesheets="@../style.css" text="Año de ensamblaje:">
                            <font>
                               <Font size="16.0" />
                            </font>
+                           <styleClass>
+                              <String fx:value="gridpane-hbox-label" />
+                              <String fx:value="bold" />
+                           </styleClass>
                         </Label>
                         <Label fx:id="assemblyYearLabel" styleClass="gridpane-hbox-label" stylesheets="@../style.css" text="Cargando...">
                            <font>
@@ -120,10 +133,14 @@
                   </HBox>
                   <HBox prefHeight="36.0" prefWidth="318.0" spacing="70.0" styleClass="gridpane-hbox" stylesheets="@../style.css">
                      <children>
-                        <Label styleClass="gridpane-hbox-label" stylesheets="@../style.css" text="Sede: ">
+                        <Label stylesheets="@../style.css" text="Sede: ">
                            <font>
                               <Font size="16.0" />
                            </font>
+                           <styleClass>
+                              <String fx:value="gridpane-hbox-label" />
+                              <String fx:value="bold" />
+                           </styleClass>
                         </Label>
                         <Label fx:id="headquarterLabel" styleClass="gridpane-hbox-label" stylesheets="@../style.css" text="Cargando...">
                            <font>
@@ -140,10 +157,14 @@
                   </HBox>
                   <HBox prefHeight="36.0" prefWidth="318.0" spacing="70.0" styleClass="gridpane-hbox" stylesheets="@../style.css">
                      <children>
-                        <Label styleClass="gridpane-hbox-label" stylesheets="@../style.css" text="Cantidad disponible:">
+                        <Label stylesheets="@../style.css" text="Cantidad disponible:">
                            <font>
                               <Font size="16.0" />
                            </font>
+                           <styleClass>
+                              <String fx:value="gridpane-hbox-label" />
+                              <String fx:value="bold" />
+                           </styleClass>
                         </Label>
                         <Label fx:id="quantityLabel" styleClass="gridpane-hbox-label" stylesheets="@../style.css" text="Cargando...">
                            <font>
@@ -172,10 +193,14 @@
                   </Label>
                   <HBox prefHeight="36.0" prefWidth="318.0" spacing="70.0" styleClass="gridpane-hbox" stylesheets="@../style.css">
                      <children>
-                        <Label prefHeight="26.0" prefWidth="100.0" styleClass="gridpane-hbox-label" stylesheets="@../style.css" text="Año de lanzamiento:">
+                        <Label prefHeight="26.0" prefWidth="100.0" stylesheets="@../style.css" text="Año de lanzamiento:">
                            <font>
                               <Font size="16.0" />
                            </font>
+                           <styleClass>
+                              <String fx:value="gridpane-hbox-label" />
+                              <String fx:value="bold" />
+                           </styleClass>
                         </Label>
                         <Label fx:id="launchYearLabel" prefHeight="26.0" prefWidth="145.0" styleClass="gridpane-hbox-label" stylesheets="@../style.css" text="Cargando...">
                            <font>
@@ -195,10 +220,14 @@
                   </HBox>
                   <HBox prefHeight="36.0" prefWidth="318.0" spacing="70.0" styleClass="gridpane-hbox" stylesheets="@../style.css">
                      <children>
-                        <Label prefHeight="26.0" prefWidth="100.0" styleClass="gridpane-hbox-label" stylesheets="@../style.css" text="Capacidad de la batería:">
+                        <Label prefHeight="26.0" prefWidth="100.0" stylesheets="@../style.css" text="Capacidad de la batería:">
                            <font>
                               <Font size="16.0" />
                            </font>
+                           <styleClass>
+                              <String fx:value="gridpane-hbox-label" />
+                              <String fx:value="bold" />
+                           </styleClass>
                         </Label>
                         <Label fx:id="batteryCapacityLabel" prefHeight="26.0" prefWidth="145.0" styleClass="gridpane-hbox-label" stylesheets="@../style.css" text="Cargando...">
                            <font>
@@ -215,10 +244,14 @@
                   </HBox>
                   <HBox prefHeight="36.0" prefWidth="318.0" spacing="70.0" styleClass="gridpane-hbox" stylesheets="@../style.css">
                      <children>
-                        <Label prefHeight="26.0" prefWidth="100.0" styleClass="gridpane-hbox-label" stylesheets="@../style.css" text="Velocidad máxima (km/h)">
+                        <Label prefHeight="26.0" prefWidth="100.0" stylesheets="@../style.css" text="Velocidad máxima (km/h)">
                            <font>
                               <Font size="16.0" />
                            </font>
+                           <styleClass>
+                              <String fx:value="gridpane-hbox-label" />
+                              <String fx:value="bold" />
+                           </styleClass>
                         </Label>
                         <Label fx:id="maxSpeedLabel" prefHeight="26.0" prefWidth="145.0" styleClass="gridpane-hbox-label" stylesheets="@../style.css" text="Cargando...">
                            <font>
@@ -239,13 +272,17 @@
                <children>
                   <HBox prefHeight="36.0" prefWidth="318.0" spacing="70.0" styleClass="gridpane-hbox" stylesheets="@../style.css">
                      <children>
-                        <Label prefHeight="26.0" prefWidth="100.0" styleClass="gridpane-hbox-label" stylesheets="@../style.css" text="Cantidad de pasajeros:">
+                        <Label prefHeight="26.0" prefWidth="100.0" stylesheets="@../style.css" text="Cantidad de pasajeros:">
                            <font>
                               <Font size="16.0" />
                            </font>
                            <HBox.margin>
                               <Insets />
                            </HBox.margin>
+                           <styleClass>
+                              <String fx:value="gridpane-hbox-label" />
+                              <String fx:value="bold" />
+                           </styleClass>
                         </Label>
                         <Label fx:id="passengersLabel" prefHeight="26.0" prefWidth="145.0" styleClass="gridpane-hbox-label" stylesheets="@../style.css" text="Cargando...">
                            <font>
@@ -265,10 +302,14 @@
                   </HBox>
                   <HBox prefHeight="36.0" prefWidth="318.0" spacing="70.0" styleClass="gridpane-hbox" stylesheets="@../style.css">
                      <children>
-                        <Label prefHeight="26.0" prefWidth="100.0" styleClass="gridpane-hbox-label" stylesheets="@../style.css" text="Transmisión:">
+                        <Label prefHeight="26.0" prefWidth="100.0" stylesheets="@../style.css" text="Transmisión:">
                            <font>
                               <Font size="16.0" />
                            </font>
+                           <styleClass>
+                              <String fx:value="gridpane-hbox-label" />
+                              <String fx:value="bold" />
+                           </styleClass>
                         </Label>
                         <Label fx:id="transmissionLabel" prefHeight="26.0" prefWidth="145.0" styleClass="gridpane-hbox-label" stylesheets="@../style.css" text="Cargando...">
                            <font>
@@ -285,10 +326,14 @@
                   </HBox>
                   <HBox prefHeight="36.0" prefWidth="318.0" spacing="70.0" styleClass="gridpane-hbox" stylesheets="@../style.css">
                      <children>
-                        <Label prefHeight="26.0" prefWidth="100.0" styleClass="gridpane-hbox-label" stylesheets="@../style.css" text="Precio (pesos):">
+                        <Label prefHeight="26.0" prefWidth="100.0" stylesheets="@../style.css" text="Precio (pesos):">
                            <font>
                               <Font size="16.0" />
                            </font>
+                           <styleClass>
+                              <String fx:value="gridpane-hbox-label" />
+                              <String fx:value="bold" />
+                           </styleClass>
                         </Label>
                         <Label fx:id="priceLabel" prefHeight="26.0" prefWidth="145.0" styleClass="gridpane-hbox-label" stylesheets="@../style.css" text="Cargando...">
                            <font>
