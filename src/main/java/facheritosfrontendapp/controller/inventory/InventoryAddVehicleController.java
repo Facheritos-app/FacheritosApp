@@ -1,14 +1,19 @@
 package facheritosfrontendapp.controller.inventory;
 
+import backend.dto.inventoryDTO.PartDTO;
+import backend.dto.inventoryDTO.VehicleDTO;
 import backend.endpoints.headquarterEndpoint.HeadquarterEndpoint;
 import backend.endpoints.inventoryEndpoint.ColorEndpoint;
+import backend.endpoints.inventoryEndpoint.InventoryEndpoint;
 import backend.endpoints.inventoryEndpoint.ModelEndpoint;
 import facheritosfrontendapp.ComboBoxView.ColorView;
 import facheritosfrontendapp.ComboBoxView.HeadquarterView;
 import facheritosfrontendapp.ComboBoxView.ModelView;
 import facheritosfrontendapp.controller.DashboardController;
 import facheritosfrontendapp.controller.MainController;
+import facheritosfrontendapp.validator.addInventory.AddVehicleValidator;
 import facheritosfrontendapp.views.MyDialogPane;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -26,6 +31,7 @@ import java.util.ResourceBundle;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
+import static javafx.scene.control.ButtonType.OK;
 import static javafx.scene.control.ButtonType.YES;
 
 public class InventoryAddVehicleController implements Initializable {
@@ -40,7 +46,7 @@ public class InventoryAddVehicleController implements Initializable {
     private Label colorLabel;
 
     @FXML
-    private Label descriptionLabel;
+    private Label imageLinkLabel;
 
     @FXML
     private Label header;
@@ -64,10 +70,10 @@ public class InventoryAddVehicleController implements Initializable {
     private Label quantityLabel;
 
     @FXML
-    private Label quantityLabel1;
+    private Label assembleYearLabel;
 
     @FXML
-    private Label salaryLabel;
+    private Label headquarterLabel;
 
     @FXML
     private Button saveBtn;
@@ -90,13 +96,19 @@ public class InventoryAddVehicleController implements Initializable {
 
     private ColorEndpoint colorEndpoint;
 
+    private InventoryEndpoint inventoryEndpoint;
+
+    private AddVehicleValidator inputValidator;
+
     public InventoryAddVehicleController(){
         headquarterEndpoint = new HeadquarterEndpoint();
+        inventoryEndpoint = new InventoryEndpoint();
         colorEndpoint = new ColorEndpoint();
         modelEndpoint = new ModelEndpoint();
         headquarterComboboxList = new ArrayList<>();
         modelComboboxList = new ArrayList<>();
         colorComboboxList = new ArrayList<>();
+        inputValidator = new AddVehicleValidator();
     }
 
     @Override
@@ -122,7 +134,115 @@ public class InventoryAddVehicleController implements Initializable {
 
     @FXML
     protected void saveClicked(MouseEvent event) {
+        if (allValidations()) {
+            new Thread(() -> {
+                VehicleDTO vehicleDTO = createVehicleObject();
+                Platform.runLater(() -> {
+                    try {
+                        MyDialogPane dialogPane = new MyDialogPane("confirmationSave");
+                        Optional<ButtonType> clickedButton = dialogPane.getClickedButton();
+                        if (clickedButton.get() == YES) {
+                            //DB call to save worker
+                            new Thread(() -> {
+                                Boolean result = null;
+                                try {
+                                    result = CompletableFuture.supplyAsync(() -> inventoryEndpoint.completeCreateVehicle(vehicleDTO)).get();
+                                } catch (InterruptedException e) {
+                                    throw new RuntimeException(e);
+                                } catch (ExecutionException e) {
+                                    throw new RuntimeException(e);
+                                }
+                                if (result) {
+                                    Platform.runLater(() -> {
+                                        Alert success = new Alert(Alert.AlertType.CONFIRMATION, "Repuesto agregado exitosamente", OK);
+                                        success.show();
+                                        //Go to main user view
+                                        try {
+                                            inventoryController = (InventoryController) dashboardController.changeContent("inventory/inventory");
+                                            //Show inventory
+                                            inventoryController.showInventory();
+                                        } catch (IOException e) {
+                                            throw new RuntimeException(e);
+                                        }
+                                    });
 
+                                } else {
+                                    Alert fail = new Alert(Alert.AlertType.ERROR, "Ha habido un problema, por favor intenta nuevamente", OK);
+                                    fail.show();
+                                }
+                            }).start();
+                        }
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                });
+            }).start();
+        }
+
+    }
+
+    public VehicleDTO createVehicleObject(){
+        VehicleDTO vehicle = new VehicleDTO();
+        vehicle.setQuantity(Integer.parseInt(quantity.getText()));
+        vehicle.setAssembleYear(yearChoicebox.getSelectionModel().getSelectedItem());
+        vehicle.setIdColor(colorCombobox.getSelectionModel().getSelectedItem().getIdColor());
+        vehicle.setIdHeadquarter(headquarterCombobox.getSelectionModel().getSelectedItem().getIdHeadquarter());
+        vehicle.setIdModel(modelCombobox.getSelectionModel().getSelectedItem().getIdModel());
+        vehicle.setImageLink(imageLink.getText());
+        return vehicle;
+    }
+    public boolean allValidations(){
+        cleanErrors();
+        Boolean everythingCorrect = true;
+        if (colorCombobox.getSelectionModel().isEmpty()) {
+            everythingCorrect = false;
+            colorLabel.setText("Seleccione un color");
+            inputValidator.setErrorStyles(colorCombobox, colorLabel);
+        }
+        if (modelCombobox.getSelectionModel().isEmpty()) {
+            everythingCorrect = false;
+            modelLabel.setText("Seleccione un modelo de vehículo");
+            inputValidator.setErrorStyles(modelCombobox, modelLabel);
+        }
+        if (yearChoicebox.getSelectionModel().isEmpty()) {
+            everythingCorrect = false;
+            assembleYearLabel.setText("Seleccione un año de ensamblaje");
+            inputValidator.setErrorStyles(yearChoicebox, assembleYearLabel);
+
+        }
+        if (!inputValidator.quantity(quantity, quantityLabel, "Escriba solamente números")) {
+            everythingCorrect = false;
+            inputValidator.setErrorStyles(quantity, quantityLabel);
+        }
+        if (headquarterCombobox.getSelectionModel().isEmpty()) {
+            everythingCorrect = false;
+            headquarterLabel.setText("Por favor, indique la sede del vehículo");
+            inputValidator.setErrorStyles(headquarterCombobox, headquarterLabel);
+        }
+        if (!inputValidator.imageLink(imageLink, imageLinkLabel, "Escriba una dirección URL")) {
+            everythingCorrect = false;
+            inputValidator.setErrorStyles(imageLink, imageLinkLabel);
+        }
+        return everythingCorrect;
+    }
+
+    /**
+     * cleanErrors: void -> void
+     * Purpose: This method cleans all the error messages presented to the user
+     */
+    public void cleanErrors() {
+        colorCombobox.setStyle("");
+        colorLabel.setText("");
+        modelCombobox.setStyle("");
+        modelLabel.setText("");
+        yearChoicebox.setStyle("");
+        assembleYearLabel.setText("");
+        quantity.setStyle("");
+        quantityLabel.setText("");
+        headquarterCombobox.setStyle("");
+        headquarterLabel.setText("");
+        imageLink.setStyle("");
+        imageLinkLabel.setText("");
     }
 
     /**

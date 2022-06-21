@@ -3,16 +3,14 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Separator?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="564.0" prefWidth="842.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="facheritosfrontendapp.controller.DashboardController">
+<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="564.0" prefWidth="842.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="facheritosfrontendapp.controller.DashboardController">
    <left>
       <VBox fx:id="navbar" prefHeight="394.0" prefWidth="150.0" BorderPane.alignment="CENTER">
          <children>
@@ -56,23 +54,6 @@
          </children>
       </VBox>
    </left>
-   <center>
-      <AnchorPane fx:id="welcomePane" prefHeight="517.0" prefWidth="647.0" BorderPane.alignment="CENTER">
-         <children>
-            <Label fx:id="welcomeLabel" layoutX="34.0" layoutY="23.0" prefHeight="72.0" prefWidth="217.0" styleClass="poppins" stylesheets="@style.css" text="Bienvenido" textFill="#1f1f1f">
-               <font>
-                  <Font name="Poppins Bold" size="36.0" />
-               </font>
-            </Label>
-            <Separator orientation="VERTICAL" prefHeight="516.0" prefWidth="8.0" />
-            <ImageView fitHeight="313.0" fitWidth="489.0" layoutX="141.0" layoutY="125.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../icons/welcome-manager.png" />
-               </image>
-            </ImageView>
-         </children>
-      </AnchorPane>
-   </center>
    <top>
       <BorderPane prefHeight="50.0" prefWidth="842.0" style="-fx-background-color: #005296;" BorderPane.alignment="CENTER">
          <left>
