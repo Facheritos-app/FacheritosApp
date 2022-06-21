@@ -135,6 +135,7 @@ public class CustomerController implements Initializable {
                 try {
                     customerSingleViewController = (CustomerSingleViewController) dashboardController.changeContent("customers/customersSingleView");
                     customerSingleViewController.backToCustomers.setVisible(true);
+                    customerSingleViewController.backToUsers.setVisible(false);
                     customerSingleViewController.showCustomer(customerRowsArray.get(i).getIdPerson());
                 } catch (IOException e) {
                     throw new RuntimeException(e);

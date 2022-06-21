@@ -25,7 +25,7 @@
                <content>
                   <TableView fx:id="userTableView" prefHeight="232.0" prefWidth="591.0" stylesheets="@../style.css">
                     <columns>
-                      <TableColumn fx:id="colId" prefWidth="103.0" text="Identificacion" />
+                      <TableColumn fx:id="colId" prefWidth="103.0" text="Cédula" />
                       <TableColumn fx:id="colFirstname" prefWidth="103.0" text="Nombre" />
                         <TableColumn fx:id="colLastname" prefWidth="65.0" text="Apellidos" />
                         <TableColumn fx:id="colRol" prefWidth="132.0" text="Rol" />
@@ -43,7 +43,7 @@
                <content>
                   <TableView fx:id="customerTableView" prefHeight="217.0" prefWidth="608.0" stylesheets="@../style.css">
                      <columns>
-                        <TableColumn fx:id="colIdCustomer" prefWidth="105.0" text="Identificacion" />
+                        <TableColumn fx:id="colIdCustomer" prefWidth="105.0" text="Cédula" />
                         <TableColumn fx:id="colFirstnameCustomer" prefWidth="127.0" text="Nombres" />
                         <TableColumn fx:id="colLastnameCustomer" prefWidth="143.0" text="Apellidos" />
                         <TableColumn fx:id="colCellphoneCustomer" minWidth="3.0" prefWidth="104.0" text="Telefono" />

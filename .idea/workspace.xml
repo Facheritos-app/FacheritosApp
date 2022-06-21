@@ -5,7 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5f49d571-a74c-4244-90f5-d1284478321e" name="Changes" comment="Cancel button now works from usersSingleView.">
+      <change afterPath="$PROJECT_DIR$/src/main/java/backend/endpoints/orderEndpoint/OrderEndpoint.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/order/OrderController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/objectRowView/orderRowView/OrderRowView.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/orders/orders.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/backend/endpoints/customerEndpoint/CustomerEndpoint.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/backend/endpoints/customerEndpoint/CustomerEndpoint.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/customer/CustomerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/customer/CustomerController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/navbar/ManagerNavbar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/navbar/ManagerNavbar.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/user/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/user/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/navbar/managerNavbar.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/navbar/managerNavbar.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/navbar/mechanicNavbar.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/navbar/mechanicNavbar.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/users/users.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/users/users.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -191,6 +203,7 @@
       <workItem from="1655581842445" duration="699000" />
       <workItem from="1655671439398" duration="28760000" />
       <workItem from="1655751784092" duration="5819000" />
+      <workItem from="1655771600141" duration="16851000" />
     </task>
     <task id="LOCAL-00001" summary="I changed the view users view with the combo boxes and the city field.">
       <created>1654630629606</created>
@@ -213,7 +226,14 @@
       <option name="project" value="LOCAL" />
       <updated>1655708862099</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Cancel button now works from usersSingleView.">
+      <created>1655766108895</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1655766108895</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -236,7 +256,8 @@
     <MESSAGE value="I merged client and customer folders, clientSingleView now works" />
     <MESSAGE value="I added the logout button, made improvements to the interface, and customerSingleView is now working for a salesperson." />
     <MESSAGE value="I added the logout button and customerSingleView now works for a salesperson." />
-    <option name="LAST_COMMIT_MESSAGE" value="I added the logout button and customerSingleView now works for a salesperson." />
+    <MESSAGE value="Cancel button now works from usersSingleView." />
+    <option name="LAST_COMMIT_MESSAGE" value="Cancel button now works from usersSingleView." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
