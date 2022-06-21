@@ -25,8 +25,7 @@ import java.util.concurrent.ExecutionException;
 
 public class DashboardController implements Initializable {
 
-    @FXML
-    private AnchorPane welcomePane;
+
     @FXML
     private BorderPane borderPane;
     @FXML

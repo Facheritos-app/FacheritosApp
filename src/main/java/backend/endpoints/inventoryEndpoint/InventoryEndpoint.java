@@ -2,6 +2,7 @@ package backend.endpoints.inventoryEndpoint;
 
 import backend.connectionBD.ConnectionBD;
 import backend.dto.inventoryDTO.PartDTO;
+import backend.dto.inventoryDTO.VehicleDTO;
 import backend.dto.personDTO.WorkerDTO;
 
 import java.sql.*;
@@ -87,9 +88,9 @@ public class InventoryEndpoint {
 
     }
     /**
-     * createPart: PartDTO -> Boolean
-     * Purpose: This method connects to the DB and saves a part,
-     * if successful, it returns true, if not it returns false
+     * createPart: PartDTO -> Map<Boolean, Integer>
+     * Purpose: This method connects to the DB and saves a part, it makes the first
+     * necessary query in order to save the part in the DB,
      */
     public Map<Boolean, Integer> createPart(PartDTO part){
         PreparedStatement preparedStatement = null;
@@ -109,7 +110,11 @@ public class InventoryEndpoint {
         }
         return response;
     }
-
+    /**
+     * completeCreatePart: PartDTO -> Boolean
+     * Purpose: This method connects to the DB and saves a part,
+     * if successful, it returns true, if not it returns false
+     */
     public Boolean completeCreatePart(PartDTO part){
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
@@ -131,6 +136,61 @@ public class InventoryEndpoint {
             }
         }else{
             System.out.print("Algo salio mal creando el respuesto :(");
+            return false;
+        }
+    }
+
+    /**
+     * createVehicle: VehicleDTO -> Map<Boolean, Integer>
+     * Purpose: This method connects to the DB and saves a vehicle, it makes the first
+     * necessary query in order to save the part in the DB,
+     */
+    public Map<Boolean, Integer> createVehicle(VehicleDTO vehicle){
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        HashMap<Boolean, Integer> response = new HashMap<>();
+        try(Connection conn = ConnectionBD.connectDB().getConnection()){
+            preparedStatement = conn.prepareStatement("INSERT INTO car(id_model, assemble_year, id_color, image) VALUES(?,?,?,?) RETURNING id_car");
+            preparedStatement.setInt(1, vehicle.getIdModel());
+            preparedStatement.setString(2, vehicle.getAssembleYear());
+            preparedStatement.setInt(3, vehicle.getIdColor());
+            preparedStatement.setString(4, vehicle.getImageLink());
+            resultSet = preparedStatement.executeQuery();
+            resultSet.next();
+            response.put(true, resultSet.getInt("id_car"));
+        }catch (SQLException e){
+            e.printStackTrace();
+            response.put(false, -1);
+        }
+        return response;
+    }
+
+    /**
+     * completeCreateVehicle: VehicleDTO -> Boolean
+     * Purpose: This method connects to the DB and saves a vehicle,
+     * if successful, it returns true, if not it returns false
+     */
+    public Boolean completeCreateVehicle(VehicleDTO vehicle){
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        Integer idCar = null;
+        Integer idHeadquarter = null; //FALTAAAA
+        HashMap<Boolean, Integer> responseIdPart = (HashMap<Boolean, Integer>) createVehicle(vehicle);
+        if(responseIdPart.containsKey(true)){
+            idCar = responseIdPart.get(true);
+            try(Connection conn = ConnectionBD.connectDB().getConnection()){
+                preparedStatement = conn.prepareStatement("INSERT INTO car_headquarter(id_car, id_headquarter, quantity) VALUES(?,?,?)");
+                preparedStatement.setInt(1,idCar);
+                preparedStatement.setInt(2, vehicle.getIdHeadquarter());
+                preparedStatement.setInt(3, vehicle.getQuantity());
+                preparedStatement.executeUpdate();
+                return true;
+            } catch (SQLException e) {
+                e.printStackTrace();
+                return false;
+            }
+        }else{
+            System.out.print("Algo salió mal creando el vehículo :(");
             return false;
         }
     }

@@ -80,6 +80,8 @@ public class InventoryVehicleController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         dashboardController = MainController.getDashboardController();
 
+        scrollpane.setFitToWidth(true);
+        scrollpane.setFitToHeight(true);
     }
 
     @FXML

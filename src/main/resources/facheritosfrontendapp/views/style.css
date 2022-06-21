@@ -161,6 +161,16 @@ Button {
     -fx-text-fill: white;
 }
 
+/*Scrollpane*/
+.scroll-pane > .viewport {
+    -fx-background-color: transparent;
+}
+.scroll-pane {
+    -fx-background-color: transparent;
+}
+.viewport {
+    -fx-background-color: white;
+}
 
 
 /**
