@@ -81,6 +81,8 @@ public class InventoryController implements Initializable {
 
     private InventoryAddPartController inventoryAddPartController;
 
+    private InventoryAddVehicleController inventoryAddVehicleController;
+
     public InventoryController(){
         inventoryEndpoint = new InventoryEndpoint();
         vehicleRowViewList = new ArrayList<>();
@@ -95,8 +97,9 @@ public class InventoryController implements Initializable {
         Optional<ButtonType> clickedButton = dialogPane.getClickedButton();
         //Vehículo
         if(clickedButton.get() == ButtonType.APPLY){
-            // CHANGE VIEW
-            System.out.println("Apply");
+            //Show form to add new caro
+            inventoryAddVehicleController = (InventoryAddVehicleController) dashboardController.changeContent("inventory/inventoryAddVehicle");
+            inventoryAddVehicleController.showForm(); //show the data in comboboxes
         }
         //Repuesto
         else if (clickedButton.get() == ButtonType.OK){
