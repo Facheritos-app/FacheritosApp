@@ -17,7 +17,7 @@
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>
-      <Label alignment="CENTER" layoutX="120.0" layoutY="138.0" prefHeight="25.0" prefWidth="600.0" text="FT Corp." textAlignment="CENTER">
+      <Label fx:id="header" alignment="CENTER" layoutX="120.0" layoutY="138.0" prefHeight="25.0" prefWidth="600.0" styleClass="poppins" stylesheets="@style.css" text="FT Corp." textAlignment="CENTER">
          <font>
             <Font name="System Bold" size="48.0" />
          </font>
@@ -26,11 +26,11 @@
          <font>
             <Font name="Poppins Regular" size="12.0" />
          </font></Label>
-      <PasswordField fx:id="password" layoutX="288.0" layoutY="316.0" prefHeight="47.0" prefWidth="265.0" promptText="Contraseña" style="-fx-background-radius: 10;">
+      <PasswordField fx:id="password" layoutX="288.0" layoutY="316.0" onKeyTyped="#passwordAction" prefHeight="47.0" prefWidth="265.0" promptText="Contraseña" style="-fx-background-radius: 10;">
          <cursor>
             <Cursor fx:constant="TEXT" />
          </cursor></PasswordField>
-      <TextField fx:id="cc" layoutX="288.0" layoutY="248.0" prefHeight="47.0" prefWidth="265.0" promptText="Cédula" style="-fx-background-radius: 10;">
+      <TextField fx:id="cc" layoutX="288.0" layoutY="248.0" onKeyTyped="#ccAction" prefHeight="47.0" prefWidth="265.0" promptText="Cédula" style="-fx-background-radius: 10;">
          <cursor>
             <Cursor fx:constant="TEXT" />
          </cursor></TextField>

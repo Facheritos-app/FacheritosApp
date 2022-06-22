@@ -5,6 +5,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
@@ -17,7 +18,7 @@
          <children>
             <Label prefHeight="69.0" prefWidth="310.0" styleClass="poppins" text="Agregar cliente" textFill="#1f1f1f">
                <font>
-                  <Font name="System Bold" size="36.0" />
+                  <Font name="Poppins Bold" size="36.0" />
                </font>
                <padding>
                   <Insets left="20.0" />
@@ -32,7 +33,7 @@
                      <children>
                         <Label prefHeight="20.0" prefWidth="77.0" text="Nombre:">
                            <font>
-                              <Font size="16.0" />
+                              <Font name="Poppins Regular" size="14.0" />
                            </font>
                         </Label>
                         <TextField fx:id="firstnameTextField" prefHeight="36.0" prefWidth="273.0" promptText="Nombre de usuario" styleClass="input-text" stylesheets="@../style.css" />
@@ -46,7 +47,7 @@
                      <children>
                         <Label prefHeight="20.0" prefWidth="77.0" text="Apellidos">
                            <font>
-                              <Font size="16.0" />
+                              <Font name="Poppins Regular" size="14.0" />
                            </font>
                         </Label>
                         <TextField fx:id="lastnameTextField" prefHeight="26.0" prefWidth="270.0" promptText="Apellidos de usuario" stylesheets="@../style.css">
@@ -69,7 +70,7 @@
                      <children>
                         <Label prefHeight="27.0" prefWidth="110.0" text="Celular">
                            <font>
-                              <Font size="16.0" />
+                              <Font name="Poppins Regular" size="14.0" />
                            </font>
                         </Label>
                         <TextField fx:id="celTextField" prefHeight="36.0" prefWidth="273.0" promptText="Ej: 3002221231" styleClass="input-text" stylesheets="@../style.css" />
@@ -83,7 +84,7 @@
                      <children>
                         <Label prefHeight="27.0" prefWidth="110.0" text="Correo:">
                            <font>
-                              <Font size="16.0" />
+                              <Font name="Poppins Regular" size="14.0" />
                            </font>
                         </Label>
                         <TextField fx:id="emailTextField" prefHeight="36.0" prefWidth="273.0" promptText="ejemplo@mail.com" styleClass="input-text" stylesheets="@../style.css" />
@@ -98,7 +99,7 @@
                      <children>
                         <Label prefHeight="25.0" prefWidth="158.0" text="Fecha de nacimiento:">
                            <font>
-                              <Font size="16.0" />
+                              <Font name="Poppins Regular" size="14.0" />
                            </font>
                         </Label>
                         <DatePicker fx:id="birthdateDatePicker" prefHeight="33.0" prefWidth="251.0" styleClass="input-text" stylesheets="@../style.css" />
@@ -112,7 +113,7 @@
                      <children>
                         <Label prefHeight="26.0" prefWidth="171.0" text="No. de identificación:">
                            <font>
-                              <Font size="16.0" />
+                              <Font name="Poppins Regular" size="14.0" />
                            </font>
                         </Label>
                         <TextField fx:id="ccTextField" prefHeight="36.0" prefWidth="273.0" promptText="Ej: 31293867" styleClass="input-text" stylesheets="@../style.css" />
@@ -124,7 +125,7 @@
                   </VBox>
                </children>
             </HBox>
-            <HBox prefHeight="179.0" prefWidth="387.0" spacing="20.0">
+            <HBox prefHeight="47.0" prefWidth="360.0" spacing="20.0">
                <children>
                   <Button fx:id="cancelButton" alignment="CENTER" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onMouseClicked="#cancelButtonAddCustomerClicked" prefHeight="36.0" prefWidth="120.0" stylesheets="@../style.css" text="Cancelar" textFill="WHITE">
                      <font>
@@ -151,5 +152,6 @@
             </HBox>
          </children>
       </VBox>
+      <Separator orientation="VERTICAL" prefHeight="516.0" prefWidth="8.0" />
    </children>
 </AnchorPane>

@@ -31,7 +31,7 @@ public class CustomerEndpoint {
 
 
     /**
-     * getCustomerById: Integer -> void
+     * getCustomerById: Integer -> Map<Boolean, ResultSet>
      * Purpose: gets a customer from the database according to an input Id.
      */
     public Map<Boolean, ResultSet> getCustomerById(Integer idPerson){

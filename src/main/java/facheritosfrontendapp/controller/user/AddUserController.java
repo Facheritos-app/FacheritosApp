@@ -126,7 +126,8 @@ public class AddUserController implements Initializable {
                             new Thread(() -> {
                                 Boolean result = null;
                                 try {
-                                    result = CompletableFuture.supplyAsync(() -> workerEndpoint.createWorker(worker)).get();
+                                    result = CompletableFuture.supplyAsync(() -> workerEndpoint.createWorker(worker)).get
+                                            ();
                                 } catch (InterruptedException e) {
                                     throw new RuntimeException(e);
                                 } catch (ExecutionException e) {

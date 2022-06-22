@@ -87,6 +87,7 @@ public class UserController implements Initializable {
         workerEndpoint = new WorkerEndpoint();
         customerEndpoint = new CustomerEndpoint();
         userSingleViewController = new UserSingleViewController();
+        customerSingleViewController = new CustomerSingleViewController();
         workerRowsArray = new ArrayList<>();
         customerRowsArray= new ArrayList<>();
     }
@@ -235,6 +236,8 @@ public class UserController implements Initializable {
                 //Here we will load the component to view the worker
                 try {
                     customerSingleViewController = (CustomerSingleViewController) dashboardController.changeContent("customers/customersSingleView");
+                    customerSingleViewController.backToUsers.setVisible(true);
+                    customerSingleViewController.backToCustomers.setVisible(false);
                     customerSingleViewController.showCustomer(customerRowsArray.get(i).getIdPerson());
                 } catch (IOException e) {
                     throw new RuntimeException(e);

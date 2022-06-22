@@ -2,6 +2,7 @@ package facheritosfrontendapp.controller.navbar;
 
 import facheritosfrontendapp.controller.DashboardController;
 import facheritosfrontendapp.controller.MainController;
+import facheritosfrontendapp.controller.customer.CustomerController;
 import facheritosfrontendapp.controller.sale.SaleController;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -16,9 +17,17 @@ public class SellerNavbar implements Initializable {
     private DashboardController dashboardController;
     private SaleController saleController;
 
+    private CustomerController customerController;
+
+    @FXML
+    public void homeClicked() throws IOException {
+        dashboardController.changeContent("home");
+    }
+
     @FXML
     public void customersClicked() throws IOException {
-        dashboardController.changeContent("customers/customersAdd");
+        customerController = (CustomerController) dashboardController.changeContent("customers/customers");
+        customerController.showCustomers();
     }
 
     @FXML

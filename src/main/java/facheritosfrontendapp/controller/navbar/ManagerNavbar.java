@@ -4,6 +4,7 @@ import facheritosfrontendapp.controller.DashboardController;
 import facheritosfrontendapp.controller.MainController;
 import facheritosfrontendapp.controller.headquarter.HeadquarterController;
 import facheritosfrontendapp.controller.inventory.InventoryController;
+import facheritosfrontendapp.controller.order.OrderController;
 import facheritosfrontendapp.controller.sale.SaleController;
 import facheritosfrontendapp.controller.user.UserController;
 import javafx.fxml.FXML;
@@ -28,6 +29,8 @@ public class ManagerNavbar implements Initializable {
 
     private SaleController saleController;
 
+    private OrderController orderController;
+
     @FXML
     protected void homeClicked() throws IOException {
         dashboardController.changeContent("home");
@@ -48,13 +51,19 @@ public class ManagerNavbar implements Initializable {
     @FXML
     protected void inventoryClicked() throws IOException {
         inventoryController = (InventoryController) dashboardController.changeContent("inventory/inventory");
-        inventoryController.showVehicles();
+        inventoryController.showInventory();
     }
 
     @FXML
     protected void salesClicked() throws IOException, ExecutionException, InterruptedException {
         saleController = (SaleController) dashboardController.changeContent("sales/sales");
         saleController.showSales();
+    }
+
+    @FXML
+    protected void ordersClicked() throws IOException {
+        orderController = (OrderController) dashboardController.changeContent("orders/orders");
+        orderController.showOrders();
     }
 
     @Override
