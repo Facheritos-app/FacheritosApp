@@ -11,6 +11,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
+
+import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -23,6 +25,8 @@ import java.util.concurrent.ExecutionException;
 public class OrderController implements Initializable {
 
     private DashboardController dashboardController;
+
+    private OrderSingleViewController orderSingleViewController;
 
     private OrderEndpoint orderEndpoint;
 
@@ -54,6 +58,7 @@ public class OrderController implements Initializable {
     public OrderController(){
         orderEndpoint = new OrderEndpoint();
         orderRowsArray= new ArrayList<>();
+        orderSingleViewController = new OrderSingleViewController();
     }
 
     @FXML
@@ -126,10 +131,15 @@ public class OrderController implements Initializable {
      * handleOptionLabel: mouseEvent -> void
      * Purpose: Listens to the events of both the view, edit and delete label.
      */
-    private void handleOptionLabel(MouseEvent mouseEvent)  {
+    private void handleOptionLabel(MouseEvent mouseEvent) {
         for(int i = 0; i < orderRowsArray.size(); i++){
             if(mouseEvent.getSource() == orderRowsArray.get(i).getOptionsLabel()){
-                //Here we will load the component to view the worker
+                try {
+                    orderSingleViewController = (OrderSingleViewController) dashboardController.changeContent("orders/ordersSingleView");
+                    orderSingleViewController.showForm(orderRowsArray.get(i).getIdOrder());
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
             }
         }
     }
