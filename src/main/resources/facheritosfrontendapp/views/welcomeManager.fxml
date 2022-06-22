@@ -1,24 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="564.0" prefWidth="842.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="facheritosfrontendapp.controller.DashboardController">
-   <top>
-      <Pane prefHeight="43.0" prefWidth="680.0" style="-fx-background-color: #005296;" BorderPane.alignment="CENTER">
-         <children>
-            <Label layoutX="25.0" layoutY="4.0" prefHeight="23.0" prefWidth="171.0" text="FT Corp." textFill="WHITE">
-               <font>
-                  <Font name="Poppins Medium" size="24.0" />
-               </font>
-            </Label>
-         </children>
-      </Pane>
-   </top>
+<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="564.0" prefWidth="842.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="facheritosfrontendapp.controller.DashboardController">
    <left>
       <VBox fx:id="navbar" prefHeight="394.0" prefWidth="150.0" BorderPane.alignment="CENTER">
          <children>
@@ -34,9 +26,9 @@
                   </ImageView>
                   <VBox prefHeight="90.0" prefWidth="89.0" styleClass="bold">
                      <children>
-                        <Label fx:id="name" text="Nombre">
+                        <Label fx:id="name" prefHeight="21.0" prefWidth="77.0" text="Nombre">
                            <font>
-                              <Font name="System Bold" size="15.0" />
+                              <Font name="Poppins Bold" size="15.0" />
                            </font>
                            <VBox.margin>
                               <Insets top="20.0" />
@@ -44,13 +36,16 @@
                         </Label>
                         <Label fx:id="rol" text="Rol" textFill="#9e9d9d">
                            <font>
-                              <Font name="System Bold" size="12.0" />
+                              <Font name="Poppins Bold" size="12.0" />
                            </font>
                         </Label>
                         <Label text="Ver perfil" textFill="#9e9d9d">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
+                           <font>
+                              <Font name="Poppins Regular" size="12.0" />
+                           </font>
                         </Label>
                      </children>
                   </VBox>
@@ -59,21 +54,31 @@
          </children>
       </VBox>
    </left>
-   <center>
-      <AnchorPane fx:id="welcomePane" prefHeight="517.0" prefWidth="647.0" BorderPane.alignment="CENTER">
-         <children>
-            <Label fx:id="welcomeLabel" layoutX="20.0" layoutY="22.0" prefHeight="72.0" prefWidth="217.0" styleClass="poppins" stylesheets="@style.css" text="Bienvenido" textFill="#1f1f1f">
+   <top>
+      <BorderPane prefHeight="50.0" prefWidth="842.0" style="-fx-background-color: #005296;" BorderPane.alignment="CENTER">
+         <left>
+            <Label prefHeight="23.0" prefWidth="171.0" text="FT Corp." textFill="WHITE" BorderPane.alignment="CENTER">
                <font>
-                  <Font name="System Bold" size="36.0" />
+                  <Font name="Poppins Medium" size="24.0" />
                </font>
+               <BorderPane.margin>
+                  <Insets left="20.0" />
+               </BorderPane.margin>
             </Label>
-            <Separator orientation="VERTICAL" prefHeight="516.0" prefWidth="8.0" />
-            <ImageView fitHeight="313.0" fitWidth="489.0" layoutX="141.0" layoutY="125.0" pickOnBounds="true" preserveRatio="true">
+         </left>
+         <right>
+            <ImageView fx:id="logOut" fitHeight="17.0" fitWidth="17.0" onMouseClicked="#logOutClicked" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
                <image>
-                  <Image url="@../icons/welcome-manager.png" />
+                  <Image url="@../icons/log-out.png" />
                </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <BorderPane.margin>
+                  <Insets right="20.0" />
+               </BorderPane.margin>
             </ImageView>
-         </children>
-      </AnchorPane>
-   </center>
+         </right>
+      </BorderPane>
+   </top>
 </BorderPane>

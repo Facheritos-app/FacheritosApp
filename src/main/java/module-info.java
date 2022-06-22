@@ -8,6 +8,7 @@ module  facheritosfrontendapp {
     requires org.postgresql.jdbc;
     requires java.sql;
     requires AnimateFX;
+    requires java.desktop;
 
 
     //opens  facheritosfrontendapp to javafx.fxml;
@@ -32,5 +33,9 @@ module  facheritosfrontendapp {
     opens facheritosfrontendapp.controller.sale to javafx.fxml;
     opens facheritosfrontendapp.objectRowView.saleRowView to javafx.base;
     exports facheritosfrontendapp.controller.customer;
+    opens facheritosfrontendapp.objectRowView.inventoryRowView to javafx.base;
+    exports facheritosfrontendapp.controller.order;
+    opens facheritosfrontendapp.controller.order to javafx.fxml;
+    opens facheritosfrontendapp.objectRowView.orderRowView to javafx.base;
 
 }

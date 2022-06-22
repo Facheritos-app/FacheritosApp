@@ -13,6 +13,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -27,10 +28,7 @@ public class MainController implements Initializable {
     private Label error;
 
     @FXML
-    private Label welcomeText;
-
-    @FXML
-    private Button button;
+    private Label header;
 
     @FXML
     private TextField cc;
@@ -47,6 +45,14 @@ public class MainController implements Initializable {
     private static DashboardController dashboardController;
 
 
+    @FXML
+    protected void ccAction() {
+        error.setVisible(false);
+    }
+    @FXML
+    protected void passwordAction() {
+        error.setVisible(false);
+    }
 
     @FXML
     protected void boton(ActionEvent event) throws IOException, ExecutionException, InterruptedException {
@@ -71,6 +77,7 @@ public class MainController implements Initializable {
             stage.setScene(scene);
             stage.show();
         }else{
+            error.setVisible(true);
             error.setStyle("-fx-text-fill: #C02130; ");
             error.setText("Error: Datos incorrectos, intente de nuevo");
         }

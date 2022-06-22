@@ -6,7 +6,21 @@ Button {
 
 }
 */
+/*
+@font-face {
+    font-family: Poppins;
+    src: url('../fonts/Poppins_Bold.ttf');
+}
+*/
 
+.bold {
+    -fx-font-weight: bold;
+}
+/*
+.poppins {
+    -fx-font-family: Poppins;
+}
+*/
 
 /*Back arrow*/
 .back-arrow {
@@ -34,6 +48,8 @@ Button {
     -fx-border-radius: 10px;
     -fx-background-radius: 10px;
     -fx-text-fill: white;
+    -fx-font-family: Poppins;
+    -fx-font-weight: BOLD;
 }
 
 .blue-button {
@@ -41,6 +57,8 @@ Button {
     -fx-border-radius: 10px;
     -fx-background-radius: 10px;
     -fx-text-fill: white;
+    -fx-font-family: Poppins;
+    -fx-font-weight: BOLD;
 }
 /*Tabpane*/
 
@@ -91,6 +109,7 @@ Button {
     -fx-background-radius: 10px;
     -fx-border-radius: 10px;
     -fx-background-color: #D3D3D3;
+    -fx-font-family: Poppins;
 }
 /*Dialog*/
 
@@ -135,6 +154,24 @@ Button {
     -fx-font-size: 14px;
     -fx-pref-width: 180px;
 }
+
+/*DialogPane*/
+.dialog-pane .button {
+    -fx-background-color: #005296;
+    -fx-text-fill: white;
+}
+
+/*Scrollpane*/
+.scroll-pane > .viewport {
+    -fx-background-color: transparent;
+}
+.scroll-pane {
+    -fx-background-color: transparent;
+}
+.viewport {
+    -fx-background-color: white;
+}
+
 
 /**
   -fx-background-color: #005296;

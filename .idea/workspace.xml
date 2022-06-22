@@ -5,9 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5f49d571-a74c-4244-90f5-d1284478321e" name="Changes" comment="I changed the view users view with the combo boxes and the city field.">
+      <change afterPath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/validator/addInventory/AddVehicleValidator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/DashboardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/DashboardController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/inventory/InventoryAddVehicleController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/inventory/InventoryAddVehicleController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/inventory/InventoryVehicleController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/inventory/InventoryVehicleController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/home.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/home.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/inventory/inventoryAddVehicle.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/inventory/inventoryAddVehicle.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/inventory/inventoryVehicle.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/inventory/inventoryVehicle.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/sales/salesSingleView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/sales/salesSingleView.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/welcomeManager.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/welcomeManager.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,8 +27,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="package-info" />
-        <option value="Class" />
         <option value="FxmlFile" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -106,7 +115,7 @@
       <option name="ALTERNATIVE_JRE_PATH" value="temurin-11" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <option name="MAIN_CLASS_NAME" value="facheritosfrontendapp.views.Main" />
-      <module name="FacheritosAppFrontend" />
+      <module name="FacheritosFrontendApp" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="facheritosfrontendapp.views.*" />
@@ -191,6 +200,10 @@
       <workItem from="1655475695268" duration="376000" />
       <workItem from="1655493195219" duration="13972000" />
       <workItem from="1655869110758" duration="37000" />
+      <workItem from="1655581842445" duration="699000" />
+      <workItem from="1655671439398" duration="28760000" />
+      <workItem from="1655751784092" duration="5819000" />
+      <workItem from="1655824219112" duration="4654000" />
     </task>
     <task id="LOCAL-00001" summary="I changed the view users view with the combo boxes and the city field.">
       <created>1654630629606</created>
@@ -199,7 +212,28 @@
       <option name="project" value="LOCAL" />
       <updated>1654630629606</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="I merged client and customer folders, clientSingleView now works">
+      <created>1655581635676</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1655581635676</updated>
+    </task>
+    <task id="LOCAL-00003" summary="I added the logout button and customerSingleView now works for a salesperson.">
+      <created>1655708862099</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1655708862099</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Cancel button now works from usersSingleView.">
+      <created>1655766108895</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1655766108895</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -219,7 +253,11 @@
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="I changed the view users view with the combo boxes and the city field." />
-    <option name="LAST_COMMIT_MESSAGE" value="I changed the view users view with the combo boxes and the city field." />
+    <MESSAGE value="I merged client and customer folders, clientSingleView now works" />
+    <MESSAGE value="I added the logout button, made improvements to the interface, and customerSingleView is now working for a salesperson." />
+    <MESSAGE value="I added the logout button and customerSingleView now works for a salesperson." />
+    <MESSAGE value="Cancel button now works from usersSingleView." />
+    <option name="LAST_COMMIT_MESSAGE" value="Cancel button now works from usersSingleView." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

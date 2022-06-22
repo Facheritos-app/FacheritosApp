@@ -1,4 +1,4 @@
-package facheritosfrontendapp.objectRowView.headquarterRowView;
+package facheritosfrontendapp.objectRowView.inventoryRowView;
 
 import facheritosfrontendapp.views.Main;
 import javafx.geometry.Pos;
@@ -15,7 +15,7 @@ public class VehicleRowView {
 
     private String name;
 
-    private Double price;
+    private String price;
 
     private String headquarter;
 
@@ -26,7 +26,7 @@ public class VehicleRowView {
 
     private VBox options;
 
-    public VehicleRowView(String name, Double price, String headquarter, Integer quantity, Integer idCar) {
+    public VehicleRowView(String name, String price, String headquarter, Integer quantity, Integer idCar) {
         this.name = name;
         this.price = price;
         this.headquarter = headquarter;
@@ -37,6 +37,8 @@ public class VehicleRowView {
         this.getOptionsHBox().setCursor(Cursor.HAND); //Hand when mouse hover
     }
 
+
+
     public String getName() {
         return name;
     }
@@ -45,11 +47,11 @@ public class VehicleRowView {
         this.name = name;
     }
 
-    public Double getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(String price) {
         this.price = price;
     }
 

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="517.0" prefWidth="647.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="facheritosfrontendapp.controller.order.OrderController">
+    <children>
+        <Label layoutX="34.0" layoutY="23.0" prefHeight="72.0" prefWidth="164.0" styleClass="poppins" stylesheets="@../style.css" text="Órdenes" textFill="#1f1f1f">
+            <font>
+                <Font name="Poppins Bold" size="36.0" />
+            </font>
+        </Label>
+        <Button fx:id="addOrder" layoutX="510.0" layoutY="95.0" mnemonicParsing="false" onMouseClicked="#addOrderAction" styleClass="red-button" stylesheets="@../style.css" text="Agregar orden +" textFill="WHITE">
+            <font>
+                <Font name="Poppins Bold" size="12.0" />
+            </font>
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </Button>
+        <TableView fx:id="orderTableView" layoutX="34.0" layoutY="127.0" prefHeight="379.0" prefWidth="592.0" stylesheets="@../style.css">
+            <columns>
+                <TableColumn fx:id="colId" prefWidth="88.0" text="No. de orden" />
+                <TableColumn fx:id="colSeat" prefWidth="99.0" text="Sede" />
+                <TableColumn fx:id="colCustomerId" prefWidth="115.0" text="C.C. Cliente" />
+                <TableColumn fx:id="colDueDate" minWidth="3.0" prefWidth="114.0" text="Fecha de entrega" />
+            <TableColumn fx:id="colStatus" minWidth="0.0" prefWidth="87.0" text="Estado" />
+                <TableColumn fx:id="colOptions" prefWidth="87.0" text="Opciones" />
+            </columns>
+            <styleClass>
+                <String fx:value="table-views" />
+                <String fx:value="table-columns" />
+            </styleClass>
+        </TableView>
+        <Separator orientation="VERTICAL" prefHeight="516.0" prefWidth="8.0" />
+    </children>
+</AnchorPane>

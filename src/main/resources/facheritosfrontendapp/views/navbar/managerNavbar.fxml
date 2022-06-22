@@ -11,7 +11,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="379.0" prefWidth="153.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="facheritosfrontendapp.controller.navbar.ManagerNavbar">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="379.0" prefWidth="153.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="facheritosfrontendapp.controller.navbar.ManagerNavbar">
    <children>
       <VBox prefHeight="394.0" prefWidth="150.0">
          <children>
@@ -35,7 +35,7 @@
                         <Insets left="10.0" top="15.0" />
                      </padding>
                      <font>
-                        <Font size="14.0" />
+                        <Font name="Poppins Regular" size="14.0" />
                      </font>
                   </Label>
                </children>
@@ -56,7 +56,7 @@
                         <Insets left="10.0" top="15.0" />
                      </padding>
                      <font>
-                        <Font size="14.0" />
+                        <Font name="Poppins Regular" size="14.0" />
                      </font>
                   </Label>
                </children>
@@ -77,7 +77,7 @@
                         <Insets left="10.0" top="15.0" />
                      </padding>
                      <font>
-                        <Font size="14.0" />
+                        <Font name="Poppins Regular" size="14.0" />
                      </font>
                   </Label>
                </children>
@@ -98,7 +98,7 @@
                         <Insets left="10.0" top="15.0" />
                      </padding>
                      <font>
-                        <Font size="14.0" />
+                        <Font name="Poppins Regular" size="14.0" />
                      </font>
                   </Label>
                </children>
@@ -114,12 +114,12 @@
                         <Insets left="10.0" top="10.0" />
                      </HBox.margin>
                   </ImageView>
-                  <Label prefHeight="35.0" prefWidth="74.0" styleClass="poppins" stylesheets="@../style.css" text="Inventario">
+                  <Label prefHeight="35.0" prefWidth="87.0" styleClass="poppins" stylesheets="@../style.css" text="Inventario">
                      <padding>
                         <Insets left="10.0" top="15.0" />
                      </padding>
                      <font>
-                        <Font size="14.0" />
+                        <Font name="Poppins Regular" size="14.0" />
                      </font>
                   </Label>
                </children>
@@ -140,13 +140,13 @@
                         <Insets left="10.0" top="15.0" />
                      </padding>
                      <font>
-                        <Font size="14.0" />
+                        <Font name="Poppins Regular" size="14.0" />
                      </font>
                   </Label>
                </children>
             </HBox>
             <Line endX="63.799957275390625" endY="1.52587890625E-5" startX="-89.8000259399414" startY="1.52587890625E-5" stroke="LIGHTGRAY" />
-            <HBox prefHeight="100.0" prefWidth="200.0" styleClass="nav-item" stylesheets="@../style.css">
+            <HBox fx:id="orders" onMouseClicked="#ordersClicked" prefHeight="100.0" prefWidth="200.0" styleClass="nav-item" stylesheets="@../style.css">
                <children>
                   <ImageView fitHeight="35.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true" styleClass="nav-item-icon">
                      <image>
@@ -161,7 +161,7 @@
                         <Insets left="10.0" top="15.0" />
                      </padding>
                      <font>
-                        <Font size="14.0" />
+                        <Font name="Poppins Regular" size="14.0" />
                      </font>
                   </Label>
                </children>
