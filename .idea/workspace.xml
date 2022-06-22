@@ -4,17 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5f49d571-a74c-4244-90f5-d1284478321e" name="Changes" comment="I changed the view users view with the combo boxes and the city field.">
-      <change afterPath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/order/OrderSingleViewController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/orders/ordersSingleView.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="5f49d571-a74c-4244-90f5-d1284478321e" name="Changes" comment="OrderSingleView now works.">
+      <change afterPath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/objectRowView/saleRowView/SaleByIdCustomerRowView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/backend/endpoints/orderEndpoint/OrderEndpoint.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/backend/endpoints/orderEndpoint/OrderEndpoint.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/navbar/MechanicNavbar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/navbar/MechanicNavbar.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/order/OrderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/order/OrderController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/backend/endpoints/saleEndpoint/SaleEndpoint.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/backend/endpoints/saleEndpoint/SaleEndpoint.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/customer/CustomerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/customer/CustomerController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/customer/CustomerSingleViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/customer/CustomerSingleViewController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/user/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/user/UserController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/customers/customersSingleView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/customers/customersSingleView.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/navbar/mechanicNavbar.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/navbar/mechanicNavbar.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/users/usersSingleView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/users/usersSingleView.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -202,6 +199,7 @@
       <workItem from="1655671439398" duration="28760000" />
       <workItem from="1655751784092" duration="5819000" />
       <workItem from="1655824219112" duration="4654000" />
+      <workItem from="1655899359892" duration="12582000" />
     </task>
     <task id="LOCAL-00001" summary="I changed the view users view with the combo boxes and the city field.">
       <created>1654630629606</created>
@@ -231,7 +229,14 @@
       <option name="project" value="LOCAL" />
       <updated>1655766108895</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="OrderSingleView now works.">
+      <created>1655874806966</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1655874806966</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -255,7 +260,8 @@
     <MESSAGE value="I added the logout button, made improvements to the interface, and customerSingleView is now working for a salesperson." />
     <MESSAGE value="I added the logout button and customerSingleView now works for a salesperson." />
     <MESSAGE value="Cancel button now works from usersSingleView." />
-    <option name="LAST_COMMIT_MESSAGE" value="Cancel button now works from usersSingleView." />
+    <MESSAGE value="OrderSingleView now works." />
+    <option name="LAST_COMMIT_MESSAGE" value="OrderSingleView now works." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

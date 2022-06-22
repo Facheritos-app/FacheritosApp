@@ -91,12 +91,12 @@
       </ImageView>
       <TableView fx:id="purchasesTable" cache="true" layoutX="55.0" layoutY="260.0" pickOnBounds="false" prefHeight="196.0" prefWidth="564.0" style="-fx-font-family: Poppins; -fx-font-size: 12; -fx-background-color: F4F4F4; -fx-background-radius: 10; -fx-border-radius: 10;" stylesheets="@../style.css">
          <columns>
-            <TableColumn fx:id="colType" prefWidth="70.0" sortable="false" style="-fx-background-color: F4F4F4;" text="Tipo" />
-            <TableColumn fx:id="colNumber" prefWidth="97.0" style="-fx-background-color: F4F4F4;" text="Número" />
-            <TableColumn fx:id="colDate" prefWidth="104.0" style="-fx-background-color: F4F4F4;" text="Fecha" />
-            <TableColumn fx:id="colPaymentMethod" prefWidth="117.0" sortable="false" style="-fx-background-color: F4F4F4;" text="Método de pago" />
-            <TableColumn fx:id="colSeat" style="-fx-background-color: F4F4F4;" text="Sede" />
-            <TableColumn fx:id="colOptions" prefWidth="108.0" sortable="false" style="-fx-background-color: F4F4F4;" text="Opciones" />
+            <TableColumn fx:id="colType" prefWidth="70.0" sortable="false" style="-fx-background-color: F4F4F4; -fx-text-fill: black;" text="Tipo" />
+            <TableColumn fx:id="colNumber" prefWidth="97.0" style="-fx-background-color: F4F4F4; -fx-text-fill: black;" text="Número" />
+            <TableColumn fx:id="colDate" prefWidth="104.0" style="-fx-background-color: F4F4F4; -fx-text-fill: black;" text="Fecha" />
+            <TableColumn fx:id="colPaymentMethod" prefWidth="117.0" sortable="false" style="-fx-background-color: F4F4F4; -fx-text-fill: black;" text="Método de pago" />
+            <TableColumn fx:id="colSeat" style="-fx-background-color: F4F4F4; -fx-text-fill: black;" text="Sede" />
+            <TableColumn fx:id="colOptions" prefWidth="94.0" sortable="false" style="-fx-background-color: F4F4F4; -fx-text-fill: black;" text="Opciones" />
          </columns>
       </TableView>
       <Separator orientation="VERTICAL" prefHeight="516.0" prefWidth="8.0" />
