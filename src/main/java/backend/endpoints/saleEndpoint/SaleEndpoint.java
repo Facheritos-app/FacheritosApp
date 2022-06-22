@@ -94,4 +94,25 @@ public class SaleEndpoint {
 
         return response;
     }
+
+    public Map<Boolean, ResultSet> getCar(Integer idHeadquarter) {
+
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        HashMap<Boolean, ResultSet> response = new HashMap<>();
+        try (Connection conn = ConnectionBD.connectDB().getConnection()) {
+            preparedStatement = conn.prepareStatement("select car.id_car, car.id_model,car.assemble_year, car.id_Color, car_headquarter.id_headquarter, car_headquarter.quantity,\n" +
+                    "\tcolor.color, model.price, model.description\n" +
+                    "from car join car_headquarter  using (id_car) join model using (id_model) join color using (id_color)\n" +
+                    "where id_headquarter =  ?");
+            preparedStatement.setInt(1, idHeadquarter);
+            resultSet = preparedStatement.executeQuery();
+            response.put(true, resultSet);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            response.put(false, resultSet);
+        }
+
+        return response;
+    }
 }

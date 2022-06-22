@@ -18,22 +18,22 @@
   <content>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="657.0" prefWidth="872.0" style="-fx-background-color: FFFFF;">
          <children>
-            <Label layoutX="443.0" layoutY="105.0" text="Venta:">
+            <Label layoutX="496.0" layoutY="106.0" text="Venta:">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
             </Label>
-            <Label layoutX="452.0" layoutY="130.0" prefHeight="38.0" prefWidth="54.0" text="Sede:">
+            <Label layoutX="505.0" layoutY="131.0" prefHeight="38.0" prefWidth="54.0" text="Sede:">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label layoutX="450.0" layoutY="168.0" prefHeight="38.0" prefWidth="123.0" text="Metodo pago:">
+            <Label layoutX="503.0" layoutY="169.0" prefHeight="38.0" prefWidth="123.0" text="Metodo pago:">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label layoutX="443.0" layoutY="352.0" text="Cliente">
+            <Label layoutX="496.0" layoutY="353.0" text="Cliente">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
@@ -63,14 +63,16 @@
                   <Font name="System Bold" size="20.0" />
                </font>
             </Label>
-            <TableView fx:id="carTableView" layoutX="33.0" layoutY="105.0" prefHeight="200.0" prefWidth="359.0" styleClass="table-views" stylesheets="@../style.css">
+            <TableView fx:id="carTableView" layoutX="33.0" layoutY="105.0" prefHeight="200.0" prefWidth="450.0" styleClass="table-views" stylesheets="@../style.css">
                <columns>
-                  <TableColumn fx:id="colId" prefWidth="38.0" text="Id" />
-                  <TableColumn fx:id="colModel" prefWidth="56.0" text="Modelo" />
-                  <TableColumn fx:id="colColor" prefWidth="74.0" text="Color" />
-                  <TableColumn fx:id="colPrice" minWidth="9.0" prefWidth="82.0" text="Costo" />
-                  <TableColumn fx:id="colOption" minWidth="0.0" prefWidth="0.0" />
-                  <TableColumn fx:id="colQuantity" minWidth="0.0" prefWidth="108.0" text="Cantidad" />
+                  <TableColumn fx:id="colOption" minWidth="0.0" prefWidth="35.0" text="..." />
+                  <TableColumn fx:id="colId" prefWidth="41.0" text="Id" />
+                  <TableColumn fx:id="colModel" prefWidth="61.0" text="Modelo" />
+                  <TableColumn fx:id="colColor" prefWidth="47.0" text="Color" />
+                  <TableColumn fx:id="colPrice" minWidth="9.0" prefWidth="63.0" text="Costo" />
+                  <TableColumn fx:id="colQuantity" minWidth="0.0" prefWidth="55.0" text="Cantidad" />
+                  <TableColumn fx:id="colYear" minWidth="0.0" prefWidth="94.0" text="Ensamblaje" />
+                  <TableColumn fx:id="colId1" prefWidth="53.0" text="..." />
                </columns>
             </TableView>
             <ImageView fitHeight="53.0" fitWidth="61.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" styleClass="back-arrow">
@@ -81,32 +83,32 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <ComboBox fx:id="headquarterCombobox" layoutX="554.0" layoutY="134.0" prefHeight="31.0" prefWidth="204.0" styleClass="input-text" stylesheets="@../style.css" />
-            <ComboBox fx:id="typeCombobox" layoutX="554.0" layoutY="172.0" prefHeight="31.0" prefWidth="206.0" styleClass="input-text" stylesheets="@../style.css" />
-            <TextField fx:id="ccClient" layoutX="550.0" layoutY="379.0" prefHeight="36.0" prefWidth="206.0" promptText="ej. 1569326" styleClass="input-text" stylesheets="@../style.css" />
-            <TextField fx:id="nameClient" layoutX="550.0" layoutY="428.0" prefHeight="36.0" prefWidth="209.0" promptText="..." styleClass="input-text" stylesheets="@../style.css" />
-            <Label layoutX="456.0" layoutY="378.0" prefHeight="38.0" prefWidth="54.0" text="Cedula:">
+            <ComboBox fx:id="headquarterCombobox" layoutX="607.0" layoutY="135.0" prefHeight="31.0" prefWidth="204.0" styleClass="input-text" stylesheets="@../style.css" />
+            <ComboBox fx:id="typeCombobox" layoutX="607.0" layoutY="173.0" prefHeight="31.0" prefWidth="206.0" styleClass="input-text" stylesheets="@../style.css" />
+            <TextField fx:id="ccClient" layoutX="603.0" layoutY="380.0" prefHeight="36.0" prefWidth="206.0" promptText="ej. 1569326" styleClass="input-text" stylesheets="@../style.css" />
+            <TextField fx:id="nameClient" layoutX="603.0" layoutY="429.0" prefHeight="36.0" prefWidth="209.0" promptText="..." styleClass="input-text" stylesheets="@../style.css" />
+            <Label layoutX="509.0" layoutY="379.0" prefHeight="38.0" prefWidth="54.0" text="Cedula:">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label layoutX="456.0" layoutY="427.0" prefHeight="38.0" prefWidth="68.0" text="Nombre:">
+            <Label layoutX="509.0" layoutY="428.0" prefHeight="38.0" prefWidth="68.0" text="Nombre:">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label layoutX="456.0" layoutY="477.0" prefHeight="38.0" prefWidth="68.0" text="Email:">
+            <Label layoutX="509.0" layoutY="478.0" prefHeight="38.0" prefWidth="68.0" text="Email:">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label layoutX="456.0" layoutY="525.0" prefHeight="38.0" prefWidth="68.0" text="Celular:">
+            <Label layoutX="509.0" layoutY="525.0" prefHeight="38.0" prefWidth="68.0" text="Celular:">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <TextField fx:id="emailClient" layoutX="550.0" layoutY="478.0" prefHeight="36.0" prefWidth="207.0" promptText="..." styleClass="input-text" stylesheets="@../style.css" />
-            <TextField fx:id="numberClient" layoutX="550.0" layoutY="526.0" prefHeight="36.0" prefWidth="209.0" promptText="..." styleClass="input-text" stylesheets="@../style.css" />
+            <TextField fx:id="emailClient" layoutX="603.0" layoutY="479.0" prefHeight="36.0" prefWidth="207.0" promptText="..." styleClass="input-text" stylesheets="@../style.css" />
+            <TextField fx:id="numberClient" layoutX="606.0" layoutY="534.0" prefHeight="36.0" prefWidth="209.0" promptText="..." styleClass="input-text" stylesheets="@../style.css" />
             <Label layoutX="33.0" layoutY="360.0" text="Vendedor">
                <font>
                   <Font name="System Bold" size="24.0" />
@@ -136,13 +138,13 @@
             </Label>
             <TextField fx:id="emailSeller" layoutX="140.0" layoutY="486.0" prefHeight="36.0" prefWidth="207.0" promptText="cargando..." styleClass="input-text" stylesheets="@../style.css" />
             <TextField fx:id="numberSeller" layoutX="140.0" layoutY="534.0" prefHeight="36.0" prefWidth="209.0" promptText="cargando..." styleClass="input-text" stylesheets="@../style.css" />
-            <Button fx:id="searchClient" layoutX="479.0" layoutY="571.0" mnemonicParsing="false" onMouseClicked="#searchClientClicked" prefWidth="129.0" stylesheets="@../style.css" text="Buscar cliente">
+            <Button fx:id="searchClient" layoutX="526.0" layoutY="571.0" mnemonicParsing="false" onMouseClicked="#searchClientClicked" prefWidth="129.0" stylesheets="@../style.css" text="Buscar cliente">
                <styleClass>
                   <String fx:value="red-button" />
                   <String fx:value="select-button" />
                </styleClass>
             </Button>
-            <Button fx:id="editClient" layoutX="625.0" layoutY="571.0" mnemonicParsing="false" onMouseClicked="#editClientClicked" prefWidth="183.0" stylesheets="@../style.css" text="Cambiar cliente">
+            <Button fx:id="editClient" layoutX="663.0" layoutY="571.0" mnemonicParsing="false" onMouseClicked="#editClientClicked" prefWidth="183.0" stylesheets="@../style.css" text="Cambiar cliente">
                <styleClass>
                   <String fx:value="red-button" />
                   <String fx:value="select-button" />

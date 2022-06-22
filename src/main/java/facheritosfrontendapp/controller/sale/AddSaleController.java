@@ -3,19 +3,24 @@ package facheritosfrontendapp.controller.sale;
 import backend.dto.personDTO.WorkerDTO;
 import backend.endpoints.headquarterEndpoint.HeadquarterEndpoint;
 import backend.endpoints.personEndpoint.PersonEndpoint;
+import backend.endpoints.saleEndpoint.SaleEndpoint;
 import facheritosfrontendapp.ComboBoxView.HeadquarterView;
 import facheritosfrontendapp.controller.DashboardController;
 import facheritosfrontendapp.controller.MainController;
+import facheritosfrontendapp.objectRowView.saleRowView.SaleCarRowView;
+import facheritosfrontendapp.objectRowView.saleRowView.SaleRowView;
+import facheritosfrontendapp.objectRowView.saleRowView.SaleSingleRowView;
 import facheritosfrontendapp.views.FxmlLoader;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Background;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
@@ -67,6 +72,8 @@ public class AddSaleController implements Initializable {
 
     private HeadquarterEndpoint headquarterEndpoint;
 
+    private SaleEndpoint saleEndpoint;
+
     private ArrayList<HeadquarterView> headquarterComboboxList;
 
     @FXML
@@ -74,6 +81,31 @@ public class AddSaleController implements Initializable {
 
     @FXML
     private ComboBox<String> typeCombobox;
+
+    private ArrayList<SaleCarRowView> saleCarRowsArray;
+
+    private ObservableList<SaleCarRowView> saleCarObList;
+
+    @FXML
+    private TableColumn<SaleCarRowView, Integer> colId;
+
+    @FXML
+    private TableColumn<SaleCarRowView, String> colModel;
+
+    @FXML
+    private TableColumn<SaleCarRowView, String> colColor;
+
+    @FXML
+    private TableColumn<SaleCarRowView, Double> colPrice;
+
+    @FXML
+    private TableColumn<SaleCarRowView, Integer> colQuantity;
+
+    @FXML
+    private TableColumn<SaleCarRowView, String> colYear;
+
+    @FXML
+    private TableView carTableView;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -86,6 +118,8 @@ public class AddSaleController implements Initializable {
         fxmlLoader = new FxmlLoader();
         headquarterComboboxList = new ArrayList<>();
         headquarterEndpoint = new HeadquarterEndpoint();
+        saleEndpoint = new SaleEndpoint();
+        saleCarRowsArray = new ArrayList<>();
         personEndpoint = new PersonEndpoint();
     }
 
@@ -225,5 +259,65 @@ public class AddSaleController implements Initializable {
         searchClient.setStyle("-fx-background-color: #C02130; ");
         ccClient.setEditable(true);
 
+    }
+
+    public void showSaleCars(){
+        new Thread(() -> {
+            CompletableFuture<Map<Boolean, ResultSet>> vehicleCall = CompletableFuture.supplyAsync(() -> saleEndpoint.getSalesCar(currentWorker.getId_headquarter()));
+            try {
+                vehicleCall.thenApply((response) -> {
+                    if (response.containsKey(true)) {
+                        ResultSet resultSet = response.get(true);
+                        Platform.runLater(() -> {
+                            try {
+                             setDataCarTable(resultSet);
+                            } catch (SQLException e) {
+                                throw new RuntimeException(e);
+                            } catch (IOException e) {
+                                throw new RuntimeException(e);
+                            }
+                        });
+                    }
+                    return true;
+                }).get();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            } catch (ExecutionException e) {
+                throw new RuntimeException(e);
+            }
+        }).start();
+    }
+
+    public void setDataCarTable(ResultSet resultSet) throws SQLException, FileNotFoundException {
+
+       /* (Integer idSale, String nameSeller, String nameClient, Date dateSeller, String paymentMethod,String headquarter,
+                Double priceSale)*/
+        while(resultSet.next()){
+            //Create the object that will contain all the data shown on the table
+            SaleCarRowView car = new SaleCarRowView(resultSet.getInt("id_car"), resultSet.getString("description"), resultSet.getString("color"),
+                    resultSet.getDouble("price"),
+                    resultSet.getInt("quantity"),resultSet.getString("assemble_year"));
+            saleCarRowsArray.add(car); //Add every element to the array.
+        }
+/*
+        //Set the handle events for the labels
+        for(Integer i = 0; i < saleSingleRowsArray.size(); i++){
+            saleSingleRowsArray.get(i).getEditLabel().setOnMouseClicked(this::handleOptionLabel);
+        }*/
+
+        //Add every element from our array to the observable list array that will show on the table
+        for(Integer i = 0; i < saleCarRowsArray.size(); i++){
+            saleCarObList.add(saleCarRowsArray.get(i));
+        }
+
+        colId.setCellValueFactory(new PropertyValueFactory("idCar"));
+        colModel.setCellValueFactory(new PropertyValueFactory("model"));
+        colColor.setCellValueFactory(new PropertyValueFactory("color"));
+        colPrice.setCellValueFactory(new PropertyValueFactory("price"));
+        colQuantity.setCellValueFactory(new PropertyValueFactory("quantity"));
+        colYear.setCellValueFactory(new PropertyValueFactory("date"));
+        //colOptions.setCellValueFactory(new PropertyValueFactory("options"));
+
+        carTableView.setItems(saleCarObList);
     }
 }

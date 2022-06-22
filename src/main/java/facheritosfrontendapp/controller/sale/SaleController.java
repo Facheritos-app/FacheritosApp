@@ -88,6 +88,7 @@ public class SaleController implements Initializable {
         addSaleController = (AddSaleController) dashboardController.changeContent("sales/salesAdd", true);
         addSaleController.setSeller();
         addSaleController.setView();
+        addSaleController.showSaleCars();
     }
 
 
