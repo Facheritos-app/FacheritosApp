@@ -121,6 +121,7 @@ public class AddSaleController implements Initializable {
         saleEndpoint = new SaleEndpoint();
         saleCarRowsArray = new ArrayList<>();
         personEndpoint = new PersonEndpoint();
+        saleCarObList = FXCollections.observableArrayList();
     }
 
     public static synchronized WorkerDTO getCurrentWorker() {
@@ -263,7 +264,7 @@ public class AddSaleController implements Initializable {
 
     public void showSaleCars(){
         new Thread(() -> {
-            CompletableFuture<Map<Boolean, ResultSet>> vehicleCall = CompletableFuture.supplyAsync(() -> saleEndpoint.getSalesCar(currentWorker.getId_headquarter()));
+            CompletableFuture<Map<Boolean, ResultSet>> vehicleCall = CompletableFuture.supplyAsync(() -> saleEndpoint.getCar(currentWorker.getId_headquarter()));
             try {
                 vehicleCall.thenApply((response) -> {
                     if (response.containsKey(true)) {
