@@ -18,7 +18,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
+import javafx.scene.layout.VBox;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -88,6 +90,12 @@ public class AddSaleController implements Initializable {
 
     @FXML
     private TableColumn<SaleCarRowView, Integer> colId;
+
+    @FXML
+    private TableColumn<SaleCarRowView, VBox> colOption;
+
+    @FXML
+    private TableColumn<SaleCarRowView, VBox> colId1;
 
     @FXML
     private TableColumn<SaleCarRowView, String> colModel;
@@ -289,6 +297,17 @@ public class AddSaleController implements Initializable {
         }).start();
     }
 
+    private void handleOptionLabel(MouseEvent mouseEvent) {
+        for(Integer i = 0; i < saleCarRowsArray.size(); i++){
+            if(mouseEvent.getSource() == saleCarRowsArray.get(i).getCheckLabel()){
+
+            }/*
+            if(mouseEvent.getSource() == saleCarRowsArray.get(i).getQuantityLabel()){
+
+            }*/
+        }
+    }
+
     public void setDataCarTable(ResultSet resultSet) throws SQLException, FileNotFoundException {
 
        /* (Integer idSale, String nameSeller, String nameClient, Date dateSeller, String paymentMethod,String headquarter,
@@ -300,11 +319,12 @@ public class AddSaleController implements Initializable {
                     resultSet.getInt("quantity"),resultSet.getString("assemble_year"));
             saleCarRowsArray.add(car); //Add every element to the array.
         }
-/*
+
         //Set the handle events for the labels
-        for(Integer i = 0; i < saleSingleRowsArray.size(); i++){
-            saleSingleRowsArray.get(i).getEditLabel().setOnMouseClicked(this::handleOptionLabel);
-        }*/
+        for(Integer i = 0; i < saleCarRowsArray.size(); i++){
+            saleCarRowsArray.get(i).getCheckHBox().setOnMouseClicked(this::handleOptionLabel);
+            //saleCarRowsArray.get(i).getQuantityHBox().setOnMouseClicked(this::handleOptionLabel);
+        }
 
         //Add every element from our array to the observable list array that will show on the table
         for(Integer i = 0; i < saleCarRowsArray.size(); i++){
@@ -317,7 +337,8 @@ public class AddSaleController implements Initializable {
         colPrice.setCellValueFactory(new PropertyValueFactory("price"));
         colQuantity.setCellValueFactory(new PropertyValueFactory("quantity"));
         colYear.setCellValueFactory(new PropertyValueFactory("date"));
-        //colOptions.setCellValueFactory(new PropertyValueFactory("options"));
+        colOption.setCellValueFactory(new PropertyValueFactory("options"));
+        //colId1.setCellValueFactory(new PropertyValueFactory("options2"));
 
         carTableView.setItems(saleCarObList);
     }

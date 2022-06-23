@@ -28,6 +28,8 @@ public class SaleCarRowView {
 
     private VBox options;
 
+    private VBox options2;
+
     public SaleCarRowView(Integer idCar, String model,String color, Double price , Integer quantity,String date ) throws FileNotFoundException {
         this.idCar = idCar;
         this.model= model;
@@ -36,7 +38,9 @@ public class SaleCarRowView {
         this.quantity= quantity;
         this.date = date;
         this.options = new VBox();
+        this.options2 = new VBox();
         this.setOptions();
+        this.setOptions2();
     }
 
     public HBox getCheckHBox(){
@@ -114,10 +118,14 @@ public class SaleCarRowView {
         options.getChildren().add(hboxCheck);
         options.setAlignment(Pos.CENTER);
 
+    }
+
+    public void setOptions2() {
+
         HBox hboxQuantity = new HBox(new TextField());
         hboxQuantity .setAlignment(Pos.CENTER);
-        options.getChildren().add(hboxQuantity);
-        options.setAlignment(Pos.CENTER);
+        options2.getChildren().add(hboxQuantity);
+        options2.setAlignment(Pos.CENTER);
     }
 
 
