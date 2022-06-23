@@ -23,11 +23,11 @@
       <TableView fx:id="quotationTableView" layoutX="17.0" layoutY="132.0" prefHeight="372.0" prefWidth="622.0">
         <columns>
           <TableColumn fx:id="colId" prefWidth="107.0" text="No. de Cotización" />
-          <TableColumn fx:id="colSeller" prefWidth="99.0" text="Vendendor" />
-            <TableColumn fx:id="colCustomer" minWidth="0.0" prefWidth="90.0" text="Cliente" />
-            <TableColumn fx:id="colSaleDate" prefWidth="108.0" text="Fecha venta" />
-            <TableColumn fx:id="colHeadq" prefWidth="108.0" text="Sede" />
-            <TableColumn fx:id="colOptions" prefWidth="116.0" text="Opciones" />
+          <TableColumn fx:id="colSeller" prefWidth="128.0" text="Vendendor" />
+            <TableColumn fx:id="colCustomer" minWidth="0.0" prefWidth="123.0" text="Cliente" />
+            <TableColumn fx:id="colSaleDate" prefWidth="75.0" text="Fecha venta" />
+            <TableColumn fx:id="colHeadq" prefWidth="98.0" text="Sede" />
+            <TableColumn fx:id="colOptions" prefWidth="97.0" text="Opciones" />
         </columns>
       </TableView>
       <Separator orientation="VERTICAL" prefHeight="516.0" prefWidth="8.0" />

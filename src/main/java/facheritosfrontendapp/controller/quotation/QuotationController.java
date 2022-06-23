@@ -44,6 +44,10 @@ public class QuotationController {
         quotationEndpoint = new QuotationEndpoint();
     }
 
+    /**
+     * showQuotations: void -> void
+     * Purpose: This method calls the quotation endpoint and gets the results, then it calls setQuotationsTable with these results.
+     */
     public void showQuotations(){
         new Thread(() -> {
             //Async call to the DB
@@ -54,8 +58,7 @@ public class QuotationController {
                     if(response.containsKey(true)){
                         ResultSet resultSet = response.get(true);
                         try {
-                            System.out.println("Entro a showQuotations");
-                            setTable(resultSet);
+                            setQuotationsTable(resultSet);
                         } catch (SQLException e) {
                             throw new RuntimeException(e);
                         }
@@ -68,12 +71,16 @@ public class QuotationController {
         }).start();
     }
 
-    public void setTable(ResultSet resultSet) throws SQLException {
+    /**
+     * setQuotationsTable: ResultSet -> void
+     * Purpose: showQuotations auxiliary, fill the quotations table view
+     */
+    public void setQuotationsTable(ResultSet resultSet) throws SQLException {
         System.out.println("Entro a setTable");
         while(resultSet.next()){
-            QuotationRowView quotationRow = new QuotationRowView(resultSet.getInt("id_quotation"), resultSet.getString("seller_name"),
-                    resultSet.getString("customer_name"), resultSet.getDate("quotation_date").toLocalDate(), resultSet.getString("headquarter_name"));
-            System.out.println("Id quotation: " + quotationRow.getIdQuotation());
+            QuotationRowView quotationRow = new QuotationRowView(resultSet.getInt("id_quotation"), resultSet.getString("seller_firstname") + " " + resultSet.getString("seller_lastname"),
+                    resultSet.getString("customer_firstname") + " " +resultSet.getString("customer_lastname"),
+                            resultSet.getDate("quotation_date").toLocalDate(), resultSet.getString("headquarter_name"));
             quotationRowsArray.add(quotationRow);
         }
 

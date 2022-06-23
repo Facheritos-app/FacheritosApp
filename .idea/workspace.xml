@@ -5,14 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5f49d571-a74c-4244-90f5-d1284478321e" name="Changes" comment="OrderSingleView now works.">
-      <change afterPath="$PROJECT_DIR$/src/main/java/backend/endpoints/quotationEndpoint/QuotationEndpoint.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/quotation/QuotationController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/objectRowView/quotationRowView/QuotationRowView.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/quotations/quotations.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/navbar/SellerNavbar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/navbar/SellerNavbar.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/navbar/sellerNavbar.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/navbar/sellerNavbar.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/backend/endpoints/quotationEndpoint/QuotationEndpoint.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/backend/endpoints/quotationEndpoint/QuotationEndpoint.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/quotation/QuotationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/quotation/QuotationController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
