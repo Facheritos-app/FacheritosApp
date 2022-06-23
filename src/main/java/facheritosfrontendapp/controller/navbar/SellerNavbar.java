@@ -3,6 +3,7 @@ package facheritosfrontendapp.controller.navbar;
 import facheritosfrontendapp.controller.DashboardController;
 import facheritosfrontendapp.controller.MainController;
 import facheritosfrontendapp.controller.customer.CustomerController;
+import facheritosfrontendapp.controller.quotation.QuotationController;
 import facheritosfrontendapp.controller.sale.SaleController;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -19,6 +20,8 @@ public class SellerNavbar implements Initializable {
 
     private CustomerController customerController;
 
+    private QuotationController quotationController;
+
     @FXML
     public void homeClicked() throws IOException {
         dashboardController.changeContent("home");
@@ -34,6 +37,12 @@ public class SellerNavbar implements Initializable {
     public void salesClicked() throws IOException, ExecutionException, InterruptedException {
         saleController = (SaleController) dashboardController.changeContent("sales/sales");
         saleController.showSales();
+    }
+
+    @FXML
+    public void quotations() throws IOException {
+        quotationController = (QuotationController) dashboardController.changeContent("quotations/quotations");
+        quotationController.showQuotations();
     }
 
     @Override

@@ -37,5 +37,8 @@ module  facheritosfrontendapp {
     exports facheritosfrontendapp.controller.order;
     opens facheritosfrontendapp.controller.order to javafx.fxml;
     opens facheritosfrontendapp.objectRowView.orderRowView to javafx.base;
+    exports facheritosfrontendapp.controller.quotation to javafx.fxml;
+    opens  facheritosfrontendapp.controller.quotation to javafx.fxml;
+    opens facheritosfrontendapp.objectRowView.quotationRowView to javafx.base;
 
 }
