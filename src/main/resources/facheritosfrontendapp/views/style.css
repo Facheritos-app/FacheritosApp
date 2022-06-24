@@ -172,6 +172,14 @@ Button {
     -fx-background-color: white;
 }
 
+/*Cards*/
+.card {
+    -fx-background-color: white;
+    -fx-background-radius: 10;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0.8, 2);
+  /*-fx-effect: dropshadow(blurType, color, radius, spread, offsetX, offsetY)*/
+
+}
 
 /**
   -fx-background-color: #005296;

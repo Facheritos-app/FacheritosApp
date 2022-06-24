@@ -5,6 +5,7 @@ import facheritosfrontendapp.controller.MainController;
 import facheritosfrontendapp.controller.headquarter.HeadquarterController;
 import facheritosfrontendapp.controller.inventory.InventoryController;
 import facheritosfrontendapp.controller.order.OrderController;
+import facheritosfrontendapp.controller.sale.ChooseOptionController;
 import facheritosfrontendapp.controller.sale.SaleController;
 import facheritosfrontendapp.controller.user.UserController;
 import javafx.fxml.FXML;
@@ -27,7 +28,7 @@ public class ManagerNavbar implements Initializable {
 
     private UserController userController;
 
-    private SaleController saleController;
+    private ChooseOptionController chooseOptionController;
 
     private OrderController orderController;
 
@@ -56,8 +57,7 @@ public class ManagerNavbar implements Initializable {
 
     @FXML
     protected void salesClicked() throws IOException, ExecutionException, InterruptedException {
-        saleController = (SaleController) dashboardController.changeContent("sales/sales");
-        saleController.showSales();
+        chooseOptionController = (ChooseOptionController) dashboardController.changeContent("sales/chooseOption");
     }
 
     @FXML
