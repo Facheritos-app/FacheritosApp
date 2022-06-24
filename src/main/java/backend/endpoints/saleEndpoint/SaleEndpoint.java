@@ -95,6 +95,7 @@ public class SaleEndpoint {
         return response;
     }
 
+
     public Map<Boolean, ResultSet> getCar(Integer idHeadquarter) {
 
         PreparedStatement preparedStatement = null;
@@ -109,6 +110,24 @@ public class SaleEndpoint {
             resultSet = preparedStatement.executeQuery();
             response.put(true, resultSet);
         } catch (SQLException e) {
+            e.printStackTrace();
+            response.put(false, resultSet);
+        }
+        return response;
+    }
+
+
+    public Map<Boolean, ResultSet> getSaleByIdCustomer(Integer idCustomer){
+        PreparedStatement preparedStatement;
+        ResultSet resultSet = null;
+        HashMap<Boolean, ResultSet> response = new HashMap<>();
+        try(Connection conn = ConnectionBD.connectDB().getConnection()){
+            preparedStatement = conn.prepareStatement("SELECT * FROM sale JOIN headquarter USING(id_headquarter) " +
+                    "JOIN payment ON sale.id_payment_method = payment.id_payment WHERE id_customer = ?");
+            preparedStatement.setInt(1, idCustomer);
+            resultSet = preparedStatement.executeQuery();
+            response.put(true, resultSet);
+        }catch (SQLException e){
             e.printStackTrace();
             response.put(false, resultSet);
         }

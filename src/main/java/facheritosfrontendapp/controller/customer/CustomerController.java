@@ -137,6 +137,7 @@ public class CustomerController implements Initializable {
                     customerSingleViewController.backToCustomers.setVisible(true);
                     customerSingleViewController.backToUsers.setVisible(false);
                     customerSingleViewController.showCustomer(customerRowsArray.get(i).getIdPerson());
+                    customerSingleViewController.showSales(customerRowsArray.get(i).getIdPerson());
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }

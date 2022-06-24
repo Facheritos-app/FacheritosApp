@@ -192,7 +192,6 @@ public class UserController implements Initializable {
      * Purpose: showCustomers auxiliary, fill the customers table
      */
     public void setCustomersData(ResultSet resultSet) throws SQLException {
-        //As long as there are records left to show
         while(resultSet.next()){
             CustomerRowView customerRow = new CustomerRowView(resultSet.getInt("id_person"), resultSet.getString("cc"), resultSet.getString("first_name"),
                     resultSet.getString("last_name"), resultSet.getString("cellphone"));
@@ -239,6 +238,7 @@ public class UserController implements Initializable {
                     customerSingleViewController.backToUsers.setVisible(true);
                     customerSingleViewController.backToCustomers.setVisible(false);
                     customerSingleViewController.showCustomer(customerRowsArray.get(i).getIdPerson());
+                    customerSingleViewController.showSales(customerRowsArray.get(i).getIdPerson());
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
