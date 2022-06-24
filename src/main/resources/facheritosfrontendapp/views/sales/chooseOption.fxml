@@ -10,8 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="517.0" prefWidth="647.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="facheritosfrontendapp.views.sales.ChooseOption">
+<AnchorPane prefHeight="517.0" prefWidth="647.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="facheritosfrontendapp.controller.sale.ChooseOptionController">
    <children>
       <Label layoutX="31.0" layoutY="43.0" text="Elige una opción">
          <font>
@@ -26,7 +25,7 @@
             <Cursor fx:constant="DEFAULT" />
          </cursor>
          <children>
-            <VBox prefHeight="202.0" prefWidth="190.0" styleClass="card" stylesheets="@../style.css">
+            <VBox onMouseClicked="#salesClicked" prefHeight="202.0" prefWidth="190.0" styleClass="card" stylesheets="@../style.css">
                <children>
                   <ImageView fitHeight="55.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -53,6 +52,9 @@
                      </font>
                   </Label>
                </children>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </VBox>
             <VBox prefHeight="202.0" prefWidth="190.0" styleClass="card" stylesheets="@../style.css">
                <children>
@@ -84,8 +86,11 @@
                <HBox.margin>
                   <Insets left="20.0" />
                </HBox.margin>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </VBox>
-            <VBox prefHeight="202.0" prefWidth="190.0" styleClass="card" stylesheets="@../style.css">
+            <VBox onMouseClicked="#quotationsClicked" prefHeight="202.0" prefWidth="190.0" styleClass="card" stylesheets="@../style.css">
                <children>
                   <ImageView fitHeight="55.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -115,6 +120,9 @@
                <HBox.margin>
                   <Insets left="20.0" />
                </HBox.margin>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </VBox>
          </children>
       </HBox>
