@@ -301,10 +301,10 @@ public class AddSaleController implements Initializable {
         for(Integer i = 0; i < saleCarRowsArray.size(); i++){
             if(mouseEvent.getSource() == saleCarRowsArray.get(i).getCheckLabel()){
 
-            }/*
+            }
             if(mouseEvent.getSource() == saleCarRowsArray.get(i).getQuantityLabel()){
 
-            }*/
+            }
         }
     }
 
@@ -323,7 +323,7 @@ public class AddSaleController implements Initializable {
         //Set the handle events for the labels
         for(Integer i = 0; i < saleCarRowsArray.size(); i++){
             saleCarRowsArray.get(i).getCheckHBox().setOnMouseClicked(this::handleOptionLabel);
-            //saleCarRowsArray.get(i).getQuantityHBox().setOnMouseClicked(this::handleOptionLabel);
+            saleCarRowsArray.get(i).getQuantityHBox().setOnMouseClicked(this::handleOptionLabel);
         }
 
         //Add every element from our array to the observable list array that will show on the table
@@ -338,7 +338,7 @@ public class AddSaleController implements Initializable {
         colQuantity.setCellValueFactory(new PropertyValueFactory("quantity"));
         colYear.setCellValueFactory(new PropertyValueFactory("date"));
         colOption.setCellValueFactory(new PropertyValueFactory("options"));
-        //colId1.setCellValueFactory(new PropertyValueFactory("options2"));
+        colId1.setCellValueFactory(new PropertyValueFactory("options2"));
 
         carTableView.setItems(saleCarObList);
     }

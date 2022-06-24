@@ -120,6 +120,9 @@ public class SaleCarRowView {
 
     }
 
+    public VBox getOptions2() {
+        return options2;
+    }
     public void setOptions2() {
 
         HBox hboxQuantity = new HBox(new TextField());
