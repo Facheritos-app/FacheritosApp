@@ -53,6 +53,9 @@ public class InventoryController implements Initializable {
     private TableView partTableview;
 
     @FXML
+    private Button addBtn;
+
+    @FXML
     private TableColumn<VehicleRowView, String> colHeadquarterPart;
 
     @FXML
@@ -116,6 +119,11 @@ public class InventoryController implements Initializable {
         dashboardController = MainController.getDashboardController();
         //Tabs cannot be closed
         inventoryTabpane.setTabClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);
+
+        //Only the manager can have the add elements to inventory button
+        if(DashboardController.getCurrentWorker().getId_rol()!=1){
+            addBtn.setVisible(false);
+        }
     }
     /**
      * selectionTabpane: int -> void

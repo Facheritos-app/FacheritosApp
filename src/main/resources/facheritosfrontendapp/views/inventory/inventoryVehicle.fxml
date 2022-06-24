@@ -351,13 +351,13 @@
             </VBox>
             <HBox prefHeight="54.0" prefWidth="239.0" spacing="30.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                <children>
-                  <Button mnemonicParsing="false" stylesheets="@../style.css" text="Eliminar">
+                  <Button fx:id="deleteBtn" mnemonicParsing="false" stylesheets="@../style.css" text="Eliminar">
                      <styleClass>
                         <String fx:value="red-button" />
                         <String fx:value="select-button" />
                      </styleClass>
                   </Button>
-                  <Button mnemonicParsing="false" stylesheets="@../style.css" text="Editar">
+                  <Button fx:id="editBtn" mnemonicParsing="false" stylesheets="@../style.css" text="Editar">
                      <styleClass>
                         <String fx:value="blue-button" />
                         <String fx:value="select-button" />

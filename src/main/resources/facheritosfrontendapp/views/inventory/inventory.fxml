@@ -48,7 +48,7 @@
             </tabs>
         </TabPane>
         <Separator orientation="VERTICAL" prefHeight="516.0" prefWidth="8.0" />
-        <Button layoutX="500.0" layoutY="74.0" mnemonicParsing="false" onMouseClicked="#addClicked" prefHeight="26.0" prefWidth="84.0" styleClass="red-button" stylesheets="@../style.css" text="Agregar  +" textFill="WHITE">
+        <Button fx:id="addBtn" layoutX="500.0" layoutY="74.0" mnemonicParsing="false" onMouseClicked="#addClicked" prefHeight="26.0" prefWidth="84.0" styleClass="red-button" stylesheets="@../style.css" text="Agregar  +" textFill="WHITE">
             <font>
                 <Font name="System Bold" size="12.0" />
             </font>
