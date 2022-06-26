@@ -60,6 +60,10 @@ Button {
     -fx-font-family: Poppins;
     -fx-font-weight: BOLD;
 }
+
+.quotation-price-button {
+    -fx-background-radius: 20px;
+}
 /*Tabpane*/
 
 .tab-pane:top {
