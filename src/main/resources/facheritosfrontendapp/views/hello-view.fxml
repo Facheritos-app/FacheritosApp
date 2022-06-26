@@ -5,11 +5,18 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="590.0" prefWidth="840.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="facheritosfrontendapp.controller.MainController">
    <children>
+      <TextField editable="false" layoutX="289.0" layoutY="316.0" onKeyTyped="#ccAction" prefHeight="47.0" prefWidth="265.0" style="-fx-background-radius: 10;">
+         <cursor>
+            <Cursor fx:constant="TEXT" />
+         </cursor>
+      </TextField>
       <Button fx:id="inicio" layoutX="288.0" layoutY="405.0" mnemonicParsing="false" onAction="#boton" prefHeight="47.0" prefWidth="265.0" style="-fx-background-color: #005296; -fx-background-radius: 10;" text="Iniciar sesión" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="Poppins Bold" size="12.0" />
@@ -26,7 +33,7 @@
          <font>
             <Font name="Poppins Regular" size="12.0" />
          </font></Label>
-      <PasswordField fx:id="password" layoutX="288.0" layoutY="316.0" onKeyTyped="#passwordAction" prefHeight="47.0" prefWidth="265.0" promptText="Contraseña" style="-fx-background-radius: 10;">
+      <PasswordField fx:id="password" layoutX="290.0" layoutY="320.0" onKeyTyped="#passwordAction" prefHeight="40.0" prefWidth="265.0" promptText="Contraseña" style="-fx-background-radius: 10; -fx-border-color: transparent; -fx-background-color: transparent;">
          <cursor>
             <Cursor fx:constant="TEXT" />
          </cursor></PasswordField>
@@ -36,5 +43,26 @@
          </cursor></TextField>
       <Label layoutX="172.0" layoutY="135.0" prefHeight="21.0" prefWidth="0.0" />
       <Label fx:id="error" alignment="CENTER" layoutX="293.0" layoutY="363.0" prefHeight="21.0" prefWidth="252.0" text=" " />
+      <ImageView fx:id="show" fitHeight="21.0" fitWidth="136.0" layoutX="524.0" layoutY="330.0" onMouseClicked="#showClicked" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../icons/view.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+      <ImageView fx:id="hide" fitHeight="21.0" fitWidth="28.0" layoutX="524.0" layoutY="331.0" onMouseClicked="#hideClicked" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../icons/hidden.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+      <TextField fx:id="passTextField" layoutX="290.0" layoutY="320.0" onKeyTyped="#updatePasswordField" prefHeight="40.0" prefWidth="265.0" promptText="Contraseña" style="-fx-background-radius: 10; -fx-background-color: transparent; -fx-border-color: transparent;" visible="false">
+         <cursor>
+            <Cursor fx:constant="TEXT" />
+         </cursor>
+      </TextField>
    </children>
 </Pane>

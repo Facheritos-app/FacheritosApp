@@ -4,10 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5f49d571-a74c-4244-90f5-d1284478321e" name="Changes" comment="I changed the view users view with the combo boxes and the city field.">
+    <list default="true" id="5f49d571-a74c-4244-90f5-d1284478321e" name="Changes" comment="Show/hide password is now available.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/quotation/QuotationSingleViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/quotation/QuotationSingleViewController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/quotations/quotationsDetails.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/quotations/quotationsDetails.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/MainController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -199,6 +200,8 @@
       <workItem from="1656100427976" duration="5814000" />
       <workItem from="1656254483720" duration="13346000" />
       <workItem from="1656273903708" duration="1625000" />
+      <workItem from="1656203199644" duration="10346000" />
+      <workItem from="1656215328543" duration="368000" />
     </task>
     <task id="LOCAL-00001" summary="I changed the view users view with the combo boxes and the city field.">
       <created>1654630629606</created>
@@ -235,7 +238,21 @@
       <option name="project" value="LOCAL" />
       <updated>1655874806966</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Show/hide password is now available.">
+      <created>1656214855099</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1656214855099</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Show/hide password is now available.">
+      <created>1656215502972</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1656215502972</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -260,7 +277,8 @@
     <MESSAGE value="I added the logout button and customerSingleView now works for a salesperson." />
     <MESSAGE value="Cancel button now works from usersSingleView." />
     <MESSAGE value="OrderSingleView now works." />
-    <option name="LAST_COMMIT_MESSAGE" value="OrderSingleView now works." />
+    <MESSAGE value="Show/hide password is now available." />
+    <option name="LAST_COMMIT_MESSAGE" value="Show/hide password is now available." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
