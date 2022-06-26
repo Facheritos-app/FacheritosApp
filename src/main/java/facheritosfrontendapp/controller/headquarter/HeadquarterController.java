@@ -3,6 +3,7 @@ package facheritosfrontendapp.controller.headquarter;
 import backend.endpoints.headquarterEndpoint.HeadquarterEndpoint;
 import facheritosfrontendapp.controller.DashboardController;
 import facheritosfrontendapp.controller.MainController;
+import facheritosfrontendapp.controller.sale.SaleSingleViewController;
 import facheritosfrontendapp.objectRowView.headquarterRowView.HeadquarterRowView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -58,7 +59,7 @@ public class HeadquarterController implements Initializable {
 
     private ArrayList<HeadquarterRowView> headquarterRowsArray;
 
-
+    private EditHeadquarterController editHeadquarterController;
 
     @FXML
     protected void addHeadquarterClicked() throws IOException {
@@ -69,6 +70,7 @@ public class HeadquarterController implements Initializable {
         headquarterEndpoint = new HeadquarterEndpoint();
         headquarterRowsArray = new ArrayList<>();
         headquarterObList = FXCollections.observableArrayList();
+        editHeadquarterController = new EditHeadquarterController();
     }
 
     @Override
@@ -92,7 +94,12 @@ public class HeadquarterController implements Initializable {
     private void handleOptionLabel(MouseEvent mouseEvent) {
         for(Integer i = 0; i < headquarterRowsArray.size(); i++){
             if(mouseEvent.getSource() == headquarterRowsArray.get(i).getEditLabel()){
-                //Here we will load the component to edit a headquarter
+                try {
+                    editHeadquarterController = (EditHeadquarterController) dashboardController.changeContent("headquarters/headquartersEdit", true);
+                    editHeadquarterController.showHeadquarterData(headquarterRowsArray.get(i).getIdHeadquarter());
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
             }
             if(mouseEvent.getSource() == headquarterRowsArray.get(i).getDeleteLabel()){
                 //Here we will load the component to delete a headquarter
