@@ -28,6 +28,7 @@ public class QuotationController implements Initializable {
 
     private ArrayList<QuotationRowView> quotationRowsArray;
     private QuotationEndpoint quotationEndpoint;
+    private QuotationSingleViewController quotationSingleViewController;
 
     private DashboardController dashboardController;
 
@@ -110,7 +111,8 @@ public class QuotationController implements Initializable {
         for(Integer i = 0; i < quotationRowsArray.size(); i++){
             if(mouseEvent.getSource() == quotationRowsArray.get(i).getOptionsLabel()){
                 try {
-                    dashboardController.changeContent("quotations/quotationsTest", true);
+                    quotationSingleViewController = (QuotationSingleViewController) dashboardController.changeContent("quotations/quotationsDetails", true);
+                    quotationSingleViewController.showQuotation(quotationRowsArray.get(i).getIdQuotation());
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
