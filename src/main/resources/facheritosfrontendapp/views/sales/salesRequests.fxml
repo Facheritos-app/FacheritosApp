@@ -7,40 +7,46 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="517.0" prefWidth="647.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="facheritosfrontendapp.controller.sale.SalesRequests">
    <children>
-      <VBox layoutY="1.0" prefHeight="517.0" prefWidth="647.0">
-         <children>
-            <ImageView fitHeight="48.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true">
+      <BorderPane prefHeight="517.0" prefWidth="647.0">
+         <center>
+            <VBox prefHeight="425.0" prefWidth="641.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Label text="Solicitudes de ventas">
+                     <font>
+                        <Font name="System Bold" size="26.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="20.0" top="20.0" />
+                     </VBox.margin>
+                  </Label>
+                  <TableView prefHeight="200.0" prefWidth="200.0" styleClass="table-views" stylesheets="@../style.css">
+                    <columns>
+                      <TableColumn prefWidth="75.0" text="C1" />
+                      <TableColumn prefWidth="75.0" text="C2" />
+                    </columns>
+                     <VBox.margin>
+                        <Insets left="20.0" right="20.0" top="30.0" />
+                     </VBox.margin>
+                  </TableView>
+               </children>
+            </VBox>
+         </center>
+         <top>
+            <ImageView fitHeight="48.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="TOP_LEFT">
                <image>
                   <Image url="@../../icons/back-arrow.png" />
                </image>
-               <VBox.margin>
-                  <Insets left="20.0" top="30.0" />
-               </VBox.margin>
-            </ImageView>
-            <Label text="Solicitudes de ventas">
-               <font>
-                  <Font name="System Bold" size="26.0" />
-               </font>
-               <VBox.margin>
+               <BorderPane.margin>
                   <Insets left="20.0" top="20.0" />
-               </VBox.margin>
-            </Label>
-            <TableView prefHeight="200.0" prefWidth="200.0">
-              <columns>
-                <TableColumn prefWidth="75.0" text="C1" />
-                <TableColumn prefWidth="75.0" text="C2" />
-              </columns>
-               <VBox.margin>
-                  <Insets left="20.0" right="20.0" top="30.0" />
-               </VBox.margin>
-            </TableView>
-         </children>
-      </VBox>
+               </BorderPane.margin>
+            </ImageView>
+         </top>
+      </BorderPane>
    </children>
 </AnchorPane>
