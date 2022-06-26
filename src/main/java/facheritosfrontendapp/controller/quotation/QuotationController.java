@@ -1,27 +1,35 @@
 package facheritosfrontendapp.controller.quotation;
 
 import backend.endpoints.quotationEndpoint.QuotationEndpoint;
+import facheritosfrontendapp.controller.DashboardController;
+import facheritosfrontendapp.controller.MainController;
 import facheritosfrontendapp.objectRowView.quotationRowView.QuotationRowView;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 
+import java.io.IOException;
+import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.ResourceBundle;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
-public class QuotationController {
+public class QuotationController implements Initializable {
 
     private ArrayList<QuotationRowView> quotationRowsArray;
     private QuotationEndpoint quotationEndpoint;
+
+    private DashboardController dashboardController;
 
 
     @FXML
@@ -100,12 +108,23 @@ public class QuotationController {
 
     public void handleOptionLabel(MouseEvent mouseEvent){
         for(Integer i = 0; i < quotationRowsArray.size(); i++){
-
+            if(mouseEvent.getSource() == quotationRowsArray.get(i).getOptionsLabel()){
+                try {
+                    dashboardController.changeContent("quotations/quotationsDetails",true);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
         }
     }
 
 
     @FXML
     public void addQuotation(javafx.scene.input.MouseEvent mouseEvent) {
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        dashboardController = MainController.getDashboardController();
     }
 }

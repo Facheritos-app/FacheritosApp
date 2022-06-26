@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.gluonhq.charm.glisten.control.TextField?>
 <?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<ScrollPane fitToHeight="true" fitToWidth="true" hmax="0.0" prefHeight="818.0" prefWidth="1166.0" style="-fx-background-color: blue;" vmax="0.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="facheritosfrontendapp.controller.user.AddUserController">
+<ScrollPane fitToHeight="true" fitToWidth="true" hmax="0.0" style="-fx-background-color: blue;" vmax="0.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="facheritosfrontendapp.controller.quotation.QuotationSingleViewController">
    <content>
       <BorderPane style="-fx-background-color: white;">
          <top>
-            <HBox prefHeight="100.0" prefWidth="1016.0" BorderPane.alignment="CENTER">
+            <HBox prefHeight="55.0" prefWidth="1164.0" BorderPane.alignment="CENTER">
                <children>
                   <VBox prefHeight="100.0" prefWidth="434.0">
                      <children>
@@ -94,7 +94,7 @@
                                           <Font name="System Bold" size="14.0" />
                                        </font>
                                     </Label>
-                                    <TextField maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="157.0" text="Cargando..." GridPane.columnIndex="1" />
+                                    <TextField maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="146.0" text="Cargando..." GridPane.columnIndex="1" />
                                     <Label text="Nombre" GridPane.rowIndex="1">
                                        <GridPane.margin>
                                           <Insets />
@@ -106,7 +106,7 @@
                                           <Insets left="20.0" />
                                        </padding>
                                     </Label>
-                                    <TextField maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="157.0" text="Cargando..." GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                    <TextField maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="146.0" text="Cargando..." GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                     <Label text="Sede" GridPane.rowIndex="2">
                                        <padding>
                                           <Insets left="20.0" />
@@ -115,6 +115,7 @@
                                           <Font name="System Bold" size="14.0" />
                                        </font>
                                     </Label>
+                                    <TextField maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="146.0" text="Cargando..." GridPane.columnIndex="1" GridPane.rowIndex="2" />
                                     <Label text="Email" GridPane.rowIndex="3">
                                        <padding>
                                           <Insets left="20.0" />
@@ -123,8 +124,7 @@
                                           <Font name="System Bold" size="14.0" />
                                        </font>
                                     </Label>
-                                    <TextField maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="157.0" text="Cargando..." GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                    <TextField maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="157.0" text="Cargando..." GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                    <TextField maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="146.0" text="Cargando..." GridPane.columnIndex="1" GridPane.rowIndex="3" />
                                  </children>
                               </GridPane>
                            </children>
@@ -156,7 +156,6 @@
                                           <Font name="System Bold" size="14.0" />
                                        </font>
                                     </Label>
-                                    <TextField maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="157.0" text="Cargando..." GridPane.columnIndex="1" />
                                     <Label text="Nombre:" GridPane.rowIndex="1">
                                        <GridPane.margin>
                                           <Insets />
@@ -165,35 +164,72 @@
                                           <Font name="System Bold" size="14.0" />
                                        </font>
                                     </Label>
-                                    <TextField maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="157.0" text="Cargando..." GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                    <TextField maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="146.0" text="Cargando..." GridPane.columnIndex="1" />
+                                    <TextField maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="146.0" text="Cargando..." GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                  </children>
                               </GridPane>
                            </children>
                         </VBox>
-                        <FlowPane alignment="TOP_CENTER" nodeOrientation="RIGHT_TO_LEFT" orientation="VERTICAL" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2">
+                        <VBox prefHeight="200.0" prefWidth="100.0" spacing="10.0" GridPane.columnIndex="2">
                            <children>
-                              <HBox alignment="CENTER_RIGHT" prefHeight="54.0" prefWidth="381.0" spacing="10.0" style="-fx-background-color: black;" styleClass="quotation-price-button" stylesheets="@../style.css">
+                              <Label text="Resumen de venta">
+                                 <font>
+                                    <Font name="System Bold" size="24.0" />
+                                 </font>
+                              </Label>
+                              <GridPane vgap="20.0">
+                                 <columnConstraints>
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="188.0" minWidth="10.0" prefWidth="121.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="342.0" minWidth="10.0" prefWidth="267.0" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                 </rowConstraints>
                                  <children>
-                                    <Label text="Cargando..." textFill="WHITE">
+                                    <Label text="Cantidad:">
+                                       <GridPane.margin>
+                                          <Insets />
+                                       </GridPane.margin>
                                        <font>
-                                          <Font name="System Bold Italic" size="14.0" />
+                                          <Font name="System Bold" size="14.0" />
                                        </font>
                                     </Label>
-                                    <Label text="Precio:" textFill="WHITE">
-                                       <padding>
-                                          <Insets right="10.0" />
-                                       </padding>
+                                    <TextField maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="146.0" text="Cargando..." GridPane.columnIndex="1" />
+                                    <Label prefHeight="20.0" prefWidth="130.0" text="Método de pago:" GridPane.rowIndex="1">
+                                       <GridPane.margin>
+                                          <Insets />
+                                       </GridPane.margin>
                                        <font>
-                                          <Font name="System Bold Italic" size="14.0" />
+                                          <Font name="System Bold" size="14.0" />
                                        </font>
                                     </Label>
+                                    <HBox alignment="CENTER" prefHeight="54.0" prefWidth="381.0" spacing="10.0" style="-fx-background-color: black;" styleClass="quotation-price-button" stylesheets="@../style.css" GridPane.columnSpan="2" GridPane.rowIndex="3" GridPane.rowSpan="2">
+                                       <children>
+                                          <Label alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" text="Precio:" textFill="WHITE">
+                                             <padding>
+                                                <Insets right="10.0" />
+                                             </padding>
+                                             <font>
+                                                <Font name="System Bold Italic" size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <Label text="Cargando..." textFill="WHITE">
+                                             <font>
+                                                <Font name="System Bold Italic" size="14.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </HBox>
+                                    <ComboBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                  </children>
-                              </HBox>
+                              </GridPane>
                            </children>
-                           <padding>
-                              <Insets top="20.0" />
-                           </padding>
-                        </FlowPane>
+                        </VBox>
                      </children>
                   </GridPane>
                   <HBox nodeOrientation="RIGHT_TO_LEFT" prefHeight="56.0" prefWidth="1164.0" style="-fx-spacing: 30;">
@@ -226,9 +262,9 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <VBox prefHeight="200.0" prefWidth="100.0">
+                  <VBox prefHeight="442.0" prefWidth="577.0">
                      <children>
-                        <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0">
+                        <HBox alignment="BOTTOM_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="48.0" prefWidth="577.0">
                            <children>
                               <Label alignment="CENTER" prefHeight="28.0" prefWidth="104.0" text="Inventario">
                                  <HBox.margin>
@@ -238,14 +274,10 @@
                                     <Font name="System Bold" size="14.0" />
                                  </font>
                               </Label>
-                              <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" stylesheets="@../style.css" text="Agregar elemento">
-                                 <HBox.margin>
-                                    <Insets />
-                                 </HBox.margin>
-                                 <styleClass>
-                                    <String fx:value="blue-button" />
-                                    <String fx:value="select-button" />
-                                 </styleClass>
+                              <Button alignment="CENTER_RIGHT" contentDisplay="CENTER" mnemonicParsing="false" text="Agregar elemento">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
                               </Button>
                            </children>
                         </HBox>
@@ -259,7 +291,7 @@
                   </VBox>
                   <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
                      <children>
-                        <HBox alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="100.0" prefWidth="200.0">
+                        <HBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="48.0" prefWidth="577.0">
                            <children>
                               <Label alignment="CENTER" contentDisplay="CENTER" text="Resumen cotización">
                                  <HBox.margin>
