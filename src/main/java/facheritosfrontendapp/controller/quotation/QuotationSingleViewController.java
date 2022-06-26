@@ -1,17 +1,19 @@
 package facheritosfrontendapp.controller.quotation;
 
 import backend.endpoints.quotationEndpoint.QuotationEndpoint;
+import facheritosfrontendapp.objectRowView.inventoryRowView.VehicleRowView;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 
+import java.math.BigDecimal;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.concurrent.CompletableFuture;
@@ -21,6 +23,17 @@ public class QuotationSingleViewController implements Initializable {
 
 
     private QuotationEndpoint quotationEndpoint;
+
+    private ArrayList<VehicleRowView> vehicleRowViewList;
+
+    @FXML
+    private TableView quotationTableView;
+    @FXML
+    private TableColumn<VehicleRowView, String> colName;
+    @FXML
+    private TableColumn<VehicleRowView, Double> colPrice;
+    @FXML
+    private TableColumn<VehicleRowView, String> colHeadquarter;
 
     @FXML
     private TextField sellerCc;
@@ -45,9 +58,11 @@ public class QuotationSingleViewController implements Initializable {
     private ComboBox paymentMethod;
     @FXML
     private Label quotationPrice;
-
+    @FXML
+    private Label quotationId;
     public QuotationSingleViewController(){
         quotationEndpoint = new QuotationEndpoint();
+        vehicleRowViewList = new ArrayList<>();
     }
 
     public void showQuotation(Integer idQuotation){
@@ -60,6 +75,7 @@ public class QuotationSingleViewController implements Initializable {
                         ResultSet resultSet = response.get(true);
                             Platform.runLater(() -> {
                                 try {
+                                    setQuotationItems(resultSet);
                                     setSellerInfo(resultSet);
                                     setCustomerInfo(resultSet);
                                     setQuotationDetails(resultSet);
@@ -95,7 +111,20 @@ public class QuotationSingleViewController implements Initializable {
     public void setQuotationDetails(ResultSet resultSet) throws SQLException {
         paymentMethod.setItems(FXCollections.observableArrayList("Tarjeta de credito", "Efectivo"));
         quotationQuantity.setText("1");
+        quotationId.setText(resultSet.getString("id_quotation"));
         quotationPrice.setText("$ " + resultSet.getString("price"));
+    }
+
+    public void setQuotationItems(ResultSet resultSet) throws SQLException {
+        VehicleRowView vehicleRowView = new VehicleRowView(resultSet.getString("description"), new BigDecimal(String.valueOf(resultSet.getDouble("price"))).toPlainString(),
+                resultSet.getString("name"), 1, resultSet.getInt("id_car"));
+        vehicleRowViewList.add(vehicleRowView);
+
+        colName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        colPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
+        colHeadquarter.setCellValueFactory(new PropertyValueFactory<>("headquarter"));
+
+        quotationTableView.setItems(FXCollections.observableArrayList(vehicleRowViewList));
     }
 
 

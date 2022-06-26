@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<ScrollPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="577.0" prefWidth="713.0" style="bac: red;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="facheritosfrontendapp.controller.quotation.QuotationSingleViewController">
+<ScrollPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="692.0" prefWidth="900.0" style="bac: red;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="facheritosfrontendapp.controller.quotation.QuotationSingleViewController">
    <content>
       <GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="500.0" minWidth="700.0" prefHeight="623.0" prefWidth="855.0">
         <columnConstraints>
@@ -46,7 +46,7 @@
                                     <Insets left="10.0" />
                                  </padding>
                               </Label>
-                              <Label text="...">
+                              <Label fx:id="quotationId" text="...">
                                  <font>
                                     <Font name="System Bold" size="36.0" />
                                  </font>
@@ -81,11 +81,6 @@
                                     <Font name="System Bold" size="14.0" />
                                  </font>
                               </Label>
-                              <Button alignment="CENTER" contentDisplay="CENTER" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="177.0" styleClass="blue-button" stylesheets="@../style.css" text="Agregar elemento">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                              </Button>
                            </children>
                            <padding>
                               <Insets bottom="10.0" />
@@ -114,10 +109,11 @@
                               <Button mnemonicParsing="false" text="Button" visible="false" />
                            </children>
                         </HBox>
-                        <TableView prefHeight="239.0" prefWidth="394.0">
+                        <TableView fx:id="quotationTableView" prefHeight="239.0" prefWidth="394.0">
                            <columns>
-                              <TableColumn prefWidth="75.0" text="C1" />
-                              <TableColumn prefWidth="75.0" text="C2" />
+                              <TableColumn fx:id="colName" prefWidth="98.0" style="-fx-alignment: CENTER;" text="Nombre" />
+                              <TableColumn fx:id="colPrice" prefWidth="124.0" style="-fx-alignment: CENTER;" text="   Precio" />
+                              <TableColumn fx:id="colHeadquarter" prefWidth="97.0" style="-fx-alignment: CENTER;" text="        Sede" />
                            </columns>
                         </TableView>
                      </children>
