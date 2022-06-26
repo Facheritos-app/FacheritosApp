@@ -134,10 +134,10 @@ public class MainController implements Initializable {
 
     @FXML
     public void hideClicked() {
+        passTextField.setVisible(false);
+        password.setText(passTextField.getText());
         password.setPrefWidth(232);
         password.setVisible(true);
-        password.setText(passTextField.getText());
-        passTextField.setVisible(false);
 
         hide.setVisible(false);
         show.setVisible(true);
