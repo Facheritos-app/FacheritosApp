@@ -110,7 +110,7 @@ public class QuotationController implements Initializable {
         for(Integer i = 0; i < quotationRowsArray.size(); i++){
             if(mouseEvent.getSource() == quotationRowsArray.get(i).getOptionsLabel()){
                 try {
-                    dashboardController.changeContent("quotations/quotationsDetails",true);
+                    dashboardController.changeContent("quotations/quotationsTest", true);
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
