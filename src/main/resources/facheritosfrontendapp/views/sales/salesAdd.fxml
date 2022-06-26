@@ -151,6 +151,8 @@
                </styleClass>
             </Button>
             <Button fx:id="saveSale" layoutX="140.0" layoutY="615.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="137.0" styleClass="blue-button" stylesheets="@../style.css" text="Guardar venta" />
+            <Button fx:id="ids" layoutX="537.0" layoutY="296.0" mnemonicParsing="false"  text="ids" />
+            <Button fx:id="calcular" layoutX="404.0" layoutY="315.0" mnemonicParsing="false" text="calcular" />
          </children></AnchorPane>
   </content>
 </ScrollPane>
