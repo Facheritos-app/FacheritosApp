@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.AccessibleRole;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -13,9 +14,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
+import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -34,13 +37,25 @@ public class MainController implements Initializable {
     private TextField cc;
 
     @FXML
+    private TextField passTextField;
+
+    @FXML
     private PasswordField password;
+
+    @FXML
+    private ImageView show;
+
+    @FXML
+    private ImageView hide;
+
 
     private Stage stage;
     private Scene scene;
     private Parent root;
     @FXML
     private Button inicio;
+
+
 
     private static DashboardController dashboardController;
 
@@ -49,9 +64,17 @@ public class MainController implements Initializable {
     protected void ccAction() {
         error.setVisible(false);
     }
+
     @FXML
     protected void passwordAction() {
         error.setVisible(false);
+        show.setVisible(true);
+        password.setPrefWidth(232);
+
+        if (password.getText().isEmpty()){
+            show.setVisible(false);
+            password.setPrefWidth(265);
+        }
     }
 
     @FXML
@@ -82,6 +105,42 @@ public class MainController implements Initializable {
             error.setText("Error: Datos incorrectos, intente de nuevo");
         }
 
+    }
+
+    @FXML
+    protected void updatePasswordField() {
+        error.setVisible(false);
+        password.setText(passTextField.getText());
+        hide.setVisible(true);
+        passTextField.setPrefWidth(232);
+
+        if (password.getText().isEmpty()){
+            hide.setVisible(false);
+            passTextField.setPrefWidth(265);
+        }
+    }
+
+
+    @FXML
+    public void showClicked() {
+        password.setVisible(false);
+        passTextField.setText(password.getText());
+        passTextField.setPrefWidth(232);
+        passTextField.setVisible(true);
+
+        show.setVisible(false);
+        hide.setVisible(true);
+    }
+
+    @FXML
+    public void hideClicked() {
+        passTextField.setVisible(false);
+        password.setText(passTextField.getText());
+        password.setPrefWidth(232);
+        password.setVisible(true);
+
+        hide.setVisible(false);
+        show.setVisible(true);
     }
 
     public static DashboardController getDashboardController() {

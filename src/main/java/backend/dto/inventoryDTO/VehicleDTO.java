@@ -14,6 +14,10 @@ public class VehicleDTO {
 
     private String imageLink;
 
+    public VehicleDTO(){
+
+    }
+
     public Integer getIdColor() {
         return idColor;
     }

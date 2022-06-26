@@ -111,4 +111,28 @@ public class SaleEndpoint {
         }
         return response;
     }
+
+    /**
+     * getSaleRequests: ConfirmationDTO -> Boolean
+     * Purpose: This method connects to the DB and brings the confirmation of the sale
+     */
+    public Map<Boolean, ResultSet> getSaleRequests() {
+
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        HashMap<Boolean, ResultSet> response = new HashMap<>();
+        try (Connection conn = ConnectionBD.connectDB().getConnection()) {
+            preparedStatement = conn.prepareStatement("SELECT * FROM sale JOIN (SELECT id_worker, id_person FROM worker) AS workers USING(id_worker) JOIN person USING(id_person)" +
+                    "JOIN headquarter USING(id_headquarter) JOIN payment ON id_payment_method=id_payment JOIN confirmation USING(id_confirmation)" +
+                    "JOIN (SELECT first_name AS customer_firstname, last_name AS customer_lastname, id_person AS id_customer FROM person) AS customers USING(id_customer) WHERE id_confirmation=2 ");
+            resultSet = preparedStatement.executeQuery();
+            response.put(true, resultSet);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            response.put(false, resultSet);
+        }
+
+        return response;
+    }
+
 }

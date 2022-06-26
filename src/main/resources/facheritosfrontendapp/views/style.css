@@ -80,10 +80,12 @@ Button {
 .table-views .column-header{
     -fx-background-color: #005296;
 
+
 }
 .table-views .column-header .label {
     -fx-text-fill: #FFFFFF;
     -fx-background-color: #005296;
+    -fx-border-radius: 10;
 }
 
 .table-views {
