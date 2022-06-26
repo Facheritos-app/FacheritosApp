@@ -59,6 +59,8 @@ public class SaleRequestController implements Initializable {
 
     private DashboardController dashboardController;
 
+    private SaleRequestSingleViewController saleRequestSingleViewController;
+
     public SaleRequestController(){
         saleEndpoint = new SaleEndpoint();
         saleRequestRowViewList = new ArrayList<>();
@@ -141,13 +143,16 @@ public class SaleRequestController implements Initializable {
      * handleSaleRequestOptionLabel: mouseEvent -> void
      * Purpose: Listens to the events of the View More label
      */
-    private void handleSaleRequestOptionHbox(MouseEvent mouseEvent)  {
+    private void handleSaleRequestOptionHbox(MouseEvent mouseEvent) {
         for(Integer i = 0; i < saleRequestRowViewList.size(); i++){
             if(mouseEvent.getSource() == saleRequestRowViewList.get(i).getOptionsHBox()){
                 //Here we will load the component to view, edit and delete the vehicle
-                /*
-                inventoryVehicleController = (InventoryVehicleController) dashboardController.changeContent("inventory/inventoryVehicle", true);
-                inventoryVehicleController.showVehicleData(vehicleRowViewList.get(i).getIdCar());*/
+                try {
+                    saleRequestSingleViewController= (SaleRequestSingleViewController) dashboardController.changeContent("sales/saleRequestSingleView", true);
+                    saleRequestSingleViewController.showSaleData(saleRequestRowViewList.get(i).getIdSale());
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
             }
         }
     }

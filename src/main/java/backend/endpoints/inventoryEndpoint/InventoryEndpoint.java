@@ -174,7 +174,7 @@ public class InventoryEndpoint {
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         Integer idCar = null;
-        Integer idHeadquarter = null; //FALTAAAA
+        Integer idHeadquarter = null;
         HashMap<Boolean, Integer> responseIdPart = (HashMap<Boolean, Integer>) createVehicle(vehicle);
         if(responseIdPart.containsKey(true)){
             idCar = responseIdPart.get(true);

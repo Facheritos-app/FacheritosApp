@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<ScrollPane fx:id="scrollpane" prefHeight="620.0" prefWidth="700.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="facheritosfrontendapp.controller.sale.SaleRequestSingleViewController">
+   <content>
+      <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="620.0" prefWidth="700.0" style="-fx-background-color: white;">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="392.8000122070313" minWidth="10.0" prefWidth="358.3999877929688" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="388.4000244140625" minWidth="10.0" prefWidth="341.20001220703125" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints maxHeight="431.2000457763672" minHeight="10.0" prefHeight="154.40000610351564" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="448.8000122070312" minHeight="10.0" prefHeight="220.53330688476564" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="440.39998168945317" minHeight="0.0" prefHeight="119.59995117187498" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="293.1333923339844" minHeight="10.0" prefHeight="121.20004882812498" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <VBox prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <ImageView fitHeight="53.0" fitWidth="61.0" onMouseClicked="#backArrowClicked" pickOnBounds="true" preserveRatio="true" styleClass="back-arrow">
+                     <image>
+                        <Image url="@../../icons/back-arrow.png" />
+                     </image>
+                     <VBox.margin>
+                        <Insets left="20.0" top="20.0" />
+                     </VBox.margin>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ImageView>
+                  <Label prefHeight="54.0" prefWidth="368.0" text="Solicitud de venta" textAlignment="CENTER">
+                     <font>
+                        <Font name="System Bold" size="36.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="20.0" top="10.0" />
+                     </VBox.margin>
+                  </Label>
+               </children>
+            </VBox>
+            <VBox prefHeight="246.0" prefWidth="394.0" GridPane.rowIndex="1" GridPane.rowSpan="2">
+               <children>
+                  <HBox prefHeight="36.0" prefWidth="318.0" spacing="70.0" styleClass="gridpane-hbox" stylesheets="@../style.css">
+                     <children>
+                        <Label prefHeight="26.0" prefWidth="100.0" stylesheets="@../style.css" text="No. de venta:">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                           <styleClass>
+                              <String fx:value="gridpane-hbox-label" />
+                              <String fx:value="bold" />
+                           </styleClass>
+                        </Label>
+                        <Label fx:id="saleNumberLabel" prefHeight="26.0" prefWidth="145.0" styleClass="gridpane-hbox-label" stylesheets="@../style.css" text="Cargando...">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                     </children>
+                     <opaqueInsets>
+                        <Insets top="20.0" />
+                     </opaqueInsets>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                     <padding>
+                        <Insets bottom="10.0" left="20.0" top="10.0" />
+                     </padding>
+                  </HBox>
+                  <HBox prefHeight="36.0" prefWidth="318.0" spacing="70.0" styleClass="gridpane-hbox" stylesheets="@../style.css">
+                     <children>
+                        <Label stylesheets="@../style.css" text="Cliente:">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                           <styleClass>
+                              <String fx:value="gridpane-hbox-label" />
+                              <String fx:value="bold" />
+                           </styleClass>
+                        </Label>
+                        <Label fx:id="customerLabel" styleClass="gridpane-hbox-label" stylesheets="@../style.css" text="Cargando...">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                     </children>
+                     <opaqueInsets>
+                        <Insets top="20.0" />
+                     </opaqueInsets>
+                     <padding>
+                        <Insets bottom="10.0" left="20.0" top="10.0" />
+                     </padding>
+                  </HBox>
+                  <HBox prefHeight="36.0" prefWidth="318.0" spacing="70.0" styleClass="gridpane-hbox" stylesheets="@../style.css">
+                     <children>
+                        <Label stylesheets="@../style.css" text="Vendedor:">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                           <styleClass>
+                              <String fx:value="gridpane-hbox-label" />
+                              <String fx:value="bold" />
+                           </styleClass>
+                        </Label>
+                        <Label fx:id="sellerLabel" styleClass="gridpane-hbox-label" stylesheets="@../style.css" text="Cargando...">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                     </children>
+                     <opaqueInsets>
+                        <Insets top="20.0" />
+                     </opaqueInsets>
+                     <padding>
+                        <Insets bottom="10.0" left="20.0" top="10.0" />
+                     </padding>
+                  </HBox>
+                  <HBox prefHeight="36.0" prefWidth="318.0" spacing="70.0" styleClass="gridpane-hbox" stylesheets="@../style.css">
+                     <children>
+                        <Label stylesheets="@../style.css" text="Sede: ">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                           <styleClass>
+                              <String fx:value="gridpane-hbox-label" />
+                              <String fx:value="bold" />
+                           </styleClass>
+                        </Label>
+                        <Label fx:id="headquarterLabel" styleClass="gridpane-hbox-label" stylesheets="@../style.css" text="Cargando...">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                     </children>
+                     <opaqueInsets>
+                        <Insets top="20.0" />
+                     </opaqueInsets>
+                     <padding>
+                        <Insets bottom="10.0" left="20.0" top="10.0" />
+                     </padding>
+                  </HBox>
+                  <HBox prefHeight="36.0" prefWidth="318.0" spacing="70.0" styleClass="gridpane-hbox" stylesheets="@../style.css">
+                     <children>
+                        <Label stylesheets="@../style.css" text="Método de pago:">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                           <styleClass>
+                              <String fx:value="gridpane-hbox-label" />
+                              <String fx:value="bold" />
+                           </styleClass>
+                        </Label>
+                        <Label fx:id="paymentMethodLabel" styleClass="gridpane-hbox-label" stylesheets="@../style.css" text="Cargando...">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                     </children>
+                     <opaqueInsets>
+                        <Insets top="20.0" />
+                     </opaqueInsets>
+                     <padding>
+                        <Insets bottom="10.0" left="20.0" top="10.0" />
+                     </padding>
+                  </HBox>
+                  <HBox prefHeight="36.0" prefWidth="318.0" spacing="70.0" styleClass="gridpane-hbox" stylesheets="@../style.css">
+                     <children>
+                        <Label stylesheets="@../style.css" text="Fecha de venta:">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                           <styleClass>
+                              <String fx:value="gridpane-hbox-label" />
+                              <String fx:value="bold" />
+                           </styleClass>
+                        </Label>
+                        <Label fx:id="dateLabel" styleClass="gridpane-hbox-label" stylesheets="@../style.css" text="Cargando...">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                     </children>
+                     <opaqueInsets>
+                        <Insets top="20.0" />
+                     </opaqueInsets>
+                     <padding>
+                        <Insets bottom="10.0" left="20.0" top="10.0" />
+                     </padding>
+                  </HBox>
+               </children>
+            </VBox>
+            <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <HBox prefHeight="111.0" prefWidth="342.0" spacing="30.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+               <children>
+                  <Button fx:id="rejectBtn" mnemonicParsing="false" onMouseClicked="#rejectBtnClicked" stylesheets="@../style.css" text="Rechazar">
+                     <styleClass>
+                        <String fx:value="red-button" />
+                        <String fx:value="select-button" />
+                     </styleClass>
+                  </Button>
+                  <Button fx:id="approveBtn" mnemonicParsing="false" onMouseClicked="#approveBtnClicked" stylesheets="@../style.css" text="Aprobar">
+                     <styleClass>
+                        <String fx:value="blue-button" />
+                        <String fx:value="select-button" />
+                     </styleClass>
+                  </Button>
+               </children>
+               <padding>
+                  <Insets left="50.0" top="5.0" />
+               </padding>
+            </HBox>
+            <VBox prefHeight="386.0" prefWidth="341.0" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.rowSpan="2">
+               <children>
+                  <TableView fx:id="vehicleQuantityTableview" prefHeight="227.0" prefWidth="219.0" styleClass="table-views" stylesheets="@../style.css">
+                    <columns>
+                      <TableColumn fx:id="vehicleCol" text="Vehículo" />
+                      <TableColumn fx:id="quantityCol" prefWidth="70.0" text="Cantidad" />
+                        <TableColumn fx:id="unitPriceCol" prefWidth="100.0" text="Precio (unidad)" />
+                        <TableColumn fx:id="priceCol" text="Precio" />
+                    </columns>
+                     <VBox.margin>
+                        <Insets right="10.0" top="10.0" />
+                     </VBox.margin>
+                  </TableView>
+                  <HBox prefHeight="55.0" prefWidth="342.0">
+                     <children>
+                        <Label prefHeight="20.0" prefWidth="67.0" text="Total:">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="50.0" top="20.0" />
+                           </HBox.margin>
+                        </Label>
+                        <Label fx:id="totalLabel" prefHeight="26.0" prefWidth="145.0" styleClass="gridpane-hbox-label" stylesheets="@../style.css" text="Cargando...">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="40.0" top="17.0" />
+                           </HBox.margin>
+                        </Label>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </GridPane>
+   </content>
+</ScrollPane>

@@ -5,20 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5f49d571-a74c-4244-90f5-d1284478321e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/backend/dto/saleDTO/SaleConfirmationDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/objectRowView/saleRowView/SaleRequestRowView.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/icons/hidden.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/icons/view.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/sale/SaleRequestSingleViewController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/objectRowView/saleRowView/SaleRequestSingleRowView.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/sales/saleRequestSingleView.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/backend/dto/inventoryDTO/VehicleDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/backend/dto/inventoryDTO/VehicleDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/backend/endpoints/inventoryEndpoint/InventoryEndpoint.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/backend/endpoints/inventoryEndpoint/InventoryEndpoint.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/backend/endpoints/saleEndpoint/SaleEndpoint.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/backend/endpoints/saleEndpoint/SaleEndpoint.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/MainController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/sale/ChooseOptionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/sale/ChooseOptionController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/sale/SalesRequests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/sale/SaleRequestController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/hello-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/hello-view.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/sales/chooseOption.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/sales/chooseOption.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/sales/salesRequests.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/sales/salesRequests.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/sale/SaleRequestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/sale/SaleRequestController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/sales/confirmationSale.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/sales/confirmationSale.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
