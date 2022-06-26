@@ -77,7 +77,7 @@ public class HeadquarterEndpoint {
         ResultSet resultSet = null;
         HashMap<Boolean, ResultSet> response = new HashMap<>();
         try(Connection conn = ConnectionBD.connectDB().getConnection()){
-            preparedStatement = conn.prepareStatement("SELECT * FROM headquarter JOIN city USING(id_city)WHERE idHeadquarter= ?");
+            preparedStatement = conn.prepareStatement("SELECT * FROM headquarter JOIN city USING(id_city)WHERE id_headquarter= ?");
             preparedStatement.setInt(1, idHeadquarter);
             resultSet = preparedStatement.executeQuery();
             resultSet.next(); //show the row data

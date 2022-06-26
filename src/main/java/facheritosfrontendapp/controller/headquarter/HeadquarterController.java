@@ -95,7 +95,7 @@ public class HeadquarterController implements Initializable {
         for(Integer i = 0; i < headquarterRowsArray.size(); i++){
             if(mouseEvent.getSource() == headquarterRowsArray.get(i).getEditLabel()){
                 try {
-                    editHeadquarterController = (EditHeadquarterController) dashboardController.changeContent("headquarters/headquartersEdit", true);
+                    editHeadquarterController = (EditHeadquarterController) dashboardController.changeContent("headquarters/headquartersEdit");
                     editHeadquarterController.showHeadquarterData(headquarterRowsArray.get(i).getIdHeadquarter());
                 } catch (IOException e) {
                     throw new RuntimeException(e);
