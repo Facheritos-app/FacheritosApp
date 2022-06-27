@@ -86,12 +86,12 @@
                               <Insets bottom="10.0" />
                            </padding>
                         </HBox>
-                        <TableView prefHeight="239.0" prefWidth="399.0">
+                        <TableView fx:id="inventoryTableView" prefHeight="239.0" prefWidth="399.0">
                            <columns>
-                              <TableColumn prefWidth="133.0" style="-fx-alignment: CENTER;" text="Nombre" />
-                              <TableColumn prefWidth="79.0" style="-fx-alignment: CENTER;" text="Precio" />
-                              <TableColumn prefWidth="107.0" style="-fx-alignment: CENTER;" text="Sede" />
-                              <TableColumn minWidth="5.0" prefWidth="133.0" style="-fx-alignment: CENTER;" text="Cantidad" />
+                              <TableColumn fx:id="colNameInventory" prefWidth="133.0" style="-fx-alignment: CENTER;" text="Nombre" />
+                              <TableColumn fx:id="colPriceInventory" prefWidth="79.0" style="-fx-alignment: CENTER;" text="Precio" />
+                              <TableColumn fx:id="colHeadquarterInventory" prefWidth="107.0" style="-fx-alignment: CENTER;" text="Sede" />
+                              <TableColumn fx:id="colQuantityInventory" minWidth="5.0" prefWidth="133.0" style="-fx-alignment: CENTER;" text="Cantidad" />
                            </columns>
                         </TableView>
                      </children>
@@ -330,7 +330,7 @@
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <Button mnemonicParsing="false" stylesheets="@../style.css" text="Editar">
+                              <Button mnemonicParsing="false" onMouseClicked="#editQuotation" stylesheets="@../style.css" text="Editar">
                                  <styleClass>
                                     <String fx:value="blue-button" />
                                     <String fx:value="select-button" />
@@ -342,7 +342,7 @@
                                     <String fx:value="select-button" />
                                  </styleClass>
                               </Button>
-                              <Button mnemonicParsing="false" stylesheets="@../style.css" text="Cancelar" GridPane.columnIndex="1">
+                              <Button fx:id="cancel" mnemonicParsing="false" stylesheets="@../style.css" text="Cancelar" GridPane.columnIndex="1">
                                  <styleClass>
                                     <String fx:value="select-button" />
                                     <String fx:value="red-button" />
