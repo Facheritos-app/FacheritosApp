@@ -230,9 +230,11 @@
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                  </rowConstraints>
                                  <children>
-                                    <Label text="Cédula:">
+                                    <Label text="Cédula:" GridPane.rowSpan="2">
                                        <GridPane.margin>
                                           <Insets />
                                        </GridPane.margin>
@@ -240,7 +242,7 @@
                                           <Font name="System Bold" size="14.0" />
                                        </font>
                                     </Label>
-                                    <Label text="Nombres:" GridPane.rowIndex="1">
+                                    <Label text="Nombres:" GridPane.rowIndex="1" GridPane.rowSpan="2">
                                        <GridPane.margin>
                                           <Insets />
                                        </GridPane.margin>
@@ -248,14 +250,14 @@
                                           <Font name="System Bold" size="14.0" />
                                        </font>
                                     </Label>
-                                    <TextField fx:id="customerCc" disable="true" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="146.0" text="Cargando..." GridPane.columnIndex="1" />
-                                    <TextField fx:id="customerName" disable="true" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="146.0" text="Cargando..." GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                    <Label text="Apellidos:" GridPane.rowIndex="2">
+                                    <TextField fx:id="customerCc" disable="true" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="146.0" text="Cargando..." GridPane.columnIndex="1" GridPane.rowSpan="2" />
+                                    <TextField fx:id="customerName" disable="true" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="146.0" text="Cargando..." GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.rowSpan="2" />
+                                    <Label text="Apellidos:" GridPane.rowIndex="2" GridPane.rowSpan="2">
                                        <font>
                                           <Font name="System Bold" size="14.0" />
                                        </font>
                                     </Label>
-                                    <TextField fx:id="customerLastname" disable="true" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="146.0" text="Cargando..." GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                    <TextField fx:id="customerLastname" disable="true" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="146.0" text="Cargando..." GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.rowSpan="2" />
                                     <Button fx:id="searchCustomer" disable="true" mnemonicParsing="false" prefHeight="30.0" prefWidth="122.0" styleClass="blue-button" stylesheets="@../style.css" text="Buscar cliente" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="3" GridPane.rowSpan="2" />
                                  </children>
                               </GridPane>
