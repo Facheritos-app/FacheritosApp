@@ -21,6 +21,8 @@ public class ChooseOptionController implements Initializable {
 
     private QuotationController quotationController;
 
+    private SaleRequestController saleRequestController;
+
     public ChooseOptionController(){
 
     }
@@ -40,6 +42,12 @@ public class ChooseOptionController implements Initializable {
     protected void quotationsClicked() throws IOException {
         quotationController = (QuotationController) dashboardController.changeContent("quotations/quotations");
         quotationController.showQuotations();
+    }
+
+    @FXML
+    protected void requestsClicked() throws IOException {
+        saleRequestController = (SaleRequestController) dashboardController.changeContent("sales/salesRequests");
+        saleRequestController.showSaleRequests();
     }
 
 }

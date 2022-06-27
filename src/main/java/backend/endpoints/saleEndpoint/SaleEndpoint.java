@@ -1,6 +1,8 @@
 package backend.endpoints.saleEndpoint;
 
 import backend.connectionBD.ConnectionBD;
+import backend.dto.inventoryDTO.VehicleDTO;
+import backend.dto.saleDTO.SaleConfirmationDTO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -50,6 +52,41 @@ public class SaleEndpoint {
             preparedStatement.setInt(1, idSale);
             resultSet = preparedStatement.executeQuery();
             resultSet.next(); //show the row data
+            response.put(true, resultSet);
+        }catch (SQLException e){
+            e.printStackTrace();
+            response.put(false, resultSet);
+        }
+        return response;
+    }
+    public Map<Boolean, ResultSet> getSaleRequestById(Integer idSale){
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        HashMap<Boolean, ResultSet> response = new HashMap<>();
+        try(Connection conn = ConnectionBD.connectDB().getConnection()){
+            preparedStatement = conn.prepareStatement("SELECT * FROM sale JOIN (SELECT id_worker, id_person FROM worker) AS workers USING(id_worker) JOIN person USING(id_person)" +
+                                        "JOIN headquarter USING(id_headquarter) JOIN payment ON id_payment_method=id_payment JOIN confirmation USING(id_confirmation)" +
+                                       "JOIN (SELECT first_name AS customer_firstname, last_name AS customer_lastname, id_person AS id_customer FROM person) AS customers USING(id_customer) WHERE id_sale=? ");
+            preparedStatement.setInt(1, idSale);
+            resultSet = preparedStatement.executeQuery();
+            resultSet.next(); //show the row data
+            response.put(true, resultSet);
+        }catch (SQLException e){
+            e.printStackTrace();
+            response.put(false, resultSet);
+        }
+        return response;
+    }
+
+    public Map<Boolean, ResultSet> getTableInSaleRequestById(Integer idSale){
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        HashMap<Boolean, ResultSet> response = new HashMap<>();
+        try(Connection conn = ConnectionBD.connectDB().getConnection()){
+            preparedStatement = conn.prepareStatement("SELECT * FROM sale_car JOIN car USING(id_car)" +
+                    "JOIN (SELECT id_model, description, price FROM model) AS models USING(id_model) WHERE id_sale = ?");
+            preparedStatement.setInt(1, idSale);
+            resultSet = preparedStatement.executeQuery();
             response.put(true, resultSet);
         }catch (SQLException e){
             e.printStackTrace();
@@ -110,5 +147,51 @@ public class SaleEndpoint {
             response.put(false, resultSet);
         }
         return response;
+    }
+
+    /**
+     * getSaleRequests: ConfirmationDTO -> Boolean
+     * Purpose: This method connects to the DB and brings the confirmation of the sale
+     */
+    public Map<Boolean, ResultSet> getSaleRequests() {
+
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        HashMap<Boolean, ResultSet> response = new HashMap<>();
+        try (Connection conn = ConnectionBD.connectDB().getConnection()) {
+            preparedStatement = conn.prepareStatement("SELECT * FROM sale JOIN (SELECT id_worker, id_person FROM worker) AS workers USING(id_worker) JOIN person USING(id_person)" +
+                    "JOIN headquarter USING(id_headquarter) JOIN payment ON id_payment_method=id_payment JOIN confirmation USING(id_confirmation)" +
+                    "JOIN (SELECT first_name AS customer_firstname, last_name AS customer_lastname, id_person AS id_customer FROM person) AS customers USING(id_customer) WHERE id_confirmation=2 ");
+            resultSet = preparedStatement.executeQuery();
+            response.put(true, resultSet);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            response.put(false, resultSet);
+        }
+
+        return response;
+    }
+
+    /**
+     * changeStateConfirmation: ConfirmationDTO -> Boolean
+     * Purpose: This method connects to the DB and saves a vehicle,
+     * if successful, it returns true, if not it returns false
+     */
+    public Boolean changeStateConfirmation(Integer idSale){
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        Integer idCar = null;
+        Integer idHeadquarter = null;
+        HashMap<Boolean, Integer> response = new HashMap<>();
+        try(Connection conn = ConnectionBD.connectDB().getConnection()){
+            preparedStatement = conn.prepareStatement("UPDATE sale SET id_confirmation=1" +
+                    "WHERE id_sale = ?");
+            preparedStatement.setInt(1,idSale);
+            preparedStatement.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+                e.printStackTrace();
+                return false;
+        }
     }
 }

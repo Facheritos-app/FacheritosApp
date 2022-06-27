@@ -56,7 +56,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </VBox>
-            <VBox prefHeight="202.0" prefWidth="190.0" styleClass="card" stylesheets="@../style.css">
+            <VBox onMouseClicked="#requestsClicked" prefHeight="202.0" prefWidth="190.0" styleClass="card" stylesheets="@../style.css">
                <children>
                   <ImageView fitHeight="55.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true">
                      <image>
