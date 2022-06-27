@@ -60,6 +60,10 @@ Button {
     -fx-font-family: Poppins;
     -fx-font-weight: BOLD;
 }
+
+.quotation-price-button {
+    -fx-background-radius: 20px;
+}
 /*Tabpane*/
 
 .tab-pane:top {
@@ -80,10 +84,12 @@ Button {
 .table-views .column-header{
     -fx-background-color: #005296;
 
+
 }
 .table-views .column-header .label {
     -fx-text-fill: #FFFFFF;
     -fx-background-color: #005296;
+    -fx-border-radius: 10;
 }
 
 .table-views {
@@ -172,6 +178,14 @@ Button {
     -fx-background-color: white;
 }
 
+/*Cards*/
+.card {
+    -fx-background-color: white;
+    -fx-background-radius: 10;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0.8, 2);
+  /*-fx-effect: dropshadow(blurType, color, radius, spread, offsetX, offsetY)*/
+
+}
 
 /**
   -fx-background-color: #005296;

@@ -6,6 +6,7 @@ import facheritosfrontendapp.controller.MainController;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
@@ -62,6 +63,12 @@ public class InventoryVehicleController implements Initializable {
     private Label priceLabel;
 
     @FXML
+    private Button editBtn;
+
+    @FXML
+    private Button deleteBtn;
+
+    @FXML
     private ImageView vehicleImage;
 
     private InventoryEndpoint inventoryEndpoint;
@@ -82,6 +89,13 @@ public class InventoryVehicleController implements Initializable {
 
         scrollpane.setFitToWidth(true);
         scrollpane.setFitToHeight(true);
+
+        //Only the manager can delete or edit elements of the inventory
+        if(DashboardController.getCurrentWorker().getId_rol() != 1) {
+            editBtn.setVisible(false);
+            deleteBtn.setVisible(false);
+        }
+
     }
 
     @FXML

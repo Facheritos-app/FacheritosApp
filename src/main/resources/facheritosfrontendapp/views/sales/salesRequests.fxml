@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane prefHeight="517.0" prefWidth="700.0" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="facheritosfrontendapp.controller.sale.SaleRequestController">
+   <center>
+      <VBox prefHeight="425.0" prefWidth="641.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label text="Solicitudes de ventas">
+               <font>
+                  <Font name="System Bold" size="26.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="20.0" top="20.0" />
+               </VBox.margin>
+            </Label>
+            <TableView fx:id="saleRequestTableview" prefHeight="197.0" prefWidth="672.0" styleClass="table-views" stylesheets="@../style.css">
+               <columns>
+                  <TableColumn fx:id="saleNumberCol" prefWidth="90.0" text="No. de venta" />
+                  <TableColumn fx:id="sellerCol" prefWidth="90.0" text="Vendedor" />
+                  <TableColumn fx:id="customerCol" prefWidth="90.0" text="Cliente" />
+                  <TableColumn fx:id="saleDateCol" prefWidth="110.0" text="Fecha de compra" />
+                  <TableColumn fx:id="paymentMethodCol" prefWidth="110.0" text="Método de pago" />
+                  <TableColumn fx:id="headquarterCol" text="Sede" />
+                  <TableColumn fx:id="optionsCol" prefWidth="90.0" text="Opciones" />
+               </columns>
+               <VBox.margin>
+                  <Insets left="20.0" right="20.0" top="30.0" />
+               </VBox.margin>
+            </TableView>
+         </children>
+      </VBox>
+   </center>
+   <top>
+      <ImageView fitHeight="48.0" fitWidth="47.0" onMouseClicked="#backArrowClicked" pickOnBounds="true" preserveRatio="true" styleClass="back-arrow" BorderPane.alignment="TOP_LEFT">
+         <image>
+            <Image url="@../../icons/back-arrow.png" />
+         </image>
+         <BorderPane.margin>
+            <Insets left="20.0" top="20.0" />
+         </BorderPane.margin>
+      </ImageView>
+   </top>
+</BorderPane>

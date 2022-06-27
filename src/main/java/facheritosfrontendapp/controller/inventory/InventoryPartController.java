@@ -68,6 +68,12 @@ public class InventoryPartController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         dashboardController = MainController.getDashboardController();
+
+        //Only the manager can delete or edit elements of the inventory
+        if(DashboardController.getCurrentWorker().getId_rol() != 1) {
+            editBtn.setVisible(false);
+            deleteBtn.setVisible(false);
+        }
     }
 
     @FXML

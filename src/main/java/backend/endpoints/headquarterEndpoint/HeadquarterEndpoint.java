@@ -3,11 +3,9 @@ package backend.endpoints.headquarterEndpoint;
 import backend.connectionBD.ConnectionBD;
 import backend.dto.city.CityDTO;
 import backend.dto.headquarterDTO.HeadquarterDTO;
+import backend.dto.personDTO.PersonDTO;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -71,5 +69,44 @@ public class HeadquarterEndpoint {
           //      return 2;
           //  }
     }
+
+    public Map<Boolean, ResultSet> getHeadquarterById(Integer idHeadquarter){
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        HashMap<Boolean, ResultSet> response = new HashMap<>();
+        try(Connection conn = ConnectionBD.connectDB().getConnection()){
+            preparedStatement = conn.prepareStatement("SELECT * FROM headquarter JOIN city USING(id_city)WHERE id_headquarter= ?");
+            preparedStatement.setInt(1, idHeadquarter);
+            resultSet = preparedStatement.executeQuery();
+            resultSet.next(); //show the row data
+            response.put(true, resultSet);
+        }catch (SQLException e){
+            e.printStackTrace();
+            response.put(false, resultSet);
+        }
+        return response;
+    }
+
+    public static void updateHeadquarter(Integer idHeadquarter,Integer idCity, String name, String cellphone, String email, String address){
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        HashMap<Boolean, Integer> response = new HashMap<>();
+        try(Connection conn = ConnectionBD.connectDB().getConnection()){
+            preparedStatement = conn.prepareStatement("UPDATE headquarter set id_city = ?, name = ?, cellphone = ? , email = ? , address = ? where id_headquarter = ?");
+            preparedStatement.setInt(1,idCity);
+            preparedStatement.setString(2, name);
+            preparedStatement.setString(3, cellphone);
+            preparedStatement.setString(4, email);
+            preparedStatement.setString(5,address) ;
+            preparedStatement.setInt(6, idHeadquarter);
+            preparedStatement.executeUpdate();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+
+
+    }
+
+
 
 }
