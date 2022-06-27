@@ -1,7 +1,9 @@
 package facheritosfrontendapp.controller.quotation;
 
+import backend.dto.quotationDTO.QuotationDTO;
 import backend.endpoints.inventoryEndpoint.InventoryEndpoint;
 import backend.endpoints.quotationEndpoint.QuotationEndpoint;
+import backend.endpoints.workerEndpoint.WorkerEndpoint;
 import facheritosfrontendapp.objectRowView.inventoryRowView.VehicleRowView;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -16,19 +18,23 @@ import java.math.BigDecimal;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Map;
-import java.util.ResourceBundle;
+import java.util.*;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
+
+import static javafx.scene.control.ButtonType.OK;
 
 public class QuotationSingleViewController implements Initializable {
 
 
     private QuotationEndpoint quotationEndpoint;
     private InventoryEndpoint inventoryEndpoint;
+    private WorkerEndpoint workerEndpoint;
+    private QuotationDTO currentQuotation;
     private ArrayList<VehicleRowView> vehicleQuotationRowList;
     private ArrayList<VehicleRowView> vehicleInventoryRowList;
+
+    private String workerCc;
 
     @FXML
     private TableView quotationTableView;
@@ -81,31 +87,35 @@ public class QuotationSingleViewController implements Initializable {
     @FXML
     private Button searchCustomer;
 
-    public QuotationSingleViewController(){
+    public QuotationSingleViewController() {
         quotationEndpoint = new QuotationEndpoint();
         inventoryEndpoint = new InventoryEndpoint();
+        workerEndpoint = new WorkerEndpoint();
         vehicleQuotationRowList = new ArrayList<>();
         vehicleInventoryRowList = new ArrayList<>();
+        currentQuotation = new QuotationDTO();
     }
 
-    public void showQuotation(Integer idQuotation){
+    public void showQuotation(Integer idQuotation) {
         new Thread(() -> {
             CompletableFuture<Map<Boolean, ResultSet>> quotationCall = CompletableFuture.supplyAsync(() -> quotationEndpoint.getQuotation(idQuotation));
 
             try {
                 quotationCall.thenApply(response -> {
-                    if(response.containsKey(true)){
+                    if (response.containsKey(true)) {
                         ResultSet resultSet = response.get(true);
-                            Platform.runLater(() -> {
-                                try {
-                                    setQuotationItems(resultSet);
-                                    setSellerInfo(resultSet);
-                                    setCustomerInfo(resultSet);
-                                    setQuotationDetails(resultSet);
-                                } catch (SQLException e) {
-                                    throw new RuntimeException(e);
-                                }
-                            });
+                        Platform.runLater(() -> {
+                            try {
+                                setQuotationItems(resultSet);
+                                setSellerInfo(resultSet, Arrays.asList("seller_cc", "seller_firstname", "seller_lastname", "headquarter_name", "seller_email"));
+                                workerCc = resultSet.getString("seller_cc");
+                                setCustomerInfo(resultSet, Arrays.asList("customer_cc", "customer_firstname", "customer_lastname"));
+                                setQuotationDetails(resultSet, Arrays.asList("id_quotation", "price"));
+                                setCurrentQuotation(resultSet, Arrays.asList("id_quotation", "id_car", "id_confirmation", "id_headquarter", "quotation_date", "id_worker", "id_person_customer"));
+                            } catch (SQLException e) {
+                                throw new RuntimeException(e);
+                            }
+                        });
                     }
                     return true;
                 }).get();
@@ -117,13 +127,13 @@ public class QuotationSingleViewController implements Initializable {
         }).start();
     }
 
-    public void showInventory(){
+    public void showInventory() {
         new Thread(() -> {
             CompletableFuture<Map<Boolean, ResultSet>> vehiclesCall = CompletableFuture.supplyAsync(() -> inventoryEndpoint.getVehiclesForTableView());
 
             try {
                 vehiclesCall.thenApply(response -> {
-                    if(response.containsKey(true)){
+                    if (response.containsKey(true)) {
                         ResultSet resultSet = response.get(true);
                         try {
                             setVehiclesData(resultSet);
@@ -141,11 +151,41 @@ public class QuotationSingleViewController implements Initializable {
         }).start();
     }
 
+    public void changeSeller(String cc) {
+        new Thread(() -> {
+            sellerInfoLoading();
+            CompletableFuture<Map<Boolean, ResultSet>> sellerCall = CompletableFuture.supplyAsync(() -> workerEndpoint.getWorkerByCc(cc));
+            try {
+                sellerCall.thenApply(response -> {
+                    Platform.runLater(() -> {
+                        if (response.containsKey(true)) {
+                            ResultSet resultSet = response.get(true);
+                            try {
+                                setSellerInfo(resultSet, Arrays.asList("cc", "first_name", "last_name", "headquarter_name", "email"));
+                            } catch (SQLException e) {
+                                throw new RuntimeException(e);
+                            }
+                        } else {
+                            Alert fail = new Alert(Alert.AlertType.ERROR, "No se ha encontrado la cedula del trabajador o no es una cédula válida, por favor intenta nuevamente", OK);
+                            fail.show();
+                            changeSeller(workerCc);
+                        }
+                    });
+                    return true;
+                }).get();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            } catch (ExecutionException e) {
+                throw new RuntimeException(e);
+            }
+        }).start();
+    }
+
     public void setVehiclesData(ResultSet resultSet) throws SQLException {
-        while(resultSet.next()){
+        while (resultSet.next()) {
             VehicleRowView vehicleRow = new VehicleRowView(resultSet.getString("description"), new BigDecimal(String.valueOf(resultSet.getDouble("price"))).toPlainString(),
-                                                            resultSet.getString("name"), resultSet.getInt("quantity"),
-                                                            resultSet.getInt("id_car"));
+                    resultSet.getString("name"), resultSet.getInt("quantity"),
+                    resultSet.getInt("id_car"));
             vehicleInventoryRowList.add(vehicleRow);
         }
 
@@ -157,8 +197,9 @@ public class QuotationSingleViewController implements Initializable {
         inventoryTableView.setItems(FXCollections.observableArrayList(vehicleInventoryRowList));
     }
 
+
     @FXML
-    public void editQuotation(MouseEvent mouseEvent){
+    public void editQuotation(MouseEvent mouseEvent) {
         sellerCc.setDisable(false);
         customerCc.setDisable(false);
         paymentMethod.setDisable(false);
@@ -169,25 +210,41 @@ public class QuotationSingleViewController implements Initializable {
         showInventory();
     }
 
-    public void setSellerInfo(ResultSet resultSet) throws SQLException {
-        sellerCc.setText(resultSet.getString("seller_cc"));
-        sellerName.setText(resultSet.getString("seller_firstname"));
-        sellerLastname.setText(resultSet.getString("seller_lastname"));
-        sellerHeadq.setText(resultSet.getString("headquarter_name"));
-        sellerEmail.setText(resultSet.getString("seller_email"));
+    public void setSellerInfo(ResultSet resultSet, List<String> columns) throws SQLException {
+        sellerCc.setText(resultSet.getString(columns.get(0)));
+        sellerName.setText(resultSet.getString(columns.get(1)));
+        sellerLastname.setText(resultSet.getString(columns.get(2)));
+        sellerHeadq.setText(resultSet.getString(columns.get(3)));
+        sellerEmail.setText(resultSet.getString(columns.get(4)));
     }
 
-    public void setCustomerInfo(ResultSet resultSet) throws SQLException {
-        customerCc.setText(resultSet.getString("customer_cc"));
-        customerName.setText(resultSet.getString("customer_firstname"));
-        customerLastname.setText(resultSet.getString("customer_lastname"));
+    public void sellerInfoLoading() {
+        sellerName.setText("Cargando...");
+        sellerLastname.setText("Cargando...");
+        sellerHeadq.setText("Cargando...");
+        sellerEmail.setText("Cargando...");
     }
 
-    public void setQuotationDetails(ResultSet resultSet) throws SQLException {
-        paymentMethod.setItems(FXCollections.observableArrayList("Tarjeta de credito", "Efectivo"));
+    public void setCustomerInfo(ResultSet resultSet, List<String> columns) throws SQLException {
+        customerCc.setText(resultSet.getString(columns.get(0)));
+        customerName.setText(resultSet.getString(columns.get(1)));
+        customerLastname.setText(resultSet.getString(columns.get(2)));
+    }
+
+    public void setQuotationDetails(ResultSet resultSet, List<String> columns) throws SQLException {
         quotationQuantity.setText("1");
-        quotationId.setText(resultSet.getString("id_quotation"));
-        quotationPrice.setText("$ " + resultSet.getString("price"));
+        quotationId.setText(String.valueOf(resultSet.getInt(columns.get(0))));
+        quotationPrice.setText("$ " + resultSet.getString(columns.get(1)));
+    }
+
+    public void setCurrentQuotation(ResultSet resultSet, List<String> columns) throws SQLException {
+        currentQuotation.setIdQuotation(resultSet.getInt(columns.get(0)));
+        currentQuotation.setIdCar(resultSet.getInt(columns.get(1)));
+        currentQuotation.setIdConfirmation(resultSet.getInt(columns.get(2)));
+        currentQuotation.setIdHeadquarter(resultSet.getInt(columns.get(3)));
+        currentQuotation.setQuotationDate(resultSet.getDate(columns.get(4)).toLocalDate());
+        currentQuotation.setIdWorker(resultSet.getInt(columns.get(5)));
+        currentQuotation.setIdCustomer(resultSet.getInt(columns.get(6)));
     }
 
     public void setQuotationItems(ResultSet resultSet) throws SQLException {
@@ -203,12 +260,12 @@ public class QuotationSingleViewController implements Initializable {
     }
 
     @FXML
-    public void onChangeCc(KeyEvent keyEvent) {
-        System.out.println("Salgo del textfield");
+    public void clickedSearchSeller(MouseEvent mouseEvent) {
+        changeSeller(sellerCc.getText());
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        paymentMethod.setItems(FXCollections.observableArrayList("Tarjeta de credito", "Efectivo"));
     }
 }

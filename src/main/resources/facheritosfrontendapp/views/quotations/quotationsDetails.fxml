@@ -167,7 +167,7 @@
                                           <Font name="System Bold" size="14.0" />
                                        </font>
                                     </Label>
-                                    <TextField fx:id="sellerCc" disable="true" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyReleased="#onChangeCc" prefHeight="26.0" prefWidth="146.0" text="Cargando..." GridPane.columnIndex="1" />
+                                    <TextField fx:id="sellerCc" disable="true" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="146.0" text="Cargando..." GridPane.columnIndex="1" />
                                     <Label text="Nombres:" GridPane.rowIndex="1">
                                        <GridPane.margin>
                                           <Insets />
@@ -207,7 +207,7 @@
                                        </padding>
                                     </Label>
                                     <TextField fx:id="sellerLastname" disable="true" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="146.0" text="Cargando..." GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                    <Button fx:id="searchSeller" disable="true" mnemonicParsing="false" prefHeight="30.0" prefWidth="128.0" styleClass="blue-button" stylesheets="@../style.css" text="Buscar vendedor" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="5" GridPane.rowSpan="2" />
+                                    <Button fx:id="searchSeller" disable="true" mnemonicParsing="false" onMouseClicked="#clickedSearchSeller" prefHeight="30.0" prefWidth="128.0" styleClass="blue-button" stylesheets="@../style.css" text="Buscar vendedor" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="5" GridPane.rowSpan="2" />
                                  </children>
                               </GridPane>
                            </children>
