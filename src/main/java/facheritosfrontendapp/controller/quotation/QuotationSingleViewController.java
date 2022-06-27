@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 
 import java.math.BigDecimal;
@@ -75,6 +76,10 @@ public class QuotationSingleViewController implements Initializable {
     private Label quotationId;
     @FXML
     private Button cancel;
+    @FXML
+    private Button searchSeller;
+    @FXML
+    private Button searchCustomer;
 
     public QuotationSingleViewController(){
         quotationEndpoint = new QuotationEndpoint();
@@ -154,10 +159,14 @@ public class QuotationSingleViewController implements Initializable {
 
     @FXML
     public void editQuotation(MouseEvent mouseEvent){
-        showInventory();
         sellerCc.setDisable(false);
         customerCc.setDisable(false);
         paymentMethod.setDisable(false);
+        searchCustomer.setDisable(false);
+        searchCustomer.setVisible(true);
+        searchSeller.setDisable(false);
+        searchSeller.setVisible(true);
+        showInventory();
     }
 
     public void setSellerInfo(ResultSet resultSet) throws SQLException {
@@ -193,7 +202,10 @@ public class QuotationSingleViewController implements Initializable {
         quotationTableView.setItems(FXCollections.observableArrayList(vehicleQuotationRowList));
     }
 
-
+    @FXML
+    public void onChangeCc(KeyEvent keyEvent) {
+        System.out.println("Salgo del textfield");
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
