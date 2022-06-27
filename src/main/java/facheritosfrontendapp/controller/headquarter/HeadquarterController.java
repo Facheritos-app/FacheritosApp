@@ -97,6 +97,7 @@ public class HeadquarterController implements Initializable {
                 try {
                     editHeadquarterController = (EditHeadquarterController) dashboardController.changeContent("headquarters/headquartersEdit");
                     editHeadquarterController.showHeadquarterData(headquarterRowsArray.get(i).getIdHeadquarter());
+
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }

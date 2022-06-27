@@ -72,6 +72,7 @@ public class EditHeadquarterController implements Initializable {
     @FXML
     private Label emailLabel;
 
+    public Integer id2;
     @FXML
     private Label cityLabel;
     private HeadquarterEndpoint headquarterEndpoint;
@@ -100,16 +101,15 @@ public class EditHeadquarterController implements Initializable {
     }
 
     public void createHeadquarter(){
-     HeadquarterDTO headquarterDTO = new HeadquarterDTO();
      CityDTO cityDTO = new CityDTO();
      cityDTO.setCity_name((String) city.getValue());
-     headquarterDTO.setId_city(idCity((String) city.getValue(),cityDTO));
-     //headquarterDTO.setId_city(1);
-     headquarterDTO.setName(nam.getText());
-     headquarterDTO.setCellphone(cellp.getText());
-     headquarterDTO.setEmail(eml.getText());
-     headquarterDTO.setAddress(addr.getText());
-     headquarterEndpoint.createHeadquarter(headquarterDTO);
+
+     headquarterEndpoint.updateHeadquarter(id2,idCity((String) city.getValue(),cityDTO),nam.getText(),cellp.getText(),eml.getText(),addr.getText());
+
+     /*
+
+
+      */
     }
 
     public Integer idCity(String city, CityDTO cityDTO){
@@ -189,6 +189,9 @@ public class EditHeadquarterController implements Initializable {
         llenadocombobox();
     }
 
+   public Integer idHeadquarter(Integer id)
+   { return id; }
+
     public void showHeadquarterData(Integer idHeadquarter){
         new Thread(() -> {
             CompletableFuture<Map<Boolean, ResultSet>> vehicleCall = CompletableFuture.supplyAsync(() -> headquarterEndpoint.getHeadquarterById(idHeadquarter));
@@ -198,7 +201,7 @@ public class EditHeadquarterController implements Initializable {
                         ResultSet resultSet = response.get(true);
                         Platform.runLater(() -> {
                             try {
-                                setData(resultSet);
+                                setData(resultSet,idHeadquarter);
                             } catch (SQLException e) {
                                 throw new RuntimeException(e);
                             } catch (IOException e) {
@@ -216,8 +219,8 @@ public class EditHeadquarterController implements Initializable {
         }).start();
     }
 
-    public void setData(ResultSet resultSet) throws SQLException, IOException {
-
+    public void setData(ResultSet resultSet,Integer id3) throws SQLException, IOException {
+        id2=id3;
         nam.setText(resultSet.getString("name"));
         addr.setText(resultSet.getString("address"));
         cellp.setText(resultSet.getString("cellphone"));
