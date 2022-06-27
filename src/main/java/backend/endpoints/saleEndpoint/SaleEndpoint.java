@@ -173,15 +173,12 @@ public class SaleEndpoint {
     }
 
     /**
-     * changeStateConfirmation: ConfirmationDTO -> Boolean
+     * changeStateConfirmation: Integer -> Boolean
      * Purpose: This method connects to the DB and saves a vehicle,
      * if successful, it returns true, if not it returns false
      */
     public Boolean changeStateConfirmation(Integer idSale){
         PreparedStatement preparedStatement = null;
-        ResultSet resultSet = null;
-        Integer idCar = null;
-        Integer idHeadquarter = null;
         HashMap<Boolean, Integer> response = new HashMap<>();
         try(Connection conn = ConnectionBD.connectDB().getConnection()){
             preparedStatement = conn.prepareStatement("UPDATE sale SET id_confirmation=1" +
@@ -192,6 +189,44 @@ public class SaleEndpoint {
         } catch (SQLException e) {
                 e.printStackTrace();
                 return false;
+        }
+    }
+    /**
+     * changeStateReject: Integer-> Boolean
+     * Purpose: This method connects to the DB and saves a vehicle,
+     * if successful, it returns true, if not it returns false
+     */
+    public Boolean changeStateReject(Integer idSale){
+        PreparedStatement preparedStatement = null;
+        HashMap<Boolean, Integer> response = new HashMap<>();
+        try(Connection conn = ConnectionBD.connectDB().getConnection()){
+            preparedStatement = conn.prepareStatement("UPDATE sale SET id_confirmation=3" +
+                    "WHERE id_sale = ?");
+            preparedStatement.setInt(1,idSale);
+            preparedStatement.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    /**
+     * changeCarsQuantityReject: Integer, Integer-> Boolean
+     * Purpose: This method connects to the DB and saves a vehicle,
+     * if successful, it returns true, if not it returns false
+     */
+    public Boolean changeCarsQuantityReject(Integer idCar, Integer quantity){
+        PreparedStatement preparedStatement = null;
+        HashMap<Boolean, Integer> response = new HashMap<>();
+        try(Connection conn = ConnectionBD.connectDB().getConnection()){
+            preparedStatement = conn.prepareStatement("UPDATE car_headquarter SET quantity = quantity + ? WHERE id_car = ?");
+            preparedStatement.setInt(1,quantity);
+            preparedStatement.setInt(2,idCar);
+            preparedStatement.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
         }
     }
 }
