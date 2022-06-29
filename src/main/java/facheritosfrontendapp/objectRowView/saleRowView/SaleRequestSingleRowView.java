@@ -11,12 +11,23 @@ public class SaleRequestSingleRowView {
 
     private String multipliedPrice;
 
-    public SaleRequestSingleRowView(Integer idModel, String name, Integer quantity, String price, String multipliedPrice) {
+    private Integer idCar;
+
+    public SaleRequestSingleRowView(Integer idCar, Integer idModel, String name, Integer quantity, String price, String multipliedPrice) {
+        this.idCar = idCar;
         this.idModel = idModel;
         this.name = name;
         this.quantity = quantity;
         this.price = price;
         this.multipliedPrice = multipliedPrice;
+    }
+
+    public Integer getIdCar() {
+        return idCar;
+    }
+
+    public void setIdCar(Integer idCar) {
+        this.idCar = idCar;
     }
 
     public Integer getIdModel() {

@@ -4,19 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5f49d571-a74c-4244-90f5-d1284478321e" name="Changes" comment="I changed the view users view with the combo boxes and the city field.">
-      <change afterPath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/sale/SaleRequestSingleViewController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/objectRowView/saleRowView/SaleRequestSingleRowView.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/sales/saleRequestSingleView.fxml" afterDir="false" />
+    <list default="true" id="5f49d571-a74c-4244-90f5-d1284478321e" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/sales/rejectSale.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/backend/endpoints/headquarterEndpoint/HeadquarterEndpoint.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/backend/endpoints/headquarterEndpoint/HeadquarterEndpoint.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/MainController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/headquarter/EditHeadquarterController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/headquarter/EditHeadquarterController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/headquarter/HeadquarterController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/headquarter/HeadquarterController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/quotation/QuotationSingleViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/quotation/QuotationSingleViewController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/headquarters/headquartersEdit.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/headquarters/headquartersEdit.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/quotations/quotationsDetails.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/quotations/quotationsDetails.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/sales/salesAdd.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/sales/salesAdd.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/backend/endpoints/saleEndpoint/SaleEndpoint.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/backend/endpoints/saleEndpoint/SaleEndpoint.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/sale/SaleRequestSingleViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/sale/SaleRequestSingleViewController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/objectRowView/saleRowView/SaleRequestSingleRowView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/objectRowView/saleRowView/SaleRequestSingleRowView.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -76,15 +69,7 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Usuario/Documents/Sexto semestre/Desarrollo de Software/FacheritosApp/src/main/resources/facheritosfrontendapp/views/quotation&quot;,
-
-
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Jennyfer/Desktop/archivos_actuales/sexto/proyectoDesarrolloFrontend/FacheritosAppFrontend/src/main/resources/facheritosfrontendapp/views/headquarters&quot;,
-
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Usuario/Documents/Sexto semestre/Desarrollo de Software/FacheritosApp/src/main/resources/facheritosfrontendapp/views/quotations&quot;,
-
-
+    &quot;last_opened_file_path&quot;: &quot;D:/Univalle/Semestre 6/Desarrollo de software I/proyecto/FacheritosFrontendApp/src/main/resources/facheritosfrontendapp/views/sales&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -94,10 +79,12 @@
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.35632184&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;preferences.JavaFX&quot;
+
   }
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Univalle\Semestre 6\Desarrollo de software I\proyecto\FacheritosFrontendApp\src\main\resources\facheritosfrontendapp\views\sales" />
       <recent name="C:\Users\Jennyfer\Desktop\archivos_actuales\sexto\proyectoDesarrolloFrontend\FacheritosAppFrontend\src\main\resources\facheritosfrontendapp\views\headquarters" />
       <recent name="C:\Users\Usuario\Documents\Sexto semestre\Desarrollo de Software\FacheritosApp\src\main\resources\facheritosfrontendapp\views\quotations" />
       <recent name="C:\Users\Usuario\Documents\Sexto semestre\Desarrollo de Software\FacheritosApp\src\main\resources\facheritosfrontendapp\views\quotation" />
@@ -238,6 +225,7 @@
       <workItem from="1656256628435" duration="999000" />
       <workItem from="1656257963536" duration="275000" />
       <workItem from="1656294026606" duration="2955000" />
+      <workItem from="1656368766194" duration="4058000" />
     </task>
     <task id="LOCAL-00001" summary="I changed the view users view with the combo boxes and the city field.">
       <created>1654630629606</created>
@@ -335,6 +323,11 @@
           <url>file://$PROJECT_DIR$/src/main/java/backend/dto/city/CityDTO.java</url>
           <line>2</line>
           <option name="timeStamp" value="7" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/sale/SaleRequestSingleViewController.java</url>
+          <line>241</line>
+          <option name="timeStamp" value="9" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
