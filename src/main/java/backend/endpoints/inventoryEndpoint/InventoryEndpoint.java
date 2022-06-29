@@ -194,4 +194,69 @@ public class InventoryEndpoint {
             return false;
         }
     }
+
+    /**
+     * editPart: PartDTO -> Map<Boolean, Integer>
+     * Purpose: This method connects to the DB and edits a part, it makes the first
+     * necessary query in order to edit the part in the DB,
+     */
+    public Map<Boolean, Integer> editPart(PartDTO part){
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        HashMap<Boolean, Integer> response = new HashMap<>();
+        try(Connection conn = ConnectionBD.connectDB().getConnection()){
+            preparedStatement = conn.prepareStatement("UPDATE part SET name=?, price=?, description=? WHERE id_part=?");
+            preparedStatement.setString(1, part.getName());
+            preparedStatement.setDouble(2, part.getPrice());
+            preparedStatement.setString(3, part.getDescription());
+            preparedStatement.setString(4, String.valueOf(part.getIdPart()));
+
+            resultSet = preparedStatement.executeQuery();
+            resultSet.next();
+            response.put(true, resultSet.getInt("id_part"));
+        }catch (SQLException e){
+            e.printStackTrace();
+            response.put(false, -1);
+        }
+        return response;
+    }
+    /**
+     * compelteEeditPart: VehicleDTO -> Boolean
+     * Purpose: This method connects to the DB and saves a vehicle,
+     * if successful, it returns true, if not it returns false
+     */
+    public Boolean completeEditPart(PartDTO part){
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        Integer idPart = null;
+        Integer idHeadquarter = null;
+        HashMap<Boolean, Integer> responseIdPart = (HashMap<Boolean, Integer>) editPart(part);
+        if(responseIdPart.containsKey(true)){
+            idPart = responseIdPart.get(true);
+            try(Connection conn = ConnectionBD.connectDB().getConnection()){
+                preparedStatement = conn.prepareStatement("DO $do$ BEGIN\n" +
+                        "   IF EXISTS (SELECT * FROM part_inventory WHERE id_part = ? AND id_headquarter = ?) THEN\n" +
+                        "      UPDATE part_inventory SET quantity=? WHERE id_part=?;\n" +
+                        "   ELSE\n" +
+                        "      raise exception using\n" +
+                        "            message='This part aleady exists in this headquarter',\n" +
+                        "            hint='Try with a different part of the inventory';\n" +
+                        "   END IF;\n" +
+                        "END\n" +
+                        "$do$");
+                preparedStatement.setInt(1, idPart);
+                preparedStatement.setInt(2, part.getId_headquarter());
+                preparedStatement.setInt(3, part.getQuantity());
+                preparedStatement.setInt(4, idPart);
+                preparedStatement.executeUpdate();
+                return true;
+            } catch (SQLException e) {
+                e.printStackTrace();
+                return false;
+            }
+        }else{
+            System.out.print("Algo salio mal modificando el repuesto :(");
+            return false;
+        }
+    }
 }

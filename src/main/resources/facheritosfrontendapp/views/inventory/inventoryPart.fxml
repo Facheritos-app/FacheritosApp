@@ -4,6 +4,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
@@ -14,7 +15,6 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-
 
 <AnchorPane prefHeight="517.0" prefWidth="647.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="facheritosfrontendapp.controller.inventory.InventoryPartController">
    <children>
@@ -65,7 +65,7 @@
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="headquarter" editable="false" prefHeight="26.0" prefWidth="222.0" styleClass="input-text" stylesheets="@../style.css" />
+                        <ComboBox fx:id="headquarter" prefHeight="26.0" prefWidth="250.0" styleClass="input-text" stylesheets="@../style.css" />
                         <Label fx:id="typeLabel" />
                      </children>
                      <HBox.margin>
@@ -159,13 +159,13 @@
                   <HBox prefHeight="48.0" prefWidth="293.0" spacing="30.0" />
                   <Pane prefHeight="51.0" prefWidth="571.0">
                      <children>
-                        <Button fx:id="cancelBtn" layoutX="63.0" mnemonicParsing="false" stylesheets="@../style.css" text="Cancelar" visible="false">
+                        <Button fx:id="cancelBtn" layoutX="63.0" mnemonicParsing="false" onMouseClicked="#cancelClicked" stylesheets="@../style.css" text="Cancelar" visible="false">
                            <styleClass>
                               <String fx:value="red-button" />
                               <String fx:value="select-button" />
                            </styleClass>
                         </Button>
-                        <Button fx:id="saveBtn" layoutX="213.0" mnemonicParsing="false" onMouseClicked="#editClicked" stylesheets="@../style.css" text="Guardar" visible="false">
+                        <Button fx:id="saveBtn" layoutX="213.0" mnemonicParsing="false" onMouseClicked="#saveClicked" stylesheets="@../style.css" text="Guardar" visible="false">
                            <styleClass>
                               <String fx:value="blue-button" />
                               <String fx:value="select-button" />
@@ -177,7 +177,7 @@
                               <String fx:value="select-button" />
                            </styleClass>
                         </Button>
-                        <Button fx:id="deleteBtn" layoutX="63.0" mnemonicParsing="false" stylesheets="@../style.css" text="Eliminar">
+                        <Button fx:id="deleteBtn" layoutX="63.0" mnemonicParsing="false" onMouseClicked="#deleteClicked" stylesheets="@../style.css" text="Eliminar">
                            <styleClass>
                               <String fx:value="red-button" />
                               <String fx:value="select-button" />
