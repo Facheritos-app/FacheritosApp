@@ -415,6 +415,7 @@ public class QuotationSingleViewController implements Initializable {
         }else{
             quotationTableView.getItems().remove(selectedVehicle);
             newQuotation.setIdCar(null);
+            quotationPrice.setText("$ ");
         }
 
     }
@@ -430,6 +431,7 @@ public class QuotationSingleViewController implements Initializable {
         }else{
             quotationTableView.getItems().add(selectedVehicle);
             newQuotation.setIdCar(selectedVehicle.getIdCar());
+            quotationPrice.setText("$ " + selectedVehicle.getPrice());
         }
     }
     @FXML
