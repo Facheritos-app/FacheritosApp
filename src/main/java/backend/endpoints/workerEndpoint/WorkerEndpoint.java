@@ -83,4 +83,27 @@ public class WorkerEndpoint {
         }
         return response;
     }
+
+    public Map<Boolean, ResultSet> getWorkerByCc(String workerCc){
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        HashMap<Boolean, ResultSet> response = new HashMap<>();
+        try(Connection conn = ConnectionBD.connectDB().getConnection()){
+            preparedStatement = conn.prepareStatement("SELECT H.name AS headquarter_name, * FROM person JOIN worker W USING(id_person)" +
+                    "JOIN headquarter H USING(id_headquarter)" +
+                    "WHERE W.state = true AND id_type_person = 2 AND cc = ?");
+            preparedStatement.setString(1, workerCc);
+            resultSet = preparedStatement.executeQuery();
+            if(!resultSet.isBeforeFirst()){
+                response.put(false, resultSet);
+                return response;
+            }
+            resultSet.next();
+            response.put(true, resultSet);
+        }catch (SQLException e){
+            e.printStackTrace();
+            response.put(false, resultSet);
+        }
+        return response;
+    }
 }
