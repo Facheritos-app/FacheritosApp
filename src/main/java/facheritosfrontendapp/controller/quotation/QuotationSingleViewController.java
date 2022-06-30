@@ -5,7 +5,11 @@ import backend.endpoints.customerEndpoint.CustomerEndpoint;
 import backend.endpoints.inventoryEndpoint.InventoryEndpoint;
 import backend.endpoints.quotationEndpoint.QuotationEndpoint;
 import backend.endpoints.workerEndpoint.WorkerEndpoint;
+import facheritosfrontendapp.controller.DashboardController;
+import facheritosfrontendapp.controller.MainController;
+import facheritosfrontendapp.controller.inventory.InventoryController;
 import facheritosfrontendapp.objectRowView.inventoryRowView.VehicleRowView;
+import facheritosfrontendapp.views.MyDialogPane;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
@@ -15,6 +19,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.net.URL;
 import java.sql.ResultSet;
@@ -24,10 +29,13 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
 import static javafx.scene.control.ButtonType.OK;
+import static javafx.scene.control.ButtonType.YES;
 
 public class QuotationSingleViewController implements Initializable {
 
 
+    private DashboardController dashboardController;
+    private QuotationController quotationController;
     private QuotationEndpoint quotationEndpoint;
     private InventoryEndpoint inventoryEndpoint;
     private WorkerEndpoint workerEndpoint;
@@ -108,6 +116,11 @@ public class QuotationSingleViewController implements Initializable {
         newQuotation = new QuotationDTO();
     }
 
+    /**
+     * showQuotation: Integer -> Void
+     * Purpose: This method calls the  quotation endpoint to get all the information required of the quotation,
+     * then, it calls all the methods to set the seller, worker and quotation info.
+     */
     public void showQuotation(Integer idQuotation) {
         new Thread(() -> {
             CompletableFuture<Map<Boolean, ResultSet>> quotationCall = CompletableFuture.supplyAsync(() -> quotationEndpoint.getQuotation(idQuotation));
@@ -140,6 +153,10 @@ public class QuotationSingleViewController implements Initializable {
         }).start();
     }
 
+    /**
+     * showInventory: Void -> Void
+     * Purpose: This method calls the inventory endpoint in order to show the inventory available
+     */
     public void showInventory() {
         new Thread(() -> {
             CompletableFuture<Map<Boolean, ResultSet>> vehiclesCall = CompletableFuture.supplyAsync(() -> inventoryEndpoint.getVehiclesForTableView());
@@ -164,6 +181,11 @@ public class QuotationSingleViewController implements Initializable {
         }).start();
     }
 
+    /**
+     * changeSeller: String -> Void
+     * Purpose: This method calls the worker endpoint to get a worker by cc in order to change the quotation's seller if necessary.
+     * Comments: In this method we start to change the newQuotation object which refers to the quotation that's currently being modified.
+     */
     public void changeSeller(String cc) {
         new Thread(() -> {
             sellerInfoLoading();
@@ -175,7 +197,8 @@ public class QuotationSingleViewController implements Initializable {
                             ResultSet resultSet = response.get(true);
                             try {
                                 setSellerInfo(resultSet, Arrays.asList("cc", "first_name", "last_name", "headquarter_name", "email"));
-                                newQuotation.setIdWorker(resultSet.getInt("id_worker"));
+                                newQuotation.setIdWorker(resultSet.getInt("id_worker")); //Set the new seller for the quotation.
+                                newQuotation.setIdHeadquarter(resultSet.getInt("id_headquarter")); //Set the new location for the quotation
                             } catch (SQLException e) {
                                 throw new RuntimeException(e);
                             }
@@ -194,7 +217,11 @@ public class QuotationSingleViewController implements Initializable {
             }
         }).start();
     }
-
+    /**
+     * changeCustomer: String -> Void
+     * Purpose: This method calls the person endpoint to get a customer by cc in order to change the quotation's customer if necessary.
+     * Comments: In this method we continue changing the newQuotation object which refers to the quotation that's currently being modified.
+     */
     public void changeCustomer(String cc){
         new Thread(() -> {
             customerInfoLoading();
@@ -206,8 +233,7 @@ public class QuotationSingleViewController implements Initializable {
                             ResultSet resultSet = response.get(true);
                             try {
                                 setCustomerInfo(resultSet, Arrays.asList("cc", "first_name", "last_name"));
-                                newQuotation.setIdCustomer(resultSet.getInt("id_person"));
-                                newQuotation.setIdHeadquarter(resultSet.getInt("id_headquarter"));
+                                newQuotation.setIdCustomer(resultSet.getInt("id_person")); //Set the new customer for the quotation
                             } catch (SQLException e) {
                                 throw new RuntimeException(e);
                             }
@@ -227,6 +253,10 @@ public class QuotationSingleViewController implements Initializable {
         }).start();
     }
 
+    /**
+     * updateQuotation: Void -> Void
+     * Purpose: This method calls the quotation endpoint to update a quotation.
+     */
     public void updateQuotation(){
         new Thread(() -> {
             CompletableFuture<Boolean> updateQuotationCall = CompletableFuture.supplyAsync(() -> quotationEndpoint.updateQuotation(newQuotation));
@@ -331,6 +361,10 @@ public class QuotationSingleViewController implements Initializable {
         paymentMethod.getSelectionModel().select(resultSet.getInt(columns.get(2)) - 1);
     }
 
+    /**
+     * setCurrentQuotation: ResultSet, List<String> -> Void
+     * Purpose: This method sets the current quotation object and creates a new one for updates
+     */
     public void setCurrentQuotation(ResultSet resultSet, List<String> columns) throws SQLException {
         currentQuotation.setIdQuotation(resultSet.getInt(columns.get(0)));
         currentQuotation.setIdCar(resultSet.getInt(columns.get(1)));
@@ -341,7 +375,7 @@ public class QuotationSingleViewController implements Initializable {
         currentQuotation.setIdCustomer(resultSet.getInt(columns.get(6)));
         currentQuotation.setIdPayment(getMethodPaymentId((String) paymentMethod.getSelectionModel().getSelectedItem()));
         try {
-            newQuotation = (QuotationDTO) currentQuotation.clone();
+            newQuotation = (QuotationDTO) currentQuotation.clone(); //Clone the current quotation into the one that will be most likely modified
         } catch (CloneNotSupportedException e) {
             throw new RuntimeException(e);
         }
@@ -367,6 +401,11 @@ public class QuotationSingleViewController implements Initializable {
     public void clickedCustomerSearch(MouseEvent mouseEvent) {
       changeCustomer(customerCc.getText());
     }
+
+    /**
+     * onDeleteVehicle: MouseEvent -> Void
+     * Purpose: This method is called when the user wants to delete the vehicle from the quotation
+     */
     @FXML
     public void onDeleteVehicle(MouseEvent mouseEvent) {
         VehicleRowView selectedVehicle = (VehicleRowView) quotationTableView.getSelectionModel().getSelectedItem();
@@ -376,7 +415,6 @@ public class QuotationSingleViewController implements Initializable {
         }else{
             quotationTableView.getItems().remove(selectedVehicle);
             newQuotation.setIdCar(null);
-            System.out.println("Borro vehiculo");
         }
 
     }
@@ -395,22 +433,52 @@ public class QuotationSingleViewController implements Initializable {
         }
     }
     @FXML
+    public void backArrowClicked(MouseEvent mouseEvent) throws IOException {
+        cancelClick(mouseEvent);
+    }
+
+    @FXML
+    public void cancelClick(MouseEvent mouseEvent) throws IOException {
+        /*Show dialogPane to confirm*/
+        MyDialogPane dialogPane = new MyDialogPane("confirmationCancel");
+        Optional<ButtonType> clickedButton = dialogPane.getClickedButton();
+        if (clickedButton.get() == YES) {
+            quotationController = (QuotationController) dashboardController.changeContent("quotations/quotations");
+            quotationController.showQuotations();
+        }
+    }
+
+    /**
+     * onUpdateQuotation: MouseEvent -> Void
+     * Purpose: This method is called when the user wants to update the current quotation,
+     * it verifies that everything is correct in order to make the update.
+     */
+    @FXML
     public void onUpdateQuotation(MouseEvent mouseEvent) {
         newQuotation.setIdPayment(getMethodPaymentId((String) paymentMethod.getSelectionModel().getSelectedItem()));
         if(compareQuotations()){
             Alert info = new Alert(Alert.AlertType.INFORMATION, "No hay nada que actualizar", OK);
             info.show();
         }else {
-            System.out.println("Hay que actualizar!!");
-            updateQuotation();
-            try {
-                currentQuotation = (QuotationDTO) newQuotation.clone();
-            } catch (CloneNotSupportedException e) {
-                throw new RuntimeException(e);
+            if(newQuotation.getIdCar() == null){
+                Alert fail = new Alert(Alert.AlertType.ERROR, "La cotización debe tener un carro!", OK);
+                fail.show();
+            } else{
+                updateQuotation();
+                try {
+                    currentQuotation = (QuotationDTO) newQuotation.clone();
+                } catch (CloneNotSupportedException e) {
+                    throw new RuntimeException(e);
+                }
             }
         }
     }
 
+    /**
+     * compareQuotations: Void -> Boolean
+     * Purpose: This method compares the new quotation and the current quotation, so the controller does not
+     * make an update request when it is not necessary.
+     */
     public Boolean compareQuotations(){
         return currentQuotation.getIdQuotation() == newQuotation.getIdQuotation() &&
            currentQuotation.getIdWorker() == newQuotation.getIdWorker() &&
@@ -421,11 +489,10 @@ public class QuotationSingleViewController implements Initializable {
            currentQuotation.getQuotationDate() == newQuotation.getQuotationDate() &&
            currentQuotation.getIdPayment() == newQuotation.getIdPayment();
     }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        dashboardController = MainController.getDashboardController();
         paymentMethod.setItems(FXCollections.observableArrayList("Tarjeta de credito", "Efectivo"));
     }
-
-
-
 }
