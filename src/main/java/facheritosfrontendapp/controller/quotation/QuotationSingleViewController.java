@@ -461,7 +461,7 @@ public class QuotationSingleViewController implements Initializable {
             info.show();
         }else {
             if(newQuotation.getIdCar() == null){
-                Alert fail = new Alert(Alert.AlertType.ERROR, "La cotización debe tener un carro!", OK);
+                Alert fail = new Alert(Alert.AlertType.ERROR, "La cotización debe tener un carro", OK);
                 fail.show();
             } else{
                 updateQuotation();
