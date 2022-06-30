@@ -1,6 +1,7 @@
 package facheritosfrontendapp.controller.quotation;
 
 import backend.dto.quotationDTO.QuotationDTO;
+import backend.endpoints.customerEndpoint.CustomerEndpoint;
 import backend.endpoints.inventoryEndpoint.InventoryEndpoint;
 import backend.endpoints.quotationEndpoint.QuotationEndpoint;
 import backend.endpoints.workerEndpoint.WorkerEndpoint;
@@ -30,11 +31,14 @@ public class QuotationSingleViewController implements Initializable {
     private QuotationEndpoint quotationEndpoint;
     private InventoryEndpoint inventoryEndpoint;
     private WorkerEndpoint workerEndpoint;
+    private CustomerEndpoint customerEndpoint;
     private QuotationDTO currentQuotation;
+    private QuotationDTO newQuotation;
     private ArrayList<VehicleRowView> vehicleQuotationRowList;
     private ArrayList<VehicleRowView> vehicleInventoryRowList;
 
     private String workerCc;
+    private String clientCc;
 
     @FXML
     private TableView quotationTableView;
@@ -45,7 +49,7 @@ public class QuotationSingleViewController implements Initializable {
     @FXML
     private TableColumn<VehicleRowView, String> colHeadquarter;
     @FXML
-    private TableView inventoryTableView;
+    private TableView<VehicleRowView> inventoryTableView;
     @FXML
     private TableColumn<VehicleRowView, String> colNameInventory;
     @FXML
@@ -81,19 +85,23 @@ public class QuotationSingleViewController implements Initializable {
     @FXML
     private Label quotationId;
     @FXML
-    private Button cancel;
-    @FXML
     private Button searchSeller;
     @FXML
     private Button searchCustomer;
+    @FXML
+    private Button addVehicleButton;
+    @FXML
+    private Button deleteVehicleButton;
 
     public QuotationSingleViewController() {
         quotationEndpoint = new QuotationEndpoint();
         inventoryEndpoint = new InventoryEndpoint();
+        customerEndpoint = new CustomerEndpoint();
         workerEndpoint = new WorkerEndpoint();
         vehicleQuotationRowList = new ArrayList<>();
         vehicleInventoryRowList = new ArrayList<>();
         currentQuotation = new QuotationDTO();
+        newQuotation = new QuotationDTO();
     }
 
     public void showQuotation(Integer idQuotation) {
@@ -110,6 +118,7 @@ public class QuotationSingleViewController implements Initializable {
                                 setSellerInfo(resultSet, Arrays.asList("seller_cc", "seller_firstname", "seller_lastname", "headquarter_name", "seller_email"));
                                 workerCc = resultSet.getString("seller_cc");
                                 setCustomerInfo(resultSet, Arrays.asList("customer_cc", "customer_firstname", "customer_lastname"));
+                                clientCc = resultSet.getString("customer_cc");
                                 setQuotationDetails(resultSet, Arrays.asList("id_quotation", "price"));
                                 setCurrentQuotation(resultSet, Arrays.asList("id_quotation", "id_car", "id_confirmation", "id_headquarter", "quotation_date", "id_worker", "id_person_customer"));
                             } catch (SQLException e) {
@@ -168,7 +177,37 @@ public class QuotationSingleViewController implements Initializable {
                         } else {
                             Alert fail = new Alert(Alert.AlertType.ERROR, "No se ha encontrado la cedula del trabajador o no es una cédula válida, por favor intenta nuevamente", OK);
                             fail.show();
-                            changeSeller(workerCc);
+                            changeSeller(workerCc); //Error, so go back to the original seller
+                        }
+                    });
+                    return true;
+                }).get();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            } catch (ExecutionException e) {
+                throw new RuntimeException(e);
+            }
+        }).start();
+    }
+
+    public void changeCustomer(String cc){
+        new Thread(() -> {
+            customerInfoLoading();
+            CompletableFuture<Map<Boolean, ResultSet>> customerCall = CompletableFuture.supplyAsync(() -> customerEndpoint.getCustomerByCc(cc));
+            try {
+                customerCall.thenApply(response -> {
+                    Platform.runLater(() -> {
+                        if(response.containsKey(true)){
+                            ResultSet resultSet = response.get(true);
+                            try {
+                                setCustomerInfo(resultSet, Arrays.asList("cc", "first_name", "last_name"));
+                            } catch (SQLException e) {
+                                throw new RuntimeException(e);
+                            }
+                        }else{
+                            Alert fail = new Alert(Alert.AlertType.ERROR, "No se ha encontrado la cedula del cliente o no es una cédula válida, por favor intenta nuevamente", OK);
+                            fail.show();
+                            changeCustomer(clientCc);
                         }
                     });
                     return true;
@@ -197,6 +236,17 @@ public class QuotationSingleViewController implements Initializable {
         inventoryTableView.setItems(FXCollections.observableArrayList(vehicleInventoryRowList));
     }
 
+    public Integer getMethodPaymentId(String paymentMethod){
+        switch (paymentMethod){
+            case "Efectivo":
+                return 2;
+            case "Tarjeta de credito":
+                return 1;
+            default:
+                return -3;
+        }
+    }
+
 
     @FXML
     public void editQuotation(MouseEvent mouseEvent) {
@@ -207,6 +257,10 @@ public class QuotationSingleViewController implements Initializable {
         searchCustomer.setVisible(true);
         searchSeller.setDisable(false);
         searchSeller.setVisible(true);
+        addVehicleButton.setDisable(false);
+        addVehicleButton.setVisible(true);
+        deleteVehicleButton.setDisable(false);
+        deleteVehicleButton.setVisible(true);
         showInventory();
     }
 
@@ -217,7 +271,6 @@ public class QuotationSingleViewController implements Initializable {
         sellerHeadq.setText(resultSet.getString(columns.get(3)));
         sellerEmail.setText(resultSet.getString(columns.get(4)));
     }
-
     public void sellerInfoLoading() {
         sellerName.setText("Cargando...");
         sellerLastname.setText("Cargando...");
@@ -229,6 +282,11 @@ public class QuotationSingleViewController implements Initializable {
         customerCc.setText(resultSet.getString(columns.get(0)));
         customerName.setText(resultSet.getString(columns.get(1)));
         customerLastname.setText(resultSet.getString(columns.get(2)));
+    }
+
+    public void customerInfoLoading(){
+        customerName.setText("Cargando...");
+        customerLastname.setText("Cargando...");
     }
 
     public void setQuotationDetails(ResultSet resultSet, List<String> columns) throws SQLException {
@@ -245,6 +303,7 @@ public class QuotationSingleViewController implements Initializable {
         currentQuotation.setQuotationDate(resultSet.getDate(columns.get(4)).toLocalDate());
         currentQuotation.setIdWorker(resultSet.getInt(columns.get(5)));
         currentQuotation.setIdCustomer(resultSet.getInt(columns.get(6)));
+        newQuotation = currentQuotation;
     }
 
     public void setQuotationItems(ResultSet resultSet) throws SQLException {
@@ -263,9 +322,41 @@ public class QuotationSingleViewController implements Initializable {
     public void clickedSearchSeller(MouseEvent mouseEvent) {
         changeSeller(sellerCc.getText());
     }
+    @FXML
+    public void clickedCustomerSearch(MouseEvent mouseEvent) {
+      changeCustomer(customerCc.getText());
+    }
+    @FXML
+    public void onDeleteVehicle(MouseEvent mouseEvent) {
+        VehicleRowView selectedVehicle = (VehicleRowView) quotationTableView.getSelectionModel().getSelectedItem();
+        if(selectedVehicle == null){
+            Alert fail = new Alert(Alert.AlertType.ERROR, "Selecciona un vehículo para eliminar", OK);
+            fail.show();
+        }else{
+            quotationTableView.getItems().remove(selectedVehicle);
+            System.out.println("Borro vehiculo");
+        }
+
+    }
+    @FXML
+    public void onAddVehicle(MouseEvent mouseEvent) {
+        VehicleRowView selectedVehicle = inventoryTableView.getSelectionModel().getSelectedItem();
+        if(selectedVehicle == null){
+            Alert fail = new Alert(Alert.AlertType.ERROR, "Selecciona un vehículo para agregar", OK);
+            fail.show();
+        }else if(quotationTableView.getItems().size() > 0){
+            Alert fail = new Alert(Alert.AlertType.ERROR, "Solo puede haber un vehículo en la cotización, por favor bora el existente para agregar uno nuevo", OK);
+            fail.show();
+        }else{
+            quotationTableView.getItems().add(selectedVehicle);
+        }
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         paymentMethod.setItems(FXCollections.observableArrayList("Tarjeta de credito", "Efectivo"));
     }
+
+
+
 }

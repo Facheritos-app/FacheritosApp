@@ -73,7 +73,7 @@
                      <children>
                         <HBox alignment="BOTTOM_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="48.0">
                            <children>
-                              <Label alignment="CENTER" prefHeight="28.0" prefWidth="356.0" text="Inventario">
+                              <Label alignment="CENTER" prefHeight="28.0" prefWidth="262.0" text="Inventario">
                                  <HBox.margin>
                                     <Insets />
                                  </HBox.margin>
@@ -81,6 +81,7 @@
                                     <Font name="System Bold" size="14.0" />
                                  </font>
                               </Label>
+                              <Button fx:id="addVehicleButton" disable="true" mnemonicParsing="false" onMouseClicked="#onAddVehicle" styleClass="blue-button" stylesheets="@../style.css" text="Agregar vehículo" visible="false" />
                            </children>
                            <padding>
                               <Insets bottom="10.0" />
@@ -98,7 +99,7 @@
                   </VBox>
                   <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
                      <children>
-                        <HBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="48.0" prefWidth="577.0">
+                        <HBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="48.0" prefWidth="577.0" spacing="20.0">
                            <children>
                               <Label alignment="CENTER" contentDisplay="CENTER" text="Resumen cotización">
                                  <HBox.margin>
@@ -108,7 +109,7 @@
                                     <Font name="System Bold" size="14.0" />
                                  </font>
                               </Label>
-                              <Button mnemonicParsing="false" text="Button" visible="false" />
+                              <Button fx:id="deleteVehicleButton" disable="true" mnemonicParsing="false" onMouseClicked="#onDeleteVehicle" styleClass="red-button" stylesheets="@../style.css" text="Eliminar elemento" visible="false" />
                            </children>
                         </HBox>
                         <TableView fx:id="quotationTableView" prefHeight="239.0" prefWidth="394.0">
@@ -258,7 +259,7 @@
                                        </font>
                                     </Label>
                                     <TextField fx:id="customerLastname" disable="true" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="146.0" text="Cargando..." GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.rowSpan="2" />
-                                    <Button fx:id="searchCustomer" disable="true" mnemonicParsing="false" prefHeight="30.0" prefWidth="122.0" styleClass="blue-button" stylesheets="@../style.css" text="Buscar cliente" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="3" GridPane.rowSpan="2" />
+                                    <Button fx:id="searchCustomer" disable="true" mnemonicParsing="false" onMouseClicked="#clickedCustomerSearch" prefHeight="30.0" prefWidth="122.0" styleClass="blue-button" stylesheets="@../style.css" text="Buscar cliente" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="3" GridPane.rowSpan="2" />
                                  </children>
                               </GridPane>
                            </children>
