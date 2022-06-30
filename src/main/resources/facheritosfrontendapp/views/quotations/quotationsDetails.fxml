@@ -337,13 +337,13 @@
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <Button mnemonicParsing="false" onMouseClicked="#editQuotation" stylesheets="@../style.css" text="Editar">
+                              <Button fx:id="editQuotationButton" mnemonicParsing="false" onMouseClicked="#editQuotation" stylesheets="@../style.css" text="Editar">
                                  <styleClass>
                                     <String fx:value="blue-button" />
                                     <String fx:value="select-button" />
                                  </styleClass>
                               </Button>
-                              <Button disable="true" mnemonicParsing="false" stylesheets="@../style.css" text="Aplicar" visible="false">
+                              <Button fx:id="updateQuotation" disable="true" mnemonicParsing="false" onMouseClicked="#onUpdateQuotation" stylesheets="@../style.css" text="Aplicar" visible="false">
                                  <styleClass>
                                     <String fx:value="blue-button" />
                                     <String fx:value="select-button" />

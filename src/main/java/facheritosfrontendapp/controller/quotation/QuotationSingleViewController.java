@@ -92,6 +92,10 @@ public class QuotationSingleViewController implements Initializable {
     private Button addVehicleButton;
     @FXML
     private Button deleteVehicleButton;
+    @FXML
+    private Button editQuotationButton;
+    @FXML
+    private Button updateQuotation;
 
     public QuotationSingleViewController() {
         quotationEndpoint = new QuotationEndpoint();
@@ -119,7 +123,7 @@ public class QuotationSingleViewController implements Initializable {
                                 workerCc = resultSet.getString("seller_cc");
                                 setCustomerInfo(resultSet, Arrays.asList("customer_cc", "customer_firstname", "customer_lastname"));
                                 clientCc = resultSet.getString("customer_cc");
-                                setQuotationDetails(resultSet, Arrays.asList("id_quotation", "price"));
+                                setQuotationDetails(resultSet, Arrays.asList("id_quotation", "price", "id_payment"));
                                 setCurrentQuotation(resultSet, Arrays.asList("id_quotation", "id_car", "id_confirmation", "id_headquarter", "quotation_date", "id_worker", "id_person_customer"));
                             } catch (SQLException e) {
                                 throw new RuntimeException(e);
@@ -171,6 +175,7 @@ public class QuotationSingleViewController implements Initializable {
                             ResultSet resultSet = response.get(true);
                             try {
                                 setSellerInfo(resultSet, Arrays.asList("cc", "first_name", "last_name", "headquarter_name", "email"));
+                                newQuotation.setIdWorker(resultSet.getInt("id_worker"));
                             } catch (SQLException e) {
                                 throw new RuntimeException(e);
                             }
@@ -201,6 +206,8 @@ public class QuotationSingleViewController implements Initializable {
                             ResultSet resultSet = response.get(true);
                             try {
                                 setCustomerInfo(resultSet, Arrays.asList("cc", "first_name", "last_name"));
+                                newQuotation.setIdCustomer(resultSet.getInt("id_person"));
+                                newQuotation.setIdHeadquarter(resultSet.getInt("id_headquarter"));
                             } catch (SQLException e) {
                                 throw new RuntimeException(e);
                             }
@@ -208,6 +215,30 @@ public class QuotationSingleViewController implements Initializable {
                             Alert fail = new Alert(Alert.AlertType.ERROR, "No se ha encontrado la cedula del cliente o no es una cédula válida, por favor intenta nuevamente", OK);
                             fail.show();
                             changeCustomer(clientCc);
+                        }
+                    });
+                    return true;
+                }).get();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            } catch (ExecutionException e) {
+                throw new RuntimeException(e);
+            }
+        }).start();
+    }
+
+    public void updateQuotation(){
+        new Thread(() -> {
+            CompletableFuture<Boolean> updateQuotationCall = CompletableFuture.supplyAsync(() -> quotationEndpoint.updateQuotation(newQuotation));
+            try {
+                updateQuotationCall.thenApply(status -> {
+                    Platform.runLater(() -> {
+                        if(status){
+                            Alert success = new Alert(Alert.AlertType.CONFIRMATION, "La cotización ha sido actualizada correctamente", OK);
+                            success.show();
+                        }else{
+                            Alert fail = new Alert(Alert.AlertType.ERROR, "Hubo un error con el servidor, intentalo otra vez por favor", OK);
+                            fail.show();
                         }
                     });
                     return true;
@@ -261,6 +292,10 @@ public class QuotationSingleViewController implements Initializable {
         addVehicleButton.setVisible(true);
         deleteVehicleButton.setDisable(false);
         deleteVehicleButton.setVisible(true);
+        editQuotationButton.setDisable(true);
+        editQuotationButton.setVisible(false);
+        updateQuotation.setDisable(false);
+        updateQuotation.setVisible(true);
         showInventory();
     }
 
@@ -293,6 +328,7 @@ public class QuotationSingleViewController implements Initializable {
         quotationQuantity.setText("1");
         quotationId.setText(String.valueOf(resultSet.getInt(columns.get(0))));
         quotationPrice.setText("$ " + resultSet.getString(columns.get(1)));
+        paymentMethod.getSelectionModel().select(resultSet.getInt(columns.get(2)) - 1);
     }
 
     public void setCurrentQuotation(ResultSet resultSet, List<String> columns) throws SQLException {
@@ -303,7 +339,12 @@ public class QuotationSingleViewController implements Initializable {
         currentQuotation.setQuotationDate(resultSet.getDate(columns.get(4)).toLocalDate());
         currentQuotation.setIdWorker(resultSet.getInt(columns.get(5)));
         currentQuotation.setIdCustomer(resultSet.getInt(columns.get(6)));
-        newQuotation = currentQuotation;
+        currentQuotation.setIdPayment(getMethodPaymentId((String) paymentMethod.getSelectionModel().getSelectedItem()));
+        try {
+            newQuotation = (QuotationDTO) currentQuotation.clone();
+        } catch (CloneNotSupportedException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void setQuotationItems(ResultSet resultSet) throws SQLException {
@@ -334,6 +375,7 @@ public class QuotationSingleViewController implements Initializable {
             fail.show();
         }else{
             quotationTableView.getItems().remove(selectedVehicle);
+            newQuotation.setIdCar(null);
             System.out.println("Borro vehiculo");
         }
 
@@ -349,9 +391,36 @@ public class QuotationSingleViewController implements Initializable {
             fail.show();
         }else{
             quotationTableView.getItems().add(selectedVehicle);
+            newQuotation.setIdCar(selectedVehicle.getIdCar());
+        }
+    }
+    @FXML
+    public void onUpdateQuotation(MouseEvent mouseEvent) {
+        newQuotation.setIdPayment(getMethodPaymentId((String) paymentMethod.getSelectionModel().getSelectedItem()));
+        if(compareQuotations()){
+            Alert info = new Alert(Alert.AlertType.INFORMATION, "No hay nada que actualizar", OK);
+            info.show();
+        }else {
+            System.out.println("Hay que actualizar!!");
+            updateQuotation();
+            try {
+                currentQuotation = (QuotationDTO) newQuotation.clone();
+            } catch (CloneNotSupportedException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 
+    public Boolean compareQuotations(){
+        return currentQuotation.getIdQuotation() == newQuotation.getIdQuotation() &&
+           currentQuotation.getIdWorker() == newQuotation.getIdWorker() &&
+           currentQuotation.getIdHeadquarter() == newQuotation.getIdHeadquarter() &&
+           currentQuotation.getIdCar() == newQuotation.getIdCar() &&
+           currentQuotation.getIdCustomer() == newQuotation.getIdCustomer() &&
+           currentQuotation.getIdConfirmation() == newQuotation.getIdConfirmation() &&
+           currentQuotation.getQuotationDate() == newQuotation.getQuotationDate() &&
+           currentQuotation.getIdPayment() == newQuotation.getIdPayment();
+    }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         paymentMethod.setItems(FXCollections.observableArrayList("Tarjeta de credito", "Efectivo"));

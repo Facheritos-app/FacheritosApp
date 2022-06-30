@@ -2,7 +2,7 @@ package backend.dto.quotationDTO;
 
 import java.time.LocalDate;
 
-public class QuotationDTO {
+public class QuotationDTO implements Cloneable {
 
     private Integer idQuotation;
 
@@ -19,6 +19,21 @@ public class QuotationDTO {
     private LocalDate quotationDate;
 
     private Integer idPayment;
+
+
+    public Object clone() throws CloneNotSupportedException {
+        QuotationDTO quotationDTO = (QuotationDTO) super.clone();
+        return quotationDTO;
+    }
+
+    @Override
+    public String toString(){
+        return "id_quotation: " + idQuotation + "\n" + "id_worker: " + idWorker + "\n" + "id_headquarter: " + idHeadquarter +
+                "\n" + "id_car: " + idCar + "\n" + "id_customer: " + idCustomer + "\n" + "id_confirmation: " + idConfirmation +
+                "\n" + "quotation_date: " + quotationDate + "\n" + "id_payment: " + idPayment;
+
+    }
+
 
     public Integer getIdQuotation() {
         return idQuotation;

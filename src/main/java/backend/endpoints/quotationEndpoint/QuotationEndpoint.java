@@ -1,6 +1,7 @@
 package backend.endpoints.quotationEndpoint;
 
 import backend.connectionBD.ConnectionBD;
+import backend.dto.quotationDTO.QuotationDTO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -53,5 +54,24 @@ public class QuotationEndpoint {
             response.put(false, resultSet);
         }
         return response;
+    }
+
+    public Boolean updateQuotation(QuotationDTO quotation){
+        PreparedStatement preparedStatement = null;
+        try(Connection conn = ConnectionBD.connectDB().getConnection()){
+            preparedStatement = conn.prepareStatement("UPDATE quotation SET id_worker = ?, id_headquarter = ?, id_car = ?, id_customer = ?, id_payment = ?" +
+                    "WHERE id_quotation = ?");
+            preparedStatement.setInt(1, quotation.getIdWorker());
+            preparedStatement.setInt(2, quotation.getIdHeadquarter());
+            preparedStatement.setInt(3, quotation.getIdCar());
+            preparedStatement.setInt(4, quotation.getIdCustomer());
+            preparedStatement.setInt(5, quotation.getIdPayment());
+            preparedStatement.setInt(6, quotation.getIdQuotation());
+            preparedStatement.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 }
