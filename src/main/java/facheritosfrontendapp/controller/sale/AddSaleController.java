@@ -162,42 +162,8 @@ public class AddSaleController implements Initializable {
 
     public void setView() {
         typeCombobox.setItems(FXCollections.observableArrayList("Tarjeta de credito","Efectivo"));
-        try {
-            showHeadquarters();
-        } catch (ExecutionException e) {
-            throw new RuntimeException(e);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
     }
 
-      public void showHeadquarters() throws ExecutionException, InterruptedException {
-
-        new Thread(() -> {
-            //Set the call to the DB.
-            CompletableFuture<Map<Boolean, ResultSet>> headquartersCall = CompletableFuture.supplyAsync(() -> headquarterEndpoint.getHeadquarters());
-
-            //Use the response from the BD to fill the combobox
-            try {
-                headquartersCall.thenApply((response) -> {
-                    if (response.containsKey(true)) {
-                        ResultSet resultSet = response.get(true);
-                        try {
-                            setHeadquarterCombobox(resultSet);
-                        } catch (SQLException e) {
-                            throw new RuntimeException(e);
-                        }
-                    }
-                    return true;
-                }).get();
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            } catch (ExecutionException e) {
-                throw new RuntimeException(e);
-            }
-        }).start();
-
-    }
 
     public void setHeadquarterCombobox(ResultSet resultSet) throws SQLException {
         while (resultSet.next()) {
@@ -337,8 +303,6 @@ public class AddSaleController implements Initializable {
         colPrice.setCellValueFactory(new PropertyValueFactory("price"));
         colQuantity.setCellValueFactory(new PropertyValueFactory("quantity"));
         colYear.setCellValueFactory(new PropertyValueFactory("date"));
-        colOption.setCellValueFactory(new PropertyValueFactory("options"));
-        colId1.setCellValueFactory(new PropertyValueFactory("options2"));
 
         carTableView.setItems(saleCarObList);
     }

@@ -119,7 +119,7 @@ public class SaleEndpoint {
         ResultSet resultSet = null;
         HashMap<Boolean, ResultSet> response = new HashMap<>();
         try (Connection conn = ConnectionBD.connectDB().getConnection()) {
-            preparedStatement = conn.prepareStatement("select sale_car.id_car, car.id_model,color.color, model.price, sale_car.quantity\n" +
+            preparedStatement = conn.prepareStatement("select sale_car.id_car,model.description  as description ,car.id_model,color.color, model.price, sale_car.quantity\n" +
                     " from sale_car join car using(id_car) join color using (id_color) join model using (id_model) WHERE id_sale = ?");
             preparedStatement.setInt(1, idSale);
             resultSet = preparedStatement.executeQuery();

@@ -246,7 +246,7 @@ public class SaleSingleViewController implements Initializable{
                 Double priceSale)*/
         while(resultSet.next()){
             //Create the object that will contain all the data shown on the table
-            SaleSingleRowView car = new SaleSingleRowView(resultSet.getInt("id_car"), resultSet.getInt("id_model"),
+            SaleSingleRowView car = new SaleSingleRowView(resultSet.getInt("id_car"), resultSet.getString("description"),
                     resultSet.getString("color"), resultSet.getDouble("price"),
                     resultSet.getInt("quantity"));
             saleSingleRowsArray.add(car); //Add every element to the array.

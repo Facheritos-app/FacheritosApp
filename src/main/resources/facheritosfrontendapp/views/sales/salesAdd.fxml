@@ -14,26 +14,21 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="532.0" prefWidth="718.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="facheritosfrontendapp.controller.sale.AddSaleController">
+<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1144.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="facheritosfrontendapp.controller.sale.AddSaleController">
   <content>
-    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="657.0" prefWidth="872.0" style="-fx-background-color: FFFFF;">
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="763.0" prefWidth="1073.0" style="-fx-background-color: FFFFF;">
          <children>
-            <Label layoutX="496.0" layoutY="106.0" text="Venta:">
+            <Label layoutX="706.0" layoutY="360.0" text="Venta:">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
             </Label>
-            <Label layoutX="505.0" layoutY="131.0" prefHeight="38.0" prefWidth="54.0" text="Sede:">
+            <Label layoutX="706.0" layoutY="435.0" prefHeight="38.0" prefWidth="123.0" text="Metodo pago:">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label layoutX="503.0" layoutY="169.0" prefHeight="38.0" prefWidth="123.0" text="Metodo pago:">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </Label>
-            <Label layoutX="496.0" layoutY="353.0" text="Cliente">
+            <Label layoutX="367.0" layoutY="360.0" text="Cliente">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
@@ -43,36 +38,14 @@
                   <Font name="System Bold" size="24.0" />
                </font>
             </Label>
-            <Label layoutX="36.0" layoutY="315.0" prefHeight="30.0" prefWidth="354.0" style="-fx-background-color: black; -fx-background-radius: 10; -fx-border-radius: 10;" text=" Venta:" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="20.0" />
-               </font>
-            </Label>
-            <Label fx:id="labelCosto" layoutX="213.0" layoutY="311.0" prefHeight="30.0" prefWidth="26.0" text="..." textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="20.0" />
-               </font>
-            </Label>
-            <Label fx:id="labelCantidad" layoutX="347.0" layoutY="315.0" prefHeight="30.0" prefWidth="32.0" text="..." textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="20.0" />
-               </font>
-            </Label>
-            <Label fx:id="labelCosto1" layoutX="182.0" layoutY="315.0" prefHeight="30.0" prefWidth="17.0" text="\$" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="20.0" />
-               </font>
-            </Label>
-            <TableView fx:id="carTableView" layoutX="33.0" layoutY="105.0" prefHeight="200.0" prefWidth="450.0" styleClass="table-views" stylesheets="@../style.css">
+            <TableView fx:id="carTableView" layoutX="33.0" layoutY="105.0" prefHeight="200.0" prefWidth="369.0" styleClass="table-views" stylesheets="@../style.css">
                <columns>
-                  <TableColumn fx:id="colOption" minWidth="0.0" prefWidth="35.0" text="..." />
                   <TableColumn fx:id="colId" prefWidth="41.0" text="Id" />
                   <TableColumn fx:id="colModel" prefWidth="61.0" text="Modelo" />
                   <TableColumn fx:id="colColor" prefWidth="47.0" text="Color" />
                   <TableColumn fx:id="colPrice" minWidth="9.0" prefWidth="63.0" text="Costo" />
                   <TableColumn fx:id="colQuantity" minWidth="0.0" prefWidth="55.0" text="Cantidad" />
-                  <TableColumn fx:id="colYear" minWidth="0.0" prefWidth="94.0" text="Ensamblaje" />
-                  <TableColumn fx:id="colId1" prefWidth="53.0" text="..." />
+                  <TableColumn fx:id="colYear" minWidth="0.0" prefWidth="101.0" text="Ensamblaje" />
                </columns>
             </TableView>
             <ImageView fitHeight="53.0" fitWidth="61.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" styleClass="back-arrow">
@@ -83,32 +56,31 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <ComboBox fx:id="headquarterCombobox" layoutX="607.0" layoutY="135.0" prefHeight="31.0" prefWidth="204.0" styleClass="input-text" stylesheets="@../style.css" />
-            <ComboBox fx:id="typeCombobox" layoutX="607.0" layoutY="173.0" prefHeight="31.0" prefWidth="206.0" styleClass="input-text" stylesheets="@../style.css" />
-            <TextField fx:id="ccClient" layoutX="603.0" layoutY="380.0" prefHeight="36.0" prefWidth="206.0" promptText="ej. 1569326" styleClass="input-text" stylesheets="@../style.css" />
-            <TextField fx:id="nameClient" layoutX="603.0" layoutY="429.0" prefHeight="36.0" prefWidth="209.0" promptText="..." styleClass="input-text" stylesheets="@../style.css" />
-            <Label layoutX="509.0" layoutY="379.0" prefHeight="38.0" prefWidth="54.0" text="Cedula:">
+            <ComboBox fx:id="typeCombobox" layoutX="815.0" layoutY="446.0" prefHeight="31.0" prefWidth="206.0" styleClass="input-text" stylesheets="@../style.css" />
+            <TextField fx:id="ccClient" layoutX="474.0" layoutY="387.0" prefHeight="36.0" prefWidth="206.0" promptText="ej. 1569326" styleClass="input-text" stylesheets="@../style.css" />
+            <TextField fx:id="nameClient" layoutX="474.0" layoutY="436.0" prefHeight="36.0" prefWidth="209.0" promptText="..." styleClass="input-text" stylesheets="@../style.css" />
+            <Label layoutX="380.0" layoutY="386.0" prefHeight="38.0" prefWidth="54.0" text="Cedula:">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label layoutX="509.0" layoutY="428.0" prefHeight="38.0" prefWidth="68.0" text="Nombre:">
+            <Label layoutX="380.0" layoutY="435.0" prefHeight="38.0" prefWidth="68.0" text="Nombre:">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label layoutX="509.0" layoutY="478.0" prefHeight="38.0" prefWidth="68.0" text="Email:">
+            <Label layoutX="380.0" layoutY="485.0" prefHeight="38.0" prefWidth="68.0" text="Email:">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label layoutX="509.0" layoutY="525.0" prefHeight="38.0" prefWidth="68.0" text="Celular:">
+            <Label layoutX="380.0" layoutY="532.0" prefHeight="38.0" prefWidth="68.0" text="Celular:">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <TextField fx:id="emailClient" layoutX="603.0" layoutY="479.0" prefHeight="36.0" prefWidth="207.0" promptText="..." styleClass="input-text" stylesheets="@../style.css" />
-            <TextField fx:id="numberClient" layoutX="606.0" layoutY="534.0" prefHeight="36.0" prefWidth="209.0" promptText="..." styleClass="input-text" stylesheets="@../style.css" />
+            <TextField fx:id="emailClient" layoutX="474.0" layoutY="486.0" prefHeight="36.0" prefWidth="207.0" promptText="..." styleClass="input-text" stylesheets="@../style.css" />
+            <TextField fx:id="numberClient" layoutX="477.0" layoutY="541.0" prefHeight="36.0" prefWidth="209.0" promptText="..." styleClass="input-text" stylesheets="@../style.css" />
             <Label layoutX="33.0" layoutY="360.0" text="Vendedor">
                <font>
                   <Font name="System Bold" size="24.0" />
@@ -138,21 +110,42 @@
             </Label>
             <TextField fx:id="emailSeller" layoutX="140.0" layoutY="486.0" prefHeight="36.0" prefWidth="207.0" promptText="cargando..." styleClass="input-text" stylesheets="@../style.css" />
             <TextField fx:id="numberSeller" layoutX="140.0" layoutY="534.0" prefHeight="36.0" prefWidth="209.0" promptText="cargando..." styleClass="input-text" stylesheets="@../style.css" />
-            <Button fx:id="searchClient" layoutX="526.0" layoutY="571.0" mnemonicParsing="false" onMouseClicked="#searchClientClicked" prefWidth="129.0" stylesheets="@../style.css" text="Buscar cliente">
+            <Button fx:id="searchClient" layoutX="395.0" layoutY="596.0" mnemonicParsing="false" onMouseClicked="#searchClientClicked" prefWidth="129.0" stylesheets="@../style.css" text="Buscar cliente">
                <styleClass>
                   <String fx:value="red-button" />
                   <String fx:value="select-button" />
                </styleClass>
             </Button>
-            <Button fx:id="editClient" layoutX="663.0" layoutY="571.0" mnemonicParsing="false" onMouseClicked="#editClientClicked" prefWidth="183.0" stylesheets="@../style.css" text="Cambiar cliente">
+            <Button fx:id="editClient" layoutX="535.0" layoutY="593.0" mnemonicParsing="false" onMouseClicked="#editClientClicked" prefHeight="38.0" prefWidth="149.0" styleClass="red-button" stylesheets="@../style.css" text="Cambiar cliente" />
+            <Button fx:id="saveSale" layoutX="953.0" layoutY="650.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="137.0" styleClass="blue-button" stylesheets="@../style.css" text="Guardar venta" />
+            <Label layoutX="706.0" layoutY="386.0" prefHeight="38.0" prefWidth="123.0" text="Cantidad:">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <TextField fx:id="cantidad" layoutX="812.0" layoutY="384.0" prefHeight="36.0" prefWidth="209.0" styleClass="input-text" stylesheets="@../style.css" />
+            <TableView fx:id="carTableView1" layoutX="479.0" layoutY="105.0" prefHeight="200.0" prefWidth="369.0" styleClass="table-views" stylesheets="@../style.css">
+               <columns>
+                  <TableColumn fx:id="colId1" prefWidth="41.0" text="Id" />
+                  <TableColumn fx:id="colModel1" prefWidth="61.0" text="Modelo" />
+                  <TableColumn fx:id="colColor1" prefWidth="47.0" text="Color" />
+                  <TableColumn fx:id="colPrice1" minWidth="9.0" prefWidth="89.0" text="Costo" />
+                  <TableColumn fx:id="colYear1" minWidth="0.0" prefWidth="129.0" text="Ensamblaje" />
+               </columns>
+            </TableView>
+            <Button fx:id="cancel" layoutX="822.0" layoutY="650.0" mnemonicParsing="false" onMouseClicked="#searchClientClicked" prefWidth="129.0" stylesheets="@../style.css" text="Cancelar">
                <styleClass>
                   <String fx:value="red-button" />
                   <String fx:value="select-button" />
                </styleClass>
             </Button>
-            <Button fx:id="saveSale" layoutX="140.0" layoutY="615.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="137.0" styleClass="blue-button" stylesheets="@../style.css" text="Guardar venta" />
-            <Button fx:id="ids" layoutX="537.0" layoutY="296.0" mnemonicParsing="false"  text="ids" />
-            <Button fx:id="calcular" layoutX="404.0" layoutY="315.0" mnemonicParsing="false" text="calcular" />
+            <Button fx:id="addSell" layoutX="254.0" layoutY="59.0" mnemonicParsing="false" styleClass="blue-button" stylesheets="@../style.css" text="Agregar a la venta" />
+            <Label layoutX="479.0" layoutY="56.0" prefHeight="38.0" prefWidth="164.0" text="Resumen venta:">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+            <Button fx:id="searchClient1" layoutX="684.0" layoutY="60.0" mnemonicParsing="false" onMouseClicked="#searchClientClicked" prefWidth="167.0" styleClass="red-button" stylesheets="@../style.css" text="Eliminar de la venta" />
          </children></AnchorPane>
   </content>
 </ScrollPane>
