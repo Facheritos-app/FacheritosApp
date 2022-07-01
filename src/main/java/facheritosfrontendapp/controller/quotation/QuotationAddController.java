@@ -3,6 +3,7 @@ package facheritosfrontendapp.controller.quotation;
 import backend.dto.quotationDTO.QuotationDTO;
 import backend.endpoints.customerEndpoint.CustomerEndpoint;
 import backend.endpoints.inventoryEndpoint.InventoryEndpoint;
+import backend.endpoints.quotationEndpoint.QuotationEndpoint;
 import backend.endpoints.workerEndpoint.WorkerEndpoint;
 import facheritosfrontendapp.controller.DashboardController;
 import facheritosfrontendapp.controller.MainController;
@@ -33,6 +34,7 @@ public class QuotationAddController implements Initializable {
 
     private QuotationController quotationController;
     private DashboardController dashboardController;
+    private QuotationEndpoint quotationEndpoint;
     private InventoryEndpoint inventoryEndpoint;
     private CustomerEndpoint customerEndpoint;
     private WorkerEndpoint workerEndpoint;
@@ -87,6 +89,7 @@ public class QuotationAddController implements Initializable {
     private TableColumn<VehicleRowView, Integer> colQuantityInventory;
 
     public QuotationAddController(){
+        quotationEndpoint = new QuotationEndpoint();
         inventoryEndpoint = new InventoryEndpoint();
         customerEndpoint = new CustomerEndpoint();
         workerEndpoint = new WorkerEndpoint();
@@ -206,7 +209,34 @@ public class QuotationAddController implements Initializable {
     }
 
     public void createQuotation(){
+        new Thread(() -> {
+            CompletableFuture<Boolean> createQuotationCall = CompletableFuture.supplyAsync(() -> quotationEndpoint.createQuotation(newQuotation));
 
+            try {
+                createQuotationCall.thenApply(state -> {
+                    Platform.runLater(() -> {
+                        if(state){
+                            Alert success = new Alert(Alert.AlertType.CONFIRMATION, "La cotización ha sido creada", OK);
+                            success.show();
+                            try {
+                                quotationController = (QuotationController) dashboardController.changeContent("quotations/quotations");
+                                quotationController.showQuotations();
+                            } catch (IOException e) {
+                                throw new RuntimeException(e);
+                            }
+                        } else {
+                            Alert fail = new Alert(Alert.AlertType.ERROR, "Hubo un problema con el servidor, vuelve a intentarlo por favor", OK);
+                            fail.show();
+                        }
+                    });
+                    return true;
+                }).get();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            } catch (ExecutionException e) {
+                throw new RuntimeException(e);
+            }
+        }).start();
     }
 
     public Integer getMethodPaymentId(String paymentMethod){
@@ -327,7 +357,12 @@ public class QuotationAddController implements Initializable {
     }
     @FXML
     public void onCreateQuotation(MouseEvent mouseEvent) {
-        newQuotation.setIdPayment(getMethodPaymentId((String) paymentMethod.getSelectionModel().getSelectedItem()));
+
+        if(paymentMethod.getSelectionModel().getSelectedItem() == null) {
+            newQuotation.setIdPayment(null);
+        }else{
+            newQuotation.setIdPayment(getMethodPaymentId((String) paymentMethod.getSelectionModel().getSelectedItem()));
+        }
         if(verifyQuotation()){
             System.out.print("Objeto de cotizacion: \n" + newQuotation);
             createQuotation();
