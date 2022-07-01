@@ -39,7 +39,6 @@ public class QuotationAddController implements Initializable {
     private CustomerEndpoint customerEndpoint;
     private WorkerEndpoint workerEndpoint;
     private ArrayList<VehicleRowView> vehicleInventoryRowList;
-
     private QuotationDTO newQuotation;
 
 
@@ -66,8 +65,6 @@ public class QuotationAddController implements Initializable {
     private ComboBox paymentMethod;
     @FXML
     private Label quotationPrice;
-
-
 
     @FXML
     private TableView quotationTableView;
@@ -97,10 +94,6 @@ public class QuotationAddController implements Initializable {
         newQuotation = new QuotationDTO();
     }
 
-    /**
-     * showInventory: Void -> Void
-     * Purpose: This method calls the inventory endpoint in order to show the inventory available
-     */
     public void showInventory() {
         new Thread(() -> {
             CompletableFuture<Map<Boolean, ResultSet>> vehiclesCall = CompletableFuture.supplyAsync(() -> inventoryEndpoint.getVehiclesForTableView());
@@ -194,7 +187,7 @@ public class QuotationAddController implements Initializable {
                             Alert fail = new Alert(Alert.AlertType.ERROR, "No se ha encontrado la cedula del cliente o no es una cédula válida, por favor intenta nuevamente", OK);
                             fail.show();
                             customerCleanInfoLoading();
-                            customerCc.setStyle("-fx-border-color: RED; -fx-border-width: 2; -fx-border-radius: 5;");
+                            customerCc.setStyle("-fx-border-color: RED; -fx-border-width: 2; -fx-border-radius: 5;"); //Error style
                             new animatefx.animation.Shake(customerCc).play();
                         }
                     });
@@ -219,6 +212,7 @@ public class QuotationAddController implements Initializable {
                             Alert success = new Alert(Alert.AlertType.CONFIRMATION, "La cotización ha sido creada", OK);
                             success.show();
                             try {
+                                //Successful, then go back to the main quotation view
                                 quotationController = (QuotationController) dashboardController.changeContent("quotations/quotations");
                                 quotationController.showQuotations();
                             } catch (IOException e) {
@@ -256,10 +250,16 @@ public class QuotationAddController implements Initializable {
         colHeadquarter.setCellValueFactory(new PropertyValueFactory<>("headquarter"));
     }
 
+    /**
+     * setCustomerInfo: ResultSet, List<String> -> Void
+     * Purpose: This method sets all the customer's information and
+     * starts to fill the quotation object that will be saved in the DB.
+     */
     public void setCustomerInfo(ResultSet resultSet, List<String> columns) throws SQLException {
         customerCc.setText(resultSet.getString(columns.get(0)));
         customerName.setText(resultSet.getString(columns.get(1)));
         customerLastname.setText(resultSet.getString(columns.get(2)));
+
         newQuotation.setIdCustomer(resultSet.getInt(columns.get(3)));
     }
 
@@ -273,6 +273,7 @@ public class QuotationAddController implements Initializable {
         customerLastname.setText("");
     }
 
+
     public void setSellerInfo(ResultSet resultSet, List<String> columns) throws SQLException {
         sellerCc.setText(resultSet.getString(columns.get(0)));
         sellerName.setText(resultSet.getString(columns.get(1)));
@@ -280,6 +281,7 @@ public class QuotationAddController implements Initializable {
         sellerHeadq.setText(resultSet.getString(columns.get(3)));
         sellerEmail.setText(resultSet.getString(columns.get(4)));
 
+        //Continue filling the quotation object with the seller's info
         newQuotation.setIdWorker(resultSet.getInt(columns.get(5)));
         newQuotation.setIdHeadquarter(resultSet.getInt(columns.get(6)));
         newQuotation.setQuotationDate(LocalDate.now());
@@ -292,15 +294,18 @@ public class QuotationAddController implements Initializable {
         sellerEmail.setText("Cargando...");
     }
 
+    /**
+     * verifyQuotation: Void -> Boolean
+     * Purpose: This method verifies that the quotation object that will be saved in the DB is completely filled
+     * with the necessary fields for the DB.
+     */
     public Boolean verifyQuotation(){
         if(newQuotation.getQuotationDate() != null && newQuotation.getIdPayment() != null &&
            newQuotation.getIdConfirmation() != null && newQuotation.getIdHeadquarter() != null &&
            newQuotation.getIdWorker() != null && newQuotation.getIdCustomer() != null &&
            newQuotation.getIdCar() != null){
-            System.out.println("Todo bien, puede guardar el objeto en la BD");
             return true;
         }else{
-            System.out.println("Error! Falta algo en el objeto de cotizacion");
             return false;
         }
     }
@@ -313,7 +318,7 @@ public class QuotationAddController implements Initializable {
     }
 
     @FXML
-    public void onDeleteVehicle(MouseEvent mouseEvent) {
+    public void onDeleteVehicle(MouseEvent mouseEvent) { //Used to delete a vehicle on the quotation table view
         VehicleRowView selectedVehicle = (VehicleRowView) quotationTableView.getSelectionModel().getSelectedItem();
         if(selectedVehicle == null){
             Alert fail = new Alert(Alert.AlertType.ERROR, "Selecciona un vehículo para eliminar", OK);
@@ -326,7 +331,7 @@ public class QuotationAddController implements Initializable {
         }
     }
     @FXML
-    public void onAddVehicle(MouseEvent mouseEvent) {
+    public void onAddVehicle(MouseEvent mouseEvent) { //Used to add a vehicle from the inventory tableview to the quotation table view
         VehicleRowView selectedVehicle = inventoryTableView.getSelectionModel().getSelectedItem();
         if(selectedVehicle == null){
             Alert fail = new Alert(Alert.AlertType.ERROR, "Selecciona un vehículo para agregar", OK);
@@ -355,16 +360,17 @@ public class QuotationAddController implements Initializable {
         customerCc.setStyle("");
         getCustomerByCc(customerCc.getText());
     }
+
     @FXML
     public void onCreateQuotation(MouseEvent mouseEvent) {
 
+        //Sets the id payment method, if the user has not clicked one then fills the object with a null value.
         if(paymentMethod.getSelectionModel().getSelectedItem() == null) {
             newQuotation.setIdPayment(null);
         }else{
             newQuotation.setIdPayment(getMethodPaymentId((String) paymentMethod.getSelectionModel().getSelectedItem()));
         }
         if(verifyQuotation()){
-            System.out.print("Objeto de cotizacion: \n" + newQuotation);
             createQuotation();
         }else{
             Alert fail = new Alert(Alert.AlertType.ERROR, "Falta información para crear la cotización", OK);
