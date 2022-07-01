@@ -3,10 +3,7 @@ package backend.endpoints.quotationEndpoint;
 import backend.connectionBD.ConnectionBD;
 import backend.dto.quotationDTO.QuotationDTO;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -54,6 +51,26 @@ public class QuotationEndpoint {
             response.put(false, resultSet);
         }
         return response;
+    }
+
+    public Boolean createQuotation(QuotationDTO quotation){
+        PreparedStatement preparedStatement = null;
+        try(Connection conn = ConnectionBD.connectDB().getConnection()){
+            preparedStatement = conn.prepareStatement("INSERT INTO quotation(id_worker, id_headquarter, id_car, id_customer, id_confirmation, quotation_date, id_payment)" +
+                    "VALUES(?,?,?,?,?,?,?)");
+            preparedStatement.setInt(1, quotation.getIdWorker());
+            preparedStatement.setInt(2, quotation.getIdHeadquarter());
+            preparedStatement.setInt(3, quotation.getIdCar());
+            preparedStatement.setInt(4, quotation.getIdCustomer());
+            preparedStatement.setInt(5, quotation.getIdConfirmation());
+            preparedStatement.setDate(6, Date.valueOf(quotation.getQuotationDate()));
+            preparedStatement.setInt(7, quotation.getIdPayment());
+            preparedStatement.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     public Boolean updateQuotation(QuotationDTO quotation){

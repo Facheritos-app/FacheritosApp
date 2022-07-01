@@ -29,6 +29,7 @@ public class QuotationController implements Initializable {
     private ArrayList<QuotationRowView> quotationRowsArray;
     private QuotationEndpoint quotationEndpoint;
     private QuotationSingleViewController quotationSingleViewController;
+    private QuotationAddController quotationAddController;
 
     private DashboardController dashboardController;
 
@@ -120,11 +121,11 @@ public class QuotationController implements Initializable {
         }
     }
 
-
     @FXML
-    public void addQuotation(javafx.scene.input.MouseEvent mouseEvent) {
+    public void onAddQuotation(MouseEvent mouseEvent) throws IOException {
+       quotationAddController = (QuotationAddController) dashboardController.changeContent("quotations/quotationsAdd",true);
+       quotationAddController.showInventory();
     }
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         dashboardController = MainController.getDashboardController();
