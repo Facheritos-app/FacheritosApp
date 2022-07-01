@@ -56,6 +56,20 @@ public class QuotationEndpoint {
         return response;
     }
 
+    public Boolean createQuotation(QuotationDTO quotation){
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        try(Connection conn = ConnectionBD.connectDB().getConnection()){
+            preparedStatement = conn.prepareStatement("");
+            resultSet = preparedStatement.executeQuery();
+            resultSet.next();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
     public Boolean updateQuotation(QuotationDTO quotation){
         PreparedStatement preparedStatement = null;
         try(Connection conn = ConnectionBD.connectDB().getConnection()){

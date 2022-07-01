@@ -1,5 +1,6 @@
 package facheritosfrontendapp.controller.quotation;
 
+import backend.dto.quotationDTO.QuotationDTO;
 import backend.endpoints.customerEndpoint.CustomerEndpoint;
 import backend.endpoints.inventoryEndpoint.InventoryEndpoint;
 import backend.endpoints.workerEndpoint.WorkerEndpoint;
@@ -20,6 +21,7 @@ import java.math.BigDecimal;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
@@ -35,6 +37,8 @@ public class QuotationAddController implements Initializable {
     private CustomerEndpoint customerEndpoint;
     private WorkerEndpoint workerEndpoint;
     private ArrayList<VehicleRowView> vehicleInventoryRowList;
+
+    private QuotationDTO newQuotation;
 
 
     @FXML
@@ -62,6 +66,7 @@ public class QuotationAddController implements Initializable {
     private Label quotationPrice;
 
 
+
     @FXML
     private TableView quotationTableView;
     @FXML
@@ -86,7 +91,7 @@ public class QuotationAddController implements Initializable {
         customerEndpoint = new CustomerEndpoint();
         workerEndpoint = new WorkerEndpoint();
         vehicleInventoryRowList = new ArrayList<>();
-
+        newQuotation = new QuotationDTO();
     }
 
     /**
@@ -144,7 +149,7 @@ public class QuotationAddController implements Initializable {
                         if (response.containsKey(true)) {
                             ResultSet resultSet = response.get(true);
                             try {
-                                setSellerInfo(resultSet, Arrays.asList("cc", "first_name", "last_name", "headquarter_name", "email"));
+                                setSellerInfo(resultSet, Arrays.asList("cc", "first_name", "last_name", "headquarter_name", "email", "id_worker", "id_headquarter"));
                             } catch (SQLException e) {
                                 throw new RuntimeException(e);
                             }
@@ -177,7 +182,7 @@ public class QuotationAddController implements Initializable {
                         if(response.containsKey(true)){
                             ResultSet resultSet = response.get(true);
                             try {
-                                setCustomerInfo(resultSet, Arrays.asList("cc", "first_name", "last_name"));
+                                setCustomerInfo(resultSet, Arrays.asList("cc", "first_name", "last_name", "id_person"));
                             } catch (SQLException e) {
                                 throw new RuntimeException(e);
                             }
@@ -200,7 +205,22 @@ public class QuotationAddController implements Initializable {
         }).start();
     }
 
-    public void setQuotationItems() {
+    public void createQuotation(){
+
+    }
+
+    public Integer getMethodPaymentId(String paymentMethod){
+        switch (paymentMethod){
+            case "Efectivo":
+                return 2;
+            case "Tarjeta de credito":
+                return 1;
+            default:
+                return -3;
+        }
+    }
+
+    public void setQuotationTableView() {
         colName.setCellValueFactory(new PropertyValueFactory<>("name"));
         colPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
         colHeadquarter.setCellValueFactory(new PropertyValueFactory<>("headquarter"));
@@ -210,6 +230,7 @@ public class QuotationAddController implements Initializable {
         customerCc.setText(resultSet.getString(columns.get(0)));
         customerName.setText(resultSet.getString(columns.get(1)));
         customerLastname.setText(resultSet.getString(columns.get(2)));
+        newQuotation.setIdCustomer(resultSet.getInt(columns.get(3)));
     }
 
     public void customerInfoLoading(){
@@ -228,12 +249,30 @@ public class QuotationAddController implements Initializable {
         sellerLastname.setText(resultSet.getString(columns.get(2)));
         sellerHeadq.setText(resultSet.getString(columns.get(3)));
         sellerEmail.setText(resultSet.getString(columns.get(4)));
+
+        newQuotation.setIdWorker(resultSet.getInt(columns.get(5)));
+        newQuotation.setIdHeadquarter(resultSet.getInt(columns.get(6)));
+        newQuotation.setQuotationDate(LocalDate.now());
+        newQuotation.setIdConfirmation(1);
     }
     public void sellerInfoLoading() {
         sellerName.setText("Cargando...");
         sellerLastname.setText("Cargando...");
         sellerHeadq.setText("Cargando...");
         sellerEmail.setText("Cargando...");
+    }
+
+    public Boolean verifyQuotation(){
+        if(newQuotation.getQuotationDate() != null && newQuotation.getIdPayment() != null &&
+           newQuotation.getIdConfirmation() != null && newQuotation.getIdHeadquarter() != null &&
+           newQuotation.getIdWorker() != null && newQuotation.getIdCustomer() != null &&
+           newQuotation.getIdCar() != null){
+            System.out.println("Todo bien, puede guardar el objeto en la BD");
+            return true;
+        }else{
+            System.out.println("Error! Falta algo en el objeto de cotizacion");
+            return false;
+        }
     }
 
     public void sellerCleanInfoLoading(){
@@ -252,6 +291,8 @@ public class QuotationAddController implements Initializable {
         }else{
             quotationTableView.getItems().remove(selectedVehicle);
             quotationPrice.setText("$ ");
+            newQuotation.setIdCar(null);
+            quotationQuantity.setText("0");
         }
     }
     @FXML
@@ -266,6 +307,8 @@ public class QuotationAddController implements Initializable {
         }else{
             quotationTableView.getItems().add(selectedVehicle);
             quotationPrice.setText("$ " + selectedVehicle.getPrice());
+            newQuotation.setIdCar(selectedVehicle.getIdCar());
+            quotationQuantity.setText("1");
         }
     }
     @FXML
@@ -283,7 +326,15 @@ public class QuotationAddController implements Initializable {
         getCustomerByCc(customerCc.getText());
     }
     @FXML
-    public void onUpdateQuotation(MouseEvent mouseEvent) {
+    public void onCreateQuotation(MouseEvent mouseEvent) {
+        newQuotation.setIdPayment(getMethodPaymentId((String) paymentMethod.getSelectionModel().getSelectedItem()));
+        if(verifyQuotation()){
+            System.out.print("Objeto de cotizacion: \n" + newQuotation);
+            createQuotation();
+        }else{
+            Alert fail = new Alert(Alert.AlertType.ERROR, "Falta información para crear la cotización", OK);
+            fail.show();
+        }
     }
     @FXML
     public void cancelClick(MouseEvent mouseEvent) throws IOException {
@@ -298,7 +349,8 @@ public class QuotationAddController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        setQuotationItems();
+        setQuotationTableView();
         dashboardController = MainController.getDashboardController();
+        paymentMethod.setItems(FXCollections.observableArrayList("Tarjeta de credito", "Efectivo"));
     }
 }
