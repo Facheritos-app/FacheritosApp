@@ -51,4 +51,27 @@ public class CustomerEndpoint {
         return response;
     }
 
+    public Map<Boolean, ResultSet> getCustomerByCc(String cc){
+        PreparedStatement preparedStatement;
+        ResultSet resultSet = null;
+        HashMap<Boolean, ResultSet> response = new HashMap<>();
+        try(Connection conn = ConnectionBD.connectDB().getConnection()){
+            preparedStatement = conn.prepareStatement(
+                    "SELECT * FROM person WHERE id_type_person = 4" +
+                            "AND cc = ?");
+            preparedStatement.setString(1, cc);
+            resultSet = preparedStatement.executeQuery();
+            if(!resultSet.isBeforeFirst()){
+                response.put(false, resultSet);
+                return response;
+            }
+            resultSet.next();
+            response.put(true, resultSet);
+        }catch (SQLException e){
+            e.printStackTrace();
+            response.put(false, resultSet);
+        }
+        return response;
+    }
+
 }
