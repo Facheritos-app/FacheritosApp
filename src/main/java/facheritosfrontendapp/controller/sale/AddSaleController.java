@@ -141,6 +141,8 @@ public class AddSaleController implements Initializable {
 
     public Integer contador;
 
+    @FXML
+    private Label noFound;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -258,12 +260,18 @@ public class AddSaleController implements Initializable {
                         Platform.runLater(() -> {
                             try {
                                 setClientData(resultSet);
+                                noFound.setText("");
                             } catch (SQLException e) {
+                                noFound.setText("Cliente no encontrado");
                                 throw new RuntimeException(e);
+
                             } catch (IOException e) {
+                                noFound.setText("Cliente no encontrado");
                                 throw new RuntimeException(e);
                             }
                         });
+                    }else{
+                        noFound.setText("Cliente no encontrado");
                     }
                     return true;
                 }).get();

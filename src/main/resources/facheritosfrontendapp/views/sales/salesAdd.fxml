@@ -112,13 +112,13 @@
             </Label>
             <TextField fx:id="emailSeller" layoutX="140.0" layoutY="486.0" prefHeight="36.0" prefWidth="207.0" promptText="cargando..." styleClass="input-text" stylesheets="@../style.css" />
             <TextField fx:id="numberSeller" layoutX="140.0" layoutY="534.0" prefHeight="36.0" prefWidth="209.0" promptText="cargando..." styleClass="input-text" stylesheets="@../style.css" />
-            <Button fx:id="searchClient" layoutX="395.0" layoutY="596.0" mnemonicParsing="false" onMouseClicked="#searchClientClicked" prefWidth="129.0" stylesheets="@../style.css" text="Buscar cliente">
+            <Button fx:id="searchClient" layoutX="395.0" layoutY="613.0" mnemonicParsing="false" onMouseClicked="#searchClientClicked" prefWidth="129.0" stylesheets="@../style.css" text="Buscar cliente">
                <styleClass>
                   <String fx:value="red-button" />
                   <String fx:value="select-button" />
                </styleClass>
             </Button>
-            <Button fx:id="editClient" layoutX="535.0" layoutY="593.0" mnemonicParsing="false" onMouseClicked="#editClientClicked" prefHeight="38.0" prefWidth="149.0" styleClass="red-button" stylesheets="@../style.css" text="Cambiar cliente" />
+            <Button fx:id="editClient" layoutX="537.0" layoutY="612.0" mnemonicParsing="false" onMouseClicked="#editClientClicked" prefHeight="38.0" prefWidth="149.0" styleClass="red-button" stylesheets="@../style.css" text="Cambiar cliente" />
             <Button fx:id="saveSale" layoutX="953.0" layoutY="650.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="137.0" styleClass="blue-button" stylesheets="@../style.css" text="Guardar venta" />
             <Label layoutX="706.0" layoutY="386.0" prefHeight="38.0" prefWidth="123.0" text="Cantidad:">
                <font>
@@ -183,6 +183,11 @@
                   </Label>
                </children>
             </HBox>
+            <Label fx:id="noFound" layoutX="479.0" layoutY="571.0" prefHeight="38.0" prefWidth="243.0" textFill="RED">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
          </children></AnchorPane>
   </content>
 </ScrollPane>
