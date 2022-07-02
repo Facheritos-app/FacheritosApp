@@ -141,6 +141,7 @@ public class AddSaleController implements Initializable {
 
     public Integer contador;
 
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         DashboardController.getCurrentWorker().getId_worker();
@@ -158,6 +159,7 @@ public class AddSaleController implements Initializable {
         saleCarRowsArray = new ArrayList<>();
         personEndpoint = new PersonEndpoint();
         saleCarObList = FXCollections.observableArrayList();
+
     }
 
     public static synchronized WorkerDTO getCurrentWorker() {
@@ -210,20 +212,40 @@ public class AddSaleController implements Initializable {
             //Crear una vista para esto
             Alert fail = new Alert(Alert.AlertType.ERROR, "Selecciona un vehículo para agregar", OK);
             fail.show();
-        }/*else if(quotationTableView.getItems().size() > 0){
-            Alert fail = new Alert(Alert.AlertType.ERROR, "Solo puede haber un vehículo en la cotización, por favor bora el existente para agregar uno nuevo", OK);
-            fail.show();
-        }*/else{
+        }else{
 
-            carTableViewSell.getItems().add(selectedCar);
-            cantidad.setText(String.valueOf(Integer.valueOf(cantidad.getText())+1));
-            priceLabel.setText(String.valueOf(Double.valueOf(priceLabel.getText())+selectedCar.getPrice()));
+            if(selectedCar.getQuantity()<=0){
+                Alert fail = new Alert(Alert.AlertType.ERROR, "No hay cantidad suficiente", OK);
+                fail.show();
+            }else{
+                selectedCar.setQuantity(selectedCar.getQuantity()-1);
+                carTableViewSell.getItems().add(selectedCar);
+                cantidad.setText(String.valueOf(Integer.valueOf(cantidad.getText())+1));
+                priceLabel.setText(String.valueOf(Double.valueOf(priceLabel.getText())+selectedCar.getPrice()));
+            }
         }
     }
 
     @FXML
     protected void searchClientClicked(){
         showClient(ccClient.getText());
+    }
+
+    @FXML
+    protected void deleteCarSeller(){
+        SaleCarRowView selectedCar = (SaleCarRowView) carTableViewSell.getSelectionModel().getSelectedItem();
+        if(selectedCar == null){
+            //Crear una vista para esto
+            Alert fail = new Alert(Alert.AlertType.ERROR, "Selecciona un vehículo para eliminar", OK);
+            fail.show();
+        }else{
+
+            carTableViewSell.getItems().remove(selectedCar);
+            cantidad.setText(String.valueOf(Integer.valueOf(cantidad.getText())-1));
+            priceLabel.setText(String.valueOf(Double.valueOf(priceLabel.getText())-selectedCar.getPrice()));
+
+
+        }
     }
 
     public void showClient(String ccClient){
