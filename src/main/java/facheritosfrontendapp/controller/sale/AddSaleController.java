@@ -239,7 +239,7 @@ public class AddSaleController implements Initializable {
             Alert fail = new Alert(Alert.AlertType.ERROR, "Selecciona un vehículo para eliminar", OK);
             fail.show();
         }else{
-
+            selectedCar.setQuantity(selectedCar.getQuantity()+1);
             carTableViewSell.getItems().remove(selectedCar);
             cantidad.setText(String.valueOf(Integer.valueOf(cantidad.getText())-1));
             priceLabel.setText(String.valueOf(Double.valueOf(priceLabel.getText())-selectedCar.getPrice()));
