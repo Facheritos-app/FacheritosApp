@@ -7,6 +7,7 @@ import backend.endpoints.saleEndpoint.SaleEndpoint;
 import facheritosfrontendapp.ComboBoxView.HeadquarterView;
 import facheritosfrontendapp.controller.DashboardController;
 import facheritosfrontendapp.controller.MainController;
+import facheritosfrontendapp.objectRowView.inventoryRowView.VehicleRowView;
 import facheritosfrontendapp.objectRowView.saleRowView.SaleCarRowView;
 import facheritosfrontendapp.objectRowView.saleRowView.SaleRowView;
 import facheritosfrontendapp.objectRowView.saleRowView.SaleSingleRowView;
@@ -33,6 +34,8 @@ import java.util.ResourceBundle;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
+import static javafx.scene.control.ButtonType.OK;
+
 public class AddSaleController implements Initializable {
     private DashboardController dashboardController;
     private SaleController saleController;
@@ -41,6 +44,9 @@ public class AddSaleController implements Initializable {
     public static WorkerDTO currentWorker;
 
     private PersonEndpoint personEndpoint;
+
+    @FXML
+    private TextField cantidad;
 
     @FXML
     private TextField ccSeller;
@@ -101,10 +107,19 @@ public class AddSaleController implements Initializable {
     private TableColumn<SaleCarRowView, String> colModel;
 
     @FXML
+    private TableColumn<SaleCarRowView, String> colModel1;
+
+    @FXML
     private TableColumn<SaleCarRowView, String> colColor;
 
     @FXML
+    private TableColumn<SaleCarRowView, String> colColor1;
+
+    @FXML
     private TableColumn<SaleCarRowView, Double> colPrice;
+
+    @FXML
+    private TableColumn<SaleCarRowView, Double> colPrice1;
 
     @FXML
     private TableColumn<SaleCarRowView, Integer> colQuantity;
@@ -113,13 +128,20 @@ public class AddSaleController implements Initializable {
     private TableColumn<SaleCarRowView, String> colYear;
 
     @FXML
+    private TableColumn<SaleCarRowView, String> colYear1;
+
+    @FXML
     private TableView carTableView;
+
+    @FXML
+    private TableView carTableViewSell;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         DashboardController.getCurrentWorker().getId_worker();
         dashboardController = MainController.getDashboardController();
         setCurrentWorker(DashboardController.getCurrentWorker());
+        setSellTableView();
     }
 
     public AddSaleController() {
@@ -151,6 +173,7 @@ public class AddSaleController implements Initializable {
 
         editClient.setDisable(true);
         editClient.setStyle("-fx-background-color: #C24E59; ");
+        cantidad.setDisable(true);
 
 
         ccSeller.setText(currentWorker.getCc());
@@ -164,15 +187,33 @@ public class AddSaleController implements Initializable {
         typeCombobox.setItems(FXCollections.observableArrayList("Tarjeta de credito","Efectivo"));
     }
 
-
-    public void setHeadquarterCombobox(ResultSet resultSet) throws SQLException {
-        while (resultSet.next()) {
-            Integer idHeadquarter = resultSet.getInt("id_headquarter");
-            String name = resultSet.getString("name");
-            headquarterComboboxList.add(new HeadquarterView(idHeadquarter, name));
-        }
-        headquarterCombobox.setItems(FXCollections.observableArrayList(headquarterComboboxList));
+    public void setSellTableView() {
+        colId1.setCellValueFactory(new PropertyValueFactory<>("idCar"));
+        colModel1.setCellValueFactory(new PropertyValueFactory<>("model"));
+        colColor1.setCellValueFactory(new PropertyValueFactory<>("color"));
+        colPrice1.setCellValueFactory(new PropertyValueFactory<>("price"));
+        colYear1.setCellValueFactory(new PropertyValueFactory<>("date"));
     }
+
+    @FXML
+    public void addCarSell(MouseEvent mouseEvent) {
+        SaleCarRowView selectedCar = (SaleCarRowView) carTableView.getSelectionModel().getSelectedItem();
+        if(selectedCar == null){
+            //Crear una vista para esto
+            Alert fail = new Alert(Alert.AlertType.ERROR, "Selecciona un vehículo para agregar", OK);
+            fail.show();
+        }/*else if(quotationTableView.getItems().size() > 0){
+            Alert fail = new Alert(Alert.AlertType.ERROR, "Solo puede haber un vehículo en la cotización, por favor bora el existente para agregar uno nuevo", OK);
+            fail.show();
+        }*/else{
+
+            carTableViewSell.getItems().add(selectedCar);
+            /*quotationPrice.setText("$ " + selectedVehicle.getPrice());
+            newQuotation.setIdCar(selectedVehicle.getIdCar());
+            quotationQuantity.setText("1");*/
+        }
+    }
+
     @FXML
     protected void searchClientClicked(){
         showClient(ccClient.getText());
@@ -307,4 +348,5 @@ public class AddSaleController implements Initializable {
 
         carTableView.setItems(saleCarObList);
     }
+
 }

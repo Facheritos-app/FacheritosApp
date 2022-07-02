@@ -124,7 +124,7 @@
                </font>
             </Label>
             <TextField fx:id="cantidad" layoutX="814.0" layoutY="387.0" prefHeight="36.0" prefWidth="209.0" styleClass="input-text" stylesheets="@../style.css" />
-            <TableView fx:id="carTableView1" layoutX="479.0" layoutY="105.0" prefHeight="200.0" prefWidth="369.0" styleClass="table-views" stylesheets="@../style.css">
+            <TableView fx:id="carTableViewSell" layoutX="479.0" layoutY="105.0" prefHeight="200.0" prefWidth="369.0" styleClass="table-views" stylesheets="@../style.css">
                <columns>
                   <TableColumn fx:id="colId1" prefWidth="41.0" text="Id" />
                   <TableColumn fx:id="colModel1" prefWidth="61.0" text="Modelo" />
@@ -139,7 +139,7 @@
                   <String fx:value="select-button" />
                </styleClass>
             </Button>
-            <Button fx:id="addSell" layoutX="254.0" layoutY="59.0" mnemonicParsing="false" styleClass="blue-button" stylesheets="@../style.css" text="Agregar a la venta" />
+            <Button fx:id="addSell" layoutX="254.0" layoutY="59.0" mnemonicParsing="false" onMouseClicked="#addCarSell" styleClass="blue-button" stylesheets="@../style.css" text="Agregar a la venta" />
             <Label layoutX="479.0" layoutY="56.0" prefHeight="38.0" prefWidth="164.0" text="Resumen venta:">
                <font>
                   <Font name="System Bold" size="16.0" />
