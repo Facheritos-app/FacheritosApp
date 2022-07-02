@@ -46,6 +46,9 @@ public class AddSaleController implements Initializable {
     private PersonEndpoint personEndpoint;
 
     @FXML
+    private Label priceLabel;
+
+    @FXML
     private TextField cantidad;
 
     @FXML
@@ -136,11 +139,14 @@ public class AddSaleController implements Initializable {
     @FXML
     private TableView carTableViewSell;
 
+    public Integer contador;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         DashboardController.getCurrentWorker().getId_worker();
         dashboardController = MainController.getDashboardController();
         setCurrentWorker(DashboardController.getCurrentWorker());
+        contador = 0;
         setSellTableView();
     }
 
@@ -174,6 +180,8 @@ public class AddSaleController implements Initializable {
         editClient.setDisable(true);
         editClient.setStyle("-fx-background-color: #C24E59; ");
         cantidad.setDisable(true);
+        cantidad.setText(String.valueOf(contador));
+        priceLabel.setText(String.valueOf(contador));
 
 
         ccSeller.setText(currentWorker.getCc());
@@ -208,9 +216,8 @@ public class AddSaleController implements Initializable {
         }*/else{
 
             carTableViewSell.getItems().add(selectedCar);
-            /*quotationPrice.setText("$ " + selectedVehicle.getPrice());
-            newQuotation.setIdCar(selectedVehicle.getIdCar());
-            quotationQuantity.setText("1");*/
+            cantidad.setText(String.valueOf(Integer.valueOf(cantidad.getText())+1));
+            priceLabel.setText(String.valueOf(Double.valueOf(priceLabel.getText())+selectedCar.getPrice()));
         }
     }
 
