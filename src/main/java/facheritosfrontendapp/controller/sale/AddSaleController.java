@@ -247,6 +247,7 @@ public class AddSaleController implements Initializable {
                             try {
                              setDataCarTable(resultSet);
                             } catch (SQLException e) {
+
                                 throw new RuntimeException(e);
                             } catch (IOException e) {
                                 throw new RuntimeException(e);

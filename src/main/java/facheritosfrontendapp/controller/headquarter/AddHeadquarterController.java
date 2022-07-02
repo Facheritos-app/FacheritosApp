@@ -88,6 +88,11 @@ public class AddHeadquarterController implements Initializable {
         }
 
     }
+    @FXML
+    protected void backArrowClicked() throws ExecutionException, InterruptedException, IOException {
+        headquarterController = (HeadquarterController) dashboardController.changeContent("headquarters/headquarters");
+        headquarterController.showHeadquarters();
+    }
 
     public void createHeadquarter(){
      HeadquarterDTO headquarterDTO = new HeadquarterDTO();
