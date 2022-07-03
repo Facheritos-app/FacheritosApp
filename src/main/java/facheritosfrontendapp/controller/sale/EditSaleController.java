@@ -273,7 +273,6 @@ public class EditSaleController implements Initializable {
         if (clickedButton.get() == YES) {
             saleSingleViewController = (SaleSingleViewController) dashboardController.changeContent("sales/salesSingleView", true);
             saleSingleViewController.showSaleData(Integer.valueOf(idSaleLabel.getText()));
-
             saleSingleViewController.showQuantity(Integer.valueOf(idSaleLabel.getText()));
             saleSingleViewController.showSaleCars(Integer.valueOf(idSaleLabel.getText()));
         }
