@@ -132,6 +132,7 @@
                   <TableColumn fx:id="colModel1" prefWidth="61.0" text="Modelo" />
                   <TableColumn fx:id="colColor1" prefWidth="47.0" text="Color" />
                   <TableColumn fx:id="colPrice1" minWidth="9.0" prefWidth="89.0" text="Costo" />
+                  <TableColumn fx:id="colQuantity1" minWidth="0.0" prefWidth="129.0" text="Cantidad" />
                   <TableColumn fx:id="colYear1" minWidth="0.0" prefWidth="129.0" text="Ensamblaje" />
                </columns>
             </TableView>

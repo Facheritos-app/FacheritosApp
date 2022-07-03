@@ -146,6 +146,9 @@ public class EditSaleController implements Initializable {
     private TableColumn<SaleCarRowView, Integer> colQuantity;
 
     @FXML
+    private TableColumn<SaleCarRowView, Integer> colQuantity1;
+
+    @FXML
     private TableColumn<SaleCarRowView, String> colYear;
 
     @FXML
@@ -322,7 +325,9 @@ public class EditSaleController implements Initializable {
                 for (int i=0 ; i< saleCarRowsArray.size(); i++){
                     if(idSelect==saleCarRowsArray.get(i).getIdCar()){
                         saleCarRowsArray.get(i).setQuantity( Integer.valueOf(saleCarRowsArray.get(i).getQuantity())-1);
+                       // saleCarRowsArray2.get(i).setQuantity( Integer.valueOf(saleCarRowsArray2.get(i).getQuantity())+1);
                         carTableView.refresh();
+                       // carTableViewSell.refresh();
                         System.out.println("cantidad" + saleCarRowsArray.get(i).getQuantity());
 
                         System.out.println("Entre al if del for");
@@ -330,7 +335,19 @@ public class EditSaleController implements Initializable {
                     System.out.println("Entre al for");
                 }
 
-                carTableViewSell.getItems().add(selectedCar);
+                for (int i=0 ; i< saleCarRowsArray2.size(); i++){
+                    if(idSelect==saleCarRowsArray2.get(i).getIdCar()){
+                        saleCarRowsArray2.get(i).setQuantity( Integer.valueOf(saleCarRowsArray2.get(i).getQuantity())+1);
+                        carTableViewSell.refresh();
+                        System.out.println("cantidad" + saleCarRowsArray.get(i).getQuantity());
+
+                        System.out.println("Entre al if del for 2");
+                    }
+                    System.out.println("Entre al for 2");
+                }
+
+
+               // carTableViewSell.getItems().add(selectedCar);
                 cantidad.setText(String.valueOf(Integer.valueOf(cantidad.getText())+1));
                 priceLabel.setText(String.valueOf(Double.valueOf(priceLabel.getText())+selectedCar.getPrice()));
             }
@@ -534,9 +551,10 @@ public class EditSaleController implements Initializable {
             SaleCarRowView car = new SaleCarRowView(resultSet.getInt("id_car"), resultSet.getString("description"), resultSet.getString("color"),
                     resultSet.getDouble("price"),
                     resultSet.getInt("quantity"),resultSet.getString("assemble_year"));
+            saleCarRowsArray2.add(car);
             Integer i=1;
             while(resultSet.getInt("quantity")>=i){
-                saleCarRowsArray2.add(car); //Add every element to the array.
+                 //Add every element to the array.
                 precio = precio + car.getPrice();
                 i++;
             }
@@ -556,6 +574,7 @@ public class EditSaleController implements Initializable {
         colModel1.setCellValueFactory(new PropertyValueFactory("model"));
         colColor1.setCellValueFactory(new PropertyValueFactory("color"));
         colPrice1.setCellValueFactory(new PropertyValueFactory("price"));
+        colQuantity1.setCellValueFactory(new PropertyValueFactory("quantity"));
         colYear1.setCellValueFactory(new PropertyValueFactory("date"));
 
         carTableViewSell.setItems(saleCarObList2);
@@ -575,7 +594,7 @@ public class EditSaleController implements Initializable {
 
 
         //Add every element from our array to the observable list array that will show on the table
-        for(Integer i = 0; i < saleCarRowsArray.size(); i++){
+       for(Integer i = 0; i < saleCarRowsArray.size(); i++){
             saleCarObList.add(saleCarRowsArray.get(i));
         }
 
