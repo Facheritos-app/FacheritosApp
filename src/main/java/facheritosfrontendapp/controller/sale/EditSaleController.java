@@ -358,6 +358,7 @@ public class EditSaleController implements Initializable {
     }
 
     public void showSaleCars(Integer idHeadquarter){
+        System.out.println(idHeadquarter);
         new Thread(() -> {
             CompletableFuture<Map<Boolean, ResultSet>> vehicleCall = CompletableFuture.supplyAsync(() -> saleEndpoint.getCar(idHeadquarter));
             try {
