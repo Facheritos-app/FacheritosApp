@@ -171,6 +171,12 @@ public class AddSaleController implements Initializable {
     protected void saveClicked(){
 
     }
+
+    @FXML
+    protected  void backArrowClicked() throws ExecutionException, InterruptedException, IOException {
+        saleController = (SaleController) dashboardController.changeContent("sales/sales");
+        saleController.showSales();
+    }
     public AddSaleController() {
         fxmlLoader = new FxmlLoader();
         headquarterComboboxList = new ArrayList<>();

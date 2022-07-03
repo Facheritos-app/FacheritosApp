@@ -7,9 +7,11 @@ import backend.endpoints.saleEndpoint.SaleEndpoint;
 import facheritosfrontendapp.ComboBoxView.HeadquarterView;
 import facheritosfrontendapp.controller.DashboardController;
 import facheritosfrontendapp.controller.MainController;
+import facheritosfrontendapp.controller.quotation.QuotationController;
 import facheritosfrontendapp.objectRowView.saleRowView.SaleCarRowView;
 import facheritosfrontendapp.objectRowView.saleRowView.SaleSingleRowView;
 import facheritosfrontendapp.views.FxmlLoader;
+import facheritosfrontendapp.views.MyDialogPane;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -28,11 +30,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
 import static javafx.scene.control.ButtonType.OK;
+import static javafx.scene.control.ButtonType.YES;
 
 public class EditSaleController implements Initializable {
     private DashboardController dashboardController;
@@ -253,6 +257,15 @@ public class EditSaleController implements Initializable {
 
        typeCombobox.setValue(resultSet.getString("name_method"));
 
+    }
+    @FXML
+    protected void backArrowClicked() throws ExecutionException, InterruptedException, IOException {
+        MyDialogPane dialogPane = new MyDialogPane("confirmationCancel");
+        Optional<ButtonType> clickedButton = dialogPane.getClickedButton();
+        if (clickedButton.get() == YES) {
+            saleController = (SaleController) dashboardController.changeContent("sales/sales");
+            saleController.showSales();
+        }
     }
 
 

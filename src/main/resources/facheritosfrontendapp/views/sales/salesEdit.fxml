@@ -50,7 +50,7 @@
                   <TableColumn fx:id="colYear" minWidth="0.0" prefWidth="101.0" text="Ensamblaje" />
                </columns>
             </TableView>
-            <ImageView fitHeight="53.0" fitWidth="61.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" styleClass="back-arrow">
+            <ImageView fitHeight="53.0" fitWidth="61.0" layoutX="14.0" layoutY="14.0" onMouseClicked="#backArrowClicked" pickOnBounds="true" preserveRatio="true" styleClass="back-arrow">
                <image>
                   <Image url="@../../icons/back-arrow.png" />
                </image>
