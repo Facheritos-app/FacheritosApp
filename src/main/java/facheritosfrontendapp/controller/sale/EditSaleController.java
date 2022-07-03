@@ -57,6 +57,9 @@ public class EditSaleController implements Initializable {
     private TextField ccSeller;
 
     @FXML
+    private Label idSaleLabel;
+
+    @FXML
     private TextField nameSeller;
 
     @FXML
@@ -156,6 +159,8 @@ public class EditSaleController implements Initializable {
 
     public Integer contador;
 
+    private SaleSingleViewController saleSingleViewController;
+
     @FXML
     private Label noFound;
 
@@ -180,6 +185,7 @@ public class EditSaleController implements Initializable {
         personEndpoint = new PersonEndpoint();
         saleCarObList = FXCollections.observableArrayList();
         saleCarObList2 = FXCollections.observableArrayList();
+        //saleSingleViewController = new SaleSingleViewController();
     }
 
     public static synchronized WorkerDTO getCurrentWorker() {
@@ -203,6 +209,7 @@ public class EditSaleController implements Initializable {
         searchClient.setDisable(true);
         searchClient.setStyle("-fx-background-color: #C24E59; ");
         cantidad.setDisable(true);
+        idSaleLabel.setText(String.valueOf(idSale));
         //cantidad.setText(String.valueOf(contador));
         //priceLabel.setText(String.valueOf(contador));
 
@@ -262,9 +269,13 @@ public class EditSaleController implements Initializable {
     protected void backArrowClicked() throws ExecutionException, InterruptedException, IOException {
         MyDialogPane dialogPane = new MyDialogPane("confirmationCancel");
         Optional<ButtonType> clickedButton = dialogPane.getClickedButton();
+
         if (clickedButton.get() == YES) {
-            saleController = (SaleController) dashboardController.changeContent("sales/sales");
-            saleController.showSales();
+            saleSingleViewController = (SaleSingleViewController) dashboardController.changeContent("sales/salesSingleView", true);
+            saleSingleViewController.showSaleData(Integer.valueOf(idSaleLabel.getText()));
+
+            saleSingleViewController.showQuantity(Integer.valueOf(idSaleLabel.getText()));
+            saleSingleViewController.showSaleCars(Integer.valueOf(idSaleLabel.getText()));
         }
     }
 
