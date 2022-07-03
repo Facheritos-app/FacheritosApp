@@ -284,8 +284,16 @@ public class EditSaleController implements Initializable {
     }
 
     @FXML
-    protected  void cancelClicked(){
+    protected  void cancelClicked() throws IOException {
+        MyDialogPane dialogPane = new MyDialogPane("confirmationCancel");
+        Optional<ButtonType> clickedButton = dialogPane.getClickedButton();
 
+        if (clickedButton.get() == YES) {
+            saleSingleViewController = (SaleSingleViewController) dashboardController.changeContent("sales/salesSingleView", true);
+            saleSingleViewController.showSaleData(Integer.valueOf(idSaleLabel.getText()));
+            saleSingleViewController.showQuantity(Integer.valueOf(idSaleLabel.getText()));
+            saleSingleViewController.showSaleCars(Integer.valueOf(idSaleLabel.getText()));
+        }
     }
 
     @FXML

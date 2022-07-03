@@ -12,6 +12,7 @@ import facheritosfrontendapp.objectRowView.saleRowView.SaleCarRowView;
 import facheritosfrontendapp.objectRowView.saleRowView.SaleRowView;
 import facheritosfrontendapp.objectRowView.saleRowView.SaleSingleRowView;
 import facheritosfrontendapp.views.FxmlLoader;
+import facheritosfrontendapp.views.MyDialogPane;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -28,14 +29,12 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Map;
-import java.util.ResourceBundle;
+import java.util.*;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
 import static javafx.scene.control.ButtonType.OK;
+import static javafx.scene.control.ButtonType.YES;
 
 public class AddSaleController implements Initializable {
     private DashboardController dashboardController;
@@ -168,8 +167,14 @@ public class AddSaleController implements Initializable {
     }
 
     @FXML
-    protected void cancelClicked(){
+    protected void cancelClicked() throws IOException, ExecutionException, InterruptedException {
+        MyDialogPane dialogPane = new MyDialogPane("confirmationCancel");
+        Optional<ButtonType> clickedButton = dialogPane.getClickedButton();
 
+        if (clickedButton.get() == YES) {
+            saleController = (SaleController) dashboardController.changeContent("sales/sales");
+            saleController.showSales();
+        }
     }
 
     @FXML
@@ -179,8 +184,15 @@ public class AddSaleController implements Initializable {
 
     @FXML
     protected  void backArrowClicked() throws ExecutionException, InterruptedException, IOException {
-        saleController = (SaleController) dashboardController.changeContent("sales/sales");
-        saleController.showSales();
+
+
+        MyDialogPane dialogPane = new MyDialogPane("confirmationCancel");
+        Optional<ButtonType> clickedButton = dialogPane.getClickedButton();
+
+        if (clickedButton.get() == YES) {
+            saleController = (SaleController) dashboardController.changeContent("sales/sales");
+            saleController.showSales();
+        }
     }
     public AddSaleController() {
         fxmlLoader = new FxmlLoader();
