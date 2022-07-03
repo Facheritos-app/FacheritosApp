@@ -8,6 +8,7 @@ import facheritosfrontendapp.ComboBoxView.HeadquarterView;
 import facheritosfrontendapp.controller.DashboardController;
 import facheritosfrontendapp.controller.MainController;
 import facheritosfrontendapp.objectRowView.saleRowView.SaleCarRowView;
+import facheritosfrontendapp.objectRowView.saleRowView.SaleSingleRowView;
 import facheritosfrontendapp.views.FxmlLoader;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -19,6 +20,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 
+import javax.naming.SizeLimitExceededException;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
@@ -91,7 +93,11 @@ public class EditSaleController implements Initializable {
 
     private ArrayList<SaleCarRowView> saleCarRowsArray;
 
+    private ArrayList<SaleCarRowView> saleCarRowsArray2;
+
     private ObservableList<SaleCarRowView> saleCarObList;
+
+    private ObservableList<SaleCarRowView> saleCarObList2;
 
     @FXML
     private TableColumn<SaleCarRowView, Integer> colId;
@@ -146,7 +152,7 @@ public class EditSaleController implements Initializable {
         dashboardController = MainController.getDashboardController();
         setCurrentWorker(DashboardController.getCurrentWorker());
         contador = 0;
-        setSellTableView();
+        //setSellTableView();
     }
 
     public EditSaleController() {
@@ -155,9 +161,10 @@ public class EditSaleController implements Initializable {
         headquarterEndpoint = new HeadquarterEndpoint();
         saleEndpoint = new SaleEndpoint();
         saleCarRowsArray = new ArrayList<>();
+        saleCarRowsArray2 = new ArrayList<>();
         personEndpoint = new PersonEndpoint();
         saleCarObList = FXCollections.observableArrayList();
-
+        saleCarObList2 = FXCollections.observableArrayList();
     }
 
     public static synchronized WorkerDTO getCurrentWorker() {
@@ -181,8 +188,8 @@ public class EditSaleController implements Initializable {
         searchClient.setDisable(true);
         searchClient.setStyle("-fx-background-color: #C24E59; ");
         cantidad.setDisable(true);
-        cantidad.setText(String.valueOf(contador));
-        priceLabel.setText(String.valueOf(contador));
+        //cantidad.setText(String.valueOf(contador));
+        //priceLabel.setText(String.valueOf(contador));
 
         showSaleData(idSale);
 
@@ -240,14 +247,6 @@ public class EditSaleController implements Initializable {
         typeCombobox.setItems(FXCollections.observableArrayList("Tarjeta de credito","Efectivo"));
     }
 
-    public void setSellTableView() {
-        colId1.setCellValueFactory(new PropertyValueFactory<>("idCar"));
-        colModel1.setCellValueFactory(new PropertyValueFactory<>("model"));
-        colColor1.setCellValueFactory(new PropertyValueFactory<>("color"));
-        colPrice1.setCellValueFactory(new PropertyValueFactory<>("price"));
-        colYear1.setCellValueFactory(new PropertyValueFactory<>("date"));
-    }
-
     @FXML
     public void addCarSell(MouseEvent mouseEvent) {
         SaleCarRowView selectedCar = (SaleCarRowView) carTableView.getSelectionModel().getSelectedItem();
@@ -282,7 +281,19 @@ public class EditSaleController implements Initializable {
             Alert fail = new Alert(Alert.AlertType.ERROR, "Selecciona un vehículo para eliminar", OK);
             fail.show();
         }else{
-            selectedCar.setQuantity(selectedCar.getQuantity()+1);
+            Integer idSelect = selectedCar.getIdCar().intValue();
+            System.out.println("Mi id car"+idSelect);
+            System.out.println("Deberia ser 2 "+saleCarRowsArray.size());
+            for (int i=0 ; i< saleCarRowsArray.size(); i++){
+                if(idSelect==saleCarRowsArray.get(i).getIdCar()){
+                    saleCarRowsArray.get(i).setQuantity( Integer.valueOf(saleCarRowsArray.get(i).getQuantity())+1);
+                    System.out.println("cantidad" + saleCarRowsArray.get(i).getQuantity());
+
+                    System.out.println("Entre al if del for");
+                }
+                System.out.println("Entre al for");
+            }
+            //selectedCar.setQuantity(selectedCar.getQuantity()+1);
             carTableViewSell.getItems().remove(selectedCar);
             cantidad.setText(String.valueOf(Integer.valueOf(cantidad.getText())-1));
             priceLabel.setText(String.valueOf(Double.valueOf(priceLabel.getText())-selectedCar.getPrice()));
@@ -386,15 +397,68 @@ public class EditSaleController implements Initializable {
         }).start();
     }
 
-    private void handleOptionLabel(MouseEvent mouseEvent) {
-        for(Integer i = 0; i < saleCarRowsArray.size(); i++){
-            if(mouseEvent.getSource() == saleCarRowsArray.get(i).getCheckLabel()){
-
+    public void showSaleCarsSell(Integer idSale){
+        new Thread(() -> {
+            CompletableFuture<Map<Boolean, ResultSet>> vehicleCall = CompletableFuture.supplyAsync(() -> saleEndpoint.getSalesCar(idSale));
+            try {
+                vehicleCall.thenApply((response) -> {
+                    if (response.containsKey(true)) {
+                        ResultSet resultSet = response.get(true);
+                        Platform.runLater(() -> {
+                            try {
+                                setDataCarTableSell(resultSet);
+                            } catch (SQLException e) {
+                                throw new RuntimeException(e);
+                            } catch (IOException e) {
+                                throw new RuntimeException(e);
+                            }
+                        });
+                    }
+                    return true;
+                }).get();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            } catch (ExecutionException e) {
+                throw new RuntimeException(e);
             }
-            if(mouseEvent.getSource() == saleCarRowsArray.get(i).getQuantityLabel()){
+        }).start();
+    }
 
+    public void setDataCarTableSell(ResultSet resultSet) throws SQLException, FileNotFoundException {
+
+       /* (Integer idSale, String nameSeller, String nameClient, Date dateSeller, String paymentMethod,String headquarter,
+                Double priceSale)*/
+        Double precio= 0.0;
+        while(resultSet.next()){
+            //Create the object that will contain all the data shown on the table
+            SaleCarRowView car = new SaleCarRowView(resultSet.getInt("id_car"), resultSet.getString("description"), resultSet.getString("color"),
+                    resultSet.getDouble("price"),
+                    resultSet.getInt("quantity"),resultSet.getString("assemble_year"));
+            Integer i=1;
+            while(resultSet.getInt("quantity")>=i){
+                saleCarRowsArray2.add(car); //Add every element to the array.
+                precio = precio + car.getPrice();
+                i++;
             }
+
         }
+        cantidad.setText(String.valueOf(saleCarRowsArray2.size()));
+        priceLabel.setText(String.valueOf(precio));
+
+
+
+        //Add every element from our array to the observable list array that will show on the table
+        for(Integer i = 0; i < saleCarRowsArray2.size(); i++){
+            saleCarObList2.add(saleCarRowsArray2.get(i));
+        }
+
+        colId1.setCellValueFactory(new PropertyValueFactory("idCar"));
+        colModel1.setCellValueFactory(new PropertyValueFactory("model"));
+        colColor1.setCellValueFactory(new PropertyValueFactory("color"));
+        colPrice1.setCellValueFactory(new PropertyValueFactory("price"));
+        colYear1.setCellValueFactory(new PropertyValueFactory("date"));
+
+        carTableViewSell.setItems(saleCarObList2);
     }
 
     public void setDataCarTable(ResultSet resultSet) throws SQLException, FileNotFoundException {
@@ -409,11 +473,6 @@ public class EditSaleController implements Initializable {
             saleCarRowsArray.add(car); //Add every element to the array.
         }
 
-        //Set the handle events for the labels
-        for(Integer i = 0; i < saleCarRowsArray.size(); i++){
-            saleCarRowsArray.get(i).getCheckHBox().setOnMouseClicked(this::handleOptionLabel);
-            saleCarRowsArray.get(i).getQuantityHBox().setOnMouseClicked(this::handleOptionLabel);
-        }
 
         //Add every element from our array to the observable list array that will show on the table
         for(Integer i = 0; i < saleCarRowsArray.size(); i++){

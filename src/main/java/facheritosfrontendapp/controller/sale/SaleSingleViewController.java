@@ -140,6 +140,7 @@ public class SaleSingleViewController implements Initializable{
         editSaleController.setData(Integer.valueOf(idNumber.getText()));
         editSaleController.setView();
         editSaleController.showSaleCars(Integer.valueOf(head.getText()));
+        editSaleController.showSaleCarsSell(Integer.valueOf(idNumber.getText()));
 
     }
 
