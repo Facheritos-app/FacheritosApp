@@ -29,6 +29,7 @@ import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.concurrent.CompletableFuture;
@@ -94,6 +95,7 @@ public class AddSaleController implements Initializable {
     private ComboBox<String> typeCombobox;
 
     private ArrayList<SaleCarRowView> saleCarRowsArray;
+    private ArrayList<SaleCarRowView> saleCarRowsArray2;
 
     private ObservableList<SaleCarRowView> saleCarObList;
 
@@ -126,6 +128,9 @@ public class AddSaleController implements Initializable {
 
     @FXML
     private TableColumn<SaleCarRowView, Integer> colQuantity;
+
+    @FXML
+    private TableColumn<SaleCarRowView, Integer> colQuantity1;
 
     @FXML
     private TableColumn<SaleCarRowView, String> colYear;
@@ -183,6 +188,7 @@ public class AddSaleController implements Initializable {
         headquarterEndpoint = new HeadquarterEndpoint();
         saleEndpoint = new SaleEndpoint();
         saleCarRowsArray = new ArrayList<>();
+        saleCarRowsArray2 = new ArrayList<>();
         personEndpoint = new PersonEndpoint();
         saleCarObList = FXCollections.observableArrayList();
 
@@ -228,11 +234,12 @@ public class AddSaleController implements Initializable {
         colModel1.setCellValueFactory(new PropertyValueFactory<>("model"));
         colColor1.setCellValueFactory(new PropertyValueFactory<>("color"));
         colPrice1.setCellValueFactory(new PropertyValueFactory<>("price"));
+        colQuantity1.setCellValueFactory(new PropertyValueFactory<>("quantity"));
         colYear1.setCellValueFactory(new PropertyValueFactory<>("date"));
     }
 
     @FXML
-    public void addCarSell(MouseEvent mouseEvent) {
+    public void addCarSell(MouseEvent mouseEvent) throws FileNotFoundException {
         SaleCarRowView selectedCar = (SaleCarRowView) carTableView.getSelectionModel().getSelectedItem();
         if(selectedCar == null){
             //Crear una vista para esto
@@ -270,13 +277,48 @@ public class AddSaleController implements Initializable {
                     System.out.println("Entre al for");
                 }
 
-                carTableViewSell.getItems().add(selectedCar);
+               // carTableViewSell.getItems().add(selectedCar);
+
+                if(buscar(saleCarRowsArray2,idSelect)){
+                    for (int i=0 ; i< saleCarRowsArray2.size(); i++){
+                        if(Arrays.asList(saleCarRowsArray2.get(i).getIdCar()).contains(idSelect)){
+                            if(idSelect==saleCarRowsArray2.get(i).getIdCar()){
+
+                                saleCarRowsArray2.get(i).setQuantity( Integer.valueOf(saleCarRowsArray2.get(i).getQuantity())+1);
+                                carTableViewSell.refresh();
+                            }
+                        }
+                    }
+
+                }else {
+                    System.out.println("Tamaño1 "+saleCarRowsArray2.size());
+
+                    SaleCarRowView car = new SaleCarRowView(selectedCar.getIdCar(), selectedCar.getModel(), selectedCar.getColor(),
+                            selectedCar.getPrice(),
+                            1,selectedCar.getDate());
+
+                    saleCarRowsArray2.add(car);
+                    carTableViewSell.getItems().add(car);
+                    System.out.println("Tamaño2 "+saleCarRowsArray2.size());
+                    saleCarRowsArray2.get(saleCarRowsArray2.size()-1).setQuantity(1);
+                    carTableViewSell.refresh();
+                }
+
                 cantidad.setText(String.valueOf(Integer.valueOf(cantidad.getText())+1));
                 priceLabel.setText(String.valueOf(Double.valueOf(priceLabel.getText())+selectedCar.getPrice()));
             }
         }
     }
 
+    private Boolean buscar( ArrayList<SaleCarRowView> saleCarRowsView, Integer id){
+        Boolean saber = false;
+        for (Integer i =0;i <  saleCarRowsView.size() ;i++ ){
+            if(id==saleCarRowsArray2.get(i).getIdCar()){
+                return true;
+            }
+        }
+        return saber;
+    }
     @FXML
     protected void searchClientClicked(){
         showClient(ccClient.getText());
@@ -312,7 +354,22 @@ public class AddSaleController implements Initializable {
                 System.out.println("Entre al for");
             }
 
-            carTableViewSell.getItems().remove(selectedCar);
+            for (int i=0 ; i< saleCarRowsArray2.size(); i++){
+                if(idSelect==saleCarRowsArray2.get(i).getIdCar()){
+                    if(saleCarRowsArray2.get(i).getQuantity()-1==0){
+                        carTableViewSell.getItems().remove(selectedCar);
+                        saleCarRowsArray2.remove(i);
+                        System.out.println("tamaño de 2 "+saleCarRowsArray2.size());
+                    }else{
+                        saleCarRowsArray2.get(i).setQuantity( Integer.valueOf(saleCarRowsArray2.get(i).getQuantity())-1);
+                        carTableViewSell.refresh();
+                    }
+
+                }
+
+            }
+
+            //carTableViewSell.getItems().remove(selectedCar);
             cantidad.setText(String.valueOf(Integer.valueOf(cantidad.getText())-1));
             priceLabel.setText(String.valueOf(Double.valueOf(priceLabel.getText())-selectedCar.getPrice()));
 
