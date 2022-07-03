@@ -28,10 +28,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Map;
-import java.util.Optional;
-import java.util.ResourceBundle;
+import java.util.*;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
@@ -296,7 +293,7 @@ public class EditSaleController implements Initializable {
 
     }
     @FXML
-    public void addCarSell(MouseEvent mouseEvent) {
+    public void addCarSell(MouseEvent mouseEvent) throws FileNotFoundException {
         SaleCarRowView selectedCar = (SaleCarRowView) carTableView.getSelectionModel().getSelectedItem();
         if(selectedCar == null){
             //Crear una vista para esto
@@ -320,38 +317,54 @@ public class EditSaleController implements Initializable {
                 deleteLabel.setText("");
                 //selectedCar.setQuantity(selectedCar.getQuantity()-1);
                 Integer idSelect = selectedCar.getIdCar().intValue();
-                System.out.println("Mi id car"+idSelect);
-                System.out.println("Deberia ser 2 "+saleCarRowsArray.size());
                 for (int i=0 ; i< saleCarRowsArray.size(); i++){
                     if(idSelect==saleCarRowsArray.get(i).getIdCar()){
                         saleCarRowsArray.get(i).setQuantity( Integer.valueOf(saleCarRowsArray.get(i).getQuantity())-1);
-                       // saleCarRowsArray2.get(i).setQuantity( Integer.valueOf(saleCarRowsArray2.get(i).getQuantity())+1);
                         carTableView.refresh();
-                       // carTableViewSell.refresh();
-                        System.out.println("cantidad" + saleCarRowsArray.get(i).getQuantity());
 
-                        System.out.println("Entre al if del for");
                     }
-                    System.out.println("Entre al for");
                 }
 
-                for (int i=0 ; i< saleCarRowsArray2.size(); i++){
-                    if(idSelect==saleCarRowsArray2.get(i).getIdCar()){
-                        saleCarRowsArray2.get(i).setQuantity( Integer.valueOf(saleCarRowsArray2.get(i).getQuantity())+1);
+                if(buscar(saleCarRowsArray2,idSelect)){
+                    for (int i=0 ; i< saleCarRowsArray2.size(); i++){
+                        if(Arrays.asList(saleCarRowsArray2.get(i).getIdCar()).contains(idSelect)){
+                            if(idSelect==saleCarRowsArray2.get(i).getIdCar()){
+
+                                saleCarRowsArray2.get(i).setQuantity( Integer.valueOf(saleCarRowsArray2.get(i).getQuantity())+1);
+                                carTableViewSell.refresh();
+                            }
+                        }
+                    }
+
+                }else {
+                        System.out.println("Tamaño1 "+saleCarRowsArray2.size());
+
+                        SaleCarRowView car = new SaleCarRowView(selectedCar.getIdCar(), selectedCar.getModel(), selectedCar.getColor(),
+                                selectedCar.getPrice(),
+                                1,selectedCar.getDate());
+
+                        saleCarRowsArray2.add(car);
+                        carTableViewSell.getItems().add(car);
+                        System.out.println("Tamaño2 "+saleCarRowsArray2.size());
+                        saleCarRowsArray2.get(saleCarRowsArray2.size()-1).setQuantity(1);
                         carTableViewSell.refresh();
-                        System.out.println("cantidad" + saleCarRowsArray.get(i).getQuantity());
-
-                        System.out.println("Entre al if del for 2");
                     }
-                    System.out.println("Entre al for 2");
-                }
-
 
                // carTableViewSell.getItems().add(selectedCar);
                 cantidad.setText(String.valueOf(Integer.valueOf(cantidad.getText())+1));
                 priceLabel.setText(String.valueOf(Double.valueOf(priceLabel.getText())+selectedCar.getPrice()));
             }
         }
+    }
+
+    private Boolean buscar( ArrayList<SaleCarRowView> saleCarRowsView, Integer id){
+        Boolean saber = false;
+        for (Integer i =0;i <  saleCarRowsView.size() ;i++ ){
+            if(id==saleCarRowsArray2.get(i).getIdCar()){
+                return true;
+            }
+        }
+        return saber;
     }
 
     @FXML
@@ -381,14 +394,27 @@ public class EditSaleController implements Initializable {
                 if(idSelect==saleCarRowsArray.get(i).getIdCar()){
                     saleCarRowsArray.get(i).setQuantity( Integer.valueOf(saleCarRowsArray.get(i).getQuantity())+1);
                     carTableView.refresh();
-                    System.out.println("cantidad" + saleCarRowsArray.get(i).getQuantity());
-
-                    System.out.println("Entre al if del for");
                 }
-                System.out.println("Entre al for");
+
             }
+
+            for (int i=0 ; i< saleCarRowsArray2.size(); i++){
+                if(idSelect==saleCarRowsArray2.get(i).getIdCar()){
+                    if(saleCarRowsArray2.get(i).getQuantity()-1==0){
+                        carTableViewSell.getItems().remove(selectedCar);
+                        saleCarRowsArray2.remove(i);
+                        System.out.println("tamaño de 2 "+saleCarRowsArray2.size());
+                    }else{
+                        saleCarRowsArray2.get(i).setQuantity( Integer.valueOf(saleCarRowsArray2.get(i).getQuantity())-1);
+                        carTableViewSell.refresh();
+                    }
+
+                }
+
+            }
+
             //selectedCar.setQuantity(selectedCar.getQuantity()+1);
-            carTableViewSell.getItems().remove(selectedCar);
+            //carTableViewSell.getItems().remove(selectedCar);
             cantidad.setText(String.valueOf(Integer.valueOf(cantidad.getText())-1));
             priceLabel.setText(String.valueOf(Double.valueOf(priceLabel.getText())-selectedCar.getPrice()));
 
