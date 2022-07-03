@@ -10,6 +10,7 @@ import facheritosfrontendapp.controller.MainController;
 import facheritosfrontendapp.controller.quotation.QuotationController;
 import facheritosfrontendapp.objectRowView.saleRowView.SaleCarRowView;
 import facheritosfrontendapp.objectRowView.saleRowView.SaleSingleRowView;
+import facheritosfrontendapp.validator.addSaleValidator.AddSaleValidator;
 import facheritosfrontendapp.views.FxmlLoader;
 import facheritosfrontendapp.views.MyDialogPane;
 import javafx.application.Platform;
@@ -164,7 +165,12 @@ public class EditSaleController implements Initializable {
     @FXML
     private Label noFound;
 
+    @FXML
+    private Label noFoundTabla;
+
     private String clientCC;
+
+    private AddSaleValidator inputValidator;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -172,6 +178,7 @@ public class EditSaleController implements Initializable {
         dashboardController = MainController.getDashboardController();
         setCurrentWorker(DashboardController.getCurrentWorker());
         contador = 0;
+        inputValidator = new AddSaleValidator();
         //setSellTableView();
     }
 
@@ -297,8 +304,65 @@ public class EditSaleController implements Initializable {
     }
 
     @FXML
-    protected  void saveClicked(){
+    protected  void saveClicked() throws IOException, ExecutionException, InterruptedException{
+        if(allValidations()) {
+            MyDialogPane dialogPane = new MyDialogPane("confirmationSave");
+            Optional<ButtonType> clickedButton = dialogPane.getClickedButton();
+            if (clickedButton.get() == ButtonType.YES) {
 
+                try{
+
+                    Alert success = new Alert(Alert.AlertType.CONFIRMATION, "Solicitud enviada al gerente", OK);
+                    success.show();
+                    //Go to main user view
+                    try {
+                        saleSingleViewController = (SaleSingleViewController) dashboardController.changeContent("sales/salesSingleView", true);
+                        saleSingleViewController.showSaleData(Integer.valueOf(idSaleLabel.getText()));
+                        saleSingleViewController.showQuantity(Integer.valueOf(idSaleLabel.getText()));
+                        saleSingleViewController.showSaleCars(Integer.valueOf(idSaleLabel.getText()));
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                }catch (Exception e){
+
+                }
+
+
+
+
+            } else {
+                System.out.println("No");
+
+
+            }
+        }
+    }
+
+    public Boolean allValidations() {
+        cleanErrors();
+        Boolean everythingCorrect = true;
+        if (!inputValidator.client(ccClient, noFound, "Ingrese un cliente, por favor")) {
+            everythingCorrect = false;
+            inputValidator.setErrorStyles(ccClient, noFound);
+        }
+
+        if (saleCarRowsArray2.size()==0) {
+            everythingCorrect = false;
+            noFoundTabla.setText("Por favor ingrese al menos un carro");
+            inputValidator.setErrorStyles(carTableViewSell, noFoundTabla);
+        }
+
+
+        return everythingCorrect;
+    }
+
+    public void cleanErrors() {
+        noFound.setText("");
+        ccClient.setStyle("");
+
+
+        noFoundTabla.setText("");
+        carTableViewSell.setStyle("");
     }
     @FXML
     public void addCarSell(MouseEvent mouseEvent) throws FileNotFoundException {

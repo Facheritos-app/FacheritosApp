@@ -209,6 +209,11 @@
                   <Font size="36.0" />
                </font>
             </Label>
+            <Label fx:id="noFoundTabla" alignment="CENTER" layoutX="463.0" layoutY="112.0" prefHeight="21.0" prefWidth="363.0" textFill="RED">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
          </children></AnchorPane>
   </content>
 </ScrollPane>

@@ -7,10 +7,13 @@ import backend.endpoints.saleEndpoint.SaleEndpoint;
 import facheritosfrontendapp.ComboBoxView.HeadquarterView;
 import facheritosfrontendapp.controller.DashboardController;
 import facheritosfrontendapp.controller.MainController;
+import facheritosfrontendapp.controller.headquarter.AddHeadquarterValidator;
+import facheritosfrontendapp.controller.headquarter.HeadquarterController;
 import facheritosfrontendapp.objectRowView.inventoryRowView.VehicleRowView;
 import facheritosfrontendapp.objectRowView.saleRowView.SaleCarRowView;
 import facheritosfrontendapp.objectRowView.saleRowView.SaleRowView;
 import facheritosfrontendapp.objectRowView.saleRowView.SaleSingleRowView;
+import facheritosfrontendapp.validator.addSaleValidator.AddSaleValidator;
 import facheritosfrontendapp.views.FxmlLoader;
 import facheritosfrontendapp.views.MyDialogPane;
 import javafx.application.Platform;
@@ -149,6 +152,12 @@ public class AddSaleController implements Initializable {
     private Label noFound;
 
     @FXML
+    private Label noFoundPay;
+
+    @FXML
+    private Label noFoundTabla;
+
+    @FXML
     private Label deleteLabel;
 
     @FXML
@@ -157,6 +166,8 @@ public class AddSaleController implements Initializable {
     @FXML
     private Label noQuantity;
 
+    private AddSaleValidator inputValidator;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         DashboardController.getCurrentWorker().getId_worker();
@@ -164,6 +175,7 @@ public class AddSaleController implements Initializable {
         setCurrentWorker(DashboardController.getCurrentWorker());
         contador = 0;
         setSellTableView();
+        inputValidator = new AddSaleValidator();
     }
 
     @FXML
@@ -178,8 +190,70 @@ public class AddSaleController implements Initializable {
     }
 
     @FXML
-    protected void saveClicked(){
+    protected void saveClicked() throws IOException, ExecutionException, InterruptedException{
+        if(allValidations()) {
+            MyDialogPane dialogPane = new MyDialogPane("confirmationSave");
+            Optional<ButtonType> clickedButton = dialogPane.getClickedButton();
+            if (clickedButton.get() == ButtonType.YES) {
 
+                try{
+
+                    Alert success = new Alert(Alert.AlertType.CONFIRMATION, "Solicitud enviada al gerente", OK);
+                    success.show();
+                    //Go to main user view
+                    try {
+                        saleController = (SaleController) dashboardController.changeContent("sales/sales");
+                        saleController.showSales();
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                }catch (Exception e){
+
+                }
+
+
+
+
+            } else {
+                System.out.println("No");
+
+
+            }
+        }
+    }
+
+    public Boolean allValidations() {
+        cleanErrors();
+        Boolean everythingCorrect = true;
+        if (!inputValidator.client(ccClient, noFound, "Ingrese un cliente, por favor")) {
+            everythingCorrect = false;
+            inputValidator.setErrorStyles(ccClient, noFound);
+        }
+        if (typeCombobox.getSelectionModel().isEmpty()) {
+            everythingCorrect = false;
+            noFoundPay.setText("Por favor indique un metodo de pago");
+            inputValidator.setErrorStyles(typeCombobox, noFoundPay);
+        }
+
+        if (saleCarRowsArray2.size()==0) {
+            everythingCorrect = false;
+            noFoundTabla.setText("Por favor ingrese al menos un carro");
+            inputValidator.setErrorStyles(carTableViewSell, noFoundTabla);
+        }
+
+
+        return everythingCorrect;
+    }
+
+    public void cleanErrors() {
+        noFound.setText("");
+        ccClient.setStyle("");
+
+        noFoundPay.setText("");
+        typeCombobox.setStyle("");
+
+        noFoundTabla.setText("");
+        carTableViewSell.setStyle("");
     }
 
     @FXML

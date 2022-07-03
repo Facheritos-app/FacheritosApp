@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="517.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="facheritosfrontendapp.controller.sale.AddSaleController">
+<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="517.0" prefWidth="700.0"  xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="facheritosfrontendapp.controller.sale.AddSaleController">
   <content>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="716.0" prefWidth="1133.0" style="-fx-background-color: FFFFF;">
          <children>
@@ -58,7 +58,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <ComboBox fx:id="typeCombobox" layoutX="815.0" layoutY="446.0" prefHeight="31.0" prefWidth="206.0" styleClass="input-text" stylesheets="@../style.css" />
+            <ComboBox fx:id="typeCombobox" layoutX="816.0" layoutY="439.0" prefHeight="31.0" prefWidth="206.0" styleClass="input-text" stylesheets="@../style.css" />
             <TextField fx:id="ccClient" layoutX="474.0" layoutY="387.0" prefHeight="36.0" prefWidth="206.0" promptText="ej. 1569326" styleClass="input-text" stylesheets="@../style.css" />
             <TextField fx:id="nameClient" layoutX="474.0" layoutY="436.0" prefHeight="36.0" prefWidth="209.0" promptText="..." styleClass="input-text" stylesheets="@../style.css" />
             <Label layoutX="380.0" layoutY="386.0" prefHeight="38.0" prefWidth="54.0" text="Cedula:">
@@ -172,14 +172,14 @@
                         <Font name="System Bold Italic" size="14.0" />
                      </font>
                   </Label>
-                  <Label fx:id="priceLabel" prefHeight="38.0" prefWidth="456.0" text="..." textFill="WHITE">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </Label>
                   <Label fx:id="quotationPrice" textFill="WHITE">
                      <font>
                         <Font name="System Bold Italic" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="priceLabel" prefHeight="38.0" prefWidth="456.0" text="..." textFill="WHITE">
+                     <font>
+                        <Font size="16.0" />
                      </font>
                   </Label>
                </children>
@@ -200,6 +200,16 @@
                </font>
             </Label>
             <Label fx:id="noQuantity" alignment="CENTER" contentDisplay="CENTER" layoutX="37.0" layoutY="109.0" prefHeight="21.0" prefWidth="362.0" textAlignment="CENTER" textFill="RED">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
+            <Label fx:id="noFoundPay" layoutX="716.0" layoutY="475.0" prefHeight="21.0" prefWidth="294.0" textFill="RED">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
+            <Label fx:id="noFoundTabla" alignment="CENTER" layoutX="483.0" layoutY="109.0" prefHeight="21.0" prefWidth="363.0" textFill="RED">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
