@@ -79,6 +79,15 @@ public class EditSaleController implements Initializable {
     @FXML
     private Button searchClient;
 
+    @FXML
+    private Label deleteLabel;
+
+    @FXML
+    private Label addLabel;
+
+    @FXML
+    private Label noQuantity;
+
     private HeadquarterEndpoint headquarterEndpoint;
 
     private SaleEndpoint saleEndpoint;
@@ -252,15 +261,26 @@ public class EditSaleController implements Initializable {
         SaleCarRowView selectedCar = (SaleCarRowView) carTableView.getSelectionModel().getSelectedItem();
         if(selectedCar == null){
             //Crear una vista para esto
-            Alert fail = new Alert(Alert.AlertType.ERROR, "Selecciona un vehículo para agregar", OK);
-            fail.show();
+           /* Alert fail = new Alert(Alert.AlertType.ERROR, "Selecciona un vehículo para agregar", OK);
+            fail.show();*/
+            noQuantity.setText("");
+            addLabel.setText("Selecciona un vehiculo para agregar");
+            deleteLabel.setText("");
         }else{
 
             if(selectedCar.getQuantity()<=0){
-                Alert fail = new Alert(Alert.AlertType.ERROR, "No hay cantidad suficiente", OK);
-                fail.show();
+                /*Alert fail = new Alert(Alert.AlertType.ERROR, "No hay cantidad suficiente", OK);
+                fail.show();*/
+                noQuantity.setText("Ya no hay carro de ese tipo");
+                addLabel.setText("");
+                deleteLabel.setText("");
+
             }else{
+                noQuantity.setText("");
+                addLabel.setText("");
+                deleteLabel.setText("");
                 selectedCar.setQuantity(selectedCar.getQuantity()-1);
+
                 carTableViewSell.getItems().add(selectedCar);
                 cantidad.setText(String.valueOf(Integer.valueOf(cantidad.getText())+1));
                 priceLabel.setText(String.valueOf(Double.valueOf(priceLabel.getText())+selectedCar.getPrice()));
@@ -278,15 +298,23 @@ public class EditSaleController implements Initializable {
         SaleCarRowView selectedCar = (SaleCarRowView) carTableViewSell.getSelectionModel().getSelectedItem();
         if(selectedCar == null){
             //Crear una vista para esto
-            Alert fail = new Alert(Alert.AlertType.ERROR, "Selecciona un vehículo para eliminar", OK);
-            fail.show();
+            /*Alert fail = new Alert(Alert.AlertType.ERROR, "Selecciona un vehículo para eliminar", OK);
+            fail.show();*/
+            noQuantity.setText("");
+            addLabel.setText("");
+            deleteLabel.setText("Selecciona un vehiculo para eliminar");
         }else{
+            noQuantity.setText("");
+            addLabel.setText("");
+            deleteLabel.setText("");
+
             Integer idSelect = selectedCar.getIdCar().intValue();
             System.out.println("Mi id car"+idSelect);
             System.out.println("Deberia ser 2 "+saleCarRowsArray.size());
             for (int i=0 ; i< saleCarRowsArray.size(); i++){
                 if(idSelect==saleCarRowsArray.get(i).getIdCar()){
                     saleCarRowsArray.get(i).setQuantity( Integer.valueOf(saleCarRowsArray.get(i).getQuantity())+1);
+                    carTableView.refresh();
                     System.out.println("cantidad" + saleCarRowsArray.get(i).getQuantity());
 
                     System.out.println("Entre al if del for");

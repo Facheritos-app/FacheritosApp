@@ -40,7 +40,7 @@
                   <Font name="System Bold" size="24.0" />
                </font>
             </Label>
-            <TableView fx:id="carTableView" layoutX="33.0" layoutY="105.0" prefHeight="200.0" prefWidth="369.0" styleClass="table-views" stylesheets="@../style.css">
+            <TableView fx:id="carTableView" layoutX="33.0" layoutY="137.0" prefHeight="200.0" prefWidth="369.0" styleClass="table-views" stylesheets="@../style.css">
                <columns>
                   <TableColumn fx:id="colId" prefWidth="41.0" text="Id" />
                   <TableColumn fx:id="colModel" prefWidth="61.0" text="Modelo" />
@@ -126,7 +126,7 @@
                </font>
             </Label>
             <TextField fx:id="cantidad" layoutX="814.0" layoutY="387.0" prefHeight="36.0" prefWidth="209.0" styleClass="input-text" stylesheets="@../style.css" />
-            <TableView fx:id="carTableViewSell" layoutX="479.0" layoutY="105.0" prefHeight="200.0" prefWidth="369.0" styleClass="table-views" stylesheets="@../style.css">
+            <TableView fx:id="carTableViewSell" layoutX="479.0" layoutY="137.0" prefHeight="200.0" prefWidth="369.0" styleClass="table-views" stylesheets="@../style.css">
                <columns>
                   <TableColumn fx:id="colId1" prefWidth="41.0" text="Id" />
                   <TableColumn fx:id="colModel1" prefWidth="61.0" text="Modelo" />
@@ -147,7 +147,7 @@
                   <Font name="System Bold" size="16.0" />
                </font>
             </Label>
-            <Button fx:id="searchClient1" layoutX="684.0" layoutY="60.0" mnemonicParsing="false" onMouseClicked="#deleteCarSeller" prefWidth="167.0" styleClass="red-button" stylesheets="@../style.css" text="Eliminar de la venta" />
+            <Button fx:id="searchClient1" layoutX="722.0" layoutY="75.0" mnemonicParsing="false" onMouseClicked="#deleteCarSeller" prefWidth="167.0" styleClass="red-button" stylesheets="@../style.css" text="Eliminar de la venta" />
             <Label layoutX="73.0" layoutY="14.0" text="Crear venta">
                <font>
                   <Font name="System Bold" size="36.0" />
@@ -186,6 +186,21 @@
             <Label fx:id="noFound" layoutX="479.0" layoutY="571.0" prefHeight="38.0" prefWidth="243.0" textFill="RED">
                <font>
                   <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="deleteLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="483.0" layoutY="109.0" prefHeight="21.0" prefWidth="362.0" textAlignment="CENTER" textFill="RED">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
+            <Label fx:id="addLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="37.0" layoutY="109.0" prefHeight="21.0" prefWidth="362.0" textAlignment="CENTER" textFill="RED">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
+            <Label fx:id="noQuantity" alignment="CENTER" contentDisplay="CENTER" layoutX="37.0" layoutY="109.0" prefHeight="21.0" prefWidth="362.0" textAlignment="CENTER" textFill="RED">
+               <font>
+                  <Font name="System Bold" size="15.0" />
                </font>
             </Label>
          </children></AnchorPane>
