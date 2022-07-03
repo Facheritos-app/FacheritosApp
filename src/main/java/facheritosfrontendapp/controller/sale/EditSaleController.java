@@ -155,6 +155,8 @@ public class EditSaleController implements Initializable {
     @FXML
     private Label noFound;
 
+    private String clientCC;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         DashboardController.getCurrentWorker().getId_worker();
@@ -243,6 +245,8 @@ public class EditSaleController implements Initializable {
         numberSeller.setText(resultSet.getString("cellphone_seller"));
 
         ccClient.setText(resultSet.getString("cc_client"));
+        clientCC = resultSet.getString("cc_client");
+        System.out.println("Cedula cliente"+ clientCC);
         nameClient.setText(resultSet.getString("name_client"));
         numberClient.setText(resultSet.getString("cellphone_client"));
         emailClient.setText(resultSet.getString("email_client"));
@@ -256,6 +260,15 @@ public class EditSaleController implements Initializable {
         typeCombobox.setItems(FXCollections.observableArrayList("Tarjeta de credito","Efectivo"));
     }
 
+    @FXML
+    protected  void cancelClicked(){
+
+    }
+
+    @FXML
+    protected  void saveClicked(){
+
+    }
     @FXML
     public void addCarSell(MouseEvent mouseEvent) {
         SaleCarRowView selectedCar = (SaleCarRowView) carTableView.getSelectionModel().getSelectedItem();
@@ -279,7 +292,20 @@ public class EditSaleController implements Initializable {
                 noQuantity.setText("");
                 addLabel.setText("");
                 deleteLabel.setText("");
-                selectedCar.setQuantity(selectedCar.getQuantity()-1);
+                //selectedCar.setQuantity(selectedCar.getQuantity()-1);
+                Integer idSelect = selectedCar.getIdCar().intValue();
+                System.out.println("Mi id car"+idSelect);
+                System.out.println("Deberia ser 2 "+saleCarRowsArray.size());
+                for (int i=0 ; i< saleCarRowsArray.size(); i++){
+                    if(idSelect==saleCarRowsArray.get(i).getIdCar()){
+                        saleCarRowsArray.get(i).setQuantity( Integer.valueOf(saleCarRowsArray.get(i).getQuantity())-1);
+                        carTableView.refresh();
+                        System.out.println("cantidad" + saleCarRowsArray.get(i).getQuantity());
+
+                        System.out.println("Entre al if del for");
+                    }
+                    System.out.println("Entre al for");
+                }
 
                 carTableViewSell.getItems().add(selectedCar);
                 cantidad.setText(String.valueOf(Integer.valueOf(cantidad.getText())+1));
@@ -341,18 +367,30 @@ public class EditSaleController implements Initializable {
 
                             try {
                                 setClientData(resultSet);
-                                noFound.setText("");
+                                System.out.println("Busquedad exitosa");
+                                System.out.println("cedula del cliente "+clientCC);
+
                             } catch (SQLException e) {
-                                noFound.setText("Cliente no encontrado");
+                                //Alert fail = new Alert(Alert.AlertType.ERROR, "No se ha encontrado la cedula del trabajador o no es una cédula válida, por favor intenta nuevamente", OK);
+                                //fail.show();
+                                showClient(clientCC);
+                                System.out.println("Busquedad mala catch SQL");
                                 throw new RuntimeException(e);
 
                             } catch (IOException e) {
-                                noFound.setText("Cliente no encontrado");
+                               // Alert fail = new Alert(Alert.AlertType.ERROR, "No se ha encontrado la cedula del trabajador o no es una cédula válida, por favor intenta nuevamente", OK);
+                                //fail.show();
+                                showClient(clientCC);
+                                System.out.println("Busquedad mals catch fail");
                                 throw new RuntimeException(e);
                             }
 
                         }else{
-                        noFound.setText("Cliente no encontrado");
+                        Alert fail = new Alert(Alert.AlertType.ERROR, "No se ha encontrado la cedula del trabajador o no es una cédula válida, por favor intenta nuevamente", OK);
+                        fail.show();
+                        System.out.println("else de result");
+                        showClient(clientCC);
+                        System.out.println("cedula del cliente "+clientCC);
                     }
                     });
                     return true;
@@ -367,16 +405,25 @@ public class EditSaleController implements Initializable {
 
     public void setClientData(ResultSet resultSet) throws SQLException, IOException {
 
-        nameClient.setText(resultSet.getString("first_name")+" "+resultSet.getString("last_name"));
-        numberClient.setText(resultSet.getString("cellphone"));
-        emailClient.setText(resultSet.getString("email"));
+        try {
+            ccClient.setText(resultSet.getString("cc"));
+            clientCC = resultSet.getString("cc");
 
-        ccClient.setEditable(false);
-        searchClient.setDisable(false);
-        searchClient.setStyle("-fx-background-color: #C24E59; ");
+            nameClient.setText(resultSet.getString("first_name")+" "+resultSet.getString("last_name"));
 
-        editClient.setDisable(false);
-        editClient.setStyle("-fx-background-color: #C02130; ");
+            numberClient.setText(resultSet.getString("cellphone"));
+            emailClient.setText(resultSet.getString("email"));
+
+            ccClient.setEditable(false);
+            searchClient.setDisable(false);
+            searchClient.setStyle("-fx-background-color: #C24E59; ");
+
+            editClient.setDisable(false);
+            editClient.setStyle("-fx-background-color: #C02130; ");
+        }catch (Exception e){
+            throw e;
+        }
+
     }
 
     @FXML
@@ -386,6 +433,8 @@ public class EditSaleController implements Initializable {
         nameClient.setText("");
         numberClient.setText("");
         emailClient.setText("");
+
+
 
         editClient.setDisable(true);
         editClient.setStyle("-fx-background-color: #C24E59; ");

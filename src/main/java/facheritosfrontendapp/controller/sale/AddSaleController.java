@@ -162,6 +162,15 @@ public class AddSaleController implements Initializable {
         setSellTableView();
     }
 
+    @FXML
+    protected void cancelClicked(){
+
+    }
+
+    @FXML
+    protected void saveClicked(){
+
+    }
     public AddSaleController() {
         fxmlLoader = new FxmlLoader();
         headquarterComboboxList = new ArrayList<>();
@@ -238,7 +247,23 @@ public class AddSaleController implements Initializable {
                 noQuantity.setText("");
                 addLabel.setText("");
                 deleteLabel.setText("");
-                selectedCar.setQuantity(selectedCar.getQuantity()-1);
+               //selectedCar.setQuantity(selectedCar.getQuantity()-1);
+                //carTableView.refresh();
+
+                Integer idSelect = selectedCar.getIdCar().intValue();
+                System.out.println("Mi id car"+idSelect);
+                System.out.println("Deberia ser 2 "+saleCarRowsArray.size());
+                for (int i=0 ; i< saleCarRowsArray.size(); i++){
+                    if(idSelect==saleCarRowsArray.get(i).getIdCar()){
+                        saleCarRowsArray.get(i).setQuantity( Integer.valueOf(saleCarRowsArray.get(i).getQuantity())-1);
+                        carTableView.refresh();
+                        System.out.println("cantidad" + saleCarRowsArray.get(i).getQuantity());
+
+                        System.out.println("Entre al if del for");
+                    }
+                    System.out.println("Entre al for");
+                }
+
                 carTableViewSell.getItems().add(selectedCar);
                 cantidad.setText(String.valueOf(Integer.valueOf(cantidad.getText())+1));
                 priceLabel.setText(String.valueOf(Double.valueOf(priceLabel.getText())+selectedCar.getPrice()));
@@ -325,17 +350,22 @@ public class AddSaleController implements Initializable {
     }
 
     public void setClientData(ResultSet resultSet) throws SQLException, IOException {
+        try {
+            ccClient.setText(resultSet.getString("cc"));
+            nameClient.setText(resultSet.getString("first_name")+" "+resultSet.getString("last_name"));
+            numberClient.setText(resultSet.getString("cellphone"));
+            emailClient.setText(resultSet.getString("email"));
 
-        nameClient.setText(resultSet.getString("first_name")+" "+resultSet.getString("last_name"));
-        numberClient.setText(resultSet.getString("cellphone"));
-        emailClient.setText(resultSet.getString("email"));
+            ccClient.setEditable(false);
+            searchClient.setDisable(false);
+            searchClient.setStyle("-fx-background-color: #C24E59; ");
 
-        ccClient.setEditable(false);
-        searchClient.setDisable(false);
-        searchClient.setStyle("-fx-background-color: #C24E59; ");
+            editClient.setDisable(false);
+            editClient.setStyle("-fx-background-color: #C02130; ");
+        }catch (Exception e){
+            throw e;
+        }
 
-        editClient.setDisable(false);
-        editClient.setStyle("-fx-background-color: #C02130; ");
     }
 
     @FXML
