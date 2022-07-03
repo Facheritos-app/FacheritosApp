@@ -43,7 +43,7 @@ public class SaleEndpoint {
         HashMap<Boolean, ResultSet> response = new HashMap<>();
         try(Connection conn = ConnectionBD.connectDB().getConnection()){
             preparedStatement = conn.prepareStatement("Select Sale.id_sale, Sale.id_worker, Sale.id_customer, Sale.id_headquarter,Sale.id_payment_method, Sale.id_confirmation,Sale.sale_date,Sale.price, \n" +
-                    "\tHeadq.name as name_headq, \n" +
+                    "\tHeadq.name as name_headq,Headq.id_headquarter as id_headquarter, \n" +
                     "\t\tClient.cc as cc_client, (Client.first_name || ' ' || Client.last_name) AS name_client, Client.cellphone as cellphone_client, Client.email as email_client,\n" +
                     "\t\t\tSeller.cc as cc_seller, (Seller.first_name || ' ' ||Seller.last_name) AS name_seller, Seller.cellphone as cellphone_seller, Seller.email as email_seller,\n" +
                     "\t\t\t\tpayment.payment_method as name_method,\n" +
@@ -119,7 +119,7 @@ public class SaleEndpoint {
         ResultSet resultSet = null;
         HashMap<Boolean, ResultSet> response = new HashMap<>();
         try (Connection conn = ConnectionBD.connectDB().getConnection()) {
-            preparedStatement = conn.prepareStatement("select sale_car.id_car,model.description  as description ,car.id_model,color.color, model.price, sale_car.quantity\n" +
+            preparedStatement = conn.prepareStatement("select sale_car.id_car,model.description  as description ,car.id_model,color.color, model.price, car.assemble_year,sale_car.quantity\n" +
                     " from sale_car join car using(id_car) join color using (id_color) join model using (id_model) WHERE id_sale = ?");
             preparedStatement.setInt(1, idSale);
             resultSet = preparedStatement.executeQuery();
@@ -252,4 +252,26 @@ public class SaleEndpoint {
             return false;
         }
     }
+
+    public Map<Boolean, ResultSet> getSeller(Integer idHeadquarter) {
+
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        HashMap<Boolean, ResultSet> response = new HashMap<>();
+        try (Connection conn = ConnectionBD.connectDB().getConnection()) {
+            preparedStatement = conn.prepareStatement("select car.id_car, car.id_model,car.assemble_year, car.id_Color, car_headquarter.id_headquarter, car_headquarter.quantity,\n" +
+                    "\tcolor.color, model.price, model.description\n" +
+                    "from car join car_headquarter  using (id_car) join model using (id_model) join color using (id_color)\n" +
+                    "where id_headquarter =  ?");
+            preparedStatement.setInt(1, idHeadquarter);
+            resultSet = preparedStatement.executeQuery();
+            response.put(true, resultSet);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            response.put(false, resultSet);
+        }
+        return response;
+    }
+
+
 }

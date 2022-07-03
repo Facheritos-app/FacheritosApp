@@ -49,6 +49,9 @@ public class SaleSingleViewController implements Initializable{
     private Label idHeadq;
 
     @FXML
+    private Label head;
+
+    @FXML
     private Label dateSale;
 
     @FXML
@@ -110,21 +113,34 @@ public class SaleSingleViewController implements Initializable{
 
     private SaleController saleController;
 
+    private EditSaleController editSaleController;
+
     public SaleSingleViewController() {
         saleEndpoint = new SaleEndpoint();
         saleSingleObList = FXCollections.observableArrayList();
         saleSingleRowsArray = new ArrayList<>();
+        editSaleController =  new EditSaleController();
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         dashboardController = MainController.getDashboardController();
+        head.setVisible(false);
     }
 
     @FXML
     protected void backArrowClicked() throws IOException, ExecutionException, InterruptedException {
         saleController = (SaleController) dashboardController.changeContent("sales/sales");
         saleController.showSales();
+    }
+
+    @FXML
+    protected void editOnClicked() throws IOException, SQLException {
+        editSaleController = (EditSaleController) dashboardController.changeContent("sales/salesEdit", true);
+        editSaleController.setData(Integer.valueOf(idNumber.getText()));
+        editSaleController.setView();
+        editSaleController.showSaleCars(Integer.valueOf(head.getText()));
+
     }
 
     public void showSaleData(Integer idSale){
@@ -157,6 +173,7 @@ public class SaleSingleViewController implements Initializable{
     public void setData(ResultSet resultSet) throws SQLException, IOException {
 
         idNumber.setText(String.valueOf(resultSet.getInt("id_sale")));
+        head.setText(String.valueOf(resultSet.getInt("id_headquarter")));
         labelCosto.setText(resultSet.getString("price"));
         idHeadq.setText(resultSet.getString("name_headq"));
         dateSale.setText(resultSet.getString("sale_date"));
@@ -271,4 +288,6 @@ public class SaleSingleViewController implements Initializable{
 
         carTableView.setItems(saleSingleObList);
     }
+
+
 }

@@ -7,10 +7,7 @@ import backend.endpoints.saleEndpoint.SaleEndpoint;
 import facheritosfrontendapp.ComboBoxView.HeadquarterView;
 import facheritosfrontendapp.controller.DashboardController;
 import facheritosfrontendapp.controller.MainController;
-import facheritosfrontendapp.objectRowView.inventoryRowView.VehicleRowView;
 import facheritosfrontendapp.objectRowView.saleRowView.SaleCarRowView;
-import facheritosfrontendapp.objectRowView.saleRowView.SaleRowView;
-import facheritosfrontendapp.objectRowView.saleRowView.SaleSingleRowView;
 import facheritosfrontendapp.views.FxmlLoader;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -20,7 +17,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Background;
 import javafx.scene.layout.VBox;
 
 import java.io.FileNotFoundException;
@@ -36,7 +32,7 @@ import java.util.concurrent.ExecutionException;
 
 import static javafx.scene.control.ButtonType.OK;
 
-public class AddSaleController implements Initializable {
+public class EditSaleController implements Initializable {
     private DashboardController dashboardController;
     private SaleController saleController;
     private FxmlLoader fxmlLoader;
@@ -153,7 +149,7 @@ public class AddSaleController implements Initializable {
         setSellTableView();
     }
 
-    public AddSaleController() {
+    public EditSaleController() {
         fxmlLoader = new FxmlLoader();
         headquarterComboboxList = new ArrayList<>();
         headquarterEndpoint = new HeadquarterEndpoint();
@@ -172,7 +168,7 @@ public class AddSaleController implements Initializable {
         this.currentWorker = currentWorker;
     }
 
-    public void setSeller() throws SQLException, IOException {
+    public void setData(Integer idSale) throws SQLException, IOException {
         ccSeller.setEditable(false);
         nameSeller.setEditable(false);
         emailSeller.setEditable(false);
@@ -180,18 +176,63 @@ public class AddSaleController implements Initializable {
         nameClient.setEditable(false);
         emailClient.setEditable(false);
         numberClient.setEditable(false);
+        ccClient.setEditable(false);
 
-        editClient.setDisable(true);
-        editClient.setStyle("-fx-background-color: #C24E59; ");
+        searchClient.setDisable(true);
+        searchClient.setStyle("-fx-background-color: #C24E59; ");
         cantidad.setDisable(true);
         cantidad.setText(String.valueOf(contador));
         priceLabel.setText(String.valueOf(contador));
 
+        showSaleData(idSale);
 
-        ccSeller.setText(currentWorker.getCc());
-        nameSeller.setText(currentWorker.getFirst_name()+" "+currentWorker.getLast_name());
-        emailSeller.setText(currentWorker.getEmail());
-        numberSeller.setText(currentWorker.getCellphone());
+
+    }
+
+    public void showSaleData(Integer idSale){
+        new Thread(() -> {
+            CompletableFuture<Map<Boolean, ResultSet>> vehicleCall = CompletableFuture.supplyAsync(() -> saleEndpoint.getSaleById(idSale));
+            try {
+                vehicleCall.thenApply((response) -> {
+                    if (response.containsKey(true)) {
+                        ResultSet resultSet = response.get(true);
+                        Platform.runLater(() -> {
+                            try {
+                                setData(resultSet);
+                            } catch (SQLException e) {
+                                throw new RuntimeException(e);
+                            } catch (IOException e) {
+                                throw new RuntimeException(e);
+                            }
+                        });
+                    }
+                    return true;
+                }).get();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            } catch (ExecutionException e) {
+                throw new RuntimeException(e);
+            }
+        }).start();
+    }
+
+
+
+    public void setData(ResultSet resultSet) throws SQLException, IOException {
+
+
+        ccSeller.setText(resultSet.getString("cc_seller"));
+        nameSeller.setText(resultSet.getString("name_seller"));
+        emailSeller.setText(resultSet.getString("email_seller"));
+        numberSeller.setText(resultSet.getString("cellphone_seller"));
+
+        ccClient.setText(resultSet.getString("cc_client"));
+        nameClient.setText(resultSet.getString("name_client"));
+        numberClient.setText(resultSet.getString("cellphone_client"));
+        emailClient.setText(resultSet.getString("email_client"));
+
+       typeCombobox.setValue(resultSet.getString("name_method"));
+
     }
 
 
@@ -316,9 +357,9 @@ public class AddSaleController implements Initializable {
 
     }
 
-    public void showSaleCars(){
+    public void showSaleCars(Integer idHeadquarter){
         new Thread(() -> {
-            CompletableFuture<Map<Boolean, ResultSet>> vehicleCall = CompletableFuture.supplyAsync(() -> saleEndpoint.getCar(currentWorker.getId_headquarter()));
+            CompletableFuture<Map<Boolean, ResultSet>> vehicleCall = CompletableFuture.supplyAsync(() -> saleEndpoint.getCar(idHeadquarter));
             try {
                 vehicleCall.thenApply((response) -> {
                     if (response.containsKey(true)) {

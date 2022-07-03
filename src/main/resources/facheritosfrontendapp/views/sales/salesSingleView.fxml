@@ -205,12 +205,17 @@
                   <String fx:value="select-button" />
                </styleClass>
             </Button>
-            <Button layoutX="496.0" layoutY="501.0" mnemonicParsing="false" stylesheets="@../style.css" text="Editar">
+            <Button layoutX="496.0" layoutY="501.0" mnemonicParsing="false" onMouseClicked="#editOnClicked" stylesheets="@../style.css" text="Editar">
                <styleClass>
                   <String fx:value="blue-button" />
                   <String fx:value="select-button" />
                </styleClass>
             </Button>
+            <Label fx:id="head" layoutX="491.0" layoutY="278.0">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
          </children></AnchorPane>
   </content>
 </ScrollPane>

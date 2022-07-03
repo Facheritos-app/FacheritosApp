@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1144.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="facheritosfrontendapp.controller.sale.AddSaleController">
+<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1144.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="facheritosfrontendapp.controller.sale.EditSaleController">
   <content>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="763.0" prefWidth="1073.0" style="-fx-background-color: FFFFF;">
          <children>
@@ -119,7 +119,7 @@
                </styleClass>
             </Button>
             <Button fx:id="editClient" layoutX="537.0" layoutY="612.0" mnemonicParsing="false" onMouseClicked="#editClientClicked" prefHeight="38.0" prefWidth="149.0" styleClass="red-button" stylesheets="@../style.css" text="Cambiar cliente" />
-            <Button fx:id="saveSale" layoutX="953.0" layoutY="650.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="137.0" styleClass="blue-button" stylesheets="@../style.css" text="Guardar venta" />
+            <Button fx:id="saveSale" layoutX="953.0" layoutY="650.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="137.0" styleClass="blue-button" stylesheets="@../style.css" text="Guardar " />
             <Label layoutX="706.0" layoutY="386.0" prefHeight="38.0" prefWidth="123.0" text="Cantidad:">
                <font>
                   <Font size="16.0" />
@@ -148,7 +148,7 @@
                </font>
             </Label>
             <Button fx:id="searchClient1" layoutX="684.0" layoutY="60.0" mnemonicParsing="false" onMouseClicked="#deleteCarSeller" prefWidth="167.0" styleClass="red-button" stylesheets="@../style.css" text="Eliminar de la venta" />
-            <Label layoutX="73.0" layoutY="14.0" text="Crear venta">
+            <Label layoutX="73.0" layoutY="14.0" text="Editar venta">
                <font>
                   <Font name="System Bold" size="36.0" />
                </font>
