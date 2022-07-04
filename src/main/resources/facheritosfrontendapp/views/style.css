@@ -187,6 +187,12 @@ Button {
 
 }
 
+/* Ver perfil*/
+.view-profile:hover {
+    -fx-cursor: HAND;
+    -fx-underline: true;
+}
+
 /**
   -fx-background-color: #005296;
  */

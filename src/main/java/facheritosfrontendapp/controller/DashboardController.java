@@ -25,6 +25,9 @@ import java.util.concurrent.ExecutionException;
 
 public class DashboardController implements Initializable {
 
+    private String currentPage;
+
+    private Boolean currentPageWithScrollpane;
 
     @FXML
     private BorderPane borderPane;
@@ -47,6 +50,8 @@ public class DashboardController implements Initializable {
     public static WorkerDTO currentWorker;
 
     public Stage stage;
+
+    private MyProfileViewController myProfileViewController;
 
     public DashboardController() {
         loginEndpoint = new LoginEndpoint();
@@ -101,6 +106,8 @@ public class DashboardController implements Initializable {
     public Object changeContent(String subpage) throws IOException {
         FxmlLoader loader = new FxmlLoader();
         borderPane.setCenter(loader.getPage(subpage));
+        currentPage = subpage;
+        currentPageWithScrollpane = false;
         return loader.getController();
     }
     /**
@@ -109,7 +116,14 @@ public class DashboardController implements Initializable {
      */
     public Object changeContent(String subpage, boolean withScrollpane) throws IOException {
         FxmlLoader loader = new FxmlLoader();
-        borderPane.setCenter(loader.getPage(subpage, true));
+        if(withScrollpane) {
+            borderPane.setCenter(loader.getPage(subpage, true));
+            currentPageWithScrollpane = true;
+        } else {
+            borderPane.setCenter(loader.getPage(subpage));
+            currentPageWithScrollpane = false;
+        }
+        currentPage = subpage;
         return loader.getController();
     }
 
@@ -161,6 +175,13 @@ public class DashboardController implements Initializable {
                 throw new RuntimeException("Wrong user type");
         }
 
+    }
+
+
+    @FXML
+    protected void myProfileClicked() throws IOException {
+        myProfileViewController = (MyProfileViewController) changeContent("myProfileView");
+        myProfileViewController.showData(currentWorker, currentPage, currentPageWithScrollpane);
     }
 
     @Override
