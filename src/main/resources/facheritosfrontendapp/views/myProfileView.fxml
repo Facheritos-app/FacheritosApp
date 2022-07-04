@@ -5,8 +5,6 @@
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -31,17 +29,6 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <ImageView fitHeight="56.0" fitWidth="49.0" onMouseClicked="#backArrowClicked" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../icons/back-arrow.png" />
-               </image>
-               <GridPane.margin>
-                  <Insets left="20.0" />
-               </GridPane.margin>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </ImageView>
             <Label onMouseClicked="#changePasswordClicked" text="Cambiar mi contraseña" textFill="#005296" GridPane.columnIndex="1">
                <GridPane.margin>
                   <Insets left="150.0" />
@@ -60,7 +47,7 @@
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="firstname" styleClass="input-text" stylesheets="@style.css" />
+                  <TextField fx:id="firstname" editable="false" styleClass="input-text" stylesheets="@style.css" />
                </children>
                <GridPane.margin>
                   <Insets left="20.0" />
@@ -76,7 +63,7 @@
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="typeWorker" styleClass="input-text" stylesheets="@style.css" />
+                  <TextField fx:id="typeWorker" editable="false" styleClass="input-text" stylesheets="@style.css" />
                </children>
                <GridPane.margin>
                   <Insets left="20.0" />
@@ -92,7 +79,7 @@
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="cellphone" styleClass="input-text" stylesheets="@style.css" />
+                  <TextField fx:id="cellphone" editable="false" styleClass="input-text" stylesheets="@style.css" />
                </children>
                <GridPane.margin>
                   <Insets left="20.0" />
@@ -108,7 +95,7 @@
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <DatePicker fx:id="date" prefHeight="26.0" prefWidth="315.0" styleClass="input-text" stylesheets="@style.css" />
+                  <DatePicker fx:id="date" disable="true" editable="false" prefHeight="26.0" prefWidth="315.0" styleClass="input-text" stylesheets="@style.css" />
                </children>
                <padding>
                   <Insets left="20.0" />
@@ -124,7 +111,7 @@
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="lastname" styleClass="input-text" stylesheets="@style.css" />
+                  <TextField fx:id="lastname" editable="false" styleClass="input-text" stylesheets="@style.css" />
                </children>
                <GridPane.margin>
                   <Insets left="20.0" />
@@ -140,7 +127,7 @@
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="headquarter" styleClass="input-text" stylesheets="@style.css" />
+                  <TextField fx:id="headquarter" editable="false" styleClass="input-text" stylesheets="@style.css" />
                </children>
                <GridPane.margin>
                   <Insets left="20.0" />
@@ -156,7 +143,7 @@
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="email" styleClass="input-text" stylesheets="@style.css" />
+                  <TextField fx:id="email" editable="false" styleClass="input-text" stylesheets="@style.css" />
                </children>
                <padding>
                   <Insets left="20.0" />
@@ -172,7 +159,7 @@
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="idNumber" styleClass="input-text" stylesheets="@style.css" />
+                  <TextField fx:id="idNumber" editable="false" styleClass="input-text" stylesheets="@style.css" />
                </children>
                <padding>
                   <Insets left="20.0" />
