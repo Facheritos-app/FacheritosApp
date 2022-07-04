@@ -183,7 +183,7 @@ public class InventoryPartController implements Initializable {
     public void setData(ResultSet resultSet) throws SQLException, IOException {
         name.setText(resultSet.getString("name"));
         headquarter.setStyle(resultSet.getString("hq"));
-        headquarter.getSelectionModel().select(findHeadquarterById(resultSet.getInt("id_headquarter")));//(resultSet.getString("hq"));
+        headquarter.getSelectionModel().select(findHeadquarterById(resultSet.getInt("id_headquarter")));
         price.setText(resultSet.getString("price"));
         quantity.setText(resultSet.getString("quantity"));
         description.setText(resultSet.getString("description"));
@@ -199,6 +199,19 @@ public class InventoryPartController implements Initializable {
     public HeadquarterView findHeadquarterById(Integer id){
         for(Integer i = 0; i < headquarterComboboxList.size(); i++){
             if(id == headquarterComboboxList.get(i).getIdHeadquarter()){
+                return headquarterComboboxList.get(i);
+            }
+        }
+        return new HeadquarterView(-100,"");
+    }
+    /**
+     * findHeadquarterByName: String -> HeadquarterView
+     * Purpose: This method finds a headquarter by its name.
+     *.
+     */
+    public HeadquarterView findHeadquarterByName(String name){
+        for(Integer i = 0; i < headquarterComboboxList.size(); i++){
+            if(name == headquarterComboboxList.get(i).getName()){
                 return headquarterComboboxList.get(i);
             }
         }
@@ -249,13 +262,13 @@ public class InventoryPartController implements Initializable {
                                 }
                                 if (result) {
                                     Platform.runLater(() -> {
-                                        Alert success = new Alert(Alert.AlertType.CONFIRMATION, "Repuesto modificado exitosamente", OK);
+                                        Alert success = new Alert(Alert.AlertType.CONFIRMATION, "Repuesto agregado exitosamente", OK);
                                         success.show();
                                         //Go to main user view
                                         try {
-                                            inventoryPartController = (InventoryPartController) dashboardController.changeContent("inventory/inventoryPart");
+                                            inventoryController = (InventoryController) dashboardController.changeContent("inventory/inventory");
                                             //Show inventory
-                                            inventoryPartController.showPartData(this.idPart);
+                                            inventoryController.showInventory();
                                         } catch (IOException e) {
                                             throw new RuntimeException(e);
                                         }
@@ -273,7 +286,6 @@ public class InventoryPartController implements Initializable {
                 });
             }).start();
         }
-
     }
 
     private PartDTO createPartObject() {
@@ -283,8 +295,7 @@ public class InventoryPartController implements Initializable {
         part.setDescription(description.getText());
         part.setQuantity(Integer.parseInt(quantity.getText()));
         part.setPrice(Double.parseDouble(price.getText()));
-        System.out.println(headquarter.getSelectionModel().getSelectedItem().getIdHeadquarter());
-        part.setId_headquarter(headquarter.getSelectionModel().getSelectedItem().getIdHeadquarter());
+        part.setId_headquarter(findHeadquarterByName(String.valueOf(headquarter.getSelectionModel().getSelectedItem())).getIdHeadquarter());
         return part;
     }
 
