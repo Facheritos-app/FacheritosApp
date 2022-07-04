@@ -19,7 +19,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<ScrollPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="766.0" prefWidth="982.0" style="bac: red;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="facheritosfrontendapp.controller.quotation.QuotationSingleViewController">
+<ScrollPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="766.0" prefWidth="982.0" style="bac: red;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="facheritosfrontendapp.controller.quotation.QuotationAddController">
    <content>
       <GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="500.0" minWidth="700.0" prefHeight="765.0" prefWidth="984.0">
         <columnConstraints>
@@ -46,21 +46,13 @@
                         </ImageView>
                         <HBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="41.0" prefWidth="301.0">
                            <children>
-                              <Label text="Cotización No°">
+                              <Label text="Crear cotización">
                                  <font>
                                     <Font name="System Bold" size="36.0" />
                                  </font>
                                  <HBox.margin>
                                     <Insets />
                                  </HBox.margin>
-                                 <padding>
-                                    <Insets left="10.0" />
-                                 </padding>
-                              </Label>
-                              <Label fx:id="quotationId" text="...">
-                                 <font>
-                                    <Font name="System Bold" size="36.0" />
-                                 </font>
                                  <padding>
                                     <Insets left="10.0" />
                                  </padding>
@@ -95,7 +87,7 @@
                                     <Font name="System Bold" size="14.0" />
                                  </font>
                               </Label>
-                              <Button fx:id="addVehicleButton" disable="true" mnemonicParsing="false" onMouseClicked="#onAddVehicle" styleClass="blue-button" stylesheets="@../style.css" text="Agregar vehículo" visible="false" />
+                              <Button fx:id="addVehicleButton" mnemonicParsing="false" onMouseClicked="#onAddVehicle" styleClass="blue-button" stylesheets="@../style.css" text="Agregar vehículo" />
                            </children>
                            <padding>
                               <Insets bottom="10.0" />
@@ -123,7 +115,7 @@
                                     <Font name="System Bold" size="14.0" />
                                  </font>
                               </Label>
-                              <Button fx:id="deleteVehicleButton" disable="true" mnemonicParsing="false" onMouseClicked="#onDeleteVehicle" styleClass="red-button" stylesheets="@../style.css" text="Eliminar elemento" visible="false" />
+                              <Button fx:id="deleteVehicleButton" mnemonicParsing="false" onMouseClicked="#onDeleteVehicle" styleClass="red-button" stylesheets="@../style.css" text="Eliminar elemento" />
                            </children>
                         </HBox>
                         <TableView fx:id="quotationTableView" prefHeight="239.0" prefWidth="394.0">
@@ -182,7 +174,7 @@
                                           <Font name="System Bold" size="14.0" />
                                        </font>
                                     </Label>
-                                    <TextField fx:id="sellerCc" disable="true" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="146.0" text="Cargando..." GridPane.columnIndex="1" />
+                                    <TextField fx:id="sellerCc" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="146.0" GridPane.columnIndex="1" />
                                     <Label text="Nombres:" GridPane.rowIndex="1">
                                        <GridPane.margin>
                                           <Insets />
@@ -194,7 +186,7 @@
                                           <Insets left="20.0" />
                                        </padding>
                                     </Label>
-                                    <TextField fx:id="sellerName" disable="true" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="146.0" text="Cargando..." GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                    <TextField fx:id="sellerName" disable="true" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="146.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                     <Label text="Sede:" GridPane.rowIndex="3">
                                        <padding>
                                           <Insets left="20.0" />
@@ -203,7 +195,7 @@
                                           <Font name="System Bold" size="14.0" />
                                        </font>
                                     </Label>
-                                    <TextField fx:id="sellerHeadq" disable="true" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="146.0" text="Cargando..." GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                    <TextField fx:id="sellerHeadq" disable="true" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="146.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                                     <Label text="Email:" GridPane.rowIndex="4">
                                        <padding>
                                           <Insets left="20.0" />
@@ -212,7 +204,7 @@
                                           <Font name="System Bold" size="14.0" />
                                        </font>
                                     </Label>
-                                    <TextField fx:id="sellerEmail" disable="true" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="146.0" text="Cargando..." GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                    <TextField fx:id="sellerEmail" disable="true" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="146.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                                     <Label text="Apellidos:" GridPane.rowIndex="2">
                                        <font>
                                           <Font name="System Bold" size="14.0" />
@@ -221,8 +213,8 @@
                                           <Insets left="20.0" />
                                        </padding>
                                     </Label>
-                                    <TextField fx:id="sellerLastname" disable="true" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="146.0" text="Cargando..." GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                    <Button fx:id="searchSeller" disable="true" mnemonicParsing="false" onMouseClicked="#clickedSearchSeller" prefHeight="30.0" prefWidth="128.0" styleClass="blue-button" stylesheets="@../style.css" text="Buscar vendedor" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="5" GridPane.rowSpan="2" />
+                                    <TextField fx:id="sellerLastname" disable="true" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="146.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                    <Button fx:id="searchSeller" mnemonicParsing="false" onMouseClicked="#clickedSearchSeller" prefHeight="30.0" prefWidth="128.0" styleClass="blue-button" stylesheets="@../style.css" text="Buscar vendedor" GridPane.columnIndex="1" GridPane.rowIndex="5" GridPane.rowSpan="2" />
                                  </children>
                               </GridPane>
                            </children>
@@ -265,15 +257,15 @@
                                           <Font name="System Bold" size="14.0" />
                                        </font>
                                     </Label>
-                                    <TextField fx:id="customerCc" disable="true" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="146.0" text="Cargando..." GridPane.columnIndex="1" GridPane.rowSpan="2" />
-                                    <TextField fx:id="customerName" disable="true" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="146.0" text="Cargando..." GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.rowSpan="2" />
+                                    <TextField fx:id="customerCc" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="146.0" GridPane.columnIndex="1" GridPane.rowSpan="2" />
+                                    <TextField fx:id="customerName" disable="true" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="146.0" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.rowSpan="2" />
                                     <Label text="Apellidos:" GridPane.rowIndex="2" GridPane.rowSpan="2">
                                        <font>
                                           <Font name="System Bold" size="14.0" />
                                        </font>
                                     </Label>
-                                    <TextField fx:id="customerLastname" disable="true" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="146.0" text="Cargando..." GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.rowSpan="2" />
-                                    <Button fx:id="searchCustomer" disable="true" mnemonicParsing="false" onMouseClicked="#clickedCustomerSearch" prefHeight="30.0" prefWidth="122.0" styleClass="blue-button" stylesheets="@../style.css" text="Buscar cliente" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="3" GridPane.rowSpan="2" />
+                                    <TextField fx:id="customerLastname" disable="true" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="146.0" GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.rowSpan="2" />
+                                    <Button fx:id="searchCustomer" mnemonicParsing="false" onMouseClicked="#clickedCustomerSearch" prefHeight="30.0" prefWidth="122.0" styleClass="blue-button" stylesheets="@../style.css" text="Buscar cliente" GridPane.columnIndex="1" GridPane.rowIndex="3" GridPane.rowSpan="2" />
                                  </children>
                               </GridPane>
                            </children>
@@ -297,6 +289,7 @@
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                  </rowConstraints>
                                  <children>
                                     <Label text="Cantidad:">
@@ -307,7 +300,7 @@
                                           <Font name="System Bold" size="14.0" />
                                        </font>
                                     </Label>
-                                    <TextField fx:id="quotationQuantity" disable="true" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="146.0" text="Cargando..." GridPane.columnIndex="1" />
+                                    <TextField fx:id="quotationQuantity" disable="true" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="146.0" GridPane.columnIndex="1" />
                                     <Label prefHeight="20.0" prefWidth="130.0" text="Método de pago:" GridPane.rowIndex="1">
                                        <GridPane.margin>
                                           <Insets />
@@ -316,8 +309,8 @@
                                           <Font name="System Bold" size="14.0" />
                                        </font>
                                     </Label>
-                                    <ComboBox fx:id="paymentMethod" disable="true" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                    <HBox alignment="CENTER" prefHeight="54.0" prefWidth="381.0" spacing="10.0" style="-fx-background-color: black;" styleClass="quotation-price-button" stylesheets="@../style.css" GridPane.columnSpan="2" GridPane.rowIndex="3" GridPane.rowSpan="2">
+                                    <ComboBox fx:id="paymentMethod" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                    <HBox alignment="CENTER" prefHeight="54.0" prefWidth="381.0" spacing="10.0" style="-fx-background-color: black;" styleClass="quotation-price-button" stylesheets="@../style.css" GridPane.columnSpan="2" GridPane.rowIndex="4" GridPane.rowSpan="2">
                                        <children>
                                           <Label alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" text="Precio:" textFill="WHITE">
                                              <padding>
@@ -327,7 +320,7 @@
                                                 <Font name="System Bold Italic" size="14.0" />
                                              </font>
                                           </Label>
-                                          <Label fx:id="quotationPrice" text="Cargando..." textFill="WHITE">
+                                          <Label fx:id="quotationPrice" textFill="WHITE">
                                              <font>
                                                 <Font name="System Bold Italic" size="14.0" />
                                              </font>
@@ -351,13 +344,7 @@
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <Button fx:id="editQuotationButton" mnemonicParsing="false" onMouseClicked="#editQuotation" stylesheets="@../style.css" text="Editar">
-                                 <styleClass>
-                                    <String fx:value="blue-button" />
-                                    <String fx:value="select-button" />
-                                 </styleClass>
-                              </Button>
-                              <Button fx:id="updateQuotation" disable="true" mnemonicParsing="false" onMouseClicked="#onUpdateQuotation" stylesheets="@../style.css" text="Aplicar" visible="false">
+                              <Button fx:id="updateQuotation" mnemonicParsing="false" onMouseClicked="#onCreateQuotation" stylesheets="@../style.css" text="Crear">
                                  <styleClass>
                                     <String fx:value="blue-button" />
                                     <String fx:value="select-button" />
