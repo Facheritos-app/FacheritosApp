@@ -83,7 +83,7 @@ public class SaleEndpoint {
         ResultSet resultSet = null;
         HashMap<Boolean, ResultSet> response = new HashMap<>();
         try(Connection conn = ConnectionBD.connectDB().getConnection()){
-            preparedStatement = conn.prepareStatement("SELECT * FROM sale_car JOIN car USING(id_car)" +
+            preparedStatement = conn.prepareStatement("SELECT *, models.price AS modelprice FROM sale_car JOIN sale USING(id_sale) JOIN car USING(id_car)" +
                     "JOIN (SELECT id_model, description, price FROM model) AS models USING(id_model) WHERE id_sale = ?");
             preparedStatement.setInt(1, idSale);
             resultSet = preparedStatement.executeQuery();
@@ -215,13 +215,14 @@ public class SaleEndpoint {
      * Purpose: This method connects to the DB and saves a vehicle,
      * if successful, it returns true, if not it returns false
      */
-    public Boolean changeCarsQuantityReject(Integer idCar, Integer quantity){
+    public Boolean changeCarsQuantityReject(Integer idCar, Integer quantity, Integer idHeadquarter){
         PreparedStatement preparedStatement = null;
         HashMap<Boolean, Integer> response = new HashMap<>();
         try(Connection conn = ConnectionBD.connectDB().getConnection()){
-            preparedStatement = conn.prepareStatement("UPDATE car_headquarter SET quantity = quantity + ? WHERE id_car = ?");
+            preparedStatement = conn.prepareStatement("UPDATE car_headquarter SET quantity = quantity + ? WHERE id_car = ? AND id_headquarter=?");
             preparedStatement.setInt(1,quantity);
             preparedStatement.setInt(2,idCar);
+            preparedStatement.setInt(3,idHeadquarter);
             preparedStatement.executeUpdate();
             return true;
         } catch (SQLException e) {
