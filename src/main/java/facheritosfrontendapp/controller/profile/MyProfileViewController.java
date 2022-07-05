@@ -1,6 +1,8 @@
-package facheritosfrontendapp.controller;
+package facheritosfrontendapp.controller.profile;
 
 import backend.dto.personDTO.WorkerDTO;
+import facheritosfrontendapp.controller.DashboardController;
+import facheritosfrontendapp.controller.MainController;
 import facheritosfrontendapp.views.Main;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -42,6 +44,8 @@ public class MyProfileViewController implements Initializable {
 
     private DashboardController dashboardController;
 
+    private ChangePasswordController changePasswordController;
+
     private String lastPage;
 
     private Boolean lastPageWithScrollpane;
@@ -70,8 +74,9 @@ public class MyProfileViewController implements Initializable {
     */
 
     @FXML
-    protected void changePasswordClicked(MouseEvent event) {
-
+    protected void changePasswordClicked(MouseEvent event) throws IOException {
+        changePasswordController = (ChangePasswordController) dashboardController.changeContent("profile/changePassword");
+        changePasswordController.setWorkerData(currentWorker, lastPage, lastPageWithScrollpane);
     }
     /**
      * showData: WorkerDTO, String, Boolean -> Void

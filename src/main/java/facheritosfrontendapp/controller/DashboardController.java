@@ -4,15 +4,13 @@ import backend.dto.loginDTO.LoginDTO;
 import backend.dto.personDTO.WorkerDTO;
 import backend.endpoints.loginEndpoint.LoginEndpoint;
 
+import facheritosfrontendapp.controller.profile.MyProfileViewController;
 import facheritosfrontendapp.views.FxmlLoader;
 import facheritosfrontendapp.views.Main;
-import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
@@ -180,7 +178,7 @@ public class DashboardController implements Initializable {
 
     @FXML
     protected void myProfileClicked() throws IOException {
-        myProfileViewController = (MyProfileViewController) changeContent("myProfileView");
+        myProfileViewController = (MyProfileViewController) changeContent("profile/myProfileView");
         myProfileViewController.showData(currentWorker, currentPage, currentPageWithScrollpane);
     }
 

@@ -188,7 +188,7 @@ Button {
 }
 
 /* Ver perfil*/
-.view-profile:hover {
+.underline:hover {
     -fx-cursor: HAND;
     -fx-underline: true;
 }

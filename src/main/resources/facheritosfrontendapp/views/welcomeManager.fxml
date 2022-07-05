@@ -39,7 +39,7 @@
                               <Font name="Poppins Bold" size="12.0" />
                            </font>
                         </Label>
-                        <Label onMouseClicked="#myProfileClicked" styleClass="view-profile" stylesheets="@style.css" text="Ver perfil" textFill="#9e9d9d">
+                        <Label onMouseClicked="#myProfileClicked" styleClass="underline" stylesheets="@style.css" text="Ver perfil" textFill="#9e9d9d">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
