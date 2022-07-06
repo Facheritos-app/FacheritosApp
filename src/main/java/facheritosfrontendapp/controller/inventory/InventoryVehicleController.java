@@ -77,8 +77,11 @@ public class InventoryVehicleController implements Initializable {
 
     private InventoryController inventoryController;
 
-    public InventoryVehicleController(){
+    private InventoryEditVehicleController inventoryEditVehicleController;
 
+    private Integer idCar;
+
+    public InventoryVehicleController(){
         inventoryEndpoint = new InventoryEndpoint();
     }
 
@@ -109,6 +112,7 @@ public class InventoryVehicleController implements Initializable {
      * Purpose: This method contains all the other methods that together make showing the vehicle data possible
      */
     public void showVehicleData(Integer idCar){
+        this.idCar = idCar;
         new Thread(() -> {
             CompletableFuture<Map<Boolean, ResultSet>> vehicleCall = CompletableFuture.supplyAsync(() -> inventoryEndpoint.getVehicleById(idCar));
             try {
@@ -156,6 +160,17 @@ public class InventoryVehicleController implements Initializable {
 
         vehicleImage.setImage(new Image(resultSet.getString("image")));
 
+
+    }
+    @FXML
+    protected void editClicked() throws IOException {
+        inventoryEditVehicleController = (InventoryEditVehicleController) dashboardController.changeContent("inventory/inventoryEditVehicle");
+        inventoryEditVehicleController.setData(idCar, modelLabel.getText(), colorLabel.getText(), assemblyYearLabel.getText(),
+                headquarterLabel.getText(), quantityLabel.getText());
+    }
+
+    @FXML
+    protected void deleteClicked(){
 
     }
 }
