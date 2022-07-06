@@ -303,6 +303,7 @@ public class SaleEndpoint {
             preparedStatement.setInt(5, saleDTO.getId_confirmation());
             preparedStatement.setDouble(6, saleDTO.getPrice());
             resultSet = preparedStatement.executeQuery();
+            resultSet.next();
             response.put(true, resultSet);
         } catch (SQLException e) {
             e.printStackTrace();
