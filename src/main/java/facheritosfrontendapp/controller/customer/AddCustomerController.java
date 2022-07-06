@@ -15,6 +15,7 @@ import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.concurrent.CompletableFuture;
@@ -132,24 +133,24 @@ public class AddCustomerController implements Initializable {
             everythingCorrect = false;
             inputValidator.setErrorStyles(firstnameTextField, firstnameLabel);
         }
-        if (!inputValidator.name(lastnameTextField, lastnameLabel, "Escriba un nombre valido, por favor")) {
+        if (!inputValidator.name(lastnameTextField, lastnameLabel, "Escriba un nombre válido, por favor")) {
             everythingCorrect = false;
             inputValidator.setErrorStyles(lastnameTextField, lastnameLabel);
         }
-        if (!inputValidator.cellphone(celTextField, celLabel, "Escriba un numero valido, por favor")) {
+        if (!inputValidator.cellphone(celTextField, celLabel, "Escriba un celular válido, por favor")) {
             everythingCorrect = false;
             inputValidator.setErrorStyles(celTextField, celLabel);
         }
-        if (!inputValidator.email(emailTextField, emailLabel, "Escriba un correo valido, por favor")) {
+        if (!inputValidator.email(emailTextField, emailLabel, "Escriba un correo válido, por favor")) {
             everythingCorrect = false;
             inputValidator.setErrorStyles(emailTextField, emailLabel);
         }
-        if (birthdateDatePicker.getValue() == null) {
+        if (birthdateDatePicker.getValue() == null || birthdateDatePicker.getValue().isAfter(LocalDate.now())) {
             everythingCorrect = false;
-            birthdateLabel.setText("Por favor indique una fecha");
+            birthdateLabel.setText("Por favor indique una fecha válida");
             inputValidator.setErrorStyles(birthdateDatePicker, birthdateLabel);
         }
-        if (!inputValidator.cc(ccTextField, ccLabel, "Ingrese una cedula valida")) {
+        if (!inputValidator.cc(ccTextField, ccLabel, "Ingrese una cédula válida")) {
             everythingCorrect = false;
             inputValidator.setErrorStyles(ccTextField, ccLabel);
         }
