@@ -6,6 +6,7 @@ import backend.endpoints.inventoryEndpoint.InventoryEndpoint;
 import facheritosfrontendapp.ComboBoxView.HeadquarterView;
 import facheritosfrontendapp.controller.DashboardController;
 import facheritosfrontendapp.controller.MainController;
+import facheritosfrontendapp.validator.addInventory.AddPartValidator;
 import facheritosfrontendapp.views.Main;
 import facheritosfrontendapp.views.MyDialogPane;
 import javafx.application.Platform;
@@ -60,10 +61,25 @@ public class InventoryPartController implements Initializable {
     private TextField quantity;
 
     @FXML
-    private ComboBox<HeadquarterView> headquarter;
+    private ComboBox<HeadquarterView> headquarterCombobox;
 
     @FXML
     private TextArea description;
+
+    @FXML
+    private Label nameLabel;
+
+    @FXML
+    private Label headquarterLabel;
+
+    @FXML
+    private Label priceLabel;
+
+    @FXML
+    private Label quantityLabel;
+
+    @FXML
+    private Label descriptionLabel;
 
     private InventoryEndpoint inventoryEndpoint;
 
@@ -78,10 +94,15 @@ public class InventoryPartController implements Initializable {
 
     private Integer idPart;
 
+    private Integer currentIdHeadquarter;
+
+    private AddPartValidator inputValidator;
+
     public InventoryPartController(){
         inventoryEndpoint = new InventoryEndpoint();
         headquarterEndpoint = new HeadquarterEndpoint();
         headquarterComboboxList = new ArrayList<>();
+        inputValidator = new AddPartValidator();
     }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -117,7 +138,7 @@ public class InventoryPartController implements Initializable {
             String name = resultSet.getString("name");
             headquarterComboboxList.add(new HeadquarterView(idHeadquarter, name));
         }
-        headquarter.setItems(FXCollections.observableArrayList(headquarterComboboxList));
+        headquarterCombobox.setItems(FXCollections.observableArrayList(headquarterComboboxList));
     }
     @FXML
     void backArrowClicked(MouseEvent event) throws IOException {
@@ -129,8 +150,8 @@ public class InventoryPartController implements Initializable {
     @FXML
     void editClicked(MouseEvent event) {
         name.setEditable(true);
-        headquarter.setEditable(true);
-        headquarter.setDisable(false);
+        headquarterCombobox.setEditable(true);
+        headquarterCombobox.setDisable(false);
         price.setEditable(true);
         quantity.setEditable(true);
         description.setEditable(true);
@@ -181,9 +202,9 @@ public class InventoryPartController implements Initializable {
      * Purpose: This method contains sets all the data from the specific vehicle
      */
     public void setData(ResultSet resultSet) throws SQLException, IOException {
+        currentIdHeadquarter = resultSet.getInt("id_headquarter");
         name.setText(resultSet.getString("name"));
-        headquarter.setStyle(resultSet.getString("hq"));
-        headquarter.getSelectionModel().select(findHeadquarterById(resultSet.getInt("id_headquarter")));
+        headquarterCombobox.getSelectionModel().select(findHeadquarterById(currentIdHeadquarter));
         price.setText(resultSet.getString("price"));
         quantity.setText(resultSet.getString("quantity"));
         description.setText(resultSet.getString("description"));
@@ -210,8 +231,12 @@ public class InventoryPartController implements Initializable {
      *.
      */
     public HeadquarterView findHeadquarterByName(String name){
+        System.out.println("name");
+        System.out.println(name);
+        System.out.println("List element");
         for(Integer i = 0; i < headquarterComboboxList.size(); i++){
-            if(name == headquarterComboboxList.get(i).getName()){
+            System.out.println(headquarterComboboxList.get(i).getName());
+            if(name.equals(headquarterComboboxList.get(i).getName())){
                 return headquarterComboboxList.get(i);
             }
         }
@@ -222,8 +247,8 @@ public class InventoryPartController implements Initializable {
     @FXML
     void cancelClicked(MouseEvent event) {
         name.setEditable(false);
-        headquarter.setEditable(false);
-        headquarter.setDisable(true);
+        headquarterCombobox.setEditable(false);
+        headquarterCombobox.setDisable(true);
         price.setEditable(false);
         quantity.setEditable(false);
         description.setEditable(false);
@@ -254,21 +279,40 @@ public class InventoryPartController implements Initializable {
                             new Thread(() -> {
                                 Boolean result = null;
                                 try {
-                                    result = CompletableFuture.supplyAsync(() -> inventoryEndpoint.completeEditPart(partDTO)).get();
+                                    //If the headquarter is not being modified
+                                    if(partDTO.getId_headquarter() == currentIdHeadquarter) {
+                                        result = CompletableFuture.supplyAsync(() -> inventoryEndpoint.changeOnlyPartQuantity(partDTO)).get();
+                                    }
+                                    //If the headquarter is being modified
+                                    else {
+                                        result = CompletableFuture.supplyAsync(() -> {
+                                            try {
+                                                return inventoryEndpoint.completeEditPart(partDTO, currentIdHeadquarter);
+                                            } catch (Exception e) {
+                                                Platform.runLater(() -> {
+                                                    headquarterLabel.setText("Verifique si ya existe este repuesto en la misma sede");
+                                                    inputValidator.setErrorStyles(headquarterCombobox, headquarterLabel);
+                                                });
+                                                throw new RuntimeException(e);
+                                            }
+                                        }).get();
+                                    }
                                 } catch (InterruptedException e) {
                                     throw new RuntimeException(e);
                                 } catch (ExecutionException e) {
+
                                     throw new RuntimeException(e);
                                 }
                                 if (result) {
                                     Platform.runLater(() -> {
-                                        Alert success = new Alert(Alert.AlertType.CONFIRMATION, "Repuesto agregado exitosamente", OK);
+                                        Alert success = new Alert(Alert.AlertType.CONFIRMATION, "Repuesto modificado exitosamente", OK);
                                         success.show();
                                         //Go to main user view
                                         try {
                                             inventoryController = (InventoryController) dashboardController.changeContent("inventory/inventory");
                                             //Show inventory
                                             inventoryController.showInventory();
+                                            inventoryController.selectionTabpane(1); //car parts tab
                                         } catch (IOException e) {
                                             throw new RuntimeException(e);
                                         }
@@ -295,12 +339,28 @@ public class InventoryPartController implements Initializable {
         part.setDescription(description.getText());
         part.setQuantity(Integer.parseInt(quantity.getText()));
         part.setPrice(Double.parseDouble(price.getText()));
-        part.setId_headquarter(findHeadquarterByName(String.valueOf(headquarter.getSelectionModel().getSelectedItem())).getIdHeadquarter());
+        HeadquarterView headquarterView = findHeadquarterByName(String.valueOf(headquarterCombobox.getSelectionModel().getSelectedItem()));
+        part.setId_headquarter(headquarterView.getIdHeadquarter());
         return part;
     }
 
     private boolean allValidations() {
-        return true;
+        //cleanErrors();
+        Boolean everythingCorrect = true;
+        if (!inputValidator.name(name, nameLabel, "Escriba un nombre sin símbolos")) {
+            everythingCorrect = false;
+            inputValidator.setErrorStyles(name, nameLabel);
+        }
+        if (!inputValidator.price(price, priceLabel, "Escriba sólo números")) {
+            everythingCorrect = false;
+            inputValidator.setErrorStyles(price, priceLabel);
+        }
+        if (!inputValidator.quantity(quantity, quantityLabel, "Escriba un correo valido, por favor")) {
+            everythingCorrect = false;
+            inputValidator.setErrorStyles(quantity, quantityLabel);
+        }
+
+        return everythingCorrect;
     }
 
 

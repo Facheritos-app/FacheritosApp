@@ -191,6 +191,7 @@ public class InventoryEndpoint {
             }
         }else{
             System.out.print("Algo salió mal creando el vehículo :(");
+
             return false;
         }
     }
@@ -220,33 +221,79 @@ public class InventoryEndpoint {
         }
         return response;
     }
+
     /**
-     * compelteEeditPart: VehicleDTO -> Boolean
+     * editPart: PartDTO -> Map<Boolean, Integer>
+     * Purpose: This method connects to the DB and edits a part, it makes the first
+     * necessary query in order to edit the part in the DB,
+     */
+    public Map<Boolean, ResultSet> checkElements(PartDTO part){
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        HashMap<Boolean, ResultSet> response = new HashMap<>();
+        try(Connection conn = ConnectionBD.connectDB().getConnection()){
+            preparedStatement = conn.prepareStatement("SELECT * FROM part_inventory WHERE id_part = ? AND id_headquarter = ?");
+            preparedStatement.setInt(1, part.getIdPart());
+            preparedStatement.setInt(2, part.getId_headquarter());
+            resultSet = preparedStatement.executeQuery();
+            if(!resultSet.isBeforeFirst()){ //if there are no rows
+                response.put(true, resultSet);
+                return response;
+            }
+            resultSet.next();
+            response.put(false, resultSet);
+        }catch (SQLException e){
+            e.printStackTrace();
+            response.put(false, resultSet);
+        }
+        return response;
+    }
+    /**
+     * complteteEditPart: VehicleDTO -> Boolean
      * Purpose: This method connects to the DB and saves a vehicle,
      * if successful, it returns true, if not it returns false
      */
-    public Boolean completeEditPart(PartDTO part){
+    public Boolean completeEditPart(PartDTO part, Integer oldIdHearquater) throws Exception {
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         Integer idPart = null;
         Integer idHeadquarter = null;
         HashMap<Boolean, Integer> responseIdPart = (HashMap<Boolean, Integer>) editPart(part);
-        if(responseIdPart.containsKey(true)){
+        HashMap<Boolean, ResultSet> responseElements = (HashMap<Boolean, ResultSet>) checkElements(part);
+        if(responseIdPart.containsKey(true) && responseElements.containsKey(true)){
            idPart = responseIdPart.get(true);
             try(Connection conn = ConnectionBD.connectDB().getConnection()){
-                preparedStatement = conn.prepareStatement("DO $do$ BEGIN IF EXISTS (SELECT * FROM part_inventory WHERE id_part = ? AND id_headquarter = ?) THEN" +
-                        "raise exception using" +
-                                "            message='This part aleady exists in this headquarter'," +
-                                "            hint='Try with a different part of the inventory';\n" +
-                        "   ELSE\n" +
-                        "      UPDATE part_inventory SET quantity=?, id_headquarter=? WHERE id_part=?;" +
-                        "   END IF;\n" +
-                        "END\n" +
-                        "$do$");
-                preparedStatement.setInt(1, part.getIdPart());
+                preparedStatement = conn.prepareStatement("UPDATE part_inventory SET quantity=?, id_headquarter=? WHERE id_part=? AND id_headquarter=?");
+                preparedStatement.setInt(1, part.getQuantity());
                 preparedStatement.setInt(2, part.getId_headquarter());
-                preparedStatement.setInt(3, part.getQuantity());
-                preparedStatement.setInt(4, part.getIdPart());
+                preparedStatement.setInt(3, part.getIdPart());
+                preparedStatement.setInt(4, oldIdHearquater);
+                preparedStatement.executeUpdate();
+                return true;
+            } catch (SQLException e) {
+                e.printStackTrace();
+                return false;
+            }
+        }else{
+            throw new Exception("ERROR: part_inventory row already exists");
+        }
+    }
+    /**
+     * changeOnlyPartQuantity: PartDTO -> Boolean
+     * Purpose: This method connects to the DB, it changes the quantity of a car part when the headquarter
+     *  stays the same.
+     */
+    public Boolean changeOnlyPartQuantity(PartDTO part){
+        PreparedStatement preparedStatement = null;
+        Integer idPart = null;
+        HashMap<Boolean, Integer> responseIdPart = (HashMap<Boolean, Integer>) editPart(part);
+        if(responseIdPart.containsKey(true)){
+            idPart = responseIdPart.get(true);
+            try(Connection conn = ConnectionBD.connectDB().getConnection()) {
+                preparedStatement = conn.prepareStatement("UPDATE part_inventory SET quantity=? WHERE id_part=? AND id_headquarter=?");
+                preparedStatement.setInt(1, part.getQuantity());
+                preparedStatement.setInt(2, part.getIdPart());
+                preparedStatement.setInt(3, part.getId_headquarter());
                 preparedStatement.executeUpdate();
                 return true;
             } catch (SQLException e) {
