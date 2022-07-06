@@ -58,7 +58,15 @@
         </tabs>
       </TabPane>
       <Separator orientation="VERTICAL" prefHeight="516.0" prefWidth="8.0" />
-      <Button fx:id="addUser" layoutX="498.0" layoutY="104.0" mnemonicParsing="false" onMouseClicked="#addUserClicked" styleClass="red-button" stylesheets="@../style.css" text="Agregar usuario +" textFill="WHITE">
+      <Button fx:id="addUserButton" layoutX="498.0" layoutY="104.0" mnemonicParsing="false" onMouseClicked="#addUserClicked" styleClass="red-button" stylesheets="@../style.css" text="Agregar usuario +" textFill="WHITE">
+         <font>
+            <Font name="Poppins Bold" size="12.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button fx:id="addCustomerButton" layoutX="367.0" layoutY="104.0" mnemonicParsing="false" onMouseClicked="#addCustomerAction" styleClass="red-button" stylesheets="@../style.css" text="Agregar cliente +" textFill="WHITE">
          <font>
             <Font name="Poppins Bold" size="12.0" />
          </font>

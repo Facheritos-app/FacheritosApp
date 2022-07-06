@@ -103,6 +103,7 @@ public class UserController implements Initializable {
         usersTabpane.setTabClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);
     }
 
+
     //For workers
 
     public void showWorkers(){
@@ -157,6 +158,16 @@ public class UserController implements Initializable {
     }
 
     //For customers
+
+    /**
+     * addCustomerAction: void -> void
+     * Purpose: shows the customers add view when pressing the add customer button
+     */
+    @FXML
+    protected void addCustomerAction() throws IOException {
+        dashboardController.changeContent("customers/customersAdd");
+    }
+
     /**
      * showCustomers: void -> void
      * Purpose: shows the customers in the customers tab

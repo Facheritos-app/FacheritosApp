@@ -26,8 +26,6 @@ public class CustomerController implements Initializable {
 
     private DashboardController dashboardController;
 
-    private AddCustomerController addCustomerController;
-
     private CustomerSingleViewController customerSingleViewController;
     private CustomerEndpoint customerEndpoint;
 
@@ -59,9 +57,13 @@ public class CustomerController implements Initializable {
         customerRowsArray= new ArrayList<>();
     }
 
+    /**
+     * addCustomerAction: void -> void
+     * Purpose: shows the customers add view when pressing the add customer button
+     */
     @FXML
     protected void addCustomerAction() throws IOException {
-        addCustomerController = (AddCustomerController) dashboardController.changeContent("customers/customersAdd");
+        dashboardController.changeContent("customers/customersAdd");
     }
 
     @Override
