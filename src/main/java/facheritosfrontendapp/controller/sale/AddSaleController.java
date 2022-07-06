@@ -1,18 +1,15 @@
 package facheritosfrontendapp.controller.sale;
 
 import backend.dto.personDTO.WorkerDTO;
+import backend.dto.saleDTO.SaleDTO;
 import backend.endpoints.headquarterEndpoint.HeadquarterEndpoint;
 import backend.endpoints.personEndpoint.PersonEndpoint;
 import backend.endpoints.saleEndpoint.SaleEndpoint;
 import facheritosfrontendapp.ComboBoxView.HeadquarterView;
 import facheritosfrontendapp.controller.DashboardController;
 import facheritosfrontendapp.controller.MainController;
-import facheritosfrontendapp.controller.headquarter.AddHeadquarterValidator;
-import facheritosfrontendapp.controller.headquarter.HeadquarterController;
-import facheritosfrontendapp.objectRowView.inventoryRowView.VehicleRowView;
+import facheritosfrontendapp.controller.user.UserController;
 import facheritosfrontendapp.objectRowView.saleRowView.SaleCarRowView;
-import facheritosfrontendapp.objectRowView.saleRowView.SaleRowView;
-import facheritosfrontendapp.objectRowView.saleRowView.SaleSingleRowView;
 import facheritosfrontendapp.validator.addSaleValidator.AddSaleValidator;
 import facheritosfrontendapp.views.FxmlLoader;
 import facheritosfrontendapp.views.MyDialogPane;
@@ -24,7 +21,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Background;
 import javafx.scene.layout.VBox;
 
 import java.io.FileNotFoundException;
@@ -35,6 +31,7 @@ import java.sql.SQLException;
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.atomic.AtomicReference;
 
 import static javafx.scene.control.ButtonType.OK;
 import static javafx.scene.control.ButtonType.YES;
@@ -134,6 +131,8 @@ public class AddSaleController implements Initializable {
     @FXML
     private TableColumn<SaleCarRowView, Integer> colQuantity1;
 
+    private  SaleDTO saleTable ;
+
     @FXML
     private TableColumn<SaleCarRowView, String> colYear;
 
@@ -176,6 +175,7 @@ public class AddSaleController implements Initializable {
         contador = 0;
         setSellTableView();
         inputValidator = new AddSaleValidator();
+        saleTable = new SaleDTO();
     }
 
     @FXML
@@ -190,36 +190,145 @@ public class AddSaleController implements Initializable {
     }
 
     @FXML
-    protected void saveClicked() throws IOException, ExecutionException, InterruptedException{
-        if(allValidations()) {
-            MyDialogPane dialogPane = new MyDialogPane("confirmationSave");
-            Optional<ButtonType> clickedButton = dialogPane.getClickedButton();
-            if (clickedButton.get() == ButtonType.YES) {
+    protected void saveClicked() throws IOException, ExecutionException, InterruptedException {
+        if (allValidations()) {
 
-                try{
+        }
+        MyDialogPane dialogPane = new MyDialogPane("confirmationSave");
+        Optional<ButtonType> clickedButton = dialogPane.getClickedButton();
+        if (clickedButton.get() == ButtonType.YES) {
 
+            try {
+                //Map<Boolean, ResultSet> response = createSale(createTableSale());
+                createTableSale();
+                Map<Boolean, ResultSet> response = saleEndpoint.insertarVenta(saleTable);
+/*
+                if (response.containsKey(true)) {
+                    ResultSet resultSet = response.get(true);
+
+                    try {
+                        setClientData(resultSet);
+                        noFound.setText("");
+                    } catch (SQLException e) {
+                        noFound.setText("Cliente no encontrado");
+                        throw new RuntimeException(e);
+
+                    } catch (IOException e) {
+                        noFound.setText("Cliente no encontrado");
+                        throw new RuntimeException(e);
+                    }
+
+                }*/
+                if (response.containsKey(true)) {
+                    ResultSet resultSet = response.get(true);
+                    try {
+
+                        System.out.println("Supuesto id + "+ resultSet.getInt("id_sale"));
+                       // ccClient.setText(resultSet.getString("cc"));
+                        //carSale(resultSet.getInt("id_Sale"));
+
+                    } catch (SQLException e) {
+
+                        throw new RuntimeException(e);
+
+                    }
+                    //despues
                     Alert success = new Alert(Alert.AlertType.CONFIRMATION, "Solicitud enviada al gerente", OK);
                     success.show();
-                    //Go to main user view
+                } else {
+
+
+
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+
+
+        }
+        try {
+            saleController = (SaleController) dashboardController.changeContent("sales/sales");
+            saleController.showSales();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void carSale(Integer idSale){
+
+        if (allValidations()) {
+            new Thread(() -> {
+                Platform.runLater(() -> {
                     try {
-                        saleController = (SaleController) dashboardController.changeContent("sales/sales");
-                        saleController.showSales();
+                        MyDialogPane dialogPane = new MyDialogPane("confirmationSave");
+                        Optional<ButtonType> clickedButton = dialogPane.getClickedButton();
+                        if (clickedButton.get() == YES) {
+                            //DB call to save worker
+                            new Thread(() -> {
+                                try {
+                                    putCars(idSale);
+                                    putCars();
+                                } catch (SQLException e) {
+                                    throw new RuntimeException(e);
+                                }
+                            }).start();
+                        }
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
-                }catch (Exception e){
+                });
+            }).start();
+        }
+    }
 
+//(Integer idCar, Integer quantity, Integer id_headquarter)
+    public AtomicReference<Boolean> putCars() throws SQLException {
+        /////ava
+        ResultSet resultSetHeadquarter = (ResultSet) personEndpoint.getPersonById(String.valueOf(Integer.valueOf(ccSeller.getText())));
+        Integer headquarter = Integer.valueOf(resultSetHeadquarter.getString("id_headquarter"));
+        AtomicReference<Boolean> accumResult = new AtomicReference<>(true);
+        for (Integer elem = 0; elem < saleCarRowsArray2.size(); elem++) {
+            //DB call to save worker
+            Integer finalElem1 = elem;
+            new Thread(() -> {
+                Boolean result = null;
+                try {
+                    result = CompletableFuture.supplyAsync(() -> saleEndpoint.changeCarsQuantityRestar(
+                            saleCarRowsArray2.get(finalElem1).getIdCar(),
+                            Double.valueOf(saleCarRowsArray2.get(finalElem1).getQuantity()),headquarter)).get();
+                    accumResult.set(accumResult.get() && result);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                } catch (ExecutionException e) {
+                    throw new RuntimeException(e);
                 }
 
-
-
-
-            } else {
-                System.out.println("No");
-
-
-            }
+            }).start();
         }
+        return accumResult;
+    }
+
+    public Boolean putCars(Integer id_sale) throws SQLException {
+        /////ava
+
+        for (Integer elem = 0; elem < saleCarRowsArray2.size(); elem++) {
+            //DB call to save worker
+            Integer finalElem1 = elem;
+            new Thread(() -> {
+                Map<Boolean, ResultSet> result = null;
+                try {
+                    result = CompletableFuture.supplyAsync(() -> saleEndpoint.insertarCarros(
+                            saleCarRowsArray2.get(finalElem1).getIdCar(),
+                            id_sale,saleCarRowsArray2.get(finalElem1).getQuantity())).get();
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                } catch (ExecutionException e) {
+                    throw new RuntimeException(e);
+                }
+
+            }).start();
+        }
+        return true;
     }
 
     public Boolean allValidations() {
@@ -303,6 +412,9 @@ public class AddSaleController implements Initializable {
         cantidad.setText(String.valueOf(contador));
         priceLabel.setText(String.valueOf(contador));
 
+        saleTable.setId_worker(currentWorker.getId_worker());
+
+        saleTable.setId_headquarter(currentWorker.getId_headquarter());
 
         ccSeller.setText(currentWorker.getCc());
         nameSeller.setText(currentWorker.getFirst_name()+" "+currentWorker.getLast_name());
@@ -509,8 +621,13 @@ public class AddSaleController implements Initializable {
             searchClient.setDisable(false);
             searchClient.setStyle("-fx-background-color: #C24E59; ");
 
+            saleTable.setId_customer(Integer.valueOf(resultSet.getString("id_person")));
+
+
             editClient.setDisable(false);
             editClient.setStyle("-fx-background-color: #C02130; ");
+
+
         }catch (Exception e){
             throw e;
         }
@@ -606,4 +723,28 @@ public class AddSaleController implements Initializable {
         carTableView.setItems(saleCarObList);
     }
 
+    public SaleDTO createTableSale() throws SQLException {
+
+
+        Integer pay;
+        if(typeCombobox.getValue()  == "Tarjeta de credito"){
+             pay=1;
+        }else{
+            pay =2;
+        }
+
+        saleTable.setId_payment_method(pay);
+
+        saleTable.setId_confirmation(1);
+
+        saleTable.setPrice(Double.valueOf(priceLabel.getText()));
+
+        return saleTable;
+    }
+
+    public Map<Boolean, ResultSet> createSale(SaleDTO sale) throws ExecutionException, InterruptedException, SQLException {
+            System.out.println("prueba 3" + saleEndpoint.insertarVenta(sale).get(1).getInt("id_sale"));
+            return CompletableFuture.supplyAsync(() -> saleEndpoint.insertarVenta(sale)).get();
+
+    }
 }

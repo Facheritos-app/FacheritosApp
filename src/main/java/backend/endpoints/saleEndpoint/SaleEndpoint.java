@@ -3,6 +3,7 @@ package backend.endpoints.saleEndpoint;
 import backend.connectionBD.ConnectionBD;
 import backend.dto.inventoryDTO.VehicleDTO;
 import backend.dto.saleDTO.SaleConfirmationDTO;
+import backend.dto.saleDTO.SaleDTO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -253,6 +254,21 @@ public class SaleEndpoint {
         }
     }
 
+    public Boolean changeCarsQuantityRestar(Integer idCar, Double quantity, Integer id_headquarter){
+        PreparedStatement preparedStatement = null;
+        HashMap<Boolean, Integer> response = new HashMap<>();
+        try(Connection conn = ConnectionBD.connectDB().getConnection()){
+            preparedStatement = conn.prepareStatement("UPDATE car_headquarter SET quantity = quantity - ? WHERE id_car = ? and id_heaquarter =?");
+            preparedStatement.setDouble(1,quantity);
+            preparedStatement.setInt(2,idCar);
+            preparedStatement.setInt(2,id_headquarter);
+            preparedStatement.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
     public Map<Boolean, ResultSet> getSeller(Integer idHeadquarter) {
 
         PreparedStatement preparedStatement = null;
@@ -273,5 +289,47 @@ public class SaleEndpoint {
         return response;
     }
 
+    public Map<Boolean, ResultSet> insertarVenta(SaleDTO saleDTO){
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        HashMap<Boolean, ResultSet> response = new HashMap<>();
+        try (Connection conn = ConnectionBD.connectDB().getConnection()) {
+            preparedStatement = conn.prepareStatement("insert into sale(id_sale, id_worker, id_customer,id_headquarter,id_payment_method,id_confirmation,sale_date,price) " +
+                    "values(default, ? ,?,?,?,?,default,?) returning  id_sale;");
+            preparedStatement.setInt(1, saleDTO.getId_worker());
+            preparedStatement.setInt(2, saleDTO.getId_customer());
+            preparedStatement.setInt(3, saleDTO.getId_headquarter());
+            preparedStatement.setInt(4, saleDTO.getId_payment_method());
+            preparedStatement.setInt(5, saleDTO.getId_confirmation());
+            preparedStatement.setDouble(6, saleDTO.getPrice());
+            resultSet = preparedStatement.executeQuery();
+            response.put(true, resultSet);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            response.put(false, resultSet);
+        }
+
+        return response;
+    }
+
+    public Map<Boolean, ResultSet> insertarCarros(Integer id_car,Integer id_sale,Integer quantity){
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        HashMap<Boolean, ResultSet> response = new HashMap<>();
+        try (Connection conn = ConnectionBD.connectDB().getConnection()) {
+            preparedStatement = conn.prepareStatement("insert into sale_car(id_car, id_sale, quantity) " +
+                    "values(?,?,?)");
+            preparedStatement.setInt(1, id_car);
+            preparedStatement.setInt(2, id_sale);
+            preparedStatement.setInt(3, quantity);
+            resultSet = preparedStatement.executeQuery();
+            response.put(true, resultSet);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            response.put(false, resultSet);
+        }
+
+        return response;
+    }
 
 }
