@@ -22,9 +22,10 @@ public class LoginEndpoint {
         HashMap<Boolean, WorkerDTO> response = new HashMap<>();
         WorkerDTO workerDTO = new WorkerDTO();
         try(Connection conn = ConnectionBD.connectDB().getConnection();){
-            preparedStatement = conn.prepareStatement("SELECT * FROM person JOIN worker USING(id_person) JOIN type_person USING(id_type_person)" +
-                    "WHERE person.cc = ?");
+            preparedStatement = conn.prepareStatement("SELECT *, (SELECT name FROM headquarter JOIN worker USING(id_headquarter)" +
+                    "JOIN person USING(id_person) WHERE cc=?) AS hq FROM person JOIN worker USING(id_person) JOIN type_person USING(id_type_person) WHERE person.cc = ?");
             preparedStatement.setString(1, loginDTO.getCc());
+            preparedStatement.setString(2, loginDTO.getCc());
             resultSet = preparedStatement.executeQuery();
             resultSet.next();//there must be a call to next for every row
             if(resultSet.getString("password").equals(loginDTO.getPassword())){

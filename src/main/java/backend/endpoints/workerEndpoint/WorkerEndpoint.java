@@ -106,4 +106,23 @@ public class WorkerEndpoint {
         }
         return response;
     }
+
+    /**
+     * changePassword: WorkerDTO -> Boolean
+     * Purpose: This method connects to the DB and changes the password of the worker
+     */
+    public Boolean changePassword(WorkerDTO worker){
+        PreparedStatement preparedStatement = null;
+            //worker.setId_person(response.get(true));
+            try(Connection conn = ConnectionBD.connectDB().getConnection()){
+                preparedStatement = conn.prepareStatement("UPDATE worker SET password=? WHERE id_worker=?");
+                preparedStatement.setString(1, worker.getPassword());
+                preparedStatement.setInt(2, worker.getId_worker());
+                preparedStatement.executeUpdate();
+                return true;
+            } catch (SQLException e) {
+                e.printStackTrace();
+                return false;
+            }
+    }
 }

@@ -13,13 +13,24 @@ public class SaleRequestSingleRowView {
 
     private Integer idCar;
 
-    public SaleRequestSingleRowView(Integer idCar, Integer idModel, String name, Integer quantity, String price, String multipliedPrice) {
+    private Integer idHeadquarter;
+
+    public SaleRequestSingleRowView(Integer idCar, Integer idModel, String name, Integer quantity, String price, String multipliedPrice, Integer idHeadquarter) {
         this.idCar = idCar;
         this.idModel = idModel;
         this.name = name;
         this.quantity = quantity;
         this.price = price;
         this.multipliedPrice = multipliedPrice;
+        this.idHeadquarter = idHeadquarter;
+    }
+
+    public Integer getIdHeadquarter() {
+        return idHeadquarter;
+    }
+
+    public void setIdHeadquarter(Integer idHeadquarter) {
+        this.idHeadquarter = idHeadquarter;
     }
 
     public Integer getIdCar() {
