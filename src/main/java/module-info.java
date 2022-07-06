@@ -40,5 +40,7 @@ module  facheritosfrontendapp {
     exports facheritosfrontendapp.controller.quotation to javafx.fxml;
     opens  facheritosfrontendapp.controller.quotation to javafx.fxml;
     opens facheritosfrontendapp.objectRowView.quotationRowView to javafx.base;
+    exports facheritosfrontendapp.controller.profile;
+    opens facheritosfrontendapp.controller.profile to javafx.fxml;
 
 }
