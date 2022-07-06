@@ -258,10 +258,10 @@ public class SaleEndpoint {
         PreparedStatement preparedStatement = null;
         HashMap<Boolean, Integer> response = new HashMap<>();
         try(Connection conn = ConnectionBD.connectDB().getConnection()){
-            preparedStatement = conn.prepareStatement("UPDATE car_headquarter SET quantity = quantity - ? WHERE id_car = ? and id_heaquarter =?");
+            preparedStatement = conn.prepareStatement("UPDATE car_headquarter SET quantity = quantity - ? WHERE id_car = ? and id_headquarter =?");
             preparedStatement.setDouble(1,quantity);
             preparedStatement.setInt(2,idCar);
-            preparedStatement.setInt(2,id_headquarter);
+            preparedStatement.setInt(3,id_headquarter);
             preparedStatement.executeUpdate();
             return true;
         } catch (SQLException e) {
@@ -313,7 +313,7 @@ public class SaleEndpoint {
         return response;
     }
 
-    public Map<Boolean, ResultSet> insertarCarros(Integer id_car,Integer id_sale,Integer quantity){
+    public Boolean insertarCarros(Integer id_car,Integer id_sale,Integer quantity){
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         HashMap<Boolean, ResultSet> response = new HashMap<>();
@@ -323,14 +323,13 @@ public class SaleEndpoint {
             preparedStatement.setInt(1, id_car);
             preparedStatement.setInt(2, id_sale);
             preparedStatement.setInt(3, quantity);
-            resultSet = preparedStatement.executeQuery();
-            response.put(true, resultSet);
+            preparedStatement.executeUpdate();
+            return true;
         } catch (SQLException e) {
             e.printStackTrace();
-            response.put(false, resultSet);
+            return false;
         }
 
-        return response;
     }
 
 }

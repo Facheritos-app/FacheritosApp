@@ -8,7 +8,6 @@ import backend.endpoints.saleEndpoint.SaleEndpoint;
 import facheritosfrontendapp.ComboBoxView.HeadquarterView;
 import facheritosfrontendapp.controller.DashboardController;
 import facheritosfrontendapp.controller.MainController;
-import facheritosfrontendapp.controller.user.UserController;
 import facheritosfrontendapp.objectRowView.saleRowView.SaleCarRowView;
 import facheritosfrontendapp.validator.addSaleValidator.AddSaleValidator;
 import facheritosfrontendapp.views.FxmlLoader;
@@ -33,7 +32,6 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.atomic.AtomicReference;
 
-import static javafx.scene.control.ButtonType.OK;
 import static javafx.scene.control.ButtonType.YES;
 
 public class AddSaleController implements Initializable {
@@ -225,7 +223,7 @@ public class AddSaleController implements Initializable {
 
                         System.out.println("Supuesto id + "+ resultSet.getInt("id_sale"));
                        // ccClient.setText(resultSet.getString("cc"));
-                        //carSale(resultSet.getInt("id_Sale"));
+                        carSale(resultSet.getInt("id_Sale"));
 
                     } catch (SQLException e) {
 
@@ -233,8 +231,8 @@ public class AddSaleController implements Initializable {
 
                     }
                     //despues
-                    Alert success = new Alert(Alert.AlertType.CONFIRMATION, "Solicitud enviada al gerente", OK);
-                    success.show();
+                    /*Alert success = new Alert(Alert.AlertType.CONFIRMATION, "Solicitud enviada al gerente", OK);
+                    success.show();*/
                 } else {
 
 
@@ -259,10 +257,6 @@ public class AddSaleController implements Initializable {
         if (allValidations()) {
             new Thread(() -> {
                 Platform.runLater(() -> {
-                    try {
-                        MyDialogPane dialogPane = new MyDialogPane("confirmationSave");
-                        Optional<ButtonType> clickedButton = dialogPane.getClickedButton();
-                        if (clickedButton.get() == YES) {
                             //DB call to save worker
                             new Thread(() -> {
                                 try {
@@ -272,10 +266,6 @@ public class AddSaleController implements Initializable {
                                     throw new RuntimeException(e);
                                 }
                             }).start();
-                        }
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
                 });
             }).start();
         }
@@ -284,8 +274,7 @@ public class AddSaleController implements Initializable {
 //(Integer idCar, Integer quantity, Integer id_headquarter)
     public AtomicReference<Boolean> putCars() throws SQLException {
         /////ava
-        ResultSet resultSetHeadquarter = (ResultSet) personEndpoint.getPersonById(String.valueOf(Integer.valueOf(ccSeller.getText())));
-        Integer headquarter = Integer.valueOf(resultSetHeadquarter.getString("id_headquarter"));
+
         AtomicReference<Boolean> accumResult = new AtomicReference<>(true);
         for (Integer elem = 0; elem < saleCarRowsArray2.size(); elem++) {
             //DB call to save worker
@@ -295,7 +284,7 @@ public class AddSaleController implements Initializable {
                 try {
                     result = CompletableFuture.supplyAsync(() -> saleEndpoint.changeCarsQuantityRestar(
                             saleCarRowsArray2.get(finalElem1).getIdCar(),
-                            Double.valueOf(saleCarRowsArray2.get(finalElem1).getQuantity()),headquarter)).get();
+                            Double.valueOf(saleCarRowsArray2.get(finalElem1).getQuantity()),currentWorker.getId_headquarter())).get();
                     accumResult.set(accumResult.get() && result);
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
@@ -315,7 +304,7 @@ public class AddSaleController implements Initializable {
             //DB call to save worker
             Integer finalElem1 = elem;
             new Thread(() -> {
-                Map<Boolean, ResultSet> result = null;
+                Boolean result = null;
                 try {
                     result = CompletableFuture.supplyAsync(() -> saleEndpoint.insertarCarros(
                             saleCarRowsArray2.get(finalElem1).getIdCar(),
