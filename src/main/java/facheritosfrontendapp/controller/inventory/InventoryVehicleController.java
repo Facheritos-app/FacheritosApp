@@ -154,7 +154,7 @@ public class InventoryVehicleController implements Initializable {
         priceLabel.setText(resultSet.getString("price"));
 
 
-        vehicleImage.setImage(new Image("https://i.postimg.cc/tCyYd0Zz/raul-di-domenico-o-Yo-Ic-Sgs-GWI-unsplash.jpg"));
+        vehicleImage.setImage(new Image(resultSet.getString("image")));
 
 
     }
