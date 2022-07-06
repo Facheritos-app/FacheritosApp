@@ -12,10 +12,7 @@ import facheritosfrontendapp.views.MyDialogPane;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
@@ -31,13 +28,13 @@ import static javafx.scene.control.ButtonType.YES;
 public class ChangePasswordController implements Initializable {
 
     @FXML
-    private TextField currentPassword;
+    private PasswordField currentPassword;
 
     @FXML
-    private TextField newPassword;
+    private PasswordField newPassword;
 
     @FXML
-    private TextField repeatNewPassword;
+    private PasswordField repeatNewPassword;
 
     @FXML
     private Label currentPasswordLabel;
@@ -63,7 +60,7 @@ public class ChangePasswordController implements Initializable {
     private WorkerEndpoint workerEndpoint;
 
     public ChangePasswordController(){
-        inputValidator = new ChangePasswordValidator();
+        inputValidator = new ChangePasswordValidator(this);
         workerEndpoint = new WorkerEndpoint();
     }
     @Override
@@ -86,12 +83,12 @@ public class ChangePasswordController implements Initializable {
     void saveClicked(MouseEvent event) {
         if (allValidations()) {
             new Thread(() -> {
-                setWorkerDTO();
                 Platform.runLater(() -> {
                     try {
                         MyDialogPane dialogPane = new MyDialogPane("confirmationSave");
                         Optional<ButtonType> clickedButton = dialogPane.getClickedButton();
                         if (clickedButton.get() == YES) {
+                            setWorkerDTO();
                             //DB call to save worker
                             new Thread(() -> {
                                 Boolean result = null;
@@ -141,24 +138,24 @@ public class ChangePasswordController implements Initializable {
     }
     /**
      * checkCurrentPassword: Void -> Boolean
-     * Purpose: check if the current password is correct
+     * Purpose: checks if the current password is equal to the one in the DB
      */
-    protected Boolean checkCurrentPassword() {
+    public Boolean checkCurrentPassword() {
         return currentPassword.getText().equals(currentWorker.getPassword());
     }
 
     /**
      * checkNewPassword: Void -> Boolean
-     * Purpose: check if the new password is different from the current password
+     * Purpose: checks if the new password is different from the current password
      */
-    protected Boolean checkNewPassword(){
+    public Boolean checkNewPassword(){
         return !currentWorker.getPassword().equals(newPassword.getText());
     }
     /**
      * checkRepeatNewPassword: Void -> Boolean
      * Purpose: check if the repeated password is equal to the new password
      */
-    protected Boolean checkRepeatNewPassword(){
+    public Boolean checkRepeatNewPassword(){
         return repeatNewPassword.getText().equals(newPassword.getText());
     }
 
@@ -168,18 +165,25 @@ public class ChangePasswordController implements Initializable {
      */
     public Boolean allValidations() {
         cleanErrors();
+        System.out.println("currentWorker.password");
+        System.out.println(currentWorker.getPassword());
+        System.out.println("currentPassword");
+        System.out.println(currentPassword.getText());
+        System.out.println("newPassword");
+        System.out.println(newPassword.getText());
+        System.out.println("repeatNewPassword");
+        System.out.println(repeatNewPassword.getText());
+
         Boolean everythingCorrect = true;
-        if (!inputValidator.password(currentPassword, currentPasswordLabel, "Contraseña actual no válida")
-        && checkCurrentPassword()) {
+        if (!inputValidator.currentPassword(currentPassword, currentPasswordLabel, "Contraseña actual no coincide")) {
             everythingCorrect = false;
             inputValidator.setErrorStyles(currentPassword, currentPasswordLabel);
         }
-        if (!inputValidator.password(newPassword, newPasswordLabel, "Contraseña nueva no válida")
-        && checkNewPassword()) {
+        if (!inputValidator.newPassword(newPassword, newPasswordLabel, "Debe tener al menos 8 caracteres, una mayúscula, una minúscula, un número y un símbolo")) {
             everythingCorrect = false;
             inputValidator.setErrorStyles(newPassword, newPasswordLabel);
         }
-        if (!checkRepeatNewPassword()) {
+        if (!inputValidator.repeatNewPassword(repeatNewPassword, repeatNewPasswordLabel, "Contraseñas no coinciden")) {
             everythingCorrect = false;
             inputValidator.setErrorStyles(repeatNewPassword, repeatNewPasswordLabel);
         }
