@@ -231,11 +231,7 @@ public class InventoryPartController implements Initializable {
      *.
      */
     public HeadquarterView findHeadquarterByName(String name){
-        System.out.println("name");
-        System.out.println(name);
-        System.out.println("List element");
         for(Integer i = 0; i < headquarterComboboxList.size(); i++){
-            System.out.println(headquarterComboboxList.get(i).getName());
             if(name.equals(headquarterComboboxList.get(i).getName())){
                 return headquarterComboboxList.get(i);
             }

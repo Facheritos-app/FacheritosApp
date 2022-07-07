@@ -81,6 +81,8 @@ public class InventoryVehicleController implements Initializable {
 
     private Integer idCar;
 
+    private String imageLink;
+
     public InventoryVehicleController(){
         inventoryEndpoint = new InventoryEndpoint();
     }
@@ -157,16 +159,17 @@ public class InventoryVehicleController implements Initializable {
         transmissionLabel.setText(resultSet.getString("transmision"));
         priceLabel.setText(resultSet.getString("price"));
 
-
-        vehicleImage.setImage(new Image(resultSet.getString("image")));
+        imageLink = resultSet.getString("image");
+        vehicleImage.setImage(new Image(imageLink));
 
 
     }
     @FXML
-    protected void editClicked() throws IOException {
+    protected void editClicked() throws IOException, ExecutionException, InterruptedException {
         inventoryEditVehicleController = (InventoryEditVehicleController) dashboardController.changeContent("inventory/inventoryEditVehicle");
         inventoryEditVehicleController.setData(idCar, modelLabel.getText(), colorLabel.getText(), assemblyYearLabel.getText(),
-                headquarterLabel.getText(), quantityLabel.getText());
+                headquarterLabel.getText(), quantityLabel.getText(), imageLink);
+        inventoryEditVehicleController.showForm();
     }
 
     @FXML
