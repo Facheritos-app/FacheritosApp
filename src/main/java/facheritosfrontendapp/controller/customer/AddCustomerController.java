@@ -12,11 +12,11 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.concurrent.CompletableFuture;
@@ -29,9 +29,14 @@ import static javafx.scene.control.ButtonType.YES;
 public class AddCustomerController implements Initializable {
 
     private DashboardController dashboardController;
+
     private UserController userController;
+    private CustomerController customerController;
+
     private AddUserValidator inputValidator;
     private PersonEndpoint personEndpoint;
+
+    private String backTo;
 
     @FXML
     private TextField firstnameTextField;
@@ -67,11 +72,49 @@ public class AddCustomerController implements Initializable {
     public AddCustomerController() {
         inputValidator = new AddUserValidator();
         personEndpoint = new PersonEndpoint();
+        backTo = "";
     }
 
+    public void setBackTo(String view) {
+        backTo = view;
+    }
+
+    /**
+     * backToCustomersClicked: void -> void
+     * Purpose: returns to the customers view
+     */
+    @FXML
+    protected void backToCustomers() throws IOException {
+        customerController = (CustomerController) dashboardController.changeContent("customers/customers");
+        customerController.showCustomers();
+    }
+
+    /**
+     * backToUsers: void -> void
+     * Purpose: returns to the users view
+     */
+    @FXML
+    protected void backToUsers() throws IOException {
+        userController = (UserController) dashboardController.changeContent("users/users");
+        userController.showWorkers();
+        userController.showCustomers();
+    }
+
+    /**
+     * whereToGoBack: String -> void
+     * Purpose: decides which view should be displayed to return to an earlier point
+     */
+    public void whereToGoBack(String view) throws IOException {
+        if (Objects.equals(view, "customers")){
+            backToCustomers();
+        }
+        if (Objects.equals(view, "users")){
+            backToUsers();
+        }
+    }
 
     @FXML
-    public void saveButtonAddCustomerClicked(MouseEvent mouseEvent) {
+    public void saveButtonAddCustomerClicked() {
         if (allValidations()) {
             PersonDTO customer = createCustomerObject();
             try {
@@ -98,10 +141,7 @@ public class AddCustomerController implements Initializable {
         MyDialogPane dialogPane = new MyDialogPane("confirmationCancel");
         Optional<ButtonType> clickedButton = dialogPane.getClickedButton();
         if (clickedButton.get() == YES) {
-            userController = (UserController) dashboardController.changeContent("users/users");
-            //SHOW THE USERS IN TABLEVIEW
-            userController.showWorkers();
-            userController.showCustomers();
+            whereToGoBack(backTo);
         } else {
             System.out.println("No");
         }
@@ -128,6 +168,11 @@ public class AddCustomerController implements Initializable {
             Platform.runLater(() -> {
                 Alert success = new Alert(Alert.AlertType.CONFIRMATION, "Cliente agregado exitosamente", OK);
                 success.show();
+                try {
+                    whereToGoBack(backTo);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
                 //Go to main user view
             });
         } else {

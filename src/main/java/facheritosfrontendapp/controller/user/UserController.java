@@ -4,6 +4,7 @@ import backend.endpoints.customerEndpoint.CustomerEndpoint;
 import backend.endpoints.workerEndpoint.WorkerEndpoint;
 import facheritosfrontendapp.controller.DashboardController;
 import facheritosfrontendapp.controller.MainController;
+import facheritosfrontendapp.controller.customer.AddCustomerController;
 import facheritosfrontendapp.controller.customer.CustomerSingleViewController;
 import facheritosfrontendapp.controller.customer.EditCustomerController;
 import facheritosfrontendapp.objectRowView.customerRowView.CustomerRowView;
@@ -33,6 +34,8 @@ public class UserController implements Initializable {
     private DashboardController dashboardController;
 
     private AddUserController addUserController;
+
+    private AddCustomerController addCustomerController;
 
     private UserSingleViewController userSingleViewController;
 
@@ -170,7 +173,8 @@ public class UserController implements Initializable {
      */
     @FXML
     protected void addCustomerAction() throws IOException {
-        dashboardController.changeContent("customers/customersAdd");
+        addCustomerController = (AddCustomerController) dashboardController.changeContent("customers/customersAdd");
+        addCustomerController.setBackTo("users");
     }
 
     /**

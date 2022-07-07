@@ -114,7 +114,7 @@ public class EditCustomerController implements Initializable {
      * whereToGoBack: String -> void
      * Purpose: decides which view should be displayed to return to an earlier point
      */
-    protected void whereToGoBack(String view) throws IOException {
+    public void whereToGoBack(String view) throws IOException {
         if (Objects.equals(view, "customers")){
             backToCustomers();
         }
@@ -147,18 +147,18 @@ public class EditCustomerController implements Initializable {
                     //customerEndpoint.updateWorker();
                     Alert success = new Alert(Alert.AlertType.CONFIRMATION, "Cliente actualizado exitosamente", OK);
                     success.show();
-
                     try {
                         whereToGoBack(backTo);
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
-                }catch (Exception e){
-
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
                 }
             } else {
                 System.out.println("No");
-            }}
+            }
+        }
     }
 
     /**
@@ -203,11 +203,17 @@ public class EditCustomerController implements Initializable {
      */
     public void cleanErrors() {
         nameLabel.setText("");
+        nameField.setStyle("");
         lastNameLabel.setText("");
+        lastNameField.setStyle("");
         idLabel.setText("");
+        idField.setStyle("");
         emailLabel.setText("");
+        emailField.setStyle("");
         cellphoneLabel.setText("");
+        phoneField.setStyle("");
         birthdayLabel.setText("");
+        birthdayPicker.setStyle("");
     }
 
     private void setIdPerson(Integer idPerson) {

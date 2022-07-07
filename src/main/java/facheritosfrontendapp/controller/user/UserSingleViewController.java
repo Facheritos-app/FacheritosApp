@@ -5,7 +5,6 @@ import backend.endpoints.workerEndpoint.WorkerEndpoint;
 import facheritosfrontendapp.ComboBoxView.HeadquarterView;
 import facheritosfrontendapp.controller.DashboardController;
 import facheritosfrontendapp.controller.MainController;
-import facheritosfrontendapp.controller.headquarter.HeadquarterController;
 import facheritosfrontendapp.validator.addUserValidator.AddUserValidator;
 import facheritosfrontendapp.views.MyDialogPane;
 import javafx.application.Platform;
@@ -292,15 +291,25 @@ public class UserSingleViewController implements Initializable {
      */
     public void cleanErrors() {
         nameLabel.setText("");
+        nameField.setStyle("");
         lastNameLabel.setText("");
+        lastNameField.setStyle("");
         idLabel.setText("");
+        idField.setStyle("");
         emailLabel.setText("");
+        emailField.setStyle("");
         salaryLabel.setText("");
+        salaryField.setStyle("");
         cellphoneLabel.setText("");
+        phoneField.setStyle("");
         birthdayLabel.setText("");
+        birthdayPicker.setStyle("");
         roleLabel.setText("");
+        roleCombo.setStyle("");
         headquarterLabel.setText("");
+        headquarterCombo.setStyle("");
         statusLabel.setText("");
+        statusCombo.setStyle("");
     }
 
     private void setIdPerson(Integer idPerson) {

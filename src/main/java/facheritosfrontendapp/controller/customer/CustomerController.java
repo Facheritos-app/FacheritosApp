@@ -30,6 +30,8 @@ public class CustomerController implements Initializable {
 
     private EditCustomerController editCustomerController;
 
+    private AddCustomerController addCustomerController;
+
     private CustomerEndpoint customerEndpoint;
 
     private ArrayList<CustomerRowView> customerRowsArray;
@@ -67,7 +69,8 @@ public class CustomerController implements Initializable {
      */
     @FXML
     protected void addCustomerAction() throws IOException {
-        dashboardController.changeContent("customers/customersAdd");
+        addCustomerController = (AddCustomerController) dashboardController.changeContent("customers/customersAdd");
+        addCustomerController.setBackTo("customers");
 
     }
 
