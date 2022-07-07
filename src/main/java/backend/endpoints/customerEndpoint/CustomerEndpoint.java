@@ -4,6 +4,7 @@ package backend.endpoints.customerEndpoint;
 import backend.connectionBD.ConnectionBD;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,7 +12,7 @@ public class CustomerEndpoint {
 
     /**
      * getCustomerForTableView: void -> Map<Boolean, ResultSet>
-     * Purpose: this method obtains customer data from the database to fill the table in the customers tab.
+     * Purpose: obtains customer data from the database to fill the table in the customers tab.
      */
     public Map<Boolean, ResultSet> getCustomersForTableView(){
         PreparedStatement preparedStatement;
@@ -72,6 +73,30 @@ public class CustomerEndpoint {
             response.put(false, resultSet);
         }
         return response;
+    }
+
+    /**
+     * updateCustomer: Integer, String, String, String, LocalDate, String, Integer, Integer, Boolean, Double -> void>
+     * Purpose: updates a customer
+     */
+    public static void updateCustomer(Integer idPerson, String cc, String name, String lastname, String cellphone,
+                                    LocalDate birthday, String email){
+        PreparedStatement preparedStatement;
+        try(Connection conn = ConnectionBD.connectDB().getConnection()){
+            preparedStatement = conn.prepareStatement("UPDATE person SET cc = ?, first_name = ?, last_name = ? , " +
+                    "cellphone = ?, birthday = ?, email = ? WHERE id_person = ?;");
+            preparedStatement.setString(1, cc);
+            preparedStatement.setString(2, name);
+            preparedStatement.setString(3, lastname);
+            preparedStatement.setString(4, cellphone);
+            preparedStatement.setDate(5, Date.valueOf(birthday));
+            preparedStatement.setString(6, email);
+            preparedStatement.setInt(7, idPerson);
+            preparedStatement.executeUpdate();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+
     }
 
 }
