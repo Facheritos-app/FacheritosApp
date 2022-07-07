@@ -64,6 +64,7 @@ public class CustomerController implements Initializable {
     @FXML
     protected void addCustomerAction() throws IOException {
         dashboardController.changeContent("customers/customersAdd");
+
     }
 
     @Override

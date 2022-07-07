@@ -5,6 +5,7 @@ import backend.dto.personDTO.PersonDTO;
 import backend.endpoints.personEndpoint.PersonEndpoint;
 import facheritosfrontendapp.controller.DashboardController;
 import facheritosfrontendapp.controller.MainController;
+import facheritosfrontendapp.controller.user.UserController;
 import facheritosfrontendapp.validator.addUserValidator.AddUserValidator;
 import facheritosfrontendapp.views.MyDialogPane;
 import javafx.application.Platform;
@@ -22,11 +23,13 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
 import static javafx.scene.control.ButtonType.OK;
+import static javafx.scene.control.ButtonType.YES;
 
 
 public class AddCustomerController implements Initializable {
 
     private DashboardController dashboardController;
+    private UserController userController;
     private AddUserValidator inputValidator;
     private PersonEndpoint personEndpoint;
 
@@ -90,7 +93,18 @@ public class AddCustomerController implements Initializable {
     }
 
     @FXML
-    public void cancelButtonAddCustomerClicked(MouseEvent mouseEvent) {
+    public void cancelButtonAddCustomerClicked() throws IOException {
+        /*Show dialogPane to confirm*/
+        MyDialogPane dialogPane = new MyDialogPane("confirmationCancel");
+        Optional<ButtonType> clickedButton = dialogPane.getClickedButton();
+        if (clickedButton.get() == YES) {
+            userController = (UserController) dashboardController.changeContent("users/users");
+            //SHOW THE USERS IN TABLEVIEW
+            userController.showWorkers();
+            userController.showCustomers();
+        } else {
+            System.out.println("No");
+        }
     }
 
     /**
