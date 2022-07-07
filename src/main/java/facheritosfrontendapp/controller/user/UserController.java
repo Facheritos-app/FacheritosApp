@@ -5,6 +5,7 @@ import backend.endpoints.workerEndpoint.WorkerEndpoint;
 import facheritosfrontendapp.controller.DashboardController;
 import facheritosfrontendapp.controller.MainController;
 import facheritosfrontendapp.controller.customer.CustomerSingleViewController;
+import facheritosfrontendapp.controller.customer.EditCustomerController;
 import facheritosfrontendapp.objectRowView.customerRowView.CustomerRowView;
 import facheritosfrontendapp.objectRowView.headquarterRowView.WorkerRowView;
 import javafx.collections.FXCollections;
@@ -36,6 +37,8 @@ public class UserController implements Initializable {
     private UserSingleViewController userSingleViewController;
 
     private CustomerSingleViewController customerSingleViewController;
+
+    private EditCustomerController editCustomerController;
 
     private WorkerEndpoint workerEndpoint;
 
@@ -88,6 +91,7 @@ public class UserController implements Initializable {
         customerEndpoint = new CustomerEndpoint();
         userSingleViewController = new UserSingleViewController();
         customerSingleViewController = new CustomerSingleViewController();
+        editCustomerController = new EditCustomerController();
         workerRowsArray = new ArrayList<>();
         customerRowsArray= new ArrayList<>();
     }
@@ -97,6 +101,7 @@ public class UserController implements Initializable {
         addUserController = (AddUserController) dashboardController.changeContent("users/usersAdd", true);
         addUserController.setView();
     }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         dashboardController = MainController.getDashboardController();
@@ -212,6 +217,7 @@ public class UserController implements Initializable {
         //Set the handle events for the labels
         for(int i = 0; i < customerRowsArray.size(); i++){
             customerRowsArray.get(i).getOptionsLabel().setOnMouseClicked(this::handleOptionLabel);
+            customerRowsArray.get(i).getEditLabel().setOnMouseClicked(this::handleOptionLabel);
         }
 
         colIdCustomer.setCellValueFactory(new PropertyValueFactory<>("cc"));
@@ -254,6 +260,17 @@ public class UserController implements Initializable {
                     throw new RuntimeException(e);
                 }
             }
+
+            if(mouseEvent.getSource() == customerRowsArray.get(i).getEditLabel()){
+                try {
+                    editCustomerController = (EditCustomerController) dashboardController.changeContent("customers/customersEdit");
+                    editCustomerController.showCustomer(customerRowsArray.get(i).getIdPerson());
+
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+
         }
     }
 

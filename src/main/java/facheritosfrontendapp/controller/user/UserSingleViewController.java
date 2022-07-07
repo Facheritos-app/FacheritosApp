@@ -234,33 +234,51 @@ public class UserSingleViewController implements Initializable {
     public Boolean allValidations() {
         cleanErrors();
         Boolean everythingCorrect = true;
-        if (!inputValidator.name(nameField, nameLabel, "Escriba un nombre válido, por favor")) {
+        if (!inputValidator.name(nameField, nameLabel, "Ingrese un nombre válido")) {
             everythingCorrect = false;
             inputValidator.setErrorStyles(nameField, nameLabel);
         }
-        if (!inputValidator.name(lastNameField, lastNameLabel, "Escriba un apellido válido, por favor")) {
+        if (!inputValidator.name(lastNameField, lastNameLabel, "Ingrese un apellido válido")) {
             everythingCorrect = false;
             inputValidator.setErrorStyles(lastNameField, lastNameLabel);
         }
-        if (!inputValidator.cellphone(phoneField, cellphoneLabel, "Escriba un celular válido, por favor")) {
+        if (!inputValidator.cellphone(phoneField, cellphoneLabel, "Ingrese un celular válido")) {
             everythingCorrect = false;
             inputValidator.setErrorStyles(phoneField, cellphoneLabel);
         }
-        if (!inputValidator.email(emailField, emailLabel, "Escriba un correo válido, por favor")) {
+        if (!inputValidator.email(emailField, emailLabel, "Ingrese un correo válido")) {
             everythingCorrect = false;
             inputValidator.setErrorStyles(emailField, emailLabel);
         }
-        if (!inputValidator.salary(salaryField, salaryLabel, "Escriba un salario válido, por favor")) {
+        if (!inputValidator.salary(salaryField, salaryLabel, "Ingrese un salario válido")) {
             everythingCorrect = false;
             inputValidator.setErrorStyles(salaryField, salaryLabel);
         }
-        if (birthdayPicker.getValue().isAfter(LocalDate.now())) {
+        if (birthdayPicker.getValue() == null || birthdayPicker.getValue().isAfter(LocalDate.now())) {
             everythingCorrect = false;
-            birthdayLabel.setText("Por favor indique una fecha válida");
+            birthdayLabel.setText("Indique una fecha válida");
             inputValidator.setErrorStyles(birthdayPicker, birthdayLabel);
         }
 
-        if (!inputValidator.cc(idField, idLabel, "Ingrese una cédula valida")) {
+        if (roleCombo.getSelectionModel().isEmpty()) {
+            everythingCorrect = false;
+            roleLabel.setText("Seleccione un rol");
+            inputValidator.setErrorStyles(roleCombo, roleLabel);
+        }
+
+        if (headquarterCombo.getSelectionModel().isEmpty()) {
+            everythingCorrect = false;
+            headquarterLabel.setText("Seleccione una sede");
+            inputValidator.setErrorStyles(headquarterCombo, headquarterLabel);
+        }
+
+        if (statusCombo.getSelectionModel().isEmpty()) {
+            everythingCorrect = false;
+            statusLabel.setText("Seleccione un estado");
+            inputValidator.setErrorStyles(statusCombo, statusLabel);
+        }
+
+        if (!inputValidator.cc(idField, idLabel, "Ingrese una cédula válida")) {
             everythingCorrect = false;
             inputValidator.setErrorStyles(idField, idLabel);
         }
@@ -273,18 +291,16 @@ public class UserSingleViewController implements Initializable {
      * Purpose: This method cleans all the error messages presented to the user
      */
     public void cleanErrors() {
-        //nameLabel.setStyle("");
         nameLabel.setText("");
-       // lastNameLabel.setStyle("");
         lastNameLabel.setText("");
-       // celTextField.setStyle("");
         idLabel.setText("");
-       // emailTextField.setStyle("");
         emailLabel.setText("");
-      //  salaryTextField.setStyle("");
         salaryLabel.setText("");
-    //    ccTextField.setStyle("");
         cellphoneLabel.setText("");
+        birthdayLabel.setText("");
+        roleLabel.setText("");
+        headquarterLabel.setText("");
+        statusLabel.setText("");
     }
 
     private void setIdPerson(Integer idPerson) {

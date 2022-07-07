@@ -170,7 +170,7 @@
             <Font name="Poppins Regular" size="12.0" />
          </font>
       </Label>
-      <Label fx:id="roleLabel" layoutX="44.0" layoutY="177.0" prefHeight="25.0" prefWidth="83.0" styleClass="poppins" stylesheets="@../style.css" textFill="#1f1f1f">
+      <Label fx:id="roleLabel" layoutX="44.0" layoutY="177.0" prefHeight="25.0" styleClass="poppins" stylesheets="@../style.css" textFill="#1f1f1f">
          <font>
             <Font name="Poppins Regular" size="12.0" />
          </font>
