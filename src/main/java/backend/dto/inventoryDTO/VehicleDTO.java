@@ -2,6 +2,8 @@ package backend.dto.inventoryDTO;
 
 public class VehicleDTO {
 
+    private Integer idCar;
+
     private Integer idColor;
 
     private Integer idModel;
@@ -16,6 +18,14 @@ public class VehicleDTO {
 
     public VehicleDTO(){
 
+    }
+
+    public Integer getIdCar() {
+        return idCar;
+    }
+
+    public void setIdCar(Integer idCar) {
+        this.idCar = idCar;
     }
 
     public Integer getIdColor() {

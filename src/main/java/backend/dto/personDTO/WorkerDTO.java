@@ -7,6 +7,8 @@ public class WorkerDTO extends PersonDTO {
 
     private Integer id_headquarter;
 
+    private String headquarter_name;
+
     private String password;
 
     private Integer id_rol;
@@ -22,6 +24,13 @@ public class WorkerDTO extends PersonDTO {
     private String cellphone;
 
 
+    public String getHeadquarter_name() {
+        return headquarter_name;
+    }
+
+    public void setHeadquarter_name(String headquarter_name) {
+        this.headquarter_name = headquarter_name;
+    }
 
     public Integer getId_worker() {
         return id_worker;

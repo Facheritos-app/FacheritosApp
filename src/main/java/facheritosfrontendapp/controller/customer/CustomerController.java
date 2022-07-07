@@ -26,9 +26,12 @@ public class CustomerController implements Initializable {
 
     private DashboardController dashboardController;
 
+    private CustomerSingleViewController customerSingleViewController;
+
+    private EditCustomerController editCustomerController;
+
     private AddCustomerController addCustomerController;
 
-    private CustomerSingleViewController customerSingleViewController;
     private CustomerEndpoint customerEndpoint;
 
     private ArrayList<CustomerRowView> customerRowsArray;
@@ -56,12 +59,19 @@ public class CustomerController implements Initializable {
     public CustomerController(){
         customerEndpoint = new CustomerEndpoint();
         customerSingleViewController = new CustomerSingleViewController();
+        editCustomerController = new EditCustomerController();
         customerRowsArray= new ArrayList<>();
     }
 
+    /**
+     * addCustomerAction: void -> void
+     * Purpose: shows the customers add view when pressing the add customer button
+     */
     @FXML
     protected void addCustomerAction() throws IOException {
         addCustomerController = (AddCustomerController) dashboardController.changeContent("customers/customersAdd");
+        addCustomerController.setBackTo("customers");
+
     }
 
     @Override
@@ -112,6 +122,7 @@ public class CustomerController implements Initializable {
         //Set the handle events for the labels
         for(int i = 0; i < customerRowsArray.size(); i++){
             customerRowsArray.get(i).getOptionsLabel().setOnMouseClicked(this::handleOptionLabel);
+            customerRowsArray.get(i).getEditLabel().setOnMouseClicked(this::handleOptionLabel);
         }
 
         colIdCustomer.setCellValueFactory(new PropertyValueFactory<>("cc"));
@@ -138,6 +149,17 @@ public class CustomerController implements Initializable {
                     customerSingleViewController.backToUsers.setVisible(false);
                     customerSingleViewController.showCustomer(customerRowsArray.get(i).getIdPerson());
                     customerSingleViewController.showSales(customerRowsArray.get(i).getIdPerson());
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+
+            if(mouseEvent.getSource() == customerRowsArray.get(i).getEditLabel()){
+                try {
+                    editCustomerController = (EditCustomerController) dashboardController.changeContent("customers/customersEdit");
+                    editCustomerController.setBackTo("customers");
+                    editCustomerController.showCustomer(customerRowsArray.get(i).getIdPerson());
+
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }

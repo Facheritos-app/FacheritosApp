@@ -88,7 +88,7 @@ public class SaleRequestSingleViewController implements Initializable {
 
     private ArrayList<SaleRequestSingleRowView> saleRequestSingleRowViewList;
 
-    public SaleRequestSingleViewController(){
+    public SaleRequestSingleViewController() {
         saleEndpoint = new SaleEndpoint();
         totalSale = 0.0;
     }
@@ -114,12 +114,13 @@ public class SaleRequestSingleViewController implements Initializable {
         saleRequestController = (SaleRequestController) dashboardController.changeContent("sales/salesRequests");
         saleRequestController.showSaleRequests();
     }
+
     /**
      * showSaleData: mouseEvent -> void
      * Purpose: Shows all the data of the sale in order to see if it should be approved
      */
 
-    public void showSaleData(Integer idSale){
+    public void showSaleData(Integer idSale) {
         new Thread(() -> {
             CompletableFuture<Map<Boolean, ResultSet>> tableSaleCall = CompletableFuture.supplyAsync(() -> saleEndpoint.getTableInSaleRequestById(idSale));
             CompletableFuture<Map<Boolean, ResultSet>> saleCall = CompletableFuture.supplyAsync(() -> saleEndpoint.getSaleRequestById(idSale));
@@ -140,20 +141,20 @@ public class SaleRequestSingleViewController implements Initializable {
                     return true;
                 }).get();
                 saleCall.thenApply((response) -> {
-                        if (response.containsKey(true)) {
-                            ResultSet resultSet = response.get(true);
-                            Platform.runLater(() -> {
-                                try {
-                                    setData(resultSet);
-                                } catch (SQLException e) {
-                                    throw new RuntimeException(e);
-                                } catch (IOException e) {
-                                    throw new RuntimeException(e);
-                                }
-                            });
-                        }
-                        return true;
-                    }).get();
+                    if (response.containsKey(true)) {
+                        ResultSet resultSet = response.get(true);
+                        Platform.runLater(() -> {
+                            try {
+                                setData(resultSet);
+                            } catch (SQLException e) {
+                                throw new RuntimeException(e);
+                            } catch (IOException e) {
+                                throw new RuntimeException(e);
+                            }
+                        });
+                    }
+                    return true;
+                }).get();
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             } catch (ExecutionException e) {
@@ -163,7 +164,7 @@ public class SaleRequestSingleViewController implements Initializable {
 
     }
 
-    protected void setTotalLabel(){
+    protected void setTotalLabel() {
         totalLabel.setText(new BigDecimal(String.valueOf(totalSale)).toPlainString());
     }
 
@@ -174,31 +175,33 @@ public class SaleRequestSingleViewController implements Initializable {
     public void setData(ResultSet resultSet) throws SQLException, IOException {
         idSale = resultSet.getInt("id_sale");
         saleNumberLabel.setText(String.valueOf(idSale));
-        customerLabel.setText(resultSet.getString("customer_firstname")+" "+resultSet.getString("customer_lastname"));
+        customerLabel.setText(resultSet.getString("customer_firstname") + " " + resultSet.getString("customer_lastname"));
         dateLabel.setText(resultSet.getString("sale_date"));
         headquarterLabel.setText(resultSet.getString("name"));
         paymentMethodLabel.setText(resultSet.getString("payment_method"));
-        sellerLabel.setText(resultSet.getString("first_name")+" "+resultSet.getString("last_name"));
+        sellerLabel.setText(resultSet.getString("first_name") + " " + resultSet.getString("last_name"));
     }
+
     /**
      * setTableData: ResultSet -> void
      * Purpose: This method contains sets all the data that should appear in the tableview
      */
     public void setTableData(ResultSet resultSet) throws SQLException {
 
-        while(resultSet.next()){
+        while (resultSet.next()) {
             Integer quantity = resultSet.getInt("quantity");
-            Double price = resultSet.getDouble("price");
+            Double price = resultSet.getDouble("modelprice");
             Double multipliedPrice = quantity * price;
             SaleRequestSingleRowView saleRow = new SaleRequestSingleRowView(resultSet.getInt("id_car"), resultSet.getInt("id_model"),
-                    resultSet.getString("description"), quantity, new BigDecimal(String.valueOf(price)).toPlainString(), new BigDecimal(String.valueOf(multipliedPrice)).toPlainString());
+                    resultSet.getString("description"), quantity, new BigDecimal(String.valueOf(price)).toPlainString(), new BigDecimal(String.valueOf(multipliedPrice)).toPlainString(),
+                    resultSet.getInt("id_headquarter"));
             //Add the data of every vehicle to the array
             saleRequestSingleRowViewList.add(saleRow);
-            totalSale+=multipliedPrice;
+            totalSale += multipliedPrice;
         }
 
         //Set the handle events for the boxes
-        for(Integer i = 0; i < saleRequestSingleRowViewList.size(); i++){
+        for (Integer i = 0; i < saleRequestSingleRowViewList.size(); i++) {
             //saleRequestSingleRowViewList.get(i).get.setOnMouseClicked(this::handleVehicleOptionHbox);
         }
         /**
@@ -214,6 +217,7 @@ public class SaleRequestSingleViewController implements Initializable {
         vehicleQuantityTableview.setItems(FXCollections.observableArrayList(saleRequestSingleRowViewList));
 
     }
+
     /**
      * approveRequest: void -> void
      * Purpose: changes the state of the sale to active
@@ -304,25 +308,24 @@ public class SaleRequestSingleViewController implements Initializable {
     public AtomicReference<Boolean> changeCarsQuantity() {
         /////ava
         AtomicReference<Boolean> accumResult = new AtomicReference<>(true);
-        for (Integer elem = 0; elem < saleRequestSingleRowViewList.size(); elem++) {
-            //DB call to save worker
-            Integer finalElem = elem;
-            new Thread(() -> {
+        new Thread(() -> {
+            for (Integer elem = 0; elem < saleRequestSingleRowViewList.size(); elem++) {
+                //DB call to save worker
+                Integer finalElem = elem;
+
                 Boolean result = null;
                 try {
-                    System.out.println("IdCar");
-                    System.out.println(saleRequestSingleRowViewList.get(finalElem).getIdCar());
                     result = CompletableFuture.supplyAsync(() -> saleEndpoint.changeCarsQuantityReject(saleRequestSingleRowViewList.get(finalElem).getIdCar(),
-                            saleRequestSingleRowViewList.get(finalElem).getQuantity())).get();
+                            saleRequestSingleRowViewList.get(finalElem).getQuantity(), saleRequestSingleRowViewList.get(finalElem).getIdHeadquarter())).get();
                     accumResult.set(accumResult.get() && result);
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 } catch (ExecutionException e) {
                     throw new RuntimeException(e);
                 }
+            }
 
-            }).start();
-        }
+        }).start();
         return accumResult;
     }
 }

@@ -1,11 +1,11 @@
 package backend.endpoints.workerEndpoint;
 
 import backend.connectionBD.ConnectionBD;
-import backend.dto.personDTO.PersonDTO;
 import backend.dto.personDTO.WorkerDTO;
 import backend.endpoints.personEndpoint.PersonEndpoint;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -106,4 +106,61 @@ public class WorkerEndpoint {
         }
         return response;
     }
+
+    /**
+     * changePassword: WorkerDTO -> Boolean
+     * Purpose: This method connects to the DB and changes the password of the worker
+     */
+    public Boolean changePassword(WorkerDTO worker){
+        PreparedStatement preparedStatement = null;
+            //worker.setId_person(response.get(true));
+            try(Connection conn = ConnectionBD.connectDB().getConnection()){
+                preparedStatement = conn.prepareStatement("UPDATE worker SET password=? WHERE id_worker=?");
+                preparedStatement.setString(1, worker.getPassword());
+                preparedStatement.setInt(2, worker.getId_worker());
+                preparedStatement.executeUpdate();
+                return true;
+            } catch (SQLException e) {
+                e.printStackTrace();
+                return false;
+            }
+    }
+
+    /**
+     * updateWorker: Integer, String, String, String, LocalDate, String, Integer, Integer, Boolean, Double -> void>
+     * Purpose: updates a worker
+     */
+    public static void updateWorker(Integer idPerson, String cc, String name, String lastname, String cellphone,
+                                    LocalDate birthday, String email, Integer type, Integer idheadquarter, Boolean status,
+                                    Double salary){
+        PreparedStatement preparedStatement;
+        PreparedStatement preparedStatement2;
+        try(Connection conn = ConnectionBD.connectDB().getConnection()){
+            preparedStatement = conn.prepareStatement("UPDATE person SET cc = ?, first_name = ?, last_name = ? , " +
+                    "cellphone = ?, birthday = ?, email = ?, id_type_person = ? WHERE id_person = ?;");
+            preparedStatement.setString(1, cc);
+            preparedStatement.setString(2, name);
+            preparedStatement.setString(3, lastname);
+            preparedStatement.setString(4, cellphone);
+            preparedStatement.setDate(5, Date.valueOf(birthday));
+            preparedStatement.setString(6, email);
+            preparedStatement.setInt(7, type);
+            preparedStatement.setInt(8, idPerson);
+            preparedStatement.executeUpdate();
+
+            preparedStatement2 = conn.prepareStatement("UPDATE worker SET id_headquarter = ?, state = ?, salary = ? " +
+                    "WHERE id_person = ?");
+            preparedStatement2.setInt(1, idheadquarter);
+            preparedStatement2.setBoolean(2, status);
+            preparedStatement2.setDouble(3, salary);
+            preparedStatement2.setInt(4, idPerson);
+            preparedStatement2.executeUpdate();
+
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+
+    }
+
+
 }

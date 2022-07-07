@@ -27,6 +27,7 @@ public class WorkerMapper {
         workerDTO.setRol(resultSet.getString("rol_person"));
         workerDTO.setHired_date(resultSet.getDate("hired_date"));
         workerDTO.setCellphone(resultSet.getString("cellphone"));
+        workerDTO.setHeadquarter_name(resultSet.getString("hq"));
         return workerDTO;
     }
 

@@ -34,6 +34,7 @@ public class CustomerRowView {
         this.options = new VBox();
         setOptions();
         getOptionsLabel().setCursor(Cursor.HAND); //Cursor hand when mouse hover
+        getEditLabel().setCursor(Cursor.HAND);
     }
 
     public Integer getIdPerson() {
@@ -88,13 +89,25 @@ public class CustomerRowView {
         return (Label) getOptionsHBox().getChildren().get(1);
     }
 
+    public HBox getEditHBox(){
+        return (HBox) options.getChildren().get(1);
+    }
+
+    public Label getEditLabel(){
+        return (Label) getEditHBox().getChildren().get(1);
+    }
+
     public void setOptions() {
         URL iconEditURL = Main.class.getResource("/facheritosfrontendapp/icons/icon-edit.png");
         Image editImage = new Image(String.valueOf(iconEditURL));
         HBox hboxOptions = new HBox(new ImageView(editImage), new Label("Ver más"));
+        HBox hboxEdit = new HBox(new ImageView(editImage), new Label("Editar"));
         hboxOptions.setSpacing(5);
         hboxOptions.setAlignment(Pos.CENTER);
+        hboxOptions.setSpacing(5);
+        hboxEdit.setAlignment(Pos.CENTER);
         options.getChildren().add(hboxOptions);
+        options.getChildren().add(hboxEdit);
         options.setAlignment(Pos.CENTER);
     }
 }
