@@ -101,13 +101,17 @@
                               <Insets bottom="10.0" />
                            </padding>
                         </HBox>
-                        <TableView fx:id="inventoryTableView" prefHeight="239.0" prefWidth="399.0">
+                        <TableView fx:id="inventoryTableView" prefHeight="239.0" prefWidth="399.0" stylesheets="@../style.css">
                            <columns>
                               <TableColumn fx:id="colNameInventory" prefWidth="133.0" style="-fx-alignment: CENTER;" text="Nombre" />
                               <TableColumn fx:id="colPriceInventory" prefWidth="94.0" style="-fx-alignment: CENTER;" text="Precio" />
                               <TableColumn fx:id="colHeadquarterInventory" prefWidth="142.0" style="-fx-alignment: CENTER;" text="Sede" />
                               <TableColumn fx:id="colQuantityInventory" minWidth="5.0" prefWidth="83.0" style="-fx-alignment: CENTER;" text="Cantidad" />
                            </columns>
+                           <styleClass>
+                              <String fx:value="table-views" />
+                              <String fx:value="table-column" />
+                           </styleClass>
                         </TableView>
                      </children>
                   </VBox>
@@ -126,12 +130,16 @@
                               <Button fx:id="deleteVehicleButton" disable="true" mnemonicParsing="false" onMouseClicked="#onDeleteVehicle" styleClass="red-button" stylesheets="@../style.css" text="Eliminar elemento" visible="false" />
                            </children>
                         </HBox>
-                        <TableView fx:id="quotationTableView" prefHeight="239.0" prefWidth="394.0">
+                        <TableView fx:id="quotationTableView" prefHeight="239.0" prefWidth="394.0" stylesheets="@../style.css">
                            <columns>
                               <TableColumn fx:id="colName" prefWidth="98.0" style="-fx-alignment: CENTER;" text="Nombre" />
                               <TableColumn fx:id="colPrice" prefWidth="124.0" style="-fx-alignment: CENTER;" text="   Precio" />
                               <TableColumn fx:id="colHeadquarter" prefWidth="97.0" style="-fx-alignment: CENTER;" text="Sede" />
                            </columns>
+                           <styleClass>
+                              <String fx:value="table-views" />
+                              <String fx:value="table-column" />
+                           </styleClass>
                         </TableView>
                      </children>
                   </VBox>

@@ -51,7 +51,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <ImageView fx:id="hide" fitHeight="21.0" fitWidth="28.0" layoutX="524.0" layoutY="331.0" onMouseClicked="#hideClicked" pickOnBounds="true" preserveRatio="true" visible="false">
+      <ImageView fx:id="hide" fitHeight="21.0" fitWidth="28.0" layoutX="524.0" layoutY="330.0" onMouseClicked="#hideClicked" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@../icons/hidden.png" />
          </image>

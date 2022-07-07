@@ -52,7 +52,8 @@ public class AddUserValidator {
     public Boolean cellphone(TextField cellphoneTextField, Label cellphoneLabel, String cellphoneLabelContent){
         Boolean correct = false;
         Boolean successRegex = Regex.onlyDigits(cellphoneTextField.getText());
-        if(cellphoneTextField.getText().isEmpty() || !successRegex){
+        String cellphone = cellphoneTextField.getText();
+        if(cellphone.isEmpty() || !successRegex || cellphone.length() != 10 ){
             cellphoneLabel.setText(cellphoneLabelContent);
         } else{
             correct = true;
@@ -75,12 +76,12 @@ public class AddUserValidator {
 
     public Boolean salary(TextField salaryTextField, Label salaryLabel, String salaryLabelContent){
         Boolean correct = false;
-        Integer content = 0;
+        Double content = 0.0;
         Boolean successRegex = Regex.onlyDigits(salaryTextField.getText());
         try {
-            content = Integer.parseInt(salaryTextField.getText());
+            content = Double.parseDouble(salaryTextField.getText());
         }catch(NumberFormatException e){
-            content = 0;
+            content = 0.0;
         }
 
         if(salaryTextField.getText().isEmpty() || !successRegex || content < 900000){
