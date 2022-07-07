@@ -2,6 +2,8 @@ package backend.dto.inventoryDTO;
 
 public class PartDTO {
 
+    private Integer idPart;
+
     private String name;
 
     private Double price;
@@ -11,6 +13,14 @@ public class PartDTO {
     private Integer id_headquarter;
 
     private Integer quantity;
+
+    public Integer getIdPart() {
+        return idPart;
+    }
+
+    public void setIdPart(Integer idPart) {
+        this.idPart = idPart;
+    }
 
     public String getName() {
         return name;

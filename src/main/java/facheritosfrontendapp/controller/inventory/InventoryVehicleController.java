@@ -77,8 +77,13 @@ public class InventoryVehicleController implements Initializable {
 
     private InventoryController inventoryController;
 
-    public InventoryVehicleController(){
+    private InventoryEditVehicleController inventoryEditVehicleController;
 
+    private Integer idCar;
+
+    private String imageLink;
+
+    public InventoryVehicleController(){
         inventoryEndpoint = new InventoryEndpoint();
     }
 
@@ -108,9 +113,10 @@ public class InventoryVehicleController implements Initializable {
      * showVehicleData: Integer -> void
      * Purpose: This method contains all the other methods that together make showing the vehicle data possible
      */
-    public void showVehicleData(Integer idCar){
+    public void showVehicleData(Integer idCar, Integer idHeadquarter){
+        this.idCar = idCar;
         new Thread(() -> {
-            CompletableFuture<Map<Boolean, ResultSet>> vehicleCall = CompletableFuture.supplyAsync(() -> inventoryEndpoint.getVehicleById(idCar));
+            CompletableFuture<Map<Boolean, ResultSet>> vehicleCall = CompletableFuture.supplyAsync(() -> inventoryEndpoint.getVehicleById(idCar, idHeadquarter));
             try {
                 vehicleCall.thenApply((response) -> {
                     if (response.containsKey(true)) {
@@ -140,7 +146,6 @@ public class InventoryVehicleController implements Initializable {
      * Purpose: This method contains sets all the data from the specific vehicle
      */
     public void setData(ResultSet resultSet) throws SQLException, IOException {
-
         modelLabel.setText(resultSet.getString("description"));
         assemblyYearLabel.setText(resultSet.getString("assemble_year"));
         colorLabel.setText(resultSet.getString("color"));
@@ -153,9 +158,21 @@ public class InventoryVehicleController implements Initializable {
         transmissionLabel.setText(resultSet.getString("transmision"));
         priceLabel.setText(resultSet.getString("price"));
 
+        imageLink = resultSet.getString("image");
+        vehicleImage.setImage(new Image(imageLink));
 
-        vehicleImage.setImage(new Image("https://i.postimg.cc/tCyYd0Zz/raul-di-domenico-o-Yo-Ic-Sgs-GWI-unsplash.jpg"));
 
+    }
+    @FXML
+    protected void editClicked() throws IOException, ExecutionException, InterruptedException {
+        inventoryEditVehicleController = (InventoryEditVehicleController) dashboardController.changeContent("inventory/inventoryEditVehicle");
+        inventoryEditVehicleController.setData(idCar, modelLabel.getText(), colorLabel.getText(), assemblyYearLabel.getText(),
+                headquarterLabel.getText(), quantityLabel.getText(), imageLink);
+        inventoryEditVehicleController.showForm();
+    }
+
+    @FXML
+    protected void deleteClicked(){
 
     }
 }

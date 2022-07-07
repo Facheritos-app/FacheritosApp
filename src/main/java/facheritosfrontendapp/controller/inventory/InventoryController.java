@@ -206,13 +206,14 @@ public class InventoryController implements Initializable {
                 //Here we will load the component to view, edit and delete the vehicle
                 try {
                     inventoryVehicleController = (InventoryVehicleController) dashboardController.changeContent("inventory/inventoryVehicle", true);
-                    inventoryVehicleController.showVehicleData(vehicleRowViewList.get(i).getIdCar());
+                    inventoryVehicleController.showVehicleData(vehicleRowViewList.get(i).getIdCar(), vehicleRowViewList.get(i).getIdHeadquarter());
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
             }
         }
     }
+
     /**
      * handlePartOptionLabel: mouseEvent -> void
      * Purpose: Listens to the events of the View More label
@@ -259,11 +260,10 @@ public class InventoryController implements Initializable {
     public void setVehiclesData(ResultSet resultSet) throws SQLException {
         while(resultSet.next()){
             VehicleRowView vehicleRow = new VehicleRowView(resultSet.getString("description"), new BigDecimal(String.valueOf(resultSet.getDouble("price"))).toPlainString(),
-                                                            resultSet.getString("name"), resultSet.getInt("quantity"),
+                                                            resultSet.getInt("id_headquarter"),resultSet.getString("name"), resultSet.getInt("quantity"),
                                                             resultSet.getInt("id_car"));
             //Add the data of every vehicle to the array
             vehicleRowViewList.add(vehicleRow);
-            System.out.println(resultSet.getDouble("price"));
         }
 
         //Set the handle events for the boxes
