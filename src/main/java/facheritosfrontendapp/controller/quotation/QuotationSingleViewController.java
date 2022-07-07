@@ -284,7 +284,7 @@ public class QuotationSingleViewController implements Initializable {
     public void setVehiclesData(ResultSet resultSet) throws SQLException {
         while (resultSet.next()) {
             VehicleRowView vehicleRow = new VehicleRowView(resultSet.getString("description"), new BigDecimal(String.valueOf(resultSet.getDouble("price"))).toPlainString(),
-                    resultSet.getInt("ig_headquarter"),resultSet.getString("name"), resultSet.getInt("quantity"),
+                    resultSet.getInt("id_headquarter"),resultSet.getString("name"), resultSet.getInt("quantity"),
                     resultSet.getInt("id_car"));
             vehicleInventoryRowList.add(vehicleRow);
         }

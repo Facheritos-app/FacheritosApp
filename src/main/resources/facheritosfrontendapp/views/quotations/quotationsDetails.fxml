@@ -132,9 +132,9 @@
                         </HBox>
                         <TableView fx:id="quotationTableView" prefHeight="239.0" prefWidth="394.0" stylesheets="@../style.css">
                            <columns>
-                              <TableColumn fx:id="colName" prefWidth="98.0" style="-fx-alignment: CENTER;" text="Nombre" />
-                              <TableColumn fx:id="colPrice" prefWidth="124.0" style="-fx-alignment: CENTER;" text="   Precio" />
-                              <TableColumn fx:id="colHeadquarter" prefWidth="97.0" style="-fx-alignment: CENTER;" text="Sede" />
+                              <TableColumn fx:id="colName" prefWidth="150.0" style="-fx-alignment: CENTER;" text="Nombre" />
+                              <TableColumn fx:id="colPrice" prefWidth="129.0" style="-fx-alignment: CENTER;" text="   Precio" />
+                              <TableColumn fx:id="colHeadquarter" prefWidth="127.0" style="-fx-alignment: CENTER;" text="Sede" />
                            </columns>
                            <styleClass>
                               <String fx:value="table-views" />
