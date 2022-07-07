@@ -190,16 +190,14 @@ public class AddSaleController implements Initializable {
     @FXML
     protected void saveClicked() throws IOException, ExecutionException, InterruptedException {
         if (allValidations()) {
+            MyDialogPane dialogPane = new MyDialogPane("confirmationSave");
+            Optional<ButtonType> clickedButton = dialogPane.getClickedButton();
+            if (clickedButton.get() == ButtonType.YES) {
 
-        }
-        MyDialogPane dialogPane = new MyDialogPane("confirmationSave");
-        Optional<ButtonType> clickedButton = dialogPane.getClickedButton();
-        if (clickedButton.get() == ButtonType.YES) {
-
-            try {
-                //Map<Boolean, ResultSet> response = createSale(createTableSale());
-                createTableSale();
-                Map<Boolean, ResultSet> response = saleEndpoint.insertarVenta(saleTable);
+                try {
+                    //Map<Boolean, ResultSet> response = createSale(createTableSale());
+                    createTableSale();
+                    Map<Boolean, ResultSet> response = saleEndpoint.insertarVenta(saleTable);
 /*
                 if (response.containsKey(true)) {
                     ResultSet resultSet = response.get(true);
@@ -217,39 +215,41 @@ public class AddSaleController implements Initializable {
                     }
 
                 }*/
-                if (response.containsKey(true)) {
-                    ResultSet resultSet = response.get(true);
-                    try {
+                    if (response.containsKey(true)) {
+                        ResultSet resultSet = response.get(true);
+                        try {
 
-                        System.out.println("Supuesto id + "+ resultSet.getInt("id_sale"));
-                       // ccClient.setText(resultSet.getString("cc"));
-                        carSale(resultSet.getInt("id_Sale"));
+                            System.out.println("Supuesto id + "+ resultSet.getInt("id_sale"));
+                            // ccClient.setText(resultSet.getString("cc"));
+                            carSale(resultSet.getInt("id_Sale"));
 
-                    } catch (SQLException e) {
+                        } catch (SQLException e) {
 
-                        throw new RuntimeException(e);
+                            throw new RuntimeException(e);
 
-                    }
-                    //despues
+                        }
+                        //despues
                     /*Alert success = new Alert(Alert.AlertType.CONFIRMATION, "Solicitud enviada al gerente", OK);
                     success.show();*/
-                } else {
+                    } else {
 
 
 
+                    }
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
                 }
-            } catch (SQLException e) {
+
+
+            }
+            try {
+                saleController = (SaleController) dashboardController.changeContent("sales/sales");
+                saleController.showSales();
+            } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-
-
         }
-        try {
-            saleController = (SaleController) dashboardController.changeContent("sales/sales");
-            saleController.showSales();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+
     }
 
     public void carSale(Integer idSale){
