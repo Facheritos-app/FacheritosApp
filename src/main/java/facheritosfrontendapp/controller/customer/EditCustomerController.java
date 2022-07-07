@@ -144,7 +144,8 @@ public class EditCustomerController implements Initializable {
             Optional<ButtonType> clickedButton = dialogPane.getClickedButton();
             if (clickedButton.get() == YES) {
                 try{
-                    //customerEndpoint.updateWorker();
+                    customerEndpoint.updateCustomer(idPerson, idField.getText(), nameField.getText(), lastNameField.getText(),
+                            phoneField.getText(), birthdayPicker.getValue(), emailField.getText());
                     Alert success = new Alert(Alert.AlertType.CONFIRMATION, "Cliente actualizado exitosamente", OK);
                     success.show();
                     try {

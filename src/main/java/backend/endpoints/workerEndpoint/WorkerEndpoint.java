@@ -1,7 +1,6 @@
 package backend.endpoints.workerEndpoint;
 
 import backend.connectionBD.ConnectionBD;
-import backend.dto.personDTO.PersonDTO;
 import backend.dto.personDTO.WorkerDTO;
 import backend.endpoints.personEndpoint.PersonEndpoint;
 
@@ -127,13 +126,15 @@ public class WorkerEndpoint {
             }
     }
 
+    /**
+     * updateWorker: Integer, String, String, String, LocalDate, String, Integer, Integer, Boolean, Double -> void>
+     * Purpose: updates a worker
+     */
     public static void updateWorker(Integer idPerson, String cc, String name, String lastname, String cellphone,
                                     LocalDate birthday, String email, Integer type, Integer idheadquarter, Boolean status,
                                     Double salary){
         PreparedStatement preparedStatement;
         PreparedStatement preparedStatement2;
-        ResultSet resultSet = null;
-        HashMap<Boolean, Integer> response = new HashMap<>();
         try(Connection conn = ConnectionBD.connectDB().getConnection()){
             preparedStatement = conn.prepareStatement("UPDATE person SET cc = ?, first_name = ?, last_name = ? , " +
                     "cellphone = ?, birthday = ?, email = ?, id_type_person = ? WHERE id_person = ?;");
@@ -158,7 +159,6 @@ public class WorkerEndpoint {
         }catch (SQLException e){
             e.printStackTrace();
         }
-
 
     }
 
