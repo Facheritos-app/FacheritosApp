@@ -16,6 +16,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.concurrent.CompletableFuture;
@@ -28,13 +29,17 @@ public class EditCustomerController implements Initializable {
 
     private final CustomerEndpoint customerEndpoint;
 
-    private AddUserValidator inputValidator;
+    private final AddUserValidator inputValidator;
 
     private DashboardController dashboardController;
 
     private UserController userController;
 
-    public Integer idPerson;
+    private CustomerController customerController;
+
+    private Integer idPerson;
+
+    private String backTo;
 
     //Here are all the @FXML components
     @FXML
@@ -77,6 +82,45 @@ public class EditCustomerController implements Initializable {
     public EditCustomerController() {
         customerEndpoint = new CustomerEndpoint();
         inputValidator = new AddUserValidator();
+        backTo = "";
+    }
+
+    public void setBackTo(String view) {
+        backTo = view;
+    }
+
+    /**
+     * backToCustomersClicked: void -> void
+     * Purpose: returns to the customers view
+     */
+    @FXML
+    protected void backToCustomers() throws IOException {
+        customerController = (CustomerController) dashboardController.changeContent("customers/customers");
+        customerController.showCustomers();
+    }
+
+    /**
+     * backToUsers: void -> void
+     * Purpose: returns to the users view
+     */
+    @FXML
+    protected void backToUsers() throws IOException {
+        userController = (UserController) dashboardController.changeContent("users/users");
+        userController.showWorkers();
+        userController.showCustomers();
+    }
+
+    /**
+     * whereToGoBack: String -> void
+     * Purpose: decides which view should be displayed to return to an earlier point
+     */
+    protected void whereToGoBack(String view) throws IOException {
+        if (Objects.equals(view, "customers")){
+            backToCustomers();
+        }
+        if (Objects.equals(view, "users")){
+            backToUsers();
+        }
     }
 
     @FXML
@@ -85,14 +129,12 @@ public class EditCustomerController implements Initializable {
         MyDialogPane dialogPane = new MyDialogPane("confirmationCancel");
         Optional<ButtonType> clickedButton = dialogPane.getClickedButton();
         if (clickedButton.get() == YES) {
-            userController = (UserController) dashboardController.changeContent("users/users");
-            //SHOW THE USERS IN TABLEVIEW
-            userController.showWorkers();
-            userController.showCustomers();
+            whereToGoBack(backTo);
         } else {
             System.out.println("No");
         }
     }
+
 
     @FXML
     protected void saveAction() throws IOException, NullPointerException {
@@ -107,10 +149,7 @@ public class EditCustomerController implements Initializable {
                     success.show();
 
                     try {
-                        userController = (UserController) dashboardController.changeContent("users/users");
-                        //SHOW THE USERS IN TABLEVIEW
-                        userController.showWorkers();
-                        userController.showCustomers();
+                        whereToGoBack(backTo);
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
@@ -128,7 +167,7 @@ public class EditCustomerController implements Initializable {
      */
     public Boolean allValidations() {
         cleanErrors();
-        Boolean everythingCorrect = true;
+        boolean everythingCorrect = true;
         if (!inputValidator.name(nameField, nameLabel, "Ingrese un nombre válido")) {
             everythingCorrect = false;
             inputValidator.setErrorStyles(nameField, nameLabel);

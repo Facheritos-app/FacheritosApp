@@ -264,6 +264,7 @@ public class UserController implements Initializable {
             if(mouseEvent.getSource() == customerRowsArray.get(i).getEditLabel()){
                 try {
                     editCustomerController = (EditCustomerController) dashboardController.changeContent("customers/customersEdit");
+                    editCustomerController.setBackTo("users");
                     editCustomerController.showCustomer(customerRowsArray.get(i).getIdPerson());
 
                 } catch (IOException e) {
