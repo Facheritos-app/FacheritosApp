@@ -113,10 +113,10 @@ public class InventoryVehicleController implements Initializable {
      * showVehicleData: Integer -> void
      * Purpose: This method contains all the other methods that together make showing the vehicle data possible
      */
-    public void showVehicleData(Integer idCar){
+    public void showVehicleData(Integer idCar, Integer idHeadquarter){
         this.idCar = idCar;
         new Thread(() -> {
-            CompletableFuture<Map<Boolean, ResultSet>> vehicleCall = CompletableFuture.supplyAsync(() -> inventoryEndpoint.getVehicleById(idCar));
+            CompletableFuture<Map<Boolean, ResultSet>> vehicleCall = CompletableFuture.supplyAsync(() -> inventoryEndpoint.getVehicleById(idCar, idHeadquarter));
             try {
                 vehicleCall.thenApply((response) -> {
                     if (response.containsKey(true)) {
@@ -146,7 +146,6 @@ public class InventoryVehicleController implements Initializable {
      * Purpose: This method contains sets all the data from the specific vehicle
      */
     public void setData(ResultSet resultSet) throws SQLException, IOException {
-
         modelLabel.setText(resultSet.getString("description"));
         assemblyYearLabel.setText(resultSet.getString("assemble_year"));
         colorLabel.setText(resultSet.getString("color"));
