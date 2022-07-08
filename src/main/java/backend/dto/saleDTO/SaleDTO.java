@@ -11,6 +11,12 @@ public class SaleDTO {
     public Object setId_customer;
     protected Integer id_sale;
 
+    protected String ccSeller;
+
+    protected String ccClient;
+
+    protected String payment_method;
+
     protected Integer id_worker;
 
     protected Integer id_customer;
@@ -106,5 +112,29 @@ public class SaleDTO {
 
     public void setId_payment_method(Integer id_payment_method) {
         this.id_payment_method = id_payment_method;
+    }
+
+    public String getCcSeller() {
+        return ccSeller;
+    }
+
+    public void setCcSeller(String ccSeller) {
+        this.ccSeller = ccSeller;
+    }
+
+    public String getCcClient() {
+        return ccClient;
+    }
+
+    public void setCcClient(String ccClient) {
+        this.ccClient = ccClient;
+    }
+
+    public String getPayment_method() {
+        return payment_method;
+    }
+
+    public void setPayment_method(String payment_method) {
+        this.payment_method = payment_method;
     }
 }

@@ -1,6 +1,7 @@
 package facheritosfrontendapp.controller.sale;
 
 
+import backend.dto.saleDTO.SaleDTO;
 import backend.endpoints.headquarterEndpoint.HeadquarterEndpoint;
 import backend.endpoints.inventoryEndpoint.InventoryEndpoint;
 import backend.endpoints.saleEndpoint.SaleEndpoint;
@@ -8,6 +9,7 @@ import backend.endpoints.workerEndpoint.WorkerEndpoint;
 import facheritosfrontendapp.controller.DashboardController;
 import facheritosfrontendapp.controller.MainController;
 import facheritosfrontendapp.controller.inventory.InventoryController;
+import facheritosfrontendapp.objectRowView.saleRowView.SaleCarRowView;
 import facheritosfrontendapp.objectRowView.saleRowView.SaleRowView;
 import facheritosfrontendapp.objectRowView.saleRowView.SaleSingleRowView;
 import javafx.application.Platform;
@@ -109,17 +111,23 @@ public class SaleSingleViewController implements Initializable{
 
     private ArrayList<SaleSingleRowView> saleSingleRowsArray;
 
+    private ArrayList<SaleCarRowView> saleCarRowsArray;
+
     private SaleEndpoint saleEndpoint;
 
     private SaleController saleController;
 
     private EditSaleController editSaleController;
 
+    private SaleDTO saleDTOCurrent;
+
     public SaleSingleViewController() {
         saleEndpoint = new SaleEndpoint();
         saleSingleObList = FXCollections.observableArrayList();
         saleSingleRowsArray = new ArrayList<>();
         editSaleController =  new EditSaleController();
+        saleDTOCurrent = new SaleDTO();
+        saleCarRowsArray = new ArrayList<>();
     }
 
     @Override
@@ -141,6 +149,7 @@ public class SaleSingleViewController implements Initializable{
         editSaleController.setView();
         editSaleController.showSaleCars(Integer.valueOf(head.getText()));
         editSaleController.showSaleCarsSell(Integer.valueOf(idNumber.getText()));
+        editSaleController.getCurrentSale(saleDTOCurrent,saleCarRowsArray);
 
     }
 
@@ -178,12 +187,21 @@ public class SaleSingleViewController implements Initializable{
         labelCosto.setText(resultSet.getString("price"));
         idHeadq.setText(resultSet.getString("name_headq"));
         dateSale.setText(resultSet.getString("sale_date"));
+
         payMethod.setText(resultSet.getString("name_method"));
+        saleDTOCurrent.setPayment_method(resultSet.getString("name_method"));
+
         confirmation.setText(resultSet.getString("confirmation_status"));
+
         ccSeller.setText(resultSet.getString("cc_seller"));
+        saleDTOCurrent.setCcSeller(resultSet.getString("cc_seller"));
+
         nameSeller.setText(resultSet.getString("name_seller"));
         emailSeller.setText(resultSet.getString("email_seller"));
+
         ccClient.setText(resultSet.getString("cc_client"));
+        saleDTOCurrent.setCcClient(resultSet.getString("cc_client"));
+
         nameClient.setText(resultSet.getString("name_client"));
         cellphoneClient.setText(resultSet.getString("cellphone_client"));
         emailClient.setText(resultSet.getString("email_client"));
@@ -268,12 +286,27 @@ public class SaleSingleViewController implements Initializable{
                     resultSet.getString("color"), resultSet.getDouble("price"),
                     resultSet.getInt("quantity"));
             saleSingleRowsArray.add(car); //Add every element to the array.
-        }
 
+            SaleCarRowView car2 = new SaleCarRowView(resultSet.getInt("id_car"), resultSet.getString("description"), resultSet.getString("color"),
+                    resultSet.getDouble("price"),
+                    resultSet.getInt("quantity"),resultSet.getString("assemble_year"));
+            saleCarRowsArray.add(car2);
+
+        }
+/*
+        while(resultSet.next()){
+            //Create the object that will contain all the data shown on the table
+            SaleCarRowView car = new SaleCarRowView(resultSet.getInt("id_car"), resultSet.getString("description"), resultSet.getString("color"),
+                    resultSet.getDouble("price"),
+                    resultSet.getInt("quantity"),resultSet.getString("assemble_year"));
+            saleCarRowsArray.add(car);
+        }*/
         //Set the handle events for the labels
         for(Integer i = 0; i < saleSingleRowsArray.size(); i++){
             saleSingleRowsArray.get(i).getEditLabel().setOnMouseClicked(this::handleOptionLabel);
         }
+
+
 
         //Add every element from our array to the observable list array that will show on the table
         for(Integer i = 0; i < saleSingleRowsArray.size(); i++){

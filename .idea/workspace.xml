@@ -4,9 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5f49d571-a74c-4244-90f5-d1284478321e" name="Changes" comment="Show/hide password is now available.">
+    <list default="true" id="6739f93d-a47a-4d3a-8f33-1e3f0591b347" name="Changes" comment="Show/hide password is now available.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/sale/AddSaleController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/sale/AddSaleController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/backend/dto/saleDTO/SaleDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/backend/dto/saleDTO/SaleDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/sale/EditSaleController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/sale/EditSaleController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/sale/SaleSingleViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/sale/SaleSingleViewController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -162,7 +164,7 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="5f49d571-a74c-4244-90f5-d1284478321e" name="Changes" comment="" />
+      <changelist id="6739f93d-a47a-4d3a-8f33-1e3f0591b347" name="Changes" comment="Show/hide password is now available." />
       <created>1653934621402</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -229,6 +231,8 @@
       <workItem from="1656883466450" duration="9594000" />
       <workItem from="1657105959971" duration="13706000" />
       <workItem from="1657222101409" duration="1042000" />
+      <workItem from="1657291636530" duration="8206000" />
+      <workItem from="1657315859786" duration="112000" />
     </task>
     <task id="LOCAL-00001" summary="I changed the view users view with the combo boxes and the city field.">
       <created>1654630629606</created>

@@ -1,6 +1,7 @@
 package facheritosfrontendapp.controller.sale;
 
 import backend.dto.personDTO.WorkerDTO;
+import backend.dto.saleDTO.SaleDTO;
 import backend.endpoints.headquarterEndpoint.HeadquarterEndpoint;
 import backend.endpoints.personEndpoint.PersonEndpoint;
 import backend.endpoints.saleEndpoint.SaleEndpoint;
@@ -32,6 +33,7 @@ import java.sql.SQLException;
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
+
 
 import static javafx.scene.control.ButtonType.OK;
 import static javafx.scene.control.ButtonType.YES;
@@ -172,6 +174,14 @@ public class EditSaleController implements Initializable {
 
     private AddSaleValidator inputValidator;
 
+    private SaleDTO saleDTOcurrent;
+
+    private ArrayList<SaleCarRowView> saleCarRowViewCurrent;
+
+    private SaleDTO saleDTOnew;
+
+    private ArrayList<SaleCarRowView> saleCarRowViewNew;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         DashboardController.getCurrentWorker().getId_worker();
@@ -179,6 +189,11 @@ public class EditSaleController implements Initializable {
         setCurrentWorker(DashboardController.getCurrentWorker());
         contador = 0;
         inputValidator = new AddSaleValidator();
+        saleDTOcurrent = new SaleDTO();
+        saleCarRowViewCurrent = new ArrayList<>();
+
+        saleDTOnew = new SaleDTO();
+        saleCarRowViewNew = new ArrayList<>();
         //setSellTableView();
     }
 
@@ -310,11 +325,35 @@ public class EditSaleController implements Initializable {
             Optional<ButtonType> clickedButton = dialogPane.getClickedButton();
             if (clickedButton.get() == ButtonType.YES) {
 
+                saleDTOnew.setCcSeller(ccSeller.getText());
+                saleDTOnew.setCcClient(ccClient.getText());
+                saleDTOnew.setPayment_method(typeCombobox.getValue());
+                saleCarRowViewNew = saleCarRowsArray2;
+/*
+               if( compareQuotationsData() && compareQuotationsCars()){
+                    System.out.println("No hay cambios");
+                }else {
+                    System.out.println("Si hay cambios");
+                }*/
+
+                if(compareQuotationsCars()){
+                    if(compareQuotationsData()){
+                        System.out.println("No hay cambios1");
+                    }else{
+                        System.out.println("Si hay cambios1");
+                    }
+
+                }else {
+                    System.out.println("Si hay cambios2");
+                }
+
+                //esto va si hay cambios
                 try{
+
 
                     Alert success = new Alert(Alert.AlertType.CONFIRMATION, "Solicitud enviada al gerente", OK);
                     success.show();
-                    //Go to main user view
+
                     try {
                         saleSingleViewController = (SaleSingleViewController) dashboardController.changeContent("sales/salesSingleView", true);
                         saleSingleViewController.showSaleData(Integer.valueOf(idSaleLabel.getText()));
@@ -338,6 +377,67 @@ public class EditSaleController implements Initializable {
         }
     }
 
+    public Boolean compareQuotationsData(){
+
+        System.out.println(saleDTOcurrent.getCcClient());
+        System.out.println(saleDTOnew.getCcClient());
+        System.out.println(saleDTOcurrent.getCcClient().equals(saleDTOnew.getCcClient()));
+        System.out.println(saleDTOcurrent.getCcClient()==saleDTOnew.getCcClient());
+
+        System.out.println(saleDTOcurrent.getCcSeller());
+        System.out.println(saleDTOnew.getCcSeller());
+        System.out.println(saleDTOcurrent.getCcSeller()==saleDTOnew.getCcSeller());
+
+        System.out.println(saleDTOcurrent.getPayment_method());
+        System.out.println(saleDTOnew.getPayment_method());
+        System.out.println(saleDTOcurrent.getPayment_method()==saleDTOnew.getPayment_method());
+
+        if((saleDTOcurrent.getCcClient().equals(saleDTOnew.getCcClient())) &&
+                (saleDTOcurrent.getCcSeller().equals(saleDTOnew.getCcSeller())) &&
+                (saleDTOcurrent.getPayment_method().equals(saleDTOnew.getPayment_method()))){
+            System.out.println("Entre");
+            return true;
+        }
+
+        return false;
+
+    }
+
+    public Boolean compareQuotationsCars(){
+        System.out.println(saleCarRowViewCurrent.size());
+        System.out.println(saleCarRowViewNew.size());
+
+        if(saleCarRowViewCurrent.size() != saleCarRowViewNew.size()){
+            System.out.println("No");
+            return false;
+
+        }else{
+            for (Integer i =0; i < saleCarRowViewCurrent.size() ;i++){
+                if(buscar2(saleCarRowViewNew,saleCarRowViewCurrent.get(i).getIdCar(),saleCarRowViewCurrent.get(i).getQuantity())){
+                    System.out.println("Si");
+                }else{
+                    System.out.println("No2");
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    private Boolean buscar2( ArrayList<SaleCarRowView> saleCarRowsView, Integer id, Integer quantity){
+        Boolean saber = false;
+        for (Integer i =0;i <  saleCarRowsView.size() ;i++ ){
+            if(id==saleCarRowsArray2.get(i).getIdCar()){
+                if(saleCarRowsArray2.get(i).getQuantity()==quantity){
+                    return true;
+                }else {
+                    return false;
+                }
+
+            }
+        }
+        return saber;
+    }
     public Boolean allValidations() {
         cleanErrors();
         Boolean everythingCorrect = true;
@@ -354,6 +454,13 @@ public class EditSaleController implements Initializable {
 
 
         return everythingCorrect;
+    }
+
+    public void getCurrentSale(SaleDTO saleDTO, ArrayList<SaleCarRowView> saleCarRowView){
+        saleDTOcurrent = saleDTO;
+        saleCarRowViewCurrent = saleCarRowView;
+
+        System.out.println(saleCarRowView);
     }
 
     public void cleanErrors() {
