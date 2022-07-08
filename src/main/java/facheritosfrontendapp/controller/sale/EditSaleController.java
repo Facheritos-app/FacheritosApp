@@ -329,42 +329,32 @@ public class EditSaleController implements Initializable {
                 saleDTOnew.setCcClient(ccClient.getText());
                 saleDTOnew.setPayment_method(typeCombobox.getValue());
                 saleCarRowViewNew = saleCarRowsArray2;
-/*
-               if( compareQuotationsData() && compareQuotationsCars()){
-                    System.out.println("No hay cambios");
-                }else {
-                    System.out.println("Si hay cambios");
-                }*/
 
-                if(compareQuotationsCars()){
-                    if(compareQuotationsData()){
-                        System.out.println("No hay cambios1");
-                    }else{
-                        System.out.println("Si hay cambios1");
+                if(compareQuotationsCars() && compareQuotationsData()){
+                        Alert success = new Alert(Alert.AlertType.CONFIRMATION, "No hay cambios para hacer", OK);
+                        success.show();
+                }else{
+
+                    try{
+
+                        Alert success = new Alert(Alert.AlertType.CONFIRMATION, "Solicitud enviada al gerente", OK);
+                        success.show();
+
+                        try {
+                            saleSingleViewController = (SaleSingleViewController) dashboardController.changeContent("sales/salesSingleView", true);
+                            saleSingleViewController.showSaleData(Integer.valueOf(idSaleLabel.getText()));
+                            saleSingleViewController.showQuantity(Integer.valueOf(idSaleLabel.getText()));
+                            saleSingleViewController.showSaleCars(Integer.valueOf(idSaleLabel.getText()));
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }catch (Exception e){
+
                     }
-
-                }else {
-                    System.out.println("Si hay cambios2");
                 }
 
-                //esto va si hay cambios
-                try{
 
 
-                    Alert success = new Alert(Alert.AlertType.CONFIRMATION, "Solicitud enviada al gerente", OK);
-                    success.show();
-
-                    try {
-                        saleSingleViewController = (SaleSingleViewController) dashboardController.changeContent("sales/salesSingleView", true);
-                        saleSingleViewController.showSaleData(Integer.valueOf(idSaleLabel.getText()));
-                        saleSingleViewController.showQuantity(Integer.valueOf(idSaleLabel.getText()));
-                        saleSingleViewController.showSaleCars(Integer.valueOf(idSaleLabel.getText()));
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
-                }catch (Exception e){
-
-                }
 
 
 
@@ -379,18 +369,6 @@ public class EditSaleController implements Initializable {
 
     public Boolean compareQuotationsData(){
 
-        System.out.println(saleDTOcurrent.getCcClient());
-        System.out.println(saleDTOnew.getCcClient());
-        System.out.println(saleDTOcurrent.getCcClient().equals(saleDTOnew.getCcClient()));
-        System.out.println(saleDTOcurrent.getCcClient()==saleDTOnew.getCcClient());
-
-        System.out.println(saleDTOcurrent.getCcSeller());
-        System.out.println(saleDTOnew.getCcSeller());
-        System.out.println(saleDTOcurrent.getCcSeller()==saleDTOnew.getCcSeller());
-
-        System.out.println(saleDTOcurrent.getPayment_method());
-        System.out.println(saleDTOnew.getPayment_method());
-        System.out.println(saleDTOcurrent.getPayment_method()==saleDTOnew.getPayment_method());
 
         if((saleDTOcurrent.getCcClient().equals(saleDTOnew.getCcClient())) &&
                 (saleDTOcurrent.getCcSeller().equals(saleDTOnew.getCcSeller())) &&
