@@ -45,8 +45,8 @@ public class SaleEndpoint {
         try(Connection conn = ConnectionBD.connectDB().getConnection()){
             preparedStatement = conn.prepareStatement("Select Sale.id_sale, Sale.id_worker, Sale.id_customer, Sale.id_headquarter,Sale.id_payment_method, Sale.id_confirmation,Sale.sale_date,Sale.price, \n" +
                     "\tHeadq.name as name_headq,Headq.id_headquarter as id_headquarter, \n" +
-                    "\t\tClient.cc as cc_client, (Client.first_name || ' ' || Client.last_name) AS name_client, Client.cellphone as cellphone_client, Client.email as email_client,\n" +
-                    "\t\t\tSeller.cc as cc_seller, (Seller.first_name || ' ' ||Seller.last_name) AS name_seller, Seller.cellphone as cellphone_seller, Seller.email as email_seller,\n" +
+                    "\t\tClient.cc as cc_client, (Client.first_name || ' ' || Client.last_name) AS name_client, Client.cellphone as cellphone_client,Client.id_person as idClient , Client.email as email_client,\n" +
+                    "\t\t\tSeller.cc as cc_seller, (Seller.first_name || ' ' ||Seller.last_name) AS name_seller, Seller.cellphone as cellphone_seller,Seller.id_person as idSeller , Seller.email as email_seller,\n" +
                     "\t\t\t\tpayment.payment_method as name_method,\n" +
                     "\t\t\t\t\tconfirmation.confirmation_status\n" +
                     "from sale as Sale join headquarter as Headq using(id_headquarter) join person as Client on Sale.id_customer = Client.id_person join person as Seller on Sale.id_worker = Seller.id_person join payment on Sale.id_payment_method = payment.id_payment join confirmation on Sale.id_confirmation = confirmation.id_confirmation WHERE id_sale = ?");
@@ -312,6 +312,27 @@ public class SaleEndpoint {
         }
 
         return response;
+    }
+
+    public Boolean updateVenta(SaleDTO saleDTO){
+        System.out.println("Hago consulta");
+        PreparedStatement preparedStatement = null;
+
+        try (Connection conn = ConnectionBD.connectDB().getConnection()) {
+            preparedStatement = conn.prepareStatement("UPDATE sale set id_customer = ? , id_confirmation = ? ,id_payment_method = ? , price = ?  where id_sale = ? ;");
+            preparedStatement.setInt(1, saleDTO.getId_customer());
+            preparedStatement.setInt(2, saleDTO.getId_confirmation());
+            preparedStatement.setInt(3, saleDTO.getId_payment_method());
+            preparedStatement.setDouble(4, saleDTO.getPrice());
+            preparedStatement.setDouble(5, saleDTO.getId_sale());
+            preparedStatement.executeUpdate();
+            System.out.println("Hago consulta2");
+            return  true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return  false;
+        }
+
     }
 
     public Boolean insertarCarros(Integer id_car,Integer id_sale,Integer quantity){

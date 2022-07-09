@@ -198,28 +198,12 @@ public class AddSaleController implements Initializable {
                     //Map<Boolean, ResultSet> response = createSale(createTableSale());
                     createTableSale();
                     Map<Boolean, ResultSet> response = saleEndpoint.insertarVenta(saleTable);
-/*
-                if (response.containsKey(true)) {
-                    ResultSet resultSet = response.get(true);
 
-                    try {
-                        setClientData(resultSet);
-                        noFound.setText("");
-                    } catch (SQLException e) {
-                        noFound.setText("Cliente no encontrado");
-                        throw new RuntimeException(e);
-
-                    } catch (IOException e) {
-                        noFound.setText("Cliente no encontrado");
-                        throw new RuntimeException(e);
-                    }
-
-                }*/
                     if (response.containsKey(true)) {
                         ResultSet resultSet = response.get(true);
                         try {
 
-                            System.out.println("Supuesto id + "+ resultSet.getInt("id_sale"));
+                           // System.out.println("Supuesto id + "+ resultSet.getInt("id_sale"));
                             // ccClient.setText(resultSet.getString("cc"));
                             carSale(resultSet.getInt("id_Sale"));
 

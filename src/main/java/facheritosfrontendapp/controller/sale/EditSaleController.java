@@ -319,7 +319,7 @@ public class EditSaleController implements Initializable {
     }
 
     @FXML
-    protected  void saveClicked() throws IOException, ExecutionException, InterruptedException{
+    protected  void saveClicked() throws IOException, ExecutionException, InterruptedException, SQLException {
         if(allValidations()) {
             MyDialogPane dialogPane = new MyDialogPane("confirmationSave");
             Optional<ButtonType> clickedButton = dialogPane.getClickedButton();
@@ -329,6 +329,8 @@ public class EditSaleController implements Initializable {
                 saleDTOnew.setCcClient(ccClient.getText());
                 saleDTOnew.setPayment_method(typeCombobox.getValue());
                 saleCarRowViewNew = saleCarRowsArray2;
+                saleDTOnew.setId_sale(Integer.valueOf(idSaleLabel.getText()));
+                createTableSale();
 
                 if(compareQuotationsCars() && compareQuotationsData()){
                         Alert success = new Alert(Alert.AlertType.CONFIRMATION, "No hay cambios para hacer", OK);
@@ -336,6 +338,30 @@ public class EditSaleController implements Initializable {
                 }else{
 
                     try{
+                        System.out.println(saleDTOnew.getId_confirmation());
+                        System.out.println(saleDTOnew.getId_headquarter());
+                        System.out.println(saleDTOnew.getId_worker());
+                        /*
+                        saleEndpoint.updateVenta(saleDTOnew);
+                        System.out.println(saleEndpoint.updateVenta(saleDTOnew));
+                        //Boolean response = saleEndpoint.updateVenta(saleDTOnew);*/
+
+
+                        System.out.println("DEBO entrar");
+
+                        new Thread(() -> {
+                            CompletableFuture<Boolean> updateQuotationCall = CompletableFuture.supplyAsync(() -> saleEndpoint.updateVenta(saleDTOnew));
+                            try {
+                                if(updateQuotationCall.get()){
+
+                                }
+
+                            } catch (InterruptedException e) {
+                                throw new RuntimeException(e);
+                            } catch (ExecutionException e) {
+                                throw new RuntimeException(e);
+                            }
+                        }).start();
 
                         Alert success = new Alert(Alert.AlertType.CONFIRMATION, "Solicitud enviada al gerente", OK);
                         success.show();
@@ -437,7 +463,10 @@ public class EditSaleController implements Initializable {
     public void getCurrentSale(SaleDTO saleDTO, ArrayList<SaleCarRowView> saleCarRowView){
         saleDTOcurrent = saleDTO;
         saleCarRowViewCurrent = saleCarRowView;
-
+        saleDTOnew.setId_headquarter(saleDTOcurrent.getId_headquarter());
+        saleDTOnew.setId_worker(saleDTOcurrent.getId_worker());
+        saleDTOnew.setId_customer(saleDTOcurrent.getId_customer());
+        System.out.println(saleDTOcurrent.getId_worker());
         System.out.println(saleCarRowView);
     }
 
@@ -626,11 +655,34 @@ public class EditSaleController implements Initializable {
         }).start();
     }
 
+    public SaleDTO createTableSale() throws SQLException {
+
+
+        Integer pay;
+        if(typeCombobox.getValue()  == "Tarjeta de credito"){
+            pay=1;
+        }else{
+            pay =2;
+        }
+
+        saleDTOnew.setId_payment_method(pay);
+
+        saleDTOnew.setId_confirmation(1);
+
+        saleDTOnew.setPrice(Double.valueOf(priceLabel.getText()));
+
+        return saleDTOnew;
+    }
+
     public void setClientData(ResultSet resultSet) throws SQLException, IOException {
 
         try {
             ccClient.setText(resultSet.getString("cc"));
             clientCC = resultSet.getString("cc");
+
+            saleDTOnew.setId_customer(Integer.valueOf(resultSet.getString("id_person")));
+
+
 
             nameClient.setText(resultSet.getString("first_name")+" "+resultSet.getString("last_name"));
 

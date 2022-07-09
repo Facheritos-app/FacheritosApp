@@ -137,4 +137,6 @@ public class SaleDTO {
     public void setPayment_method(String payment_method) {
         this.payment_method = payment_method;
     }
+
+
 }

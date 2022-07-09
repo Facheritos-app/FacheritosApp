@@ -184,6 +184,8 @@ public class SaleSingleViewController implements Initializable{
 
         idNumber.setText(String.valueOf(resultSet.getInt("id_sale")));
         head.setText(String.valueOf(resultSet.getInt("id_headquarter")));
+        saleDTOCurrent.setId_headquarter(resultSet.getInt("id_headquarter"));
+
         labelCosto.setText(resultSet.getString("price"));
         idHeadq.setText(resultSet.getString("name_headq"));
         dateSale.setText(resultSet.getString("sale_date"));
@@ -195,12 +197,14 @@ public class SaleSingleViewController implements Initializable{
 
         ccSeller.setText(resultSet.getString("cc_seller"));
         saleDTOCurrent.setCcSeller(resultSet.getString("cc_seller"));
+        saleDTOCurrent.setId_worker(resultSet.getInt("id_worker"));
 
         nameSeller.setText(resultSet.getString("name_seller"));
         emailSeller.setText(resultSet.getString("email_seller"));
 
         ccClient.setText(resultSet.getString("cc_client"));
         saleDTOCurrent.setCcClient(resultSet.getString("cc_client"));
+        saleDTOCurrent.setId_customer(Integer.valueOf(resultSet.getString("idClient")));
 
         nameClient.setText(resultSet.getString("name_client"));
         cellphoneClient.setText(resultSet.getString("cellphone_client"));
