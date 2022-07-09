@@ -279,7 +279,7 @@ public class EditSaleController implements Initializable {
 
         ccClient.setText(resultSet.getString("cc_client"));
         clientCC = resultSet.getString("cc_client");
-        System.out.println("Cedula cliente"+ clientCC);
+
         nameClient.setText(resultSet.getString("name_client"));
         numberClient.setText(resultSet.getString("cellphone_client"));
         emailClient.setText(resultSet.getString("email_client"));
@@ -338,16 +338,14 @@ public class EditSaleController implements Initializable {
                 }else{
 
                     try{
-                        System.out.println(saleDTOnew.getId_confirmation());
-                        System.out.println(saleDTOnew.getId_headquarter());
-                        System.out.println(saleDTOnew.getId_worker());
+
                         /*
                         saleEndpoint.updateVenta(saleDTOnew);
                         System.out.println(saleEndpoint.updateVenta(saleDTOnew));
                         //Boolean response = saleEndpoint.updateVenta(saleDTOnew);*/
 
 
-                        System.out.println("DEBO entrar");
+
 
                         new Thread(() -> {
                             CompletableFuture<Boolean> updateQuotationCall = CompletableFuture.supplyAsync(() -> saleEndpoint.updateVenta(saleDTOnew));
@@ -392,7 +390,7 @@ public class EditSaleController implements Initializable {
 
 
             } else {
-                System.out.println("No");
+
 
 
             }
@@ -403,17 +401,17 @@ public class EditSaleController implements Initializable {
     public void borrarCarrosNew(){
         for(int i =0;i < saleCarRowViewCurrent.size(); i++){
             if(buscaR(saleCarRowsArray2,saleCarRowViewCurrent.get(i).getIdCar())){
-                System.out.println("Lo encontro");
+
                 if(buscaR2(saleCarRowsArray2,saleCarRowViewCurrent.get(i).getIdCar(),saleCarRowViewCurrent.get(i).getQuantity())){
-                    System.out.println("Lo encontro y son iguales");
+
                 }else{
-                    System.out.println("Lo encontro pero no son iguales");
+
                     //cuidado
 
                     buscar3(saleCarRowsArray,saleCarRowViewCurrent.get(i).getIdCar());
                 }
             }else{
-                System.out.println("No lo encontro");
+
                 saleEndpoint.borrarCarros(saleDTOnew,saleCarRowViewCurrent.get(i).getIdCar());
                 saleEndpoint.changeCarsQuantityReject(saleCarRowViewCurrent.get(i).getIdCar(),saleCarRowViewCurrent.get(i).getQuantity(),saleDTOcurrent.getId_headquarter());
             }
@@ -421,18 +419,18 @@ public class EditSaleController implements Initializable {
 
         for(int i =0;i < saleCarRowsArray2.size(); i++){
             if(buscaR(saleCarRowViewCurrent,saleCarRowsArray2.get(i).getIdCar())){
-                System.out.println("No hay un nuevo carro en la venta");
+
                 if(buscaR2(saleCarRowViewCurrent,saleCarRowsArray2.get(i).getIdCar(),saleCarRowsArray2.get(i).getQuantity())){
-                    System.out.println("Lo encontro y son iguales");
+
                 }else{
-                    System.out.println("Lo encontro pero no son iguales");
+
                     //cuidado
                     saleEndpoint.updateSaleCar(saleCarRowsArray2.get(i).getQuantity(),saleCarRowsArray2.get(i).getIdCar(),Integer.valueOf(idSaleLabel.getText()));
 
                 }
 
             }else{
-                System.out.println("Hay un nuevo carro en la venta");
+
                 saleEndpoint.insertarCarros(saleCarRowsArray2.get(i).getIdCar(), Integer.valueOf(idSaleLabel.getText()),saleCarRowsArray2.get(i).getQuantity());
                 saleEndpoint.changeCarsQuantityRestar(saleCarRowsArray2.get(i).getIdCar(), Double.valueOf(saleCarRowsArray2.get(i).getQuantity()),saleDTOcurrent.getId_headquarter());
             }
@@ -504,7 +502,7 @@ public class EditSaleController implements Initializable {
         if((saleDTOcurrent.getCcClient().equals(saleDTOnew.getCcClient())) &&
                 (saleDTOcurrent.getCcSeller().equals(saleDTOnew.getCcSeller())) &&
                 (saleDTOcurrent.getPayment_method().equals(saleDTOnew.getPayment_method()))){
-            System.out.println("Entre");
+
             return true;
         }
 
@@ -513,19 +511,18 @@ public class EditSaleController implements Initializable {
     }
 
     public Boolean compareQuotationsCars(){
-        System.out.println(saleCarRowViewCurrent.size());
-        System.out.println(saleCarRowViewNew.size());
+
 
         if(saleCarRowViewCurrent.size() != saleCarRowViewNew.size()){
-            System.out.println("No");
+
             return false;
 
         }else{
             for (Integer i =0; i < saleCarRowViewCurrent.size() ;i++){
                 if(buscar2(saleCarRowViewNew,saleCarRowViewCurrent.get(i).getIdCar(),saleCarRowViewCurrent.get(i).getQuantity())){
-                    System.out.println("Si");
+
                 }else{
-                    System.out.println("No2");
+
                     return false;
                 }
             }
@@ -567,8 +564,7 @@ public class EditSaleController implements Initializable {
         saleDTOnew.setId_headquarter(saleDTOcurrent.getId_headquarter());
         saleDTOnew.setId_worker(saleDTOcurrent.getId_worker());
         saleDTOnew.setId_customer(saleDTOcurrent.getId_customer());
-        System.out.println(saleDTOcurrent.getId_worker());
-        System.out.println(saleCarRowView);
+
     }
 
     public void cleanErrors() {
@@ -624,7 +620,7 @@ public class EditSaleController implements Initializable {
                     }
 
                 }else {
-                        System.out.println("Tamaño1 "+saleCarRowsArray2.size());
+
 
                         SaleCarRowView car = new SaleCarRowView(selectedCar.getIdCar(), selectedCar.getModel(), selectedCar.getColor(),
                                 selectedCar.getPrice(),
@@ -632,7 +628,7 @@ public class EditSaleController implements Initializable {
 
                         saleCarRowsArray2.add(car);
                         carTableViewSell.getItems().add(car);
-                        System.out.println("Tamaño2 "+saleCarRowsArray2.size());
+
                         saleCarRowsArray2.get(saleCarRowsArray2.size()-1).setQuantity(1);
                         carTableViewSell.refresh();
                     }
@@ -667,8 +663,7 @@ public class EditSaleController implements Initializable {
             deleteLabel.setText("");
 
             Integer idSelect = selectedCar.getIdCar().intValue();
-            System.out.println("Mi id car"+idSelect);
-            System.out.println("Deberia ser 2 "+saleCarRowsArray.size());
+
             for (int i=0 ; i< saleCarRowsArray.size(); i++){
                 if(idSelect==saleCarRowsArray.get(i).getIdCar()){
                     saleCarRowsArray.get(i).setQuantity( Integer.valueOf(saleCarRowsArray.get(i).getQuantity())+1);
@@ -682,7 +677,7 @@ public class EditSaleController implements Initializable {
                     if(saleCarRowsArray2.get(i).getQuantity()-1==0){
                         carTableViewSell.getItems().remove(selectedCar);
                         saleCarRowsArray2.remove(i);
-                        System.out.println("tamaño de 2 "+saleCarRowsArray2.size());
+
                     }else{
                         saleCarRowsArray2.get(i).setQuantity( Integer.valueOf(saleCarRowsArray2.get(i).getQuantity())-1);
                         carTableViewSell.refresh();
@@ -712,30 +707,29 @@ public class EditSaleController implements Initializable {
 
                             try {
                                 setClientData(resultSet);
-                                System.out.println("Busquedad exitosa");
-                                System.out.println("cedula del cliente "+clientCC);
+
 
                             } catch (SQLException e) {
                                 //Alert fail = new Alert(Alert.AlertType.ERROR, "No se ha encontrado la cedula del trabajador o no es una cédula válida, por favor intenta nuevamente", OK);
                                 //fail.show();
                                 showClient(clientCC);
-                                System.out.println("Busquedad mala catch SQL");
+
                                 throw new RuntimeException(e);
 
                             } catch (IOException e) {
                                // Alert fail = new Alert(Alert.AlertType.ERROR, "No se ha encontrado la cedula del trabajador o no es una cédula válida, por favor intenta nuevamente", OK);
                                 //fail.show();
                                 showClient(clientCC);
-                                System.out.println("Busquedad mals catch fail");
+
                                 throw new RuntimeException(e);
                             }
 
                         }else{
                         Alert fail = new Alert(Alert.AlertType.ERROR, "No se ha encontrado la cedula del trabajador o no es una cédula válida, por favor intenta nuevamente", OK);
                         fail.show();
-                        System.out.println("else de result");
+
                         showClient(clientCC);
-                        System.out.println("cedula del cliente "+clientCC);
+
                     }
                     });
                     return true;
@@ -796,7 +790,7 @@ public class EditSaleController implements Initializable {
 
     @FXML
     public void editClientClicked(){
-        System.out.println("llegue");
+
         ccClient.setText("");
         nameClient.setText("");
         numberClient.setText("");
@@ -814,7 +808,7 @@ public class EditSaleController implements Initializable {
     }
 
     public void showSaleCars(Integer idHeadquarter){
-        System.out.println(idHeadquarter);
+
         new Thread(() -> {
             CompletableFuture<Map<Boolean, ResultSet>> vehicleCall = CompletableFuture.supplyAsync(() -> saleEndpoint.getCar(idHeadquarter));
             try {

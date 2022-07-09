@@ -449,17 +449,16 @@ public class AddSaleController implements Initializable {
                 //carTableView.refresh();
 
                 Integer idSelect = selectedCar.getIdCar().intValue();
-                System.out.println("Mi id car"+idSelect);
-                System.out.println("Deberia ser 2 "+saleCarRowsArray.size());
+
                 for (int i=0 ; i< saleCarRowsArray.size(); i++){
                     if(idSelect==saleCarRowsArray.get(i).getIdCar()){
                         saleCarRowsArray.get(i).setQuantity( Integer.valueOf(saleCarRowsArray.get(i).getQuantity())-1);
                         carTableView.refresh();
-                        System.out.println("cantidad" + saleCarRowsArray.get(i).getQuantity());
 
-                        System.out.println("Entre al if del for");
+
+
                     }
-                    System.out.println("Entre al for");
+
                 }
 
                // carTableViewSell.getItems().add(selectedCar);
@@ -476,7 +475,7 @@ public class AddSaleController implements Initializable {
                     }
 
                 }else {
-                    System.out.println("Tamaño1 "+saleCarRowsArray2.size());
+
 
                     SaleCarRowView car = new SaleCarRowView(selectedCar.getIdCar(), selectedCar.getModel(), selectedCar.getColor(),
                             selectedCar.getPrice(),
@@ -484,7 +483,7 @@ public class AddSaleController implements Initializable {
 
                     saleCarRowsArray2.add(car);
                     carTableViewSell.getItems().add(car);
-                    System.out.println("Tamaño2 "+saleCarRowsArray2.size());
+
                     saleCarRowsArray2.get(saleCarRowsArray2.size()-1).setQuantity(1);
                     carTableViewSell.refresh();
                 }
@@ -526,17 +525,14 @@ public class AddSaleController implements Initializable {
 
             //selectedCar.setQuantity(selectedCar.getQuantity()+1);
             Integer idSelect = selectedCar.getIdCar().intValue();
-            System.out.println("Mi id car"+idSelect);
-            System.out.println("Deberia ser 2 "+saleCarRowsArray.size());
+
             for (int i=0 ; i< saleCarRowsArray.size(); i++){
                 if(idSelect==saleCarRowsArray.get(i).getIdCar()){
                     saleCarRowsArray.get(i).setQuantity( Integer.valueOf(saleCarRowsArray.get(i).getQuantity())+1);
                     carTableView.refresh();
-                    System.out.println("cantidad" + saleCarRowsArray.get(i).getQuantity());
 
-                    System.out.println("Entre al if del for");
                 }
-                System.out.println("Entre al for");
+
             }
 
             for (int i=0 ; i< saleCarRowsArray2.size(); i++){
@@ -544,7 +540,7 @@ public class AddSaleController implements Initializable {
                     if(saleCarRowsArray2.get(i).getQuantity()-1==0){
                         carTableViewSell.getItems().remove(selectedCar);
                         saleCarRowsArray2.remove(i);
-                        System.out.println("tamaño de 2 "+saleCarRowsArray2.size());
+
                     }else{
                         saleCarRowsArray2.get(i).setQuantity( Integer.valueOf(saleCarRowsArray2.get(i).getQuantity())-1);
                         carTableViewSell.refresh();
@@ -623,7 +619,7 @@ public class AddSaleController implements Initializable {
 
     @FXML
     public void editClientClicked(){
-        System.out.println("llegue");
+
         ccClient.setText("");
         nameClient.setText("");
         numberClient.setText("");
@@ -730,7 +726,7 @@ public class AddSaleController implements Initializable {
     }
 
     public Map<Boolean, ResultSet> createSale(SaleDTO sale) throws ExecutionException, InterruptedException, SQLException {
-            System.out.println("prueba 3" + saleEndpoint.insertarVenta(sale).get(1).getInt("id_sale"));
+
             return CompletableFuture.supplyAsync(() -> saleEndpoint.insertarVenta(sale)).get();
 
     }
