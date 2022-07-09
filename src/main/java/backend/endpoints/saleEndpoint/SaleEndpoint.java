@@ -5,10 +5,7 @@ import backend.dto.inventoryDTO.VehicleDTO;
 import backend.dto.saleDTO.SaleConfirmationDTO;
 import backend.dto.saleDTO.SaleDTO;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -335,6 +332,40 @@ public class SaleEndpoint {
 
     }
 
+    public Boolean updateSaleCar(Integer newQuantiy, Integer idCar, Integer idSale){
+        PreparedStatement preparedStatement = null;
+
+        try (Connection conn = ConnectionBD.connectDB().getConnection()) {
+            preparedStatement = conn.prepareStatement("update sale_car set quantity = ?\n" +
+                    "where id_car = ? and id_sale = ?");
+            preparedStatement.setInt(1, newQuantiy);
+            preparedStatement.setInt(2, idCar);
+            preparedStatement.setInt(3,  idSale);
+            preparedStatement.executeUpdate();
+            return  true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return  false;
+        }
+    }
+
+    public Boolean updateSaleHeadquarter(Integer newQuantiy, Integer idCar, Integer idHead){
+        PreparedStatement preparedStatement = null;
+
+        try (Connection conn = ConnectionBD.connectDB().getConnection()) {
+            preparedStatement = conn.prepareStatement("update car_headquarter set quantity = ?\n" +
+                    "where id_car = ? and id_headquarter = ?");
+            preparedStatement.setInt(1, newQuantiy);
+            preparedStatement.setInt(2, idCar);
+            preparedStatement.setInt(3,  idHead);
+            preparedStatement.executeUpdate();
+            return  true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return  false;
+        }
+    }
+
     public Boolean insertarCarros(Integer id_car,Integer id_sale,Integer quantity){
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
@@ -353,5 +384,22 @@ public class SaleEndpoint {
         }
 
     }
+
+    public Boolean borrarCarros(SaleDTO saleDTO, Integer idCar){
+        PreparedStatement preparedStatement = null;
+        try(Connection conn = ConnectionBD.connectDB().getConnection()){
+            preparedStatement = conn.prepareStatement("delete from sale_car\n" +
+                    "  where id_sale= ? and id_car = ?");
+            preparedStatement.setInt(1, saleDTO.getId_sale());
+            preparedStatement.setInt(2, idCar);
+            preparedStatement.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+
 
 }

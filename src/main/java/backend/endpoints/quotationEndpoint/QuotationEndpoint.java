@@ -85,6 +85,7 @@ public class QuotationEndpoint {
             preparedStatement.setInt(5, quotation.getIdPayment());
             preparedStatement.setInt(6, quotation.getIdQuotation());
             preparedStatement.executeUpdate();
+
             return true;
         } catch (SQLException e) {
             e.printStackTrace();

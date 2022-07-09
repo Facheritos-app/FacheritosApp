@@ -353,6 +353,7 @@ public class EditSaleController implements Initializable {
                             CompletableFuture<Boolean> updateQuotationCall = CompletableFuture.supplyAsync(() -> saleEndpoint.updateVenta(saleDTOnew));
                             try {
                                 if(updateQuotationCall.get()){
+                                    borrarCarrosNew();
 
                                 }
 
@@ -363,17 +364,26 @@ public class EditSaleController implements Initializable {
                             }
                         }).start();
 
-                        Alert success = new Alert(Alert.AlertType.CONFIRMATION, "Solicitud enviada al gerente", OK);
-                        success.show();
+                            try {
 
+                                saleSingleViewController = (SaleSingleViewController) dashboardController.changeContent("sales/salesSingleView", true);
+                                saleSingleViewController.showSaleData(Integer.valueOf(idSaleLabel.getText()));
+                                saleSingleViewController.showQuantity(Integer.valueOf(idSaleLabel.getText()));
+                                saleSingleViewController.showSaleCars(Integer.valueOf(idSaleLabel.getText()));
+                                saleSingleViewController.alter();
+                            } catch (IOException e) {
+                                throw new RuntimeException(e);
+                            }
+                        /*
                         try {
+
                             saleSingleViewController = (SaleSingleViewController) dashboardController.changeContent("sales/salesSingleView", true);
                             saleSingleViewController.showSaleData(Integer.valueOf(idSaleLabel.getText()));
                             saleSingleViewController.showQuantity(Integer.valueOf(idSaleLabel.getText()));
                             saleSingleViewController.showSaleCars(Integer.valueOf(idSaleLabel.getText()));
                         } catch (IOException e) {
                             throw new RuntimeException(e);
-                        }
+                        }*/
                     }catch (Exception e){
 
                     }
@@ -392,6 +402,105 @@ public class EditSaleController implements Initializable {
             }
         }
     }
+
+    //actualizar los carro de las ventas
+    public void borrarCarrosNew(){
+        for(int i =0;i < saleCarRowViewCurrent.size(); i++){
+            if(buscaR(saleCarRowsArray2,saleCarRowViewCurrent.get(i).getIdCar())){
+                System.out.println("Lo encontro");
+                if(buscaR2(saleCarRowsArray2,saleCarRowViewCurrent.get(i).getIdCar(),saleCarRowViewCurrent.get(i).getQuantity())){
+                    System.out.println("Lo encontro y son iguales");
+                }else{
+                    System.out.println("Lo encontro pero no son iguales");
+                    //cuidado
+
+                    buscar3(saleCarRowsArray,saleCarRowViewCurrent.get(i).getIdCar());
+                }
+            }else{
+                System.out.println("No lo encontro");
+                saleEndpoint.borrarCarros(saleDTOnew,saleCarRowViewCurrent.get(i).getIdCar());
+                saleEndpoint.changeCarsQuantityReject(saleCarRowViewCurrent.get(i).getIdCar(),saleCarRowViewCurrent.get(i).getQuantity(),saleDTOcurrent.getId_headquarter());
+            }
+        }
+
+        for(int i =0;i < saleCarRowsArray2.size(); i++){
+            if(buscaR(saleCarRowViewCurrent,saleCarRowsArray2.get(i).getIdCar())){
+                System.out.println("No hay un nuevo carro en la venta");
+                if(buscaR2(saleCarRowViewCurrent,saleCarRowsArray2.get(i).getIdCar(),saleCarRowsArray2.get(i).getQuantity())){
+                    System.out.println("Lo encontro y son iguales");
+                }else{
+                    System.out.println("Lo encontro pero no son iguales");
+                    //cuidado
+                    saleEndpoint.updateSaleCar(saleCarRowsArray2.get(i).getQuantity(),saleCarRowsArray2.get(i).getIdCar(),Integer.valueOf(idSaleLabel.getText()));
+
+                }
+
+            }else{
+                System.out.println("Hay un nuevo carro en la venta");
+                saleEndpoint.insertarCarros(saleCarRowsArray2.get(i).getIdCar(), Integer.valueOf(idSaleLabel.getText()),saleCarRowsArray2.get(i).getQuantity());
+                saleEndpoint.changeCarsQuantityRestar(saleCarRowsArray2.get(i).getIdCar(), Double.valueOf(saleCarRowsArray2.get(i).getQuantity()),saleDTOcurrent.getId_headquarter());
+            }
+        }
+    }
+
+    private Boolean buscaR( ArrayList<SaleCarRowView> saleCarRowsView, Integer id){
+        Boolean saber = false;
+        for (Integer i =0;i <  saleCarRowsView.size() ;i++ ){
+            if(id==saleCarRowsView.get(i).getIdCar()){
+                return true;
+            }
+        }
+        return saber;
+    }
+
+    private Boolean buscaR2( ArrayList<SaleCarRowView> saleCarRowsView, Integer id, Integer quantity){
+        Boolean saber = false;
+        for (Integer i =0;i <  saleCarRowsView.size() ;i++ ){
+            if(id==saleCarRowsView.get(i).getIdCar()){
+                if(saleCarRowsView.get(i).getQuantity()==quantity){
+                    return true;
+                }else {
+                    return false;
+                }
+
+            }
+        }
+        return saber;
+    }
+
+    private void buscar3( ArrayList<SaleCarRowView> saleCarRowsView, Integer id){
+        for (Integer i =0;i <  saleCarRowsView.size() ;i++ ){
+            if(id==saleCarRowsView.get(i).getIdCar()){
+                saleEndpoint.updateSaleHeadquarter(saleCarRowsArray.get(i).getQuantity(),saleCarRowsArray.get(i).getIdCar(),saleDTOcurrent.getId_headquarter());
+            }
+        }
+    }
+    private Boolean buscar( ArrayList<SaleCarRowView> saleCarRowsView, Integer id){
+        Boolean saber = false;
+        for (Integer i =0;i <  saleCarRowsView.size() ;i++ ){
+            if(id==saleCarRowsArray2.get(i).getIdCar()){
+                return true;
+            }
+        }
+        return saber;
+    }
+
+    private Boolean buscar2( ArrayList<SaleCarRowView> saleCarRowsView, Integer id, Integer quantity){
+        Boolean saber = false;
+        for (Integer i =0;i <  saleCarRowsView.size() ;i++ ){
+            if(id==saleCarRowsArray2.get(i).getIdCar()){
+                if(saleCarRowsArray2.get(i).getQuantity()==quantity){
+                    return true;
+                }else {
+                    return false;
+                }
+
+            }
+        }
+        return saber;
+    }
+
+
 
     public Boolean compareQuotationsData(){
 
@@ -428,20 +537,8 @@ public class EditSaleController implements Initializable {
         return true;
     }
 
-    private Boolean buscar2( ArrayList<SaleCarRowView> saleCarRowsView, Integer id, Integer quantity){
-        Boolean saber = false;
-        for (Integer i =0;i <  saleCarRowsView.size() ;i++ ){
-            if(id==saleCarRowsArray2.get(i).getIdCar()){
-                if(saleCarRowsArray2.get(i).getQuantity()==quantity){
-                    return true;
-                }else {
-                    return false;
-                }
 
-            }
-        }
-        return saber;
-    }
+
     public Boolean allValidations() {
         cleanErrors();
         Boolean everythingCorrect = true;
@@ -459,6 +556,7 @@ public class EditSaleController implements Initializable {
 
         return everythingCorrect;
     }
+
 
     public void getCurrentSale(SaleDTO saleDTO, ArrayList<SaleCarRowView> saleCarRowView){
         saleDTOcurrent = saleDTO;
@@ -543,15 +641,7 @@ public class EditSaleController implements Initializable {
         }
     }
 
-    private Boolean buscar( ArrayList<SaleCarRowView> saleCarRowsView, Integer id){
-        Boolean saber = false;
-        for (Integer i =0;i <  saleCarRowsView.size() ;i++ ){
-            if(id==saleCarRowsArray2.get(i).getIdCar()){
-                return true;
-            }
-        }
-        return saber;
-    }
+
 
     @FXML
     protected void searchClientClicked(){
