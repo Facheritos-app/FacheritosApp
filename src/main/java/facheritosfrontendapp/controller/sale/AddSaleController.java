@@ -32,6 +32,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.atomic.AtomicReference;
 
+import static javafx.scene.control.ButtonType.OK;
 import static javafx.scene.control.ButtonType.YES;
 
 public class AddSaleController implements Initializable {
@@ -229,6 +230,8 @@ public class AddSaleController implements Initializable {
             try {
                 saleController = (SaleController) dashboardController.changeContent("sales/sales");
                 saleController.showSales();
+                saleController.alter();
+
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }

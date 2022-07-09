@@ -365,25 +365,21 @@ public class EditSaleController implements Initializable {
                         }).start();
 
                             try {
-
+                                saleController = (SaleController) dashboardController.changeContent("sales/sales");
+                                saleController.showSales();
+                                Alert success = new Alert(Alert.AlertType.CONFIRMATION, "Solicitud enviada al gerente", OK);
+                                success.show();
+                                /*
+                                No hay buena concurrencia
                                 saleSingleViewController = (SaleSingleViewController) dashboardController.changeContent("sales/salesSingleView", true);
                                 saleSingleViewController.showSaleData(Integer.valueOf(idSaleLabel.getText()));
                                 saleSingleViewController.showQuantity(Integer.valueOf(idSaleLabel.getText()));
                                 saleSingleViewController.showSaleCars(Integer.valueOf(idSaleLabel.getText()));
-                                saleSingleViewController.alter();
+                                saleSingleViewController.alter();*/
                             } catch (IOException e) {
                                 throw new RuntimeException(e);
                             }
-                        /*
-                        try {
 
-                            saleSingleViewController = (SaleSingleViewController) dashboardController.changeContent("sales/salesSingleView", true);
-                            saleSingleViewController.showSaleData(Integer.valueOf(idSaleLabel.getText()));
-                            saleSingleViewController.showQuantity(Integer.valueOf(idSaleLabel.getText()));
-                            saleSingleViewController.showSaleCars(Integer.valueOf(idSaleLabel.getText()));
-                        } catch (IOException e) {
-                            throw new RuntimeException(e);
-                        }*/
                     }catch (Exception e){
 
                     }
@@ -871,6 +867,7 @@ public class EditSaleController implements Initializable {
        /* (Integer idSale, String nameSeller, String nameClient, Date dateSeller, String paymentMethod,String headquarter,
                 Double priceSale)*/
         Double precio= 0.0;
+        Integer cantidad2 =0;
         while(resultSet.next()){
             //Create the object that will contain all the data shown on the table
             SaleCarRowView car = new SaleCarRowView(resultSet.getInt("id_car"), resultSet.getString("description"), resultSet.getString("color"),
@@ -881,11 +878,13 @@ public class EditSaleController implements Initializable {
             while(resultSet.getInt("quantity")>=i){
                  //Add every element to the array.
                 precio = precio + car.getPrice();
+                    cantidad2 = cantidad2 +1;
                 i++;
             }
 
         }
-        cantidad.setText(String.valueOf(saleCarRowsArray2.size()));
+        //cantidad.setText(String.valueOf(saleCarRowsArray2.size()));
+        cantidad.setText(String.valueOf(cantidad2));
         priceLabel.setText(String.valueOf(precio));
 
 

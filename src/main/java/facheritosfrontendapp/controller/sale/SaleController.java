@@ -10,6 +10,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -27,6 +28,8 @@ import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
+
+import static javafx.scene.control.ButtonType.OK;
 
 public class SaleController implements Initializable {
 
@@ -75,6 +78,11 @@ public class SaleController implements Initializable {
         saleSingleViewController = new SaleSingleViewController();
         addSaleController =  new AddSaleController();
         saleObList = FXCollections.observableArrayList();
+    }
+
+    public void alter(){;
+        Alert success = new Alert(Alert.AlertType.CONFIRMATION, "Solicitud enviada al gerente", OK);
+        success.show();
     }
 
     @Override
