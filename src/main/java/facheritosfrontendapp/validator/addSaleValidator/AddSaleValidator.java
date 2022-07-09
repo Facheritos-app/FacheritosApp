@@ -32,9 +32,15 @@ public class AddSaleValidator {
         new animatefx.animation.Shake(tabla).play();
     }
 
+    public void setErrorStyles(Button searchClient, Label noFound) {
+        searchClient.setStyle(getErrorStyle());
+        noFound.setStyle(getErrorMessageStyle());
+        new animatefx.animation.Shake(searchClient).play();
+    }
+/*
     public Boolean client(TextField nameTextField, Label nameLabel, String nameLabelContent){
         Boolean correct = false;
-        if(nameTextField.getText().isEmpty() ){
+        if(nameTextField.i){
             nameLabel.setText(nameLabelContent);
         }else {
             correct = true;
@@ -43,7 +49,7 @@ public class AddSaleValidator {
         return correct;
 
     }
-
+*/
 
     public String getErrorStyle() {
         return errorStyle;
@@ -52,6 +58,8 @@ public class AddSaleValidator {
     public String getErrorMessageStyle() {
         return errorMessageStyle;
     }
+
+
 }
 
 

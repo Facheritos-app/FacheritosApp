@@ -310,10 +310,21 @@ public class AddSaleController implements Initializable {
     public Boolean allValidations() {
         cleanErrors();
         Boolean everythingCorrect = true;
+        if (nameClient.getText().isEmpty()) {
+            everythingCorrect = false;
+            noFound.setText("Ingrese un cliente, por favor");
+            inputValidator.setErrorStyles(searchClient, noFound);
+        }
+        /*
         if (!inputValidator.client(ccClient, noFound, "Ingrese un cliente, por favor")) {
             everythingCorrect = false;
             inputValidator.setErrorStyles(ccClient, noFound);
         }
+
+        if (!inputValidator.client(ccClient, noFound, "Ingrese datos completos del cliente, por favor")) {
+            everythingCorrect = false;
+            inputValidator.setErrorStyles(nameClient, noFound);
+        }*/
         if (typeCombobox.getSelectionModel().isEmpty()) {
             everythingCorrect = false;
             noFoundPay.setText("Por favor indique un metodo de pago");

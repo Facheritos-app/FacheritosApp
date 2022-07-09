@@ -538,10 +538,17 @@ public class EditSaleController implements Initializable {
     public Boolean allValidations() {
         cleanErrors();
         Boolean everythingCorrect = true;
-        if (!inputValidator.client(ccClient, noFound, "Ingrese un cliente, por favor")) {
+
+        if (nameClient.getText().isEmpty()) {
             everythingCorrect = false;
-            inputValidator.setErrorStyles(ccClient, noFound);
+            noFound.setText("Ingrese un cliente, por favor");
+            inputValidator.setErrorStyles(searchClient, noFound);
         }
+        /*
+        if (!inputValidator.client(searchClient, noFound, "Ingrese un cliente, por favor")) {
+            everythingCorrect = false;
+            inputValidator.setErrorStyles(searchClient, noFound);
+        }*/
 
         if (saleCarRowsArray2.size()==0) {
             everythingCorrect = false;
