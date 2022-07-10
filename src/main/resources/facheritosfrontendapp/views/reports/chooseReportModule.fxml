@@ -17,7 +17,7 @@
             <Font name="System Bold" size="36.0" />
          </font>
       </Label>
-      <HBox layoutX="13.0" layoutY="153.0" prefHeight="202.0" prefWidth="612.0">
+      <HBox layoutX="18.0" layoutY="135.0" prefHeight="202.0" prefWidth="612.0">
          <opaqueInsets>
             <Insets />
          </opaqueInsets>
@@ -27,12 +27,12 @@
          <children>
             <VBox onMouseClicked="#sellersClicked" prefHeight="202.0" prefWidth="190.0" styleClass="card" stylesheets="@../style.css">
                <children>
-                  <ImageView fitHeight="55.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="75.0" fitWidth="79.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../icons/sales-coins.png" />
+                        <Image url="@../../icons/icon-seller.png" />
                      </image>
                      <VBox.margin>
-                        <Insets left="65.0" top="30.0" />
+                        <Insets left="60.0" top="30.0" />
                      </VBox.margin>
                   </ImageView>
                   <Label prefHeight="35.0" prefWidth="142.0" text="Vendedores">
@@ -40,86 +40,18 @@
                         <Font name="System Bold" size="24.0" />
                      </font>
                      <VBox.margin>
-                        <Insets left="30.0" top="10.0" />
+                        <Insets left="30.0" top="5.0" />
                      </VBox.margin>
                   </Label>
-                  <Label contentDisplay="BOTTOM" ellipsisString="" prefHeight="44.0" prefWidth="140.0" text="Listado de las últimas ventas realizadas." textAlignment="CENTER" wrapText="true">
+                  <Label contentDisplay="BOTTOM" ellipsisString="" prefHeight="44.0" prefWidth="140.0" text="Listado de vendedores" textAlignment="CENTER" wrapText="true">
                      <VBox.margin>
-                        <Insets left="30.0" top="10.0" />
+                        <Insets left="30.0" />
                      </VBox.margin>
                      <font>
                         <Font size="13.0" />
                      </font>
                   </Label>
                </children>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </VBox>
-            <VBox prefHeight="202.0" prefWidth="190.0" styleClass="card" stylesheets="@../style.css">
-               <children>
-                  <ImageView fitHeight="55.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../icons/request.png" />
-                     </image>
-                     <VBox.margin>
-                        <Insets left="65.0" top="30.0" />
-                     </VBox.margin>
-                  </ImageView>
-                  <Label text="Solicitudes">
-                     <font>
-                        <Font name="System Bold" size="24.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets left="35.0" top="10.0" />
-                     </VBox.margin>
-                  </Label>
-                  <Label contentDisplay="BOTTOM" ellipsisString="" prefHeight="44.0" prefWidth="140.0" text="Listado de las últimas solicitudes presentadas." textAlignment="CENTER" wrapText="true">
-                     <VBox.margin>
-                        <Insets left="30.0" top="10.0" />
-                     </VBox.margin>
-                     <font>
-                        <Font size="13.0" />
-                     </font>
-                  </Label>
-               </children>
-               <HBox.margin>
-                  <Insets left="20.0" />
-               </HBox.margin>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </VBox>
-            <VBox prefHeight="202.0" prefWidth="190.0" styleClass="card" stylesheets="@../style.css">
-               <children>
-                  <ImageView fitHeight="55.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../icons/quotations.png" />
-                     </image>
-                     <VBox.margin>
-                        <Insets left="65.0" top="30.0" />
-                     </VBox.margin>
-                  </ImageView>
-                  <Label text="Cotizaciones">
-                     <font>
-                        <Font name="System Bold" size="24.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets left="25.0" top="10.0" />
-                     </VBox.margin>
-                  </Label>
-                  <Label contentDisplay="BOTTOM" ellipsisString="" prefHeight="44.0" prefWidth="140.0" text="Listado de las últimas cotizaciones presentadas." textAlignment="CENTER" wrapText="true">
-                     <VBox.margin>
-                        <Insets left="30.0" top="10.0" />
-                     </VBox.margin>
-                     <font>
-                        <Font size="13.0" />
-                     </font>
-                  </Label>
-               </children>
-               <HBox.margin>
-                  <Insets left="20.0" />
-               </HBox.margin>
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
