@@ -282,10 +282,10 @@ WHERE id_type_person = 2]]>
 		</band>
 	</pageHeader>
 	<columnHeader>
-		<band height="100" splitType="Stretch">
+		<band height="290" splitType="Immediate">
 			<property name="com.jaspersoft.studio.unit.height" value="px"/>
 			<componentElement>
-				<reportElement key="" positionType="FixRelativeToBottom" x="-20" y="0" width="799" height="100" uuid="8dadbbd5-9c30-4db9-9231-fb95b2b199f4">
+				<reportElement key="" positionType="FixRelativeToBottom" stretchType="RelativeToTallestObject" x="-20" y="0" width="799" height="290" uuid="8dadbbd5-9c30-4db9-9231-fb95b2b199f4">
 					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
 					<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
 					<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
@@ -490,9 +490,6 @@ WHERE id_type_person = 2]]>
 			</componentElement>
 		</band>
 	</columnHeader>
-	<detail>
-		<band height="15"/>
-	</detail>
 	<columnFooter>
 		<band height="231" splitType="Stretch"/>
 	</columnFooter>

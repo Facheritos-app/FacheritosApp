@@ -1,20 +1,20 @@
 package facheritosfrontendapp.controller.report;
 
-import backend.connectionBD.ConnectionBD;
+
 import javafx.fxml.FXML;
 import javafx.scene.input.MouseEvent;
-import net.sf.jasperreports.engine.*;
-import net.sf.jasperreports.view.JasperViewer;
-
-import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.Map;
 
 public class ReportController {
 
+    JasperConnection jasperConnection;
 
+    public ReportController(){
+        jasperConnection = new JasperConnection("FacheritosReports/sellersReport.jrxml");
+    }
 
     @FXML
     public void sellersClicked(MouseEvent mouseEvent) {
+        System.out.println("");
+        jasperConnection.showReport();
     }
 }
