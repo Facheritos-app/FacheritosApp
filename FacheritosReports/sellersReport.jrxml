@@ -494,43 +494,20 @@ WHERE id_type_person = 2]]>
 		<band height="15"/>
 	</detail>
 	<columnFooter>
-		<band height="276" splitType="Stretch">
-			<bar3DChart>
-				<chart isShowLegend="false" evaluationTime="Report">
-					<reportElement x="-20" y="0" width="280" height="220" uuid="01381207-606a-4703-95bc-00618771865e"/>
-					<chartTitle/>
-					<chartSubtitle/>
-					<chartLegend position="Bottom">
-						<font fontName="Ventas&#xD;&#xA;SansSerif"/>
-					</chartLegend>
-				</chart>
-				<categoryDataset>
-					<dataset resetType="Report">
-						<datasetRun subDataset="Seller_Sale" uuid="a2df32d5-013a-43f9-ba63-d7e9cc2139ff"/>
-					</dataset>
-					<categorySeries>
-						<seriesExpression><![CDATA["Cantidad de ventas por vendedor"]]></seriesExpression>
-						<categoryExpression><![CDATA[$F{seller_name}]]></categoryExpression>
-						<valueExpression><![CDATA[$F{sales}]]></valueExpression>
-					</categorySeries>
-				</categoryDataset>
-				<bar3DPlot>
-					<plot/>
-					<itemLabel/>
-					<categoryAxisFormat>
-						<axisFormat labelColor="#000000" tickLabelColor="#000000" axisLineColor="#000000"/>
-					</categoryAxisFormat>
-					<valueAxisFormat>
-						<axisFormat labelColor="#000000" tickLabelColor="#000000" axisLineColor="#000000"/>
-					</valueAxisFormat>
-				</bar3DPlot>
-			</bar3DChart>
-		</band>
+		<band height="231" splitType="Stretch"/>
 	</columnFooter>
 	<pageFooter>
-		<band height="54" splitType="Stretch"/>
+		<band height="130" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="110" width="70" height="20" uuid="d8120a6d-871e-414a-a5cb-e1dad04d9ab8"/>
+				<textElement textAlignment="Left">
+					<font size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[FT CORP]]></text>
+			</staticText>
+		</band>
 	</pageFooter>
 	<summary>
-		<band height="42" splitType="Stretch"/>
+		<band height="44" splitType="Stretch"/>
 	</summary>
 </jasperReport>

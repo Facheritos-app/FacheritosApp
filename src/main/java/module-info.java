@@ -9,6 +9,7 @@ module  facheritosfrontendapp {
     requires java.sql;
     requires AnimateFX;
     requires java.desktop;
+    requires jasperreports;
 
 
     //opens  facheritosfrontendapp to javafx.fxml;
@@ -39,6 +40,8 @@ module  facheritosfrontendapp {
     opens facheritosfrontendapp.objectRowView.orderRowView to javafx.base;
     exports facheritosfrontendapp.controller.quotation to javafx.fxml;
     opens  facheritosfrontendapp.controller.quotation to javafx.fxml;
+    exports facheritosfrontendapp.controller.report to javafx.fxml;
+    opens facheritosfrontendapp.controller.report to javafx.fxml;
     opens facheritosfrontendapp.objectRowView.quotationRowView to javafx.base;
     exports facheritosfrontendapp.controller.profile;
     opens facheritosfrontendapp.controller.profile to javafx.fxml;

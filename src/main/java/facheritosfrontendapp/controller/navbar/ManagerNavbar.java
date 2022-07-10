@@ -10,6 +10,7 @@ import facheritosfrontendapp.controller.sale.SaleController;
 import facheritosfrontendapp.controller.user.UserController;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 
 import java.io.IOException;
@@ -35,6 +36,11 @@ public class ManagerNavbar implements Initializable {
     @FXML
     protected void homeClicked() throws IOException {
         dashboardController.changeContent("home");
+    }
+
+    @FXML
+    public void reportsClicked(MouseEvent mouseEvent) throws IOException {
+        dashboardController.changeContent("reports/chooseReportModule");
     }
     @FXML
     protected void usersClicked() throws IOException {
