@@ -4,19 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="efda8c83-5a68-4b52-9fd2-9a9bfe8985df" name="Changes" comment="Show/hide password is now available.">
-      <change afterPath="$PROJECT_DIR$/FacheritosReports/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FacheritosReports/sellersReport.jrxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/report/JasperConnection.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/report/ReportController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/icons/icon-seller.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/reports/chooseReportModule.fxml" afterDir="false" />
+    <list default="true" id="efda8c83-5a68-4b52-9fd2-9a9bfe8985df" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/navbar/ManagerNavbar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/facheritosfrontendapp/controller/navbar/ManagerNavbar.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/navbar/managerNavbar.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/navbar/managerNavbar.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/sales/salesEdit.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/sales/salesEdit.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/sales/salesSingleView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/facheritosfrontendapp/views/sales/salesSingleView.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,15 +40,16 @@
   "keyToString": {
     "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.35632184"
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.lookFeel"
   }
 }]]></component>
   <component name="RunManager">
-    <configuration name="facheritosfrontendapp.views.Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="ALTERNATIVE_JRE_PATH" value="temurin-11 (2)" />
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="ALTERNATIVE_JRE_PATH" value="temurin-11" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <option name="MAIN_CLASS_NAME" value="facheritosfrontendapp.views.Main" />
-      <module name="FacheritosAppFrontend" />
+      <module name="FacheritosApp" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="facheritosfrontendapp.views.*" />
@@ -69,7 +62,7 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.facheritosfrontendapp.views.Main" />
+        <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
   </component>
