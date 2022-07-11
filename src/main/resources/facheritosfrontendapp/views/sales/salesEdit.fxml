@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="517.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="facheritosfrontendapp.controller.sale.EditSaleController">
+  <content>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="733.0" prefWidth="1135.0" style="-fx-background-color: FFFFF;">
+         <children>
+            <Label layoutX="706.0" layoutY="360.0" text="Venta:">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label layoutX="706.0" layoutY="435.0" prefHeight="38.0" prefWidth="123.0" text="Metodo pago:">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="367.0" layoutY="360.0" text="Cliente">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label layoutX="266.0" layoutY="272.0" text="Vendedor:">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+            <TableView fx:id="carTableView" layoutX="34.0" layoutY="140.0" prefHeight="200.0" prefWidth="369.0" styleClass="table-views" stylesheets="@../style.css">
+               <columns>
+                  <TableColumn fx:id="colId" prefWidth="41.0" text="Id" />
+                  <TableColumn fx:id="colModel" prefWidth="61.0" text="Modelo" />
+                  <TableColumn fx:id="colColor" prefWidth="47.0" text="Color" />
+                  <TableColumn fx:id="colPrice" minWidth="9.0" prefWidth="63.0" text="Costo" />
+                  <TableColumn fx:id="colQuantity" minWidth="0.0" prefWidth="55.0" text="Cantidad" />
+                  <TableColumn fx:id="colYear" minWidth="0.0" prefWidth="101.0" text="Ensamblaje" />
+               </columns>
+            </TableView>
+            <ImageView fitHeight="53.0" fitWidth="61.0" layoutX="14.0" layoutY="14.0" onMouseClicked="#backArrowClicked" pickOnBounds="true" preserveRatio="true" styleClass="back-arrow">
+               <image>
+                  <Image url="@../../icons/back-arrow.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ComboBox fx:id="typeCombobox" layoutX="815.0" layoutY="446.0" prefHeight="31.0" prefWidth="206.0" styleClass="input-text" stylesheets="@../style.css" />
+            <TextField fx:id="ccClient" layoutX="474.0" layoutY="387.0" prefHeight="36.0" prefWidth="206.0" promptText="ej. 1569326" styleClass="input-text" stylesheets="@../style.css" />
+            <TextField fx:id="nameClient" layoutX="474.0" layoutY="436.0" prefHeight="36.0" prefWidth="209.0" promptText="..." styleClass="input-text" stylesheets="@../style.css" />
+            <Label layoutX="380.0" layoutY="386.0" prefHeight="38.0" prefWidth="54.0" text="Cedula:">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="380.0" layoutY="435.0" prefHeight="38.0" prefWidth="68.0" text="Nombre:">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="380.0" layoutY="485.0" prefHeight="38.0" prefWidth="68.0" text="Email:">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="380.0" layoutY="532.0" prefHeight="38.0" prefWidth="68.0" text="Celular:">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <TextField fx:id="emailClient" layoutX="474.0" layoutY="486.0" prefHeight="36.0" prefWidth="207.0" promptText="..." styleClass="input-text" stylesheets="@../style.css" />
+            <TextField fx:id="numberClient" layoutX="473.0" layoutY="535.0" prefHeight="36.0" prefWidth="209.0" promptText="..." styleClass="input-text" stylesheets="@../style.css" />
+            <Label layoutX="33.0" layoutY="360.0" text="Vendedor">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+            <TextField fx:id="ccSeller" layoutX="140.0" layoutY="387.0" prefHeight="36.0" prefWidth="206.0" promptText="cargando..." styleClass="input-text" stylesheets="@../style.css" />
+            <TextField fx:id="nameSeller" layoutX="140.0" layoutY="436.0" prefHeight="36.0" prefWidth="209.0" promptText="cargando..." styleClass="input-text" stylesheets="@../style.css" />
+            <Label layoutX="46.0" layoutY="386.0" prefHeight="38.0" prefWidth="54.0" text="Cedula:">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="46.0" layoutY="435.0" prefHeight="38.0" prefWidth="68.0" text="Nombre:">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="46.0" layoutY="485.0" prefHeight="38.0" prefWidth="68.0" text="Email:">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="46.0" layoutY="533.0" prefHeight="38.0" prefWidth="68.0" text="Celular:">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <TextField fx:id="emailSeller" layoutX="140.0" layoutY="486.0" prefHeight="36.0" prefWidth="207.0" promptText="cargando..." styleClass="input-text" stylesheets="@../style.css" />
+            <TextField fx:id="numberSeller" layoutX="140.0" layoutY="534.0" prefHeight="36.0" prefWidth="209.0" promptText="cargando..." styleClass="input-text" stylesheets="@../style.css" />
+            <Button fx:id="searchClient" layoutX="395.0" layoutY="613.0" mnemonicParsing="false" onMouseClicked="#searchClientClicked" prefWidth="129.0" stylesheets="@../style.css" text="Buscar cliente">
+               <styleClass>
+                  <String fx:value="red-button" />
+                  <String fx:value="select-button" />
+               </styleClass>
+            </Button>
+            <Button fx:id="editClient" layoutX="537.0" layoutY="612.0" mnemonicParsing="false" onMouseClicked="#editClientClicked" prefHeight="38.0" prefWidth="149.0" styleClass="red-button" stylesheets="@../style.css" text="Cambiar cliente" />
+            <Button fx:id="saveSale" layoutX="953.0" layoutY="650.0" mnemonicParsing="false" onMouseClicked="#saveClicked" prefHeight="31.0" prefWidth="137.0" styleClass="blue-button" stylesheets="@../style.css" text="Guardar " />
+            <Label layoutX="706.0" layoutY="386.0" prefHeight="38.0" prefWidth="123.0" text="Cantidad:">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <TextField fx:id="cantidad" layoutX="814.0" layoutY="387.0" prefHeight="36.0" prefWidth="209.0" styleClass="input-text" stylesheets="@../style.css" />
+            <TableView fx:id="carTableViewSell" layoutX="477.0" layoutY="140.0" prefHeight="200.0" prefWidth="369.0" styleClass="table-views" stylesheets="@../style.css">
+               <columns>
+                  <TableColumn fx:id="colId1" prefWidth="41.0" text="Id" />
+                  <TableColumn fx:id="colModel1" prefWidth="61.0" text="Modelo" />
+                  <TableColumn fx:id="colColor1" prefWidth="47.0" text="Color" />
+                  <TableColumn fx:id="colPrice1" minWidth="9.0" prefWidth="89.0" text="Costo" />
+                  <TableColumn fx:id="colQuantity1" minWidth="0.0" prefWidth="129.0" text="Cantidad" />
+                  <TableColumn fx:id="colYear1" minWidth="0.0" prefWidth="129.0" text="Ensamblaje" />
+               </columns>
+            </TableView>
+            <Button fx:id="cancel" layoutX="822.0" layoutY="650.0" mnemonicParsing="false" onMouseClicked="#cancelClicked" prefWidth="129.0" stylesheets="@../style.css" text="Cancelar">
+               <styleClass>
+                  <String fx:value="red-button" />
+                  <String fx:value="select-button" />
+               </styleClass>
+            </Button>
+            <Button fx:id="addSell" layoutX="254.0" layoutY="59.0" mnemonicParsing="false" onMouseClicked="#addCarSell" styleClass="blue-button" stylesheets="@../style.css" text="Agregar a la venta" />
+            <Label layoutX="480.0" layoutY="56.0" prefHeight="38.0" prefWidth="164.0" text="Resumen venta:">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+            <Button fx:id="searchClient1" layoutX="684.0" layoutY="75.0" mnemonicParsing="false" onMouseClicked="#deleteCarSeller" prefWidth="167.0" styleClass="red-button" stylesheets="@../style.css" text="Eliminar de la venta" />
+            <Label layoutX="73.0" layoutY="14.0" text="Editar venta">
+               <font>
+                  <Font name="System Bold" size="36.0" />
+               </font>
+            </Label>
+            <HBox alignment="CENTER" layoutX="706.0" layoutY="495.0" prefHeight="54.0" prefWidth="337.0" spacing="10.0" style="-fx-background-color: black;" styleClass="quotation-price-button" stylesheets="@../style.css">
+               <children>
+                  <Label alignment="TOP_LEFT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="20.0" prefWidth="284.0" text="Precio:" textFill="WHITE">
+                     <padding>
+                        <Insets right="10.0" />
+                     </padding>
+                     <font>
+                        <Font name="System Bold Italic" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="TOP_LEFT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="20.0" prefWidth="89.0" text="\$" textFill="WHITE">
+                     <padding>
+                        <Insets right="10.0" />
+                     </padding>
+                     <font>
+                        <Font name="System Bold Italic" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="priceLabel" prefHeight="38.0" prefWidth="456.0" text="..." textFill="WHITE">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="quotationPrice" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold Italic" size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <Label fx:id="noFound" layoutX="479.0" layoutY="571.0" prefHeight="38.0" prefWidth="243.0" textFill="RED">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="deleteLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="481.0" layoutY="112.0" prefHeight="21.0" prefWidth="362.0" textAlignment="CENTER" textFill="RED">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
+            <Label fx:id="addLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="37.0" layoutY="101.0" prefHeight="21.0" prefWidth="362.0" textAlignment="CENTER" textFill="RED">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
+            <Label fx:id="noQuantity" alignment="CENTER" contentDisplay="CENTER" layoutX="38.0" layoutY="112.0" prefHeight="21.0" prefWidth="362.0" textAlignment="CENTER" textFill="RED">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
+            <Label fx:id="idSaleLabel" layoutX="288.0" layoutY="14.0" text="...">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Label>
+            <Label fx:id="noFoundTabla" alignment="CENTER" layoutX="463.0" layoutY="112.0" prefHeight="21.0" prefWidth="363.0" textFill="RED">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
+         </children></AnchorPane>
+  </content>
+</ScrollPane>

@@ -14,7 +14,7 @@ import java.net.URL;
 public class SaleSingleRowView {
     private Integer idCar;
 
-    private Integer model;
+    private String model;
 
     private String color;
 
@@ -32,7 +32,7 @@ public class SaleSingleRowView {
         return (Label) getEditHBox().getChildren().get(1);
     }
 
-    public SaleSingleRowView(Integer idCar, Integer model, String color, Double price, Integer quantity) throws FileNotFoundException {
+    public SaleSingleRowView(Integer idCar, String  model, String color, Double price, Integer quantity) throws FileNotFoundException {
         this.idCar = idCar;
         this.model= model;
         this.color = color;
@@ -50,11 +50,11 @@ public class SaleSingleRowView {
         this.idCar = idCar;
     }
 
-    public Integer getModel() {
+    public String  getModel() {
         return model;
     }
 
-    public void setModel(Integer model) {
+    public void setModel(String  model) {
         this.model = model;
     }
 

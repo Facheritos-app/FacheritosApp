@@ -123,6 +123,12 @@ public class EditHeadquarterController implements Initializable {
     }
 
     @FXML
+    protected void backArrowClicked() throws ExecutionException, InterruptedException, IOException {
+        headquarterController = (HeadquarterController) dashboardController.changeContent("headquarters/headquarters");
+        headquarterController.showHeadquarters();
+    }
+
+    @FXML
 
     protected void saveButtonClicked() throws IOException, ExecutionException, InterruptedException {
         if(allValidations()) {
