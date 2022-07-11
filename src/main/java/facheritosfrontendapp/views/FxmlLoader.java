@@ -19,6 +19,7 @@ public class FxmlLoader {
         System.out.println(fileName);
         URL fileURL = Main.class.getResource("/facheritosfrontendapp/views/"+fileName+".fxml");
         loader = new FXMLLoader(fileURL);
+        System.out.println(fileURL);
         if(fileURL == null){
             throw new FileNotFoundException("FXML not found");
         }

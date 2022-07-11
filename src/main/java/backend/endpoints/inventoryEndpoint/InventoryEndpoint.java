@@ -35,10 +35,6 @@ public class InventoryEndpoint {
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         HashMap<Boolean, ResultSet> response = new HashMap<>();
-        System.out.println("idcar");
-        System.out.println(idCar);
-        System.out.println("idheadquarter");
-        System.out.println(idHeadquarter);
         try(Connection conn = ConnectionBD.connectDB().getConnection()){
             preparedStatement = conn.prepareStatement("SELECT * FROM car JOIN car_headquarter USING (id_car)" +
                             "JOIN headquarter USING (id_headquarter) JOIN color USING (id_color)" +
