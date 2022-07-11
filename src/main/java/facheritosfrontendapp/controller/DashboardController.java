@@ -86,6 +86,7 @@ public class DashboardController implements Initializable {
                 setRol(currentWorker.getRol());
                 try {
                     selectNavbar();
+                    selectDashboard();
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
@@ -93,7 +94,7 @@ public class DashboardController implements Initializable {
                 throw new RuntimeException("Error de login");
             }
             return true;
-        }).handle((result, ex) -> null != ex ? false : true).get();
+        }).get();//.handle((result, ex) -> null != ex ? false : true).get();
     }
 
     /**
@@ -175,6 +176,29 @@ public class DashboardController implements Initializable {
 
     }
 
+    /**
+     * selectDashboard: void -> void
+     * Purpose: this method decides which dashboard to show depending on the user's rol.
+     */
+    protected void selectDashboard() throws IOException {
+        switch (currentWorker.getId_rol()) {
+            //Manager
+            case 1:
+                this.changeContent("home");
+                break;
+            //Seller
+            case 2:
+                this.changeContent("dashboard/sellerDashboard");
+                break;
+            //Mechanic
+            case 3:
+                this.changeContent("home");
+                break;
+            default:
+                throw new RuntimeException("Wrong user type");
+        }
+
+    }
 
     @FXML
     protected void myProfileClicked() throws IOException {
@@ -184,11 +208,7 @@ public class DashboardController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        try {
-            this.changeContent("home");
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+
     }
     public static synchronized WorkerDTO getCurrentWorker() {
         return currentWorker;
