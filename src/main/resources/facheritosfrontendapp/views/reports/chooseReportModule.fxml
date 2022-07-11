@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="517.0" prefWidth="647.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="facheritosfrontendapp.controller.report.ReportController">
+   <children>
+      <Label layoutX="31.0" layoutY="43.0" text="Elige una opción">
+         <font>
+            <Font name="System Bold" size="36.0" />
+         </font>
+      </Label>
+      <HBox layoutX="18.0" layoutY="135.0" prefHeight="202.0" prefWidth="612.0">
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor>
+         <children>
+            <VBox onMouseClicked="#sellersClicked" prefHeight="202.0" prefWidth="190.0" styleClass="card" stylesheets="@../style.css">
+               <children>
+                  <ImageView fitHeight="75.0" fitWidth="79.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../icons/icon-seller.png" />
+                     </image>
+                     <VBox.margin>
+                        <Insets left="60.0" top="30.0" />
+                     </VBox.margin>
+                  </ImageView>
+                  <Label prefHeight="35.0" prefWidth="142.0" text="Vendedores">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="30.0" top="5.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label contentDisplay="BOTTOM" ellipsisString="" prefHeight="44.0" prefWidth="140.0" text="Listado de vendedores" textAlignment="CENTER" wrapText="true">
+                     <VBox.margin>
+                        <Insets left="30.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </Label>
+               </children>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </VBox>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>
