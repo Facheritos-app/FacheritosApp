@@ -3,11 +3,9 @@ package backend.endpoints.saleEndpoint;
 import backend.connectionBD.ConnectionBD;
 import backend.dto.inventoryDTO.VehicleDTO;
 import backend.dto.saleDTO.SaleConfirmationDTO;
+import backend.dto.saleDTO.SaleDTO;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -43,9 +41,9 @@ public class SaleEndpoint {
         HashMap<Boolean, ResultSet> response = new HashMap<>();
         try(Connection conn = ConnectionBD.connectDB().getConnection()){
             preparedStatement = conn.prepareStatement("Select Sale.id_sale, Sale.id_worker, Sale.id_customer, Sale.id_headquarter,Sale.id_payment_method, Sale.id_confirmation,Sale.sale_date,Sale.price, \n" +
-                    "\tHeadq.name as name_headq, \n" +
-                    "\t\tClient.cc as cc_client, (Client.first_name || ' ' || Client.last_name) AS name_client, Client.cellphone as cellphone_client, Client.email as email_client,\n" +
-                    "\t\t\tSeller.cc as cc_seller, (Seller.first_name || ' ' ||Seller.last_name) AS name_seller, Seller.cellphone as cellphone_seller, Seller.email as email_seller,\n" +
+                    "\tHeadq.name as name_headq,Headq.id_headquarter as id_headquarter, \n" +
+                    "\t\tClient.cc as cc_client, (Client.first_name || ' ' || Client.last_name) AS name_client, Client.cellphone as cellphone_client,Client.id_person as idClient , Client.email as email_client,\n" +
+                    "\t\t\tSeller.cc as cc_seller, (Seller.first_name || ' ' ||Seller.last_name) AS name_seller, Seller.cellphone as cellphone_seller,Seller.id_person as idSeller , Seller.email as email_seller,\n" +
                     "\t\t\t\tpayment.payment_method as name_method,\n" +
                     "\t\t\t\t\tconfirmation.confirmation_status\n" +
                     "from sale as Sale join headquarter as Headq using(id_headquarter) join person as Client on Sale.id_customer = Client.id_person join person as Seller on Sale.id_worker = Seller.id_person join payment on Sale.id_payment_method = payment.id_payment join confirmation on Sale.id_confirmation = confirmation.id_confirmation WHERE id_sale = ?");
@@ -119,7 +117,7 @@ public class SaleEndpoint {
         ResultSet resultSet = null;
         HashMap<Boolean, ResultSet> response = new HashMap<>();
         try (Connection conn = ConnectionBD.connectDB().getConnection()) {
-            preparedStatement = conn.prepareStatement("select sale_car.id_car, car.id_model,color.color, model.price, sale_car.quantity\n" +
+            preparedStatement = conn.prepareStatement("select sale_car.id_car,model.description  as description ,car.id_model,color.color, model.price, car.assemble_year,sale_car.quantity\n" +
                     " from sale_car join car using(id_car) join color using (id_color) join model using (id_model) WHERE id_sale = ?");
             preparedStatement.setInt(1, idSale);
             resultSet = preparedStatement.executeQuery();
@@ -131,6 +129,28 @@ public class SaleEndpoint {
 
         return response;
     }
+
+
+    public Map<Boolean, ResultSet> getCar(Integer idHeadquarter) {
+
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        HashMap<Boolean, ResultSet> response = new HashMap<>();
+        try (Connection conn = ConnectionBD.connectDB().getConnection()) {
+            preparedStatement = conn.prepareStatement("select car.id_car, car.id_model,car.assemble_year, car.id_Color, car_headquarter.id_headquarter, car_headquarter.quantity,\n" +
+                    "\tcolor.color, model.price, model.description\n" +
+                    "from car join car_headquarter  using (id_car) join model using (id_model) join color using (id_color)\n" +
+                    "where id_headquarter =  ?");
+            preparedStatement.setInt(1, idHeadquarter);
+            resultSet = preparedStatement.executeQuery();
+            response.put(true, resultSet);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            response.put(false, resultSet);
+        }
+        return response;
+    }
+
 
     public Map<Boolean, ResultSet> getSaleByIdCustomer(Integer idCustomer){
         PreparedStatement preparedStatement;
@@ -146,6 +166,7 @@ public class SaleEndpoint {
             e.printStackTrace();
             response.put(false, resultSet);
         }
+
         return response;
     }
 
@@ -230,4 +251,155 @@ public class SaleEndpoint {
             return false;
         }
     }
+
+    public Boolean changeCarsQuantityRestar(Integer idCar, Double quantity, Integer id_headquarter){
+        PreparedStatement preparedStatement = null;
+        HashMap<Boolean, Integer> response = new HashMap<>();
+        try(Connection conn = ConnectionBD.connectDB().getConnection()){
+            preparedStatement = conn.prepareStatement("UPDATE car_headquarter SET quantity = quantity - ? WHERE id_car = ? and id_headquarter =?");
+            preparedStatement.setDouble(1,quantity);
+            preparedStatement.setInt(2,idCar);
+            preparedStatement.setInt(3,id_headquarter);
+            preparedStatement.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    public Map<Boolean, ResultSet> getSeller(Integer idHeadquarter) {
+
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        HashMap<Boolean, ResultSet> response = new HashMap<>();
+        try (Connection conn = ConnectionBD.connectDB().getConnection()) {
+            preparedStatement = conn.prepareStatement("select car.id_car, car.id_model,car.assemble_year, car.id_Color, car_headquarter.id_headquarter, car_headquarter.quantity,\n" +
+                    "\tcolor.color, model.price, model.description\n" +
+                    "from car join car_headquarter  using (id_car) join model using (id_model) join color using (id_color)\n" +
+                    "where id_headquarter =  ?");
+            preparedStatement.setInt(1, idHeadquarter);
+            resultSet = preparedStatement.executeQuery();
+            response.put(true, resultSet);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            response.put(false, resultSet);
+        }
+        return response;
+    }
+
+    public Map<Boolean, ResultSet> insertarVenta(SaleDTO saleDTO){
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        HashMap<Boolean, ResultSet> response = new HashMap<>();
+        try (Connection conn = ConnectionBD.connectDB().getConnection()) {
+            preparedStatement = conn.prepareStatement("insert into sale(id_sale, id_worker, id_customer,id_headquarter,id_payment_method,id_confirmation,sale_date,price) " +
+                    "values(default, ? ,?,?,?,?,default,?) returning  id_sale;");
+            preparedStatement.setInt(1, saleDTO.getId_worker());
+            preparedStatement.setInt(2, saleDTO.getId_customer());
+            preparedStatement.setInt(3, saleDTO.getId_headquarter());
+            preparedStatement.setInt(4, saleDTO.getId_payment_method());
+            preparedStatement.setInt(5, saleDTO.getId_confirmation());
+            preparedStatement.setDouble(6, saleDTO.getPrice());
+            resultSet = preparedStatement.executeQuery();
+            resultSet.next();
+            response.put(true, resultSet);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            response.put(false, resultSet);
+        }
+
+        return response;
+    }
+
+    public Boolean updateVenta(SaleDTO saleDTO){
+        System.out.println("Hago consulta");
+        PreparedStatement preparedStatement = null;
+
+        try (Connection conn = ConnectionBD.connectDB().getConnection()) {
+            preparedStatement = conn.prepareStatement("UPDATE sale set id_customer = ? , id_confirmation = ? ,id_payment_method = ? , price = ?  where id_sale = ? ;");
+            preparedStatement.setInt(1, saleDTO.getId_customer());
+            preparedStatement.setInt(2, saleDTO.getId_confirmation());
+            preparedStatement.setInt(3, saleDTO.getId_payment_method());
+            preparedStatement.setDouble(4, saleDTO.getPrice());
+            preparedStatement.setDouble(5, saleDTO.getId_sale());
+            preparedStatement.executeUpdate();
+            System.out.println("Hago consulta2");
+            return  true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return  false;
+        }
+
+    }
+
+    public Boolean updateSaleCar(Integer newQuantiy, Integer idCar, Integer idSale){
+        PreparedStatement preparedStatement = null;
+
+        try (Connection conn = ConnectionBD.connectDB().getConnection()) {
+            preparedStatement = conn.prepareStatement("update sale_car set quantity = ?\n" +
+                    "where id_car = ? and id_sale = ?");
+            preparedStatement.setInt(1, newQuantiy);
+            preparedStatement.setInt(2, idCar);
+            preparedStatement.setInt(3,  idSale);
+            preparedStatement.executeUpdate();
+            return  true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return  false;
+        }
+    }
+
+    public Boolean updateSaleHeadquarter(Integer newQuantiy, Integer idCar, Integer idHead){
+        PreparedStatement preparedStatement = null;
+
+        try (Connection conn = ConnectionBD.connectDB().getConnection()) {
+            preparedStatement = conn.prepareStatement("update car_headquarter set quantity = ?\n" +
+                    "where id_car = ? and id_headquarter = ?");
+            preparedStatement.setInt(1, newQuantiy);
+            preparedStatement.setInt(2, idCar);
+            preparedStatement.setInt(3,  idHead);
+            preparedStatement.executeUpdate();
+            return  true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return  false;
+        }
+    }
+
+    public Boolean insertarCarros(Integer id_car,Integer id_sale,Integer quantity){
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        HashMap<Boolean, ResultSet> response = new HashMap<>();
+        try (Connection conn = ConnectionBD.connectDB().getConnection()) {
+            preparedStatement = conn.prepareStatement("insert into sale_car(id_car, id_sale, quantity) " +
+                    "values(?,?,?)");
+            preparedStatement.setInt(1, id_car);
+            preparedStatement.setInt(2, id_sale);
+            preparedStatement.setInt(3, quantity);
+            preparedStatement.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+
+    }
+
+    public Boolean borrarCarros(SaleDTO saleDTO, Integer idCar){
+        PreparedStatement preparedStatement = null;
+        try(Connection conn = ConnectionBD.connectDB().getConnection()){
+            preparedStatement = conn.prepareStatement("delete from sale_car\n" +
+                    "  where id_sale= ? and id_car = ?");
+            preparedStatement.setInt(1, saleDTO.getId_sale());
+            preparedStatement.setInt(2, idCar);
+            preparedStatement.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+
+
 }

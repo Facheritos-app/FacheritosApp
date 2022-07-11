@@ -21,6 +21,8 @@ public class WorkerDTO extends PersonDTO {
 
     private Date hired_date;
 
+    private String cellphone;
+
 
     public String getHeadquarter_name() {
         return headquarter_name;
@@ -92,5 +94,15 @@ public class WorkerDTO extends PersonDTO {
 
     public void setHired_date(Date hired_date) {
         this.hired_date = hired_date;
+    }
+
+    @Override
+    public String getCellphone() {
+        return cellphone;
+    }
+
+    @Override
+    public void setCellphone(String cellphone) {
+        this.cellphone = cellphone;
     }
 }

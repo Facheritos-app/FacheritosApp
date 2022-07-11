@@ -73,4 +73,23 @@ public class PersonEndpoint {
         return response;
     }
 
+    public Map<Boolean, ResultSet> getPersonById(String ccClient){
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        HashMap<Boolean, ResultSet> response = new HashMap<>();
+        try(Connection conn = ConnectionBD.connectDB().getConnection()){
+            preparedStatement = conn.prepareStatement(" select *\n" +
+                    "from person\n" +
+                    "where id_type_person = 4 and cc = ?");
+            preparedStatement.setString(1,ccClient);
+            resultSet = preparedStatement.executeQuery();
+            resultSet.next(); //show the row data
+            response.put(true, resultSet);
+        }catch (SQLException e){
+            e.printStackTrace();
+            response.put(false, resultSet);
+        }
+        return response;
+    }
+
 }

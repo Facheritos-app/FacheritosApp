@@ -88,6 +88,17 @@ public class AddHeadquarterController implements Initializable {
         }
 
     }
+    @FXML
+    protected void backArrowClicked() throws ExecutionException, InterruptedException, IOException {
+        MyDialogPane dialogPane = new MyDialogPane("confirmationCancel");
+        Optional<ButtonType> clickedButton = dialogPane.getClickedButton();
+        if(clickedButton.get() == ButtonType.YES){
+            headquarterController = (HeadquarterController) dashboardController.changeContent("headquarters/headquarters");
+            headquarterController.showHeadquarters();
+        } else {
+            System.out.println("No");
+        }
+    }
 
     public void createHeadquarter(){
      HeadquarterDTO headquarterDTO = new HeadquarterDTO();
