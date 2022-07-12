@@ -17,4 +17,10 @@ public class ReportController {
         System.out.println("");
         jasperConnection.showReport();
     }
+
+    @FXML
+    public void headquarterClicked(MouseEvent mouseEvent) {
+
+    }
+
 }
