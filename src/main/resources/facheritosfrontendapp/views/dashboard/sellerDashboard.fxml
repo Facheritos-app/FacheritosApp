@@ -108,7 +108,7 @@
                         <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0">
                            <children>
                               <ComboBox fx:id="selectionCustomersCombobox" onAction="#salesSelectionChanged" prefHeight="26.0" prefWidth="94.0" styleClass="input-text" stylesheets="@../style.css" />
-                              <ChoiceBox fx:id="yearCustomerChoicebox" prefHeight="26.0" prefWidth="78.0" styleClass="input-text" stylesheets="@../style.css">
+                              <ChoiceBox fx:id="yearCustomersChoicebox" prefHeight="26.0" prefWidth="78.0" styleClass="input-text" stylesheets="@../style.css">
                                  <padding>
                                     <Insets left="40.0" />
                                  </padding>

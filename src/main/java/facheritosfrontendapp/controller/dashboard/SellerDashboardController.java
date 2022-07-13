@@ -44,6 +44,14 @@ public class SellerDashboardController implements Initializable {
     @FXML
     private Label yearChoiceboxLabel;
 
+    //Top customers chart
+    @FXML
+    private ComboBox<String> selectionCustomersCombobox;
+    @FXML
+    private ChoiceBox<String> yearCustomersChoicebox;
+    @FXML
+    private ComboBox<String> idCombobox;
+
     private SellerDashboardEndpoint sellerDashboardEndpoint;
 
     private ArrayList<String> categoryList;
@@ -52,12 +60,15 @@ public class SellerDashboardController implements Initializable {
 
     private ArrayList<String> monthsNames;
 
+    private ArrayList<String> years;
     public SellerDashboardController() {
         sellerDashboardEndpoint = new SellerDashboardEndpoint();
         categoryList = new ArrayList<>();
         categoryTotal = new ArrayList<>();
         monthsNames = new ArrayList<>(
                 Arrays.asList("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"));
+        years = new ArrayList<>(
+                Arrays.asList("2022", "2021", " 2020", "2019", "2018", "2017", "2016", "2015"));
     }
 
     @Override
@@ -71,19 +82,36 @@ public class SellerDashboardController implements Initializable {
      * Purpose: This method sets the elements of the choicebox to be shown
      */
     public void setChoiceBox() {
+        //Sales chart
         daysMonthsYearsCombobox.setItems(FXCollections.observableArrayList("Meses", "Años"));
-        yearChoicebox.setItems(FXCollections.observableArrayList("2022", "2021", " 2020", "2019", "2018", "2017", "2016", "2015"));
+        yearChoicebox.setItems(FXCollections.observableArrayList(years));
+        //Top customers chart
+        selectionCustomersCombobox.setItems(FXCollections.observableArrayList("No. compras", "Valor de compra"));
+        yearCustomersChoicebox.setItems(FXCollections.observableArrayList(years));
+        idCombobox.setItems(FXCollections.observableArrayList("Cédula", "Nombre"));
     }
-
+    /**
+     * preselectOptions: void -> void
+     * Purpose: This method sets a selected item for the comboboxes and choiceboxes by default
+     */
+    protected void preselectOptions(){
+        //Sales chart
+        daysMonthsYearsCombobox.getSelectionModel().select(0); //Months
+        yearChoicebox.getSelectionModel().select(0); //2022
+        //Top customers chart
+        selectionCustomersCombobox.getSelectionModel().select(0); //Number of sales
+        yearCustomersChoicebox.getSelectionModel().select(0); //2022
+        idCombobox.getSelectionModel().select(0); //id number
+    }
     /**
      * showDashboard: void ->  void
      * Purpose: This method shows everything in the view from one single function
      */
     public void showDashboard() {
-        this.setChoiceBox();
-        daysMonthsYearsCombobox.getSelectionModel().select(0); //Months
-        yearChoicebox.getSelectionModel().select(0); //5 2022
+        setChoiceBox();
+        preselectOptions();
         salesSeeClicked();
+        customersViewClicked();
     }
     /**
      * getSalesPerMonth: String, Integer -> void
@@ -94,7 +122,7 @@ public class SellerDashboardController implements Initializable {
         new Thread(() -> {
             //Set the call to the DB.
             CompletableFuture<Map<Boolean, ResultSet>> salesCall = CompletableFuture.supplyAsync(() ->
-                    sellerDashboardEndpoint.amountOfSalesPerMonthChart(passToEnglish(category), year));
+                    sellerDashboardEndpoint.amountOfSalesChart(passToEnglish(category), year));
             //Concatenate the response of the previous call from the BD to actually populate the table with the data
             try {
                 salesCall.thenApply((response) -> {
@@ -194,5 +222,39 @@ public class SellerDashboardController implements Initializable {
             yearChoicebox.setVisible(true);
             yearChoiceboxLabel.setVisible(true);
         }
+    }
+
+    /**
+     * getCustomersData: String, Integer -> void
+     * Purpose: This method connects to the DB and returns the necessary data to build the top customers chart
+     */
+    public void getCustomerData(Integer selectionType, Integer year, Integer id) {
+        //This means that another thread different from the JavaFX app thread will update the required items with the data.
+        new Thread(() -> {
+            //Set the call to the DB.
+            CompletableFuture<Map<Boolean, ResultSet>> customersCall = CompletableFuture.supplyAsync(() -> sellerDashboardEndpoint.customersChart(selectionType, year, id));
+            //Concatenate the response of the previous call from the BD to actually populate the table with the data
+            try {
+                customersCall.thenApply((response) -> {
+                    if (response.containsKey(true)) {
+                        ResultSet resultSet = response.get(true);
+                        Platform.runLater(() -> {
+                            //setSalesChart(resultSet);
+                        });
+                    }
+                    return true;
+                }).get();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            } catch (ExecutionException e) {
+                throw new RuntimeException(e);
+            }
+        }).start();
+    }
+
+    @FXML
+    protected void customersViewClicked(){
+        getCustomerData(selectionCustomersCombobox.getSelectionModel().getSelectedIndex(),
+                Integer.valueOf(yearChoicebox.getSelectionModel().getSelectedItem()), idCombobox.getSelectionModel().getSelectedIndex());
     }
 }
