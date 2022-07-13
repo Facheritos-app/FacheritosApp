@@ -107,6 +107,24 @@ public class AddUserValidator {
 
     }
 
+    public Boolean price(TextField priceTextField, Label priceLabel, String priceLabelContent){
+        Boolean correct = false;
+        Double content;
+        Boolean successRegex = Regex.onlyDigits(priceTextField.getText());
+        try {
+            content = Double.parseDouble(priceTextField.getText());
+        } catch (NumberFormatException e) {
+            content = 0.0;
+        }
+
+        if(priceTextField.getText().isEmpty() || !successRegex || content < 0.0){
+            priceLabel.setText(priceLabelContent);
+        } else {
+            correct = true;
+        }
+        return correct;
+    }
+
     public String getErrorStyle() {
         return errorStyle;
     }

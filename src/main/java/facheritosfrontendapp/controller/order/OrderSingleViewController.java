@@ -6,6 +6,7 @@ import facheritosfrontendapp.ComboBoxView.HeadquarterView;
 import facheritosfrontendapp.controller.DashboardController;
 import facheritosfrontendapp.controller.MainController;
 import facheritosfrontendapp.controller.customer.CustomerController;
+import facheritosfrontendapp.validator.addUserValidator.AddUserValidator;
 import facheritosfrontendapp.views.MyDialogPane;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -17,6 +18,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.ArrayList;
@@ -26,12 +28,15 @@ import java.util.ResourceBundle;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
+import static javafx.scene.control.ButtonType.OK;
 import static javafx.scene.control.ButtonType.YES;
 
 public class OrderSingleViewController implements Initializable {
 
     private OrderEndpoint orderEndpoint;
     private HeadquarterEndpoint headquarterEndpoint;
+
+    private final AddUserValidator inputValidator;
 
     private ArrayList<HeadquarterView> headquarterComboboxList;
 
@@ -50,22 +55,40 @@ public class OrderSingleViewController implements Initializable {
     private TextField ccField;
 
     @FXML
+    private Label ccLabel;
+
+    @FXML
     private TextField creationDateField;
 
     @FXML
     private ComboBox headquarterCombo;
 
     @FXML
+    private Label headquarterLabel;
+
+    @FXML
     private DatePicker dueDatePicker;
+
+    @FXML
+    private Label dueDateLabel;
 
     @FXML
     private TextField priceField;
 
     @FXML
+    private Label priceLabel;
+
+    @FXML
     private TextField partField;
 
     @FXML
+    private Label partLabel;
+
+    @FXML
     private ComboBox statusCombo;
+
+    @FXML
+    private Label statusLabel;
 
     @FXML
     private Button deleteOrderButton;
@@ -81,6 +104,14 @@ public class OrderSingleViewController implements Initializable {
 
     @FXML
     private Button searchButton;
+
+    public OrderSingleViewController() {
+        orderEndpoint = new OrderEndpoint();
+        headquarterEndpoint = new HeadquarterEndpoint();
+        headquarterComboboxList = new ArrayList<>();
+        inputValidator = new AddUserValidator();
+    }
+
 
     @FXML
     /**
@@ -118,6 +149,98 @@ public class OrderSingleViewController implements Initializable {
         }
     }
 
+    @FXML
+    protected void saveAction() throws IOException, NullPointerException {
+        /*Show dialogPane to confirm*/
+        if (allValidations()){
+            MyDialogPane dialogPane = new MyDialogPane("confirmationSave");
+            Optional<ButtonType> clickedButton = dialogPane.getClickedButton();
+            if (clickedButton.get() == YES) {
+                try{
+                    //orderEndpoint
+                    Alert success = new Alert(Alert.AlertType.CONFIRMATION, "Orden actualizada exitosamente", OK);
+                    success.show();
+                    try {
+                        orderController = (OrderController) dashboardController.changeContent("orders/orders");
+                        orderController.showOrders();
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            } else {
+                System.out.println("No");
+            }
+        }
+    }
+
+
+    /**
+     * allValidations: Void -> Boolean
+     * Purpose: Group all the validations from the edit-user form
+     */
+    public Boolean allValidations() {
+        cleanErrors();
+        boolean everythingCorrect = true;
+
+        if (!inputValidator.cc(ccField, ccLabel, "Ingrese una cédula válida")) {
+            everythingCorrect = false;
+            inputValidator.setErrorStyles(ccField, ccLabel);
+        }
+
+        if (headquarterCombo.getSelectionModel().isEmpty()) {
+            everythingCorrect = false;
+            headquarterLabel.setText("Seleccione una sede");
+            inputValidator.setErrorStyles(headquarterCombo, headquarterLabel);
+        }
+
+        if (!inputValidator.price(priceField, priceLabel, "Ingrese un precio válido")) {
+            everythingCorrect = false;
+            inputValidator.setErrorStyles(priceField, priceLabel);
+        }
+
+        if (statusCombo.getSelectionModel().isEmpty()) {
+            everythingCorrect = false;
+            statusLabel.setText("Seleccione un estado");
+            inputValidator.setErrorStyles(statusCombo, statusLabel);
+        }
+
+        if (partField.getText().isEmpty()) {
+            everythingCorrect = false;
+            partLabel.setText("Ingrese una parte");
+            inputValidator.setErrorStyles(partField, partLabel);
+        }
+
+        if (dueDatePicker.getValue() == null || dueDatePicker.getValue().isBefore(LocalDate.now())) {
+            everythingCorrect = false;
+            dueDateLabel.setText("Indique una fecha válida");
+            inputValidator.setErrorStyles(dueDatePicker, dueDateLabel);
+        }
+
+
+        return everythingCorrect;
+    }
+
+    /**
+     * cleanErrors: void -> void
+     * Purpose: This method cleans all the error messages presented to the user
+     */
+    public void cleanErrors() {
+        ccField.setStyle("");
+        ccLabel.setText("");
+        headquarterCombo.setStyle("");
+        headquarterLabel.setText("");
+        dueDatePicker.setStyle("");
+        dueDateLabel.setText("");
+        priceField.setStyle("");
+        priceLabel.setText("");
+        partField.setStyle("");
+        partLabel.setText("");
+        statusCombo.setStyle("");
+        statusLabel.setText("");
+    }
+
     /**
      * backToOrdersClicked: void -> void
      * Purpose: when the backArrow is clicked  it returns to the orders view
@@ -126,12 +249,6 @@ public class OrderSingleViewController implements Initializable {
     protected void backToOrdersClicked() throws IOException {
         orderController = (OrderController) dashboardController.changeContent("orders/orders");
         orderController.showOrders();
-    }
-
-    public OrderSingleViewController() {
-        orderEndpoint = new OrderEndpoint();
-        headquarterEndpoint = new HeadquarterEndpoint();
-        headquarterComboboxList = new ArrayList<>();
     }
 
     /**

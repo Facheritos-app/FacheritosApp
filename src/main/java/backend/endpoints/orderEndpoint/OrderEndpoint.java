@@ -38,9 +38,9 @@ public class OrderEndpoint {
         HashMap<Boolean, ResultSet> response = new HashMap<>();
         try(Connection conn = ConnectionBD.connectDB().getConnection()){
             preparedStatement = conn.prepareStatement("SELECT *, headquarter.name AS seat,  state.name AS status, " +
-                    "part.name AS partname, job_order.created_at AS createdOrder, job_order.price AS jobPrice FROM person JOIN job_order ON person.id_person = job_order.id_customer " +
-                    "JOIN state USING(id_state) JOIN headquarter USING(id_headquarter) JOIN job_order_part USING(id_job_order) " +
-                    "JOIN part USING(id_part)  WHERE id_job_order = ?");
+                    "part.name AS partname, job_order.created_at AS createdOrder, job_order.price AS jobPrice FROM person " +
+                    "JOIN job_order ON person.id_person = job_order.id_customer JOIN state USING(id_state) JOIN headquarter U" +
+                    "SING(id_headquarter) JOIN job_order_part USING(id_job_order) JOIN part USING(id_part)  WHERE id_job_order = ?");
             preparedStatement.setInt(1,idOrder);
             resultSet = preparedStatement.executeQuery();
             resultSet.next();
