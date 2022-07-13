@@ -336,9 +336,9 @@ WHERE id_type_person = 2]]>
 		<property name="com.jaspersoft.studio.field.tree.path" value="worker"/>
 	</field>
 	<title>
-		<band height="82" splitType="Stretch">
+		<band height="84" splitType="Stretch">
 			<line>
-				<reportElement x="0" y="80" width="780" height="1" uuid="806ce5df-1219-4876-ae0c-ca7405b1f246">
+				<reportElement x="-20" y="83" width="800" height="1" uuid="806ce5df-1219-4876-ae0c-ca7405b1f246">
 					<property name="local_mesure_unitheight" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
