@@ -157,7 +157,7 @@ WHERE id_type_person = 2]]>
 	<subDataset name="Sales_Information" uuid="beb6c19d-b9f4-46a9-9bea-a7cfc45c0530">
 		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Facheritos server"/>
 		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
-		<parameter name="sales_year" class="java.lang.Integer" evaluationTime="Early">
+		<parameter name="sales_year" class="java.lang.Integer" evaluationTime="Late">
 			<defaultValueExpression><![CDATA[2022]]></defaultValueExpression>
 		</parameter>
 		<queryString>
@@ -176,7 +176,7 @@ JOIN payment ON(sale.id_payment_method = payment.id_payment) -- join para obtene
 JOIN (SELECT id_sale, SUM(model.price) AS amount_sale FROM sale_car JOIN car USING(id_car)
 JOIN model USING(id_model)
 GROUP BY id_sale) AS sale_price USING(id_sale) --Subquery, aquí saco el total de la venta.
-WHERE confirmation_status = 'Activo' AND EXTRACT(YEAR FROM sale.sale_date) = 2022]]>
+WHERE confirmation_status = 'Activo' AND EXTRACT(YEAR FROM sale.sale_date) = $P{sales_year}]]>
 		</queryString>
 		<field name="id_sale" class="java.lang.Integer">
 			<property name="com.jaspersoft.studio.field.name" value="id_sale"/>
@@ -427,7 +427,7 @@ WHERE id_type_person = 2]]>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font fontName="Arial" size="11" isBold="false"/>
 								</textElement>
-								<text><![CDATA[id_sale]]></text>
+								<text><![CDATA[Id]]></text>
 							</staticText>
 						</jr:columnHeader>
 						<jr:detailCell style="Table 1_TD" height="30">
@@ -446,7 +446,7 @@ WHERE id_type_person = 2]]>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font fontName="Arial" size="11" isBold="false"/>
 								</textElement>
-								<text><![CDATA[seller_name]]></text>
+								<text><![CDATA[Vendedor]]></text>
 							</staticText>
 						</jr:columnHeader>
 						<jr:detailCell style="Table 1_TD" height="30">
@@ -465,7 +465,7 @@ WHERE id_type_person = 2]]>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font fontName="Arial" size="11" isBold="false"/>
 								</textElement>
-								<text><![CDATA[customer_name]]></text>
+								<text><![CDATA[Cliente]]></text>
 							</staticText>
 						</jr:columnHeader>
 						<jr:detailCell style="Table 1_TD" height="30">
@@ -484,7 +484,7 @@ WHERE id_type_person = 2]]>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font fontName="Arial" size="11" isBold="false"/>
 								</textElement>
-								<text><![CDATA[sale_date]]></text>
+								<text><![CDATA[Fecha de la venta]]></text>
 							</staticText>
 						</jr:columnHeader>
 						<jr:detailCell style="Table 1_TD" height="30">
@@ -503,7 +503,7 @@ WHERE id_type_person = 2]]>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font fontName="Arial" size="11" isBold="false"/>
 								</textElement>
-								<text><![CDATA[payment_method]]></text>
+								<text><![CDATA[Método de pago]]></text>
 							</staticText>
 						</jr:columnHeader>
 						<jr:detailCell style="Table 1_TD" height="30">
@@ -522,7 +522,7 @@ WHERE id_type_person = 2]]>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font fontName="Arial" size="11" isBold="false"/>
 								</textElement>
-								<text><![CDATA[headquarter_name]]></text>
+								<text><![CDATA[Sede]]></text>
 							</staticText>
 						</jr:columnHeader>
 						<jr:detailCell style="Table 1_TD" height="30">
@@ -541,7 +541,7 @@ WHERE id_type_person = 2]]>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font fontName="Arial" size="11" isBold="false"/>
 								</textElement>
-								<text><![CDATA[amount_sale]]></text>
+								<text><![CDATA[Valor de la venta]]></text>
 							</staticText>
 						</jr:columnHeader>
 						<jr:detailCell style="Table 1_TD" height="30">
@@ -615,17 +615,17 @@ WHERE id_type_person = 2]]>
 			</pie3DChart>
 			<stackedBar3DChart>
 				<chart evaluationTime="Report">
-					<reportElement x="0" y="280" width="280" height="200" uuid="510fcda6-1c9c-4a38-86ec-3dc92f188910"/>
+					<reportElement x="0" y="280" width="415" height="200" uuid="6f9f617c-b0e0-4ff7-92bc-6121ce8d1b31"/>
 					<chartTitle/>
 					<chartSubtitle/>
 					<chartLegend/>
 				</chart>
 				<categoryDataset>
 					<dataset resetType="Report">
-						<datasetRun subDataset="Best_Customers" uuid="98c99f26-07a2-474a-bdc2-161539a0f6a0"/>
+						<datasetRun subDataset="Best_Customers" uuid="a17ece5c-0fba-41ed-a94f-3b5d665003d0"/>
 					</dataset>
 					<categorySeries>
-						<seriesExpression><![CDATA["SERIES 1"]]></seriesExpression>
+						<seriesExpression><![CDATA["Clientes más activos"]]></seriesExpression>
 						<categoryExpression><![CDATA[$F{customer_name}]]></categoryExpression>
 						<valueExpression><![CDATA[$F{quantity_sales_customer}]]></valueExpression>
 					</categorySeries>
