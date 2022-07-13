@@ -4,6 +4,7 @@ import backend.dto.loginDTO.LoginDTO;
 import backend.dto.personDTO.WorkerDTO;
 import backend.endpoints.loginEndpoint.LoginEndpoint;
 
+import facheritosfrontendapp.controller.dashboard.SellerDashboardController;
 import facheritosfrontendapp.controller.profile.MyProfileViewController;
 import facheritosfrontendapp.views.FxmlLoader;
 import facheritosfrontendapp.views.Main;
@@ -50,6 +51,8 @@ public class DashboardController implements Initializable {
     public Stage stage;
 
     private MyProfileViewController myProfileViewController;
+
+    private SellerDashboardController sellerDashboard;
 
     public DashboardController() {
         loginEndpoint = new LoginEndpoint();
@@ -188,7 +191,7 @@ public class DashboardController implements Initializable {
                 break;
             //Seller
             case 2:
-                this.changeContent("dashboard/sellerDashboard");
+                changeContent("dashboard/sellerDashboard", true);
                 break;
             //Mechanic
             case 3:
