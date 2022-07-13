@@ -8,12 +8,15 @@ public class ReportController {
 
     JasperConnection jasperConnection;
 
-    public ReportController(){
-        jasperConnection = new JasperConnection("FacheritosReports/sales/sellersReport.jrxml");
-    }
-
     @FXML
     public void sellersClicked(MouseEvent mouseEvent) {
+        jasperConnection = new JasperConnection("FacheritosReports/sales/sellersReport.jrxml");
+        jasperConnection.showReport();
+    }
+    @FXML
+    public void salesClicked(MouseEvent mouseEvent) {
+        jasperConnection = new JasperConnection("FacheritosReports/sales/salesMonth.jrxml");
+        jasperConnection.addParameters("sales_year", (Integer) 2021);
         jasperConnection.showReport();
     }
 }
