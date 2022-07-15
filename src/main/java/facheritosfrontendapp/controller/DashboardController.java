@@ -97,7 +97,7 @@ public class DashboardController implements Initializable {
                 throw new RuntimeException("Error de login");
             }
             return true;
-        }).get();//.handle((result, ex) -> null != ex ? false : true).get();
+        }).handle((result, ex) -> null != ex ? false : true).get();
     }
 
     /**
