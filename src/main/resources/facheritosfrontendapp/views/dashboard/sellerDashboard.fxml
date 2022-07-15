@@ -34,7 +34,7 @@
                <children>
                   <VBox prefHeight="197.0" prefWidth="398.0" styleClass="card" stylesheets="@../style.css">
                      <children>
-                        <HBox prefHeight="100.0" prefWidth="200.0" spacing="80.0">
+                        <HBox prefHeight="100.0" prefWidth="200.0" spacing="70.0">
                            <children>
                               <Label text="Tipo de selección">
                                  <HBox.margin>
@@ -124,7 +124,7 @@
                               <Insets left="20.0" />
                            </padding>
                         </HBox>
-                        <BarChart fx:id="customersChart" prefHeight="194.0" prefWidth="382.0" title="Clientes">
+                        <BarChart fx:id="customersChart" animated="false" prefHeight="194.0" prefWidth="382.0" title="Clientes">
                            <xAxis>
                               <CategoryAxis label="Meses" prefWidth="323.0" side="BOTTOM" fx:id="xAxisCustomer" />
                            </xAxis>

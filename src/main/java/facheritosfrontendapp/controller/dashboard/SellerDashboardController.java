@@ -30,6 +30,9 @@ public class SellerDashboardController implements Initializable {
     private BarChart<?, ?> salesChart;
 
     @FXML
+    private BarChart<?, ?> customersChart;
+
+    @FXML
     private NumberAxis yAxis;
 
     @FXML
@@ -61,6 +64,11 @@ public class SellerDashboardController implements Initializable {
     private ArrayList<String> monthsNames;
 
     private ArrayList<String> years;
+
+    private ArrayList<String> customerChartList;
+
+    private ArrayList<Integer> customerChartTotal;
+
     public SellerDashboardController() {
         sellerDashboardEndpoint = new SellerDashboardEndpoint();
         categoryList = new ArrayList<>();
@@ -68,7 +76,10 @@ public class SellerDashboardController implements Initializable {
         monthsNames = new ArrayList<>(
                 Arrays.asList("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"));
         years = new ArrayList<>(
-                Arrays.asList("2022", "2021", " 2020", "2019", "2018", "2017", "2016", "2015"));
+                Arrays.asList("2022", "2021", "2020", "2019", "2018", "2017", "2016", "2015"));
+
+        customerChartList = new ArrayList<>();
+        customerChartTotal = new ArrayList<>();
     }
 
     @Override
@@ -133,6 +144,8 @@ public class SellerDashboardController implements Initializable {
                                 setSalesChart(resultSet, passToEnglish(category));
                             } catch (SQLException e) {
                                 throw new RuntimeException(e);
+                            } catch (Exception e) {
+                                throw new RuntimeException(e);
                             }
                         });
                     }
@@ -150,19 +163,34 @@ public class SellerDashboardController implements Initializable {
      * Purpose: This method clears the data from the chart in order to change the parameters.
      * It must be executed before changing the chart parameters.
      */
-    protected void clearDataToUpdate() {
-        categoryList.clear();
-        categoryTotal.clear();
-        salesChart.getData().clear();
-        salesChart.layout();
+    protected void clearDataToUpdate(Integer chart) throws Exception {
+        System.out.println("chart");
+        System.out.println(chart);
+        switch(chart){
+            case 0: //sales chart
+                categoryList.clear();
+                categoryTotal.clear();
+                salesChart.getData().clear();
+                salesChart.layout();
+                break;
+            case 1: //customers chart
+                customerChartList.clear();
+                customerChartTotal.clear();
+                customersChart.getData().clear();
+                customersChart.layout();
+                break;
+            default:
+                throw new Exception("ERROR: impossible to clear data from the chart");
+        }
+
     }
 
     /**
      * setSalesChart: ResultSet, String -> void
      * Purpose: This method uses the data from the query and sets it in the chart
      */
-    protected void setSalesChart(ResultSet resultSet, String category) throws SQLException {
-        clearDataToUpdate();
+    protected void setSalesChart(ResultSet resultSet, String category) throws Exception {
+        clearDataToUpdate(0);
         while (resultSet.next()) {
             categoryList.add(resultSet.getString("cat"));
             categoryTotal.add(resultSet.getInt("total"));
@@ -239,7 +267,11 @@ public class SellerDashboardController implements Initializable {
                     if (response.containsKey(true)) {
                         ResultSet resultSet = response.get(true);
                         Platform.runLater(() -> {
-                            //setSalesChart(resultSet);
+                            try {
+                                setCustomersChart(resultSet, selectionType);
+                            } catch (Exception e) {
+                                throw new RuntimeException(e);
+                            }
                         });
                     }
                     return true;
@@ -255,6 +287,35 @@ public class SellerDashboardController implements Initializable {
     @FXML
     protected void customersViewClicked(){
         getCustomerData(selectionCustomersCombobox.getSelectionModel().getSelectedIndex(),
-                Integer.valueOf(yearChoicebox.getSelectionModel().getSelectedItem()), idCombobox.getSelectionModel().getSelectedIndex());
+                Integer.valueOf(yearCustomersChoicebox.getSelectionModel().getSelectedItem()), idCombobox.getSelectionModel().getSelectedIndex());
+    }
+
+    /**
+     * setCustomersChart: ResultSet, String -> void
+     * Purpose: This method uses the data from the query and sets it in the customers chart
+     */
+    protected void setCustomersChart(ResultSet resultSet, Integer selectionType) throws Exception {
+        clearDataToUpdate(1);
+        while (resultSet.next()) {
+            customerChartList.add(resultSet.getString("data"));
+            customerChartTotal.add(resultSet.getInt("total"));
+        }
+        XYChart.Series series1 = new XYChart.Series();
+        switch(selectionType) {
+            case 0: //number of sales
+                for (Integer i = 0; i < customerChartList.size(); i++) {
+                    series1.getData().add(new XYChart.Data(customerChartList.get(i), customerChartTotal.get(i)));
+                }
+                break;
+            case 1: //price sold
+                for (Integer i = 0; i < customerChartList.size(); i++) {
+                    series1.getData().add(new XYChart.Data(customerChartList.get(i), customerChartTotal.get(i)));
+                }
+                break;
+            default:
+                throw new RuntimeException("ERROR: No valid option for the customers chart");
+        }
+        series1.setName(selectionCustomersCombobox.getSelectionModel().getSelectedItem());
+        customersChart.getData().addAll(series1);
     }
 }

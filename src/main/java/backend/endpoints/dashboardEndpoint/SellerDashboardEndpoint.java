@@ -39,34 +39,45 @@ public class SellerDashboardEndpoint {
     }
 
     /**
-     * amountOfSalesPerMonthChart: void -> Map<Boolean, Integer>
-     * Purpose: This method connects to the DB and returns the total number of sales per month, two columns
+     * customersChart: Integer x3 -> Map<Boolean, ResultSet>
+     * Purpose: This method connects to the DB and returns the data for the customers chart
      */
     public Map<Boolean, ResultSet> customersChart(Integer selectionType, Integer year, Integer id) {
-
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         HashMap<Boolean, ResultSet> response = new HashMap<>();
         try (Connection conn = ConnectionBD.connectDB().getConnection()) {
-            //If the yAxis is about the amount of sales
-            if (selectionType.equals(0)) {
+            //If the yAxis has the amount of sales
+            if(selectionType.equals(0)) {
                 //If the id is the id number (cc)
                 if(id == 0) {
-                    preparedStatement = conn.prepareStatement("SELECT cc,COUNT(*) AS total FROM sale " +
+                    preparedStatement = conn.prepareStatement("SELECT cc AS data,COUNT(*) AS total FROM sale " +
                             "JOIN person ON person.id_person=sale.id_customer " +
-                            "WHERE DATE_PART('year', sale_date) = ? GROUP BY cc ORDER BY total DESC LIMIT 10");
+                            "WHERE DATE_PART('year', sale_date) = ? GROUP BY data ORDER BY total DESC LIMIT 10");
                 }
                 //if the id is the name of the customer
                 else if(id == 1) {
-                    preparedStatement = conn.prepareStatement("SELECT CONCAT(last_name, ' ', first_name) AS name, COUNT(*) AS total FROM sale " +
+                    preparedStatement = conn.prepareStatement("SELECT last_name AS data, COUNT(*) AS total FROM sale " +
                             "JOIN person ON person.id_person=sale.id_customer " +
-                            "WHERE DATE_PART('year', sale_date) = ? GROUP BY name ORDER BY total DESC LIMIT 10");
+                            "WHERE DATE_PART('year', sale_date) = ? GROUP BY data ORDER BY total DESC LIMIT 10");
                 }
                 preparedStatement.setInt(1, year);
             }
-            //If the yAxis is about the total (price) sold
-            else if (selectionType.equals(1)) {
-                preparedStatement = conn.prepareStatement("");
+            //If the yAxis has the total (price) sold
+            else if(selectionType.equals(1)) {
+                //If the id is the id number (cc)
+                if(id == 0){
+                    preparedStatement = conn.prepareStatement("SELECT cc AS data, SUM(price) AS total FROM sale " +
+                            " JOIN person ON person.id_person=sale.id_customer " +
+                            " WHERE DATE_PART('year', sale_date) = ? GROUP BY data ORDER BY total DESC LIMIT 10;");
+                }
+                //if the id is the name of the customer
+                else if(id == 1){
+                    preparedStatement = conn.prepareStatement("SELECT last_name AS data, SUM(price) AS total FROM sale " +
+                            " JOIN person ON person.id_person=sale.id_customer " +
+                            " WHERE DATE_PART('year', sale_date) = ? GROUP BY data ORDER BY total DESC LIMIT 10;");
+                }
+                preparedStatement.setInt(1, year);
             }
             resultSet = preparedStatement.executeQuery();
             response.put(true, resultSet);
