@@ -17,7 +17,7 @@
             <Font name="System Bold" size="36.0" />
          </font>
       </Label>
-      <HBox layoutX="18.0" layoutY="135.0" prefHeight="202.0" prefWidth="612.0">
+      <HBox layoutX="18.0" layoutY="135.0" prefHeight="202.0" prefWidth="612.0" spacing="20.0">
          <opaqueInsets>
             <Insets />
          </opaqueInsets>
@@ -56,40 +56,73 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </VBox>
-            <VBox layoutX="10.0" layoutY="10.0" onMouseClicked="#headquarterClicked" prefHeight="202.0" prefWidth="190.0" styleClass="card" stylesheets="@../style.css">
-               <children>
-                  <ImageView fitHeight="63.0" fitWidth="69.0">
-                     <image>
-                        <Image url="@../../icons/headquarter.png" />
-                     </image>
-                     <VBox.margin>
-                        <Insets left="60.0" top="35.0" />
-                     </VBox.margin>
-                  </ImageView>
-                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="35.0" prefWidth="142.0" text="Sede" textAlignment="CENTER">
-                     <font>
-                        <Font name="System Bold" size="24.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets left="25.0" top="10.0" />
-                     </VBox.margin>
-                  </Label>
-                  <Label alignment="CENTER" contentDisplay="BOTTOM" ellipsisString="" prefHeight="44.0" prefWidth="140.0" text="Listado de sedes" textAlignment="CENTER" wrapText="true">
-                     <VBox.margin>
-                        <Insets left="30.0" />
-                     </VBox.margin>
-                     <font>
-                        <Font size="13.0" />
-                     </font>
-                  </Label>
-               </children>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <HBox.margin>
-                  <Insets left="20.0" />
-               </HBox.margin>
-            </VBox>
+
+             <VBox onMouseClicked="#salesClicked" prefHeight="202.0" prefWidth="190.0" styleClass="card" stylesheets="@../style.css">
+                 <children>
+                     <ImageView fitHeight="75.0" fitWidth="79.0" pickOnBounds="true" preserveRatio="true">
+                         <image>
+                             <Image url="@../../icons/total-sales.png" />
+                         </image>
+                         <VBox.margin>
+                             <Insets left="60.0" top="30.0" />
+                         </VBox.margin>
+                     </ImageView>
+                     <Label prefHeight="35.0" prefWidth="84.0" text="Ventas">
+                         <font>
+                             <Font name="System Bold" size="24.0" />
+                         </font>
+                         <VBox.margin>
+                             <Insets left="60.0" top="5.0" />
+                         </VBox.margin>
+                     </Label>
+                     <Label contentDisplay="BOTTOM" ellipsisString="" prefHeight="44.0" prefWidth="140.0" text="Reporte general de ventas" textAlignment="CENTER" wrapText="true">
+                         <VBox.margin>
+                             <Insets left="30.0" />
+                         </VBox.margin>
+                         <font>
+                             <Font size="13.0" />
+                         </font>
+                     </Label>
+                 </children>
+                 <cursor>
+                     <Cursor fx:constant="HAND" />
+                 </cursor>
+             </VBox>
+
+             <VBox layoutX="10.0" layoutY="10.0" onMouseClicked="#headquarterClicked" prefHeight="202.0" prefWidth="190.0" styleClass="card" stylesheets="@../style.css">
+                 <children>
+                     <ImageView fitHeight="63.0" fitWidth="69.0">
+                         <image>
+                             <Image url="@../../icons/headquarter.png" />
+                         </image>
+                         <VBox.margin>
+                             <Insets left="60.0" top="35.0" />
+                         </VBox.margin>
+                     </ImageView>
+                     <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="35.0" prefWidth="142.0" text="Sede" textAlignment="CENTER">
+                         <font>
+                             <Font name="System Bold" size="24.0" />
+                         </font>
+                         <VBox.margin>
+                             <Insets left="25.0" top="10.0" />
+                         </VBox.margin>
+                     </Label>
+                     <Label alignment="CENTER" contentDisplay="BOTTOM" ellipsisString="" prefHeight="44.0" prefWidth="140.0" text="Listado de sedes" textAlignment="CENTER" wrapText="true">
+                         <VBox.margin>
+                             <Insets left="30.0" />
+                         </VBox.margin>
+                         <font>
+                             <Font size="13.0" />
+                         </font>
+                     </Label>
+                 </children>
+                 <cursor>
+                     <Cursor fx:constant="HAND" />
+                 </cursor>
+                 <HBox.margin>
+                     <Insets left="20.0" />
+                 </HBox.margin>
+             </VBox>
          </children>
       </HBox>
    </children>
