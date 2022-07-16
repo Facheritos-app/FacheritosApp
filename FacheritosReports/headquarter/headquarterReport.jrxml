@@ -106,12 +106,17 @@ Y2l0eSAsMTUsNjIsMmQzNzZhODctYWIxZC00NDQzLWFhZTAtMmMxMmQ2NTUyNDkyOw==]]>
 			<![CDATA[select headquarter.id_headquarter,headquarter.name ,city.city_name,headquarter.cellphone ,headquarter.email, headquarter.address  ,COALESCE(ventas.ventaCantidad,0) as ventaCantidad, 
 COALESCE(ventas.gananciasVenta,0) as ventaGanancia, COALESCE(ordenes.ordenesCantidad,0) as ordenCantidad, COALESCE(ordenes.gananciasOrden,0) as ordenGanancia
 from headquarter join city using(id_city) 
+
 left join (select id_headquarter as headVenta,  count(id_sale) 
 as ventaCantidad , sum(price) as gananciasVenta
 from sale
-group by id_headquarter) as ventas on  headquarter.id_headquarter  = ventas.headVenta 
+where id_confirmation =1
+group by id_headquarter
+		  ) as ventas on  headquarter.id_headquarter  = ventas.headVenta 
+
 left join (select id_headquarter, count(id_job_order) as ordenesCantidad, sum(price) as gananciasOrden
 from job_order
+where id_state =1
 group by id_headquarter) as ordenes  on  headquarter.id_headquarter  = ordenes.id_headquarter]]>
 		</queryString>
 		<field name="id_headquarter" class="java.lang.Integer">
@@ -169,12 +174,17 @@ group by id_headquarter) as ordenes  on  headquarter.id_headquarter  = ordenes.i
 		<![CDATA[select headquarter.id_headquarter,headquarter.name ,city.city_name,headquarter.cellphone ,headquarter.email, headquarter.address  ,COALESCE(ventas.ventaCantidad,0) as ventaCantidad, 
 COALESCE(ventas.gananciasVenta,0) as ventaGanancia, COALESCE(ordenes.ordenesCantidad,0) as ordenCantidad, COALESCE(ordenes.gananciasOrden,0) as ordenGanancia
 from headquarter join city using(id_city) 
+
 left join (select id_headquarter as headVenta,  count(id_sale) 
 as ventaCantidad , sum(price) as gananciasVenta
 from sale
-group by id_headquarter) as ventas on  headquarter.id_headquarter  = ventas.headVenta 
+where id_confirmation =1
+group by id_headquarter
+		  ) as ventas on  headquarter.id_headquarter  = ventas.headVenta 
+
 left join (select id_headquarter, count(id_job_order) as ordenesCantidad, sum(price) as gananciasOrden
 from job_order
+where id_state =1
 group by id_headquarter) as ordenes  on  headquarter.id_headquarter  = ordenes.id_headquarter]]>
 	</queryString>
 	<field name="id_headquarter" class="java.lang.Integer">
