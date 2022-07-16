@@ -5,6 +5,9 @@
 		<![CDATA[aGVhZHF1YXJ0ZXIgLDE0NywxNSxkYmE4NDIzNy0zNzRiLTRjZWUtYjQ3Ni0xZGMxMmE5OGRkOTQ7
 Y2l0eSAsMTUsNjIsMmQzNzZhODctYWIxZC00NDQzLWFhZTAtMmMxMmQ2NTUyNDkyOw==]]>
 	</property>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="241"/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="752"/>
 	<property name="com.jaspersoft.studio.unit." value="pixel"/>
 	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
 	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
@@ -14,9 +17,6 @@ Y2l0eSAsMTUsNjIsMmQzNzZhODctYWIxZC00NDQzLWFhZTAtMmMxMmQ2NTUyNDkyOw==]]>
 	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
 	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
 	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
-	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
-	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="241"/>
-	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="752"/>
 	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false" pdfFontName="Times-Bold"/>
 	<style name="SubTitle" forecolor="#CCCCCC" fontName="Times New Roman" fontSize="18" isBold="false" pdfFontName="Times-Roman"/>
 	<style name="Column header" forecolor="#666666" fontName="Times New Roman" fontSize="14" isBold="true"/>
@@ -298,7 +298,8 @@ group by id_headquarter) as ordenes  on  headquarter.id_headquarter  = ordenes.i
 		<band/>
 	</columnHeader>
 	<detail>
-		<band height="60">
+		<band height="60" splitType="Prevent">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
 			<printWhenExpression><![CDATA[$V{REPORT_COUNT} == 1]]></printWhenExpression>
 			<componentElement>
 				<reportElement x="-20" y="-1" width="800" height="60" uuid="abe29e2d-9d01-451b-a576-85edf9aae07f">
