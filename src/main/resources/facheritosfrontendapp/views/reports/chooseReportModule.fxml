@@ -140,7 +140,7 @@
                         <Image url="@../../icons/customers-icon.png" />
                      </image>
                      <VBox.margin>
-                        <Insets left="60.0" top="20.0" />
+                        <Insets left="60.0" top="40.0" />
                      </VBox.margin>
                   </ImageView>
                   <Label alignment="CENTER" prefHeight="35.0" prefWidth="142.0" text="Clientes">
