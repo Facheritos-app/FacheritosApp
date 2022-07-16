@@ -22,7 +22,8 @@ public class ReportController {
 
     @FXML
     public void headquarterClicked(MouseEvent mouseEvent) {
-
+        jasperConnection = new JasperConnection("FacheritosReports/headquarter/headquarterReport.jrxml");
+        jasperConnection.showReport();
     }
 
 }
