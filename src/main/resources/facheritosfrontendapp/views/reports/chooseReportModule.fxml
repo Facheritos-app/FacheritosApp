@@ -120,7 +120,7 @@
                      <Cursor fx:constant="HAND" />
                  </cursor>
                  <HBox.margin>
-                     <Insets left="20.0" />
+                     <Insets left="1.0" />
                  </HBox.margin>
              </VBox>
          </children>
