@@ -139,6 +139,22 @@ JOIN part USING(id_part)]]>
 			<property name="com.jaspersoft.studio.field.label" value="quantity_sold"/>
 		</field>
 	</subDataset>
+	<subDataset name="job_orders_per_month" uuid="b7a133a1-9322-49bd-84d5-e2d845a99e9c">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Facheritos server"/>
+		<queryString language="SQL">
+			<![CDATA[SELECT TO_CHAR(created_at, 'Month') AS job_order_month, COUNT(id_job_order) AS job_orders_quantity FROM job_order
+GROUP BY job_order_month]]>
+		</queryString>
+		<field name="job_order_month" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="job_order_month"/>
+			<property name="com.jaspersoft.studio.field.label" value="job_order_month"/>
+		</field>
+		<field name="job_orders_quantity" class="java.lang.Long">
+			<property name="com.jaspersoft.studio.field.name" value="job_orders_quantity"/>
+			<property name="com.jaspersoft.studio.field.label" value="job_orders_quantity"/>
+		</field>
+	</subDataset>
 	<queryString language="SQL">
 		<![CDATA[SELECT *, CASE
 WHEN state=true THEN 'Activo' ELSE 'Inactivo'
@@ -374,23 +390,52 @@ WHERE id_type_person = 2]]>
 			</staticText>
 			<pie3DChart>
 				<chart evaluationTime="Report">
-					<reportElement x="41" y="40" width="269" height="200" uuid="23c5bcc6-22a6-47c2-9978-360e4dfdf4b9"/>
+					<reportElement x="41" y="40" width="269" height="200" uuid="7040d6a8-17a4-4804-a2ca-6eb0899aad3b"/>
 					<chartTitle/>
 					<chartSubtitle/>
 					<chartLegend/>
 				</chart>
 				<pieDataset>
 					<dataset resetType="Report">
-						<datasetRun subDataset="parts_most_sold" uuid="fb73ddae-96e9-4a03-ad1f-2d6cdc8d356b"/>
+						<datasetRun subDataset="parts_most_sold" uuid="7476eea7-3061-46e8-8053-5b55b1f9a9ca"/>
 					</dataset>
 					<keyExpression><![CDATA[$F{name}]]></keyExpression>
 					<valueExpression><![CDATA[$F{quantity_sold}]]></valueExpression>
+					<labelExpression><![CDATA[$F{name}]]></labelExpression>
 				</pieDataset>
 				<pie3DPlot>
 					<plot/>
 					<itemLabel/>
 				</pie3DPlot>
 			</pie3DChart>
+			<stackedBar3DChart>
+				<chart evaluationTime="Report">
+					<reportElement x="460" y="40" width="270" height="200" uuid="9af9c199-75d6-4f71-a818-0221e41448f8"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<dataset resetType="Report">
+						<datasetRun subDataset="job_orders_per_month" uuid="f6490b4b-1e8a-485a-b3bc-ecca3540d6a5"/>
+					</dataset>
+					<categorySeries>
+						<seriesExpression><![CDATA["Cantidad de órdenes de trabajo por mes"]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{job_order_month}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{job_orders_quantity}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<bar3DPlot>
+					<plot/>
+					<itemLabel/>
+					<categoryAxisFormat>
+						<axisFormat labelColor="#000000" tickLabelColor="#000000" axisLineColor="#000000"/>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat labelColor="#000000" tickLabelColor="#000000" axisLineColor="#000000"/>
+					</valueAxisFormat>
+				</bar3DPlot>
+			</stackedBar3DChart>
 		</band>
 	</columnFooter>
 </jasperReport>
