@@ -165,8 +165,7 @@ JOIN worker USING(id_worker)
 JOIN person USING(id_person)
 WHERE worker.state = true
 GROUP BY worker.id_worker, person.id_person) AS worker_job_orders_quantity --subquery para obtener el trabajador y la cantidad de órdenes de trabajo
-JOIN person USING(id_person) --join para obtener la información personal de los trabajadores del subquery
-]]>
+JOIN person USING(id_person) --join para obtener la información personal de los trabajadores del subquery]]>
 		</queryString>
 		<field name="worker_name" class="java.lang.String">
 			<property name="com.jaspersoft.studio.field.name" value="worker_name"/>
