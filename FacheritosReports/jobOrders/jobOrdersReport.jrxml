@@ -155,6 +155,28 @@ GROUP BY job_order_month]]>
 			<property name="com.jaspersoft.studio.field.label" value="job_orders_quantity"/>
 		</field>
 	</subDataset>
+	<subDataset name="worker_job_orders" uuid="b22f76da-5cd3-4a21-9b37-5c13fab80d84">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Facheritos server"/>
+		<queryString language="SQL">
+			<![CDATA[SELECT CONCAT(person.first_name, ' ', person.last_name) AS worker_name, worker_job_orders_quantity.job_orders_quantity 
+FROM (SELECT worker.id_worker, person.id_person,  COUNT(id_job_order) AS job_orders_quantity FROM job_order
+JOIN worker USING(id_worker)
+JOIN person USING(id_person)
+WHERE worker.state = true
+GROUP BY worker.id_worker, person.id_person) AS worker_job_orders_quantity --subquery para obtener el trabajador y la cantidad de órdenes de trabajo
+JOIN person USING(id_person) --join para obtener la información personal de los trabajadores del subquery
+]]>
+		</queryString>
+		<field name="worker_name" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="worker_name"/>
+			<property name="com.jaspersoft.studio.field.label" value="worker_name"/>
+		</field>
+		<field name="job_orders_quantity" class="java.lang.Long">
+			<property name="com.jaspersoft.studio.field.name" value="job_orders_quantity"/>
+			<property name="com.jaspersoft.studio.field.label" value="job_orders_quantity"/>
+		</field>
+	</subDataset>
 	<queryString language="SQL">
 		<![CDATA[SELECT *, CASE
 WHEN state=true THEN 'Activo' ELSE 'Inactivo'
@@ -380,7 +402,7 @@ WHERE id_type_person = 2]]>
 		</band>
 	</detail>
 	<columnFooter>
-		<band height="570">
+		<band height="586">
 			<staticText>
 				<reportElement mode="Opaque" x="0" y="0" width="350" height="30" forecolor="#FFFFFF" backcolor="#005296" uuid="e930dfd5-c5c0-40f7-b1c0-85dff79b4104"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -422,6 +444,34 @@ WHERE id_type_person = 2]]>
 					<categorySeries>
 						<seriesExpression><![CDATA["Cantidad de órdenes de trabajo por mes"]]></seriesExpression>
 						<categoryExpression><![CDATA[$F{job_order_month}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{job_orders_quantity}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<bar3DPlot>
+					<plot/>
+					<itemLabel/>
+					<categoryAxisFormat>
+						<axisFormat labelColor="#000000" tickLabelColor="#000000" axisLineColor="#000000"/>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat labelColor="#000000" tickLabelColor="#000000" axisLineColor="#000000"/>
+					</valueAxisFormat>
+				</bar3DPlot>
+			</stackedBar3DChart>
+			<stackedBar3DChart>
+				<chart evaluationTime="Report">
+					<reportElement x="41" y="310" width="279" height="200" uuid="e41ea8f5-c66d-4efb-bc77-a1e9d5afa619"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<dataset resetType="Report">
+						<datasetRun subDataset="worker_job_orders" uuid="dc913320-997d-4749-a683-21c4b4dcddad"/>
+					</dataset>
+					<categorySeries>
+						<seriesExpression><![CDATA["Cantidad de órdenes de trabajo por trabajador"]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{worker_name}]]></categoryExpression>
 						<valueExpression><![CDATA[$F{job_orders_quantity}]]></valueExpression>
 					</categorySeries>
 				</categoryDataset>
