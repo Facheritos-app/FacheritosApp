@@ -55,6 +55,15 @@ public class SellerDashboardController implements Initializable {
     @FXML
     private ComboBox<String> idCombobox;
 
+    @FXML
+    private ComboBox<?> modelsCombobox;
+
+    @FXML
+    private ComboBox selectionModelsCombobox;
+
+    @FXML
+    private ChoiceBox yearModelChoicebox;
+
     private SellerDashboardEndpoint sellerDashboardEndpoint;
 
     private ArrayList<String> categoryList;
@@ -123,6 +132,7 @@ public class SellerDashboardController implements Initializable {
         preselectOptions();
         salesSeeClicked();
         customersViewClicked();
+        modelsViewClicked();
     }
     /**
      * getSalesPerMonth: String, Integer -> void
@@ -199,7 +209,6 @@ public class SellerDashboardController implements Initializable {
         switch (category) {
             case "month":
                 for (Integer i = 0; i < categoryList.size(); i++) {
-                    System.out.println(categoryList.get(i));
                     series1.getData().add(new XYChart.Data(monthsNames.get(Integer.parseInt(categoryList.get(i)) - 1), categoryTotal.get(i)));
                 }
                 break;
@@ -317,5 +326,42 @@ public class SellerDashboardController implements Initializable {
         }
         series1.setName(selectionCustomersCombobox.getSelectionModel().getSelectedItem());
         customersChart.getData().addAll(series1);
+    }
+
+    @FXML
+    protected void modelsViewClicked(){
+        getModelsData();
+    }
+
+    /**
+     * getModelsData: String, Integer -> void
+     * Purpose: This method connects to the DB and returns the necessary data to build the models chart
+     */
+    public void getModelsData(Integer model,Integer selectionType, Integer year) {
+        //This means that another thread different from the JavaFX app thread will update the required items with the data.
+        new Thread(() -> {
+            //Set the call to the DB.
+            CompletableFuture<Map<Boolean, ResultSet>> modelsCall = CompletableFuture.supplyAsync(() -> sellerDashboardEndpoint.modelsChart(model, selectionType, year));
+            //Concatenate the response of the previous call from the BD to actually populate the table with the data
+            try {
+                modelsCall.thenApply((response) -> {
+                    if (response.containsKey(true)) {
+                        ResultSet resultSet = response.get(true);
+                        Platform.runLater(() -> {
+                            try {
+                                //setCustomersChart(resultSet, selectionType);
+                            } catch (Exception e) {
+                                throw new RuntimeException(e);
+                            }
+                        });
+                    }
+                    return true;
+                }).get();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            } catch (ExecutionException e) {
+                throw new RuntimeException(e);
+            }
+        }).start();
     }
 }
