@@ -616,7 +616,7 @@ WHERE id_type_person = 2]]>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="14" isBold="true"/>
 				</textElement>
-				<text><![CDATA[MODELOS MÁS VENDIDO]]></text>
+				<text><![CDATA[MODELOS MÁS VENDIDOS]]></text>
 			</staticText>
 			<pie3DChart>
 				<chart evaluationTime="Report">

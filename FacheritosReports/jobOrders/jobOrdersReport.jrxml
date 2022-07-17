@@ -117,6 +117,28 @@ JOIN headquarter USING(id_headquarter)]]>
 			<property name="com.jaspersoft.studio.field.tree.path" value="part_inventory"/>
 		</field>
 	</subDataset>
+	<subDataset name="parts_most_sold" uuid="b0ab81f7-bd89-4c7d-8fe0-3c31e28eb219">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Facheritos server"/>
+		<queryString language="SQL">
+			<![CDATA[SELECT name, quantity_sold 
+FROM (SELECT id_part, COUNT(id_part) AS quantity_sold FROM job_order
+JOIN job_order_part USING(id_job_order)
+GROUP BY id_part
+ORDER BY quantity_sold DESC
+LIMIT 3) AS part_quantity_sold
+JOIN part USING(id_part)]]>
+		</queryString>
+		<field name="name" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="name"/>
+			<property name="com.jaspersoft.studio.field.label" value="name"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="part"/>
+		</field>
+		<field name="quantity_sold" class="java.lang.Long">
+			<property name="com.jaspersoft.studio.field.name" value="quantity_sold"/>
+			<property name="com.jaspersoft.studio.field.label" value="quantity_sold"/>
+		</field>
+	</subDataset>
 	<queryString language="SQL">
 		<![CDATA[SELECT *, CASE
 WHEN state=true THEN 'Activo' ELSE 'Inactivo'
@@ -342,6 +364,33 @@ WHERE id_type_person = 2]]>
 		</band>
 	</detail>
 	<columnFooter>
-		<band height="570"/>
+		<band height="570">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="350" height="30" forecolor="#FFFFFF" backcolor="#005296" uuid="e930dfd5-c5c0-40f7-b1c0-85dff79b4104"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[REPUESTOS MÁS VENDIDOS]]></text>
+			</staticText>
+			<pie3DChart>
+				<chart evaluationTime="Report">
+					<reportElement x="41" y="40" width="269" height="200" uuid="23c5bcc6-22a6-47c2-9978-360e4dfdf4b9"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<pieDataset>
+					<dataset resetType="Report">
+						<datasetRun subDataset="parts_most_sold" uuid="fb73ddae-96e9-4a03-ad1f-2d6cdc8d356b"/>
+					</dataset>
+					<keyExpression><![CDATA[$F{name}]]></keyExpression>
+					<valueExpression><![CDATA[$F{quantity_sold}]]></valueExpression>
+				</pieDataset>
+				<pie3DPlot>
+					<plot/>
+					<itemLabel/>
+				</pie3DPlot>
+			</pie3DChart>
+		</band>
 	</columnFooter>
 </jasperReport>
