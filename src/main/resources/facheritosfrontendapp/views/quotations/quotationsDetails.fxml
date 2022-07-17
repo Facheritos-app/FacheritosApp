@@ -353,6 +353,7 @@
                         <GridPane hgap="20.0">
                           <columnConstraints>
                             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                           </columnConstraints>
                           <rowConstraints>
@@ -372,6 +373,12 @@
                                  </styleClass>
                               </Button>
                               <Button fx:id="cancel" mnemonicParsing="false" onMouseClicked="#cancelClick" prefHeight="57.0" prefWidth="100.0" stylesheets="@../style.css" text="Cancelar" GridPane.columnIndex="1">
+                                 <styleClass>
+                                    <String fx:value="select-button" />
+                                    <String fx:value="red-button" />
+                                 </styleClass>
+                              </Button>
+                              <Button fx:id="cancel1" mnemonicParsing="false" onMouseClicked="#deleteQuotationClick" prefHeight="57.0" prefWidth="100.0" stylesheets="@../style.css" text="Eliminar" GridPane.columnIndex="2">
                                  <styleClass>
                                     <String fx:value="select-button" />
                                     <String fx:value="red-button" />

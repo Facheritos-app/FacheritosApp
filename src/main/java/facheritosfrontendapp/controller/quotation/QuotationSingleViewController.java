@@ -450,6 +450,33 @@ public class QuotationSingleViewController implements Initializable {
         }
     }
 
+    @FXML
+    public void deleteQuotationClick(MouseEvent mouseEvent) throws IOException, ExecutionException, InterruptedException {
+        MyDialogPane dialogPane = new MyDialogPane("confirmationDelete");
+        Optional<ButtonType> clickedButton = dialogPane.getClickedButton();
+        if(clickedButton.get() == YES) {
+            CompletableFuture<Boolean> deleteQuotationCall = CompletableFuture.supplyAsync(() -> quotationEndpoint.deleteQuotation(currentQuotation.getIdQuotation()));
+            deleteQuotationCall.thenApply(response -> {
+                Platform.runLater(() -> {
+                    if(response){
+                        Alert success = new Alert(Alert.AlertType.CONFIRMATION, "Esta cotización ha sido eliminada");
+                        success.showAndWait();
+                        try {
+                            quotationController = (QuotationController) dashboardController.changeContent("quotations/quotations");
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
+                        quotationController.showQuotations();
+                    } else {
+                        Alert fail = new Alert(Alert.AlertType.ERROR, "No se ha podido eliminar esta cotización, vuelvalo a intentar");
+                        fail.show();
+                    }
+                });
+                return response;
+            }).get();
+        }
+    }
+
     /**
      * onUpdateQuotation: MouseEvent -> Void
      * Purpose: This method is called when the user wants to update the current quotation,
