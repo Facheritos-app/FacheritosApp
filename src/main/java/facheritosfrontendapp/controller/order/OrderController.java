@@ -135,7 +135,7 @@ public class OrderController implements Initializable {
         for(int i = 0; i < orderRowsArray.size(); i++){
             if(mouseEvent.getSource() == orderRowsArray.get(i).getOptionsLabel()){
                 try {
-                    orderSingleViewController = (OrderSingleViewController) dashboardController.changeContent("orders/ordersSingleView");
+                    orderSingleViewController = (OrderSingleViewController) dashboardController.changeContent("orders/ordersSingleView", true);
                     orderSingleViewController.showForm(orderRowsArray.get(i).getIdOrder());
                 } catch (IOException e) {
                     throw new RuntimeException(e);
