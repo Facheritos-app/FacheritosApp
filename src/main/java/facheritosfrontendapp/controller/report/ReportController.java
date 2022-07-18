@@ -31,4 +31,9 @@ public class ReportController {
         jasperConnection = new JasperConnection("FacheritosReports/customer/customerReport.jrxml");
         jasperConnection.showReport();
     }
+    @FXML
+    public void jobOrdersClicked(MouseEvent mouseEvent) {
+        jasperConnection = new JasperConnection("FacheritosReports/jobOrders/jobOrdersReport.jrxml");
+        jasperConnection.showReport();
+    }
 }

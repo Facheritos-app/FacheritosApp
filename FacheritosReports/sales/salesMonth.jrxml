@@ -277,6 +277,31 @@ LIMIT 3]]>
 			<property name="com.jaspersoft.studio.field.label" value="quantity_sales_customer"/>
 		</field>
 	</subDataset>
+	<subDataset name="Headquarter_Sales" uuid="38c3c5f4-9005-4c1f-94b5-7cd274688e97">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Facheritos server"/>
+		<queryString language="SQL">
+			<![CDATA[SELECT headquarter.name, headquarter_sales.total_sales 
+FROM (SELECT id_headquarter, SUM(price) AS total_sales FROM sale
+GROUP BY id_headquarter) AS headquarter_sales
+JOIN headquarter USING(id_headquarter)]]>
+		</queryString>
+		<field name="name" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="name"/>
+			<property name="com.jaspersoft.studio.field.label" value="name"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="headquarter"/>
+		</field>
+		<field name="total_sales" class="java.lang.Double">
+			<property name="com.jaspersoft.studio.field.name" value="total_sales"/>
+			<property name="com.jaspersoft.studio.field.label" value="total_sales"/>
+		</field>
+		<group name="name">
+			<groupExpression><![CDATA[$F{name}]]></groupExpression>
+		</group>
+		<group name="total_sales">
+			<groupExpression><![CDATA[$F{total_sales}]]></groupExpression>
+		</group>
+	</subDataset>
 	<queryString language="SQL">
 		<![CDATA[SELECT *, CASE
 WHEN state=true THEN 'Activo' ELSE 'Inactivo'
@@ -591,7 +616,7 @@ WHERE id_type_person = 2]]>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="14" isBold="true"/>
 				</textElement>
-				<text><![CDATA[MODELOS MÁS VENDIDO]]></text>
+				<text><![CDATA[MODELOS MÁS VENDIDOS]]></text>
 			</staticText>
 			<pie3DChart>
 				<chart evaluationTime="Report">
@@ -628,6 +653,34 @@ WHERE id_type_person = 2]]>
 						<seriesExpression><![CDATA["Clientes más activos"]]></seriesExpression>
 						<categoryExpression><![CDATA[$F{customer_name}]]></categoryExpression>
 						<valueExpression><![CDATA[$F{quantity_sales_customer}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<bar3DPlot>
+					<plot/>
+					<itemLabel/>
+					<categoryAxisFormat>
+						<axisFormat labelColor="#000000" tickLabelColor="#000000" axisLineColor="#000000"/>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat labelColor="#000000" tickLabelColor="#000000" axisLineColor="#000000"/>
+					</valueAxisFormat>
+				</bar3DPlot>
+			</stackedBar3DChart>
+			<stackedBar3DChart>
+				<chart evaluationTime="Report">
+					<reportElement x="440" y="280" width="320" height="200" uuid="f2812fb8-463f-4b1b-9c3a-ee013a80c116"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<dataset resetType="Report">
+						<datasetRun subDataset="Headquarter_Sales" uuid="bfc5a1a8-e709-4101-9410-50b3ab9dee30"/>
+					</dataset>
+					<categorySeries>
+						<seriesExpression><![CDATA["Ventas totales por sede"]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{name}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{total_sales}]]></valueExpression>
 					</categorySeries>
 				</categoryDataset>
 				<bar3DPlot>

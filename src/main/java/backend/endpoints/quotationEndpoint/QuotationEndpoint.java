@@ -18,7 +18,8 @@ public class QuotationEndpoint {
                     "H.name AS headquarter_name, *" +
                     "FROM quotation Quotation JOIN headquarter H USING(id_headquarter)" +
                     "JOIN worker USING (id_worker) JOIN person PW USING(id_person)" +
-                    "JOIN person Customer ON(Quotation.id_customer = Customer.id_person)");
+                    "JOIN person Customer ON(Quotation.id_customer = Customer.id_person)" +
+                    "WHERE id_confirmation = 1");
             resultSet = preparedStatement.executeQuery();
             response.put(true, resultSet);
         }catch (SQLException e){
@@ -86,6 +87,20 @@ public class QuotationEndpoint {
             preparedStatement.setInt(6, quotation.getIdQuotation());
             preparedStatement.executeUpdate();
 
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public Boolean deleteQuotation(Integer idQuotation) {
+        PreparedStatement preparedStatement = null;
+        try(Connection conn = ConnectionBD.connectDB().getConnection()){
+            preparedStatement = conn.prepareStatement("UPDATE quotation SET id_confirmation = ? WHERE id_quotation = ?");
+            preparedStatement.setInt(1, 3);
+            preparedStatement.setInt(2, idQuotation);
+            preparedStatement.executeUpdate();
             return true;
         } catch (SQLException e) {
             e.printStackTrace();
