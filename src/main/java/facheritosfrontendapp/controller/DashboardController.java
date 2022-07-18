@@ -52,7 +52,7 @@ public class DashboardController implements Initializable {
 
     private MyProfileViewController myProfileViewController;
 
-    private SellerDashboardController sellerDashboard;
+    private SellerDashboardController sellerDashboardController;
 
     public DashboardController() {
         loginEndpoint = new LoginEndpoint();
@@ -191,7 +191,8 @@ public class DashboardController implements Initializable {
                 break;
             //Seller
             case 2:
-                changeContent("dashboard/sellerDashboard", true);
+                sellerDashboardController = (SellerDashboardController) changeContent("dashboard/sellerDashboard", true);
+                sellerDashboardController.showDashboard();
                 break;
             //Mechanic
             case 3:

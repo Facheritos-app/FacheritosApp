@@ -92,7 +92,7 @@ public class SellerDashboardEndpoint {
      * modelsChart:  -> Map<Boolean, ResultSet>
      * Purpose: This method connects to the DB and returns the data for the models chart
      */
-    public Map<Boolean, ResultSet> modelsChart(Integer model, Integer selectionType, Integer year) {
+    public Map<Boolean, ResultSet> modelsChart(Integer idModel, Integer selectionType, Integer year) {
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         HashMap<Boolean, ResultSet> response = new HashMap<>();
@@ -107,14 +107,14 @@ public class SellerDashboardEndpoint {
             }
             //Price of models sold
             else if(selectionType == 1){
-                preparedStatement = conn.prepareStatement("SELECT DATE_PART('month', sale_date) AS data, SUM(price) AS total " +
+                preparedStatement = conn.prepareStatement("SELECT DATE_PART('month', sale_date) AS data, SUM(model.price) AS total " +
                         "FROM sale JOIN sale_car USING(id_sale) JOIN car USING(id_car) " +
                         "JOIN model USING(id_model) " +
                         "WHERE id_model = ? AND DATE_PART('year', sale_date) = ?" +
                         "GROUP by data;");
             }
 
-            preparedStatement.setInt(1, model);
+            preparedStatement.setInt(1, idModel);
             preparedStatement.setInt(2, year);
             resultSet = preparedStatement.executeQuery();
             response.put(true, resultSet);
