@@ -86,7 +86,6 @@ public class QuotationController implements Initializable {
      * Purpose: showQuotations auxiliary, fill the quotations table view
      */
     public void setQuotationsTable(ResultSet resultSet) throws SQLException {
-        System.out.println("Entro a setTable");
         while(resultSet.next()){
             QuotationRowView quotationRow = new QuotationRowView(resultSet.getInt("id_quotation"), resultSet.getString("seller_firstname") + " " + resultSet.getString("seller_lastname"),
                     resultSet.getString("customer_firstname") + " " +resultSet.getString("customer_lastname"),
