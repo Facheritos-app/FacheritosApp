@@ -151,7 +151,6 @@ public class SellerDashboardController implements Initializable {
      * Purpose: This method shows everything in the view from one single function
      */
     public void showDashboard() {
-        System.out.println("Show dashboard");
         setChoiceBox();
         preselectOptions();
         salesSeeClicked();
@@ -394,7 +393,6 @@ public class SellerDashboardController implements Initializable {
 
     @FXML
     protected void modelsViewClicked(){
-        System.out.println("Models clicked");
         getModelsData(modelsCombobox.getSelectionModel().getSelectedItem().getIdModel(),
                 selectionModelsCombobox.getSelectionModel().getSelectedIndex(), Integer.valueOf(yearModelChoicebox.getSelectionModel().getSelectedItem()));
     }
@@ -435,7 +433,6 @@ public class SellerDashboardController implements Initializable {
      * Purpose: This method uses the data from the query and sets it in the models chart
      */
     protected void setModelsChart(ResultSet resultSet) throws Exception {
-        System.out.println("Models chart");
         clearDataToUpdate(2);
         while (resultSet.next()) {
             modelChartList.add(resultSet.getString("data"));
