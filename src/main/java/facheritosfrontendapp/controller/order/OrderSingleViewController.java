@@ -76,6 +76,9 @@ public class OrderSingleViewController implements Initializable {
     private TextField priceField;
 
     @FXML
+    private TextField priceField2;
+
+    @FXML
     private Label priceLabel;
 
     @FXML
@@ -233,7 +236,9 @@ public class OrderSingleViewController implements Initializable {
         headquarterLabel.setText("");
         dueDatePicker.setStyle("");
         dueDateLabel.setText("");
-        priceField.setStyle("");
+        priceField.setStyle(
+                "-fx-background-color: #F4F4F4;\n " + "-fx-border-radius: 10;"
+        );
         priceLabel.setText("");
         partField.setStyle("");
         partLabel.setText("");
