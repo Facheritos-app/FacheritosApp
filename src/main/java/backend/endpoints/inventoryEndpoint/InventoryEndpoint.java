@@ -20,7 +20,7 @@ public class InventoryEndpoint {
         try (Connection conn = ConnectionBD.connectDB().getConnection()) {
             preparedStatement = conn.prepareStatement("SELECT * FROM car JOIN car_headquarter USING (id_car)" +
                     "JOIN headquarter USING (id_headquarter)" +
-                    "JOIN model USING (id_model)");
+                    "JOIN model USING (id_model) WHERE car.status='Activo'");
             resultSet = preparedStatement.executeQuery();
             response.put(true, resultSet);
         } catch (SQLException e) {
@@ -414,5 +414,23 @@ public class InventoryEndpoint {
         }else{
             throw new Exception("ERROR: car_headquarter row already exists");
         }
+    }
+    /**
+     * deleteVehicle: Integer -> Boolean
+     * Purpose: sets the state of the vehicle as inactive, but it does not delete it definitively.
+     */
+    public Boolean deleteVehicle(Integer idVehicle) {
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+            try(Connection conn = ConnectionBD.connectDB().getConnection()){
+                preparedStatement = conn.prepareStatement("UPDATE car SET status='Inactivo' WHERE id_car = ?");
+                preparedStatement.setInt(1, idVehicle);
+                preparedStatement.executeUpdate();
+                return true;
+            } catch (SQLException e) {
+                e.printStackTrace();
+                return false;
+            }
+
     }
 }
