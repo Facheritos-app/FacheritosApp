@@ -215,8 +215,6 @@ public class InventoryVehicleController implements Initializable {
             Alert fail = new Alert(Alert.AlertType.ERROR, "Ha habido un problema, por favor intenta nuevamente", OK);
             fail.show();
         }
-
-
         }).start();
     }
 }

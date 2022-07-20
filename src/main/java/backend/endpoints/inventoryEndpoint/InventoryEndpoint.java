@@ -58,7 +58,7 @@ public class InventoryEndpoint {
         try (Connection conn = ConnectionBD.connectDB().getConnection()) {
             preparedStatement = conn.prepareStatement("SELECT *, headquarter.name AS hq FROM part JOIN part_inventory USING(id_part)" +
                     "JOIN headquarter USING(id_headquarter)" +
-                    "JOIN city USING(id_city)");
+                    "JOIN city USING(id_city) WHERE part.status = 'Activo'");
             resultSet = preparedStatement.executeQuery();
             response.put(true, resultSet);
         } catch (SQLException e) {
@@ -431,6 +431,24 @@ public class InventoryEndpoint {
                 e.printStackTrace();
                 return false;
             }
+
+    }
+    /**
+     * deletePart: Integer -> Boolean
+     * Purpose: sets the state of the part as inactive, but it does not delete it definitively.
+     */
+    public Boolean deletePart(Integer idPart) {
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        try(Connection conn = ConnectionBD.connectDB().getConnection()){
+            preparedStatement = conn.prepareStatement("UPDATE part SET status='Inactivo' WHERE id_part = ?");
+            preparedStatement.setInt(1, idPart);
+            preparedStatement.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
 
     }
 }
