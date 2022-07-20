@@ -47,8 +47,6 @@ public class CustomerSingleViewController implements Initializable {
 
     private ArrayList<SaleByIdCustomerRowView> saleRowsArray;
 
-    private SaleSingleViewController saleSingleViewController;
-
     @FXML
     private Label nameLabel;
 
@@ -86,9 +84,6 @@ public class CustomerSingleViewController implements Initializable {
     private TableColumn<SaleByIdCustomerRowView, String> colSeat;
 
     @FXML
-    private TableColumn<SaleByIdCustomerRowView, VBox> colOptions;
-
-    @FXML
     public ImageView backToCustomers;
 
     @FXML
@@ -104,7 +99,6 @@ public class CustomerSingleViewController implements Initializable {
         customerEndpoint = new CustomerEndpoint();
         saleEndpoint = new SaleEndpoint();
         saleRowsArray = new ArrayList<>();
-        saleSingleViewController = new SaleSingleViewController();
     }
 
     @Override
@@ -235,7 +229,6 @@ public class CustomerSingleViewController implements Initializable {
         colDate.setCellValueFactory(new PropertyValueFactory<>("saleDate"));
         colPaymentMethod.setCellValueFactory(new PropertyValueFactory<>("paymentMethod"));
         colSeat.setCellValueFactory(new PropertyValueFactory<>("headquarter"));
-        //colOptions.setCellValueFactory(new PropertyValueFactory<>("options"));
 
         purchasesTable.setItems(FXCollections.observableArrayList(saleRowsArray));
     }

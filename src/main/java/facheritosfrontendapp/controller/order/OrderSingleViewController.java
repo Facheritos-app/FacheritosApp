@@ -1,11 +1,16 @@
 package facheritosfrontendapp.controller.order;
 
 import backend.endpoints.headquarterEndpoint.HeadquarterEndpoint;
+import backend.endpoints.inventoryEndpoint.InventoryEndpoint;
 import backend.endpoints.orderEndpoint.OrderEndpoint;
 import facheritosfrontendapp.ComboBoxView.HeadquarterView;
 import facheritosfrontendapp.controller.DashboardController;
 import facheritosfrontendapp.controller.MainController;
 import facheritosfrontendapp.controller.customer.CustomerController;
+import facheritosfrontendapp.controller.inventory.InventoryPartController;
+import facheritosfrontendapp.controller.inventory.InventoryVehicleController;
+import facheritosfrontendapp.objectRowView.inventoryRowView.PartRowView;
+import facheritosfrontendapp.objectRowView.inventoryRowView.VehicleRowView;
 import facheritosfrontendapp.validator.addUserValidator.AddUserValidator;
 import facheritosfrontendapp.views.MyDialogPane;
 import javafx.application.Platform;
@@ -13,6 +18,7 @@ import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 import java.net.URL;
@@ -35,16 +41,34 @@ public class OrderSingleViewController implements Initializable {
 
     private OrderEndpoint orderEndpoint;
     private HeadquarterEndpoint headquarterEndpoint;
+    private InventoryEndpoint inventoryEndpoint;
 
     private final AddUserValidator inputValidator;
 
     private ArrayList<HeadquarterView> headquarterComboboxList;
 
+    private ArrayList<PartRowView> partRowViewList;
+
     private DashboardController dashboardController;
 
     private OrderController orderController;
 
+    private InventoryPartController inventoryPartController;
+
+
     //Here are all the @FXML components
+    //Parts table
+    @FXML
+    private TableView partTableview;
+    @FXML
+    private TableColumn<VehicleRowView, String> colNamePart;
+    @FXML
+    private TableColumn<VehicleRowView, Double> colPricePart;
+    @FXML
+    private TableColumn<VehicleRowView, Integer> colQuantityPart;
+
+    //Order Summary table
+
     @FXML
     private Label orderLabel;
 
@@ -76,9 +100,6 @@ public class OrderSingleViewController implements Initializable {
     private TextField priceField;
 
     @FXML
-    private TextField priceField2;
-
-    @FXML
     private Label priceLabel;
 
     @FXML
@@ -108,11 +129,15 @@ public class OrderSingleViewController implements Initializable {
     @FXML
     private Button searchButton;
 
+
     public OrderSingleViewController() {
         orderEndpoint = new OrderEndpoint();
         headquarterEndpoint = new HeadquarterEndpoint();
         headquarterComboboxList = new ArrayList<>();
         inputValidator = new AddUserValidator();
+        inventoryEndpoint = new InventoryEndpoint();
+        partRowViewList = new ArrayList<>();
+        inventoryPartController = new InventoryPartController();
     }
 
 

@@ -25,7 +25,7 @@
                   <Font name="Poppins Regular" size="12.0" />
                </font>
             </Label>
-            <TextField fx:id="priceField2" editable="false" layoutX="622.0" layoutY="403.0" prefHeight="56.0" prefWidth="273.0" style="-fx-background-color: F4F4F4; -fx-background-radius: 10; -fx-border-radius: 10;" stylesheets="@../style.css">
+            <TextField editable="false" layoutX="622.0" layoutY="403.0" prefHeight="56.0" prefWidth="273.0" style="-fx-background-color: F4F4F4; -fx-background-radius: 10; -fx-border-radius: 10;" stylesheets="@../style.css">
                <font>
                   <Font name="Poppins Regular" size="12.0" />
                </font>
@@ -246,11 +246,11 @@
                   <Font name="Poppins Regular" size="12.0" />
                </font>
             </TextField>
-            <TableView cache="true" layoutX="323.0" layoutY="110.0" pickOnBounds="false" prefHeight="243.0" prefWidth="273.0" style="-fx-font-family: Poppins; -fx-font-size: 12; -fx-background-color: F4F4F4; -fx-background-radius: 10; -fx-border-radius: 10;" stylesheets="@../style.css">
+            <TableView fx:id="partTableview" cache="true" layoutX="323.0" layoutY="110.0" pickOnBounds="false" prefHeight="243.0" prefWidth="273.0" style="-fx-font-family: Poppins; -fx-font-size: 12; -fx-background-color: F4F4F4; -fx-background-radius: 10; -fx-border-radius: 10;" stylesheets="@../style.css">
                <columns>
-                  <TableColumn prefWidth="115.0" sortable="false" style="-fx-background-color: F4F4F4; -fx-text-fill: black;" text="Nombre" />
-                  <TableColumn prefWidth="84.0" style="-fx-background-color: F4F4F4; -fx-text-fill: black;" text="Precio" />
-                  <TableColumn prefWidth="73.0" style="-fx-background-color: F4F4F4; -fx-text-fill: black;" text="Cantidad" />
+                  <TableColumn fx:id="colNamePart" prefWidth="115.0" sortable="false" style="-fx-background-color: F4F4F4; -fx-text-fill: black;" text="Nombre" />
+                  <TableColumn fx:id="colPricePart" prefWidth="84.0" style="-fx-background-color: F4F4F4; -fx-text-fill: black;" text="Precio" />
+                  <TableColumn fx:id="colQuantityPart" prefWidth="73.0" style="-fx-background-color: F4F4F4; -fx-text-fill: black;" text="Cantidad" />
                </columns>
             </TableView>
          </children>
