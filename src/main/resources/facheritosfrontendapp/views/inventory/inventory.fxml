@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -9,52 +10,86 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="517.0" prefWidth="647.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="facheritosfrontendapp.controller.inventory.InventoryController">
     <children>
-        <Label layoutX="34.0" layoutY="23.0" prefHeight="72.0" prefWidth="217.0" styleClass="poppins" stylesheets="@../style.css" text="Inventario" textFill="#1f1f1f">
-            <font>
-                <Font name="Poppins Bold" size="36.0" />
-            </font>
-        </Label>
-        <TabPane fx:id="inventoryTabpane" layoutX="62.0" layoutY="108.0" prefHeight="383.0" prefWidth="522.0" style="-fx-border-color: c9c9c9;" stylesheets="@../style.css">
-            <tabs>
-                <Tab text="Vehículos">
-                    <content>
-                        <TableView fx:id="vehicleTableview" prefHeight="200.0" prefWidth="495.0" styleClass="table-views" stylesheets="@../style.css">
-                            <columns>
-                                <TableColumn fx:id="colName" prefWidth="120.0" text="Nombre" />
-                                <TableColumn fx:id="colPrice" prefWidth="100.0" text="Precio" />
-                                <TableColumn fx:id="colHeadquarter" prefWidth="100.0" text="Sede" />
-                                <TableColumn fx:id="colQuantity" prefWidth="100.0" text="Cantidad" />
-                                <TableColumn fx:id="colOptions" prefWidth="100.0" text="Opciones" />
-                            </columns>
+        <Separator layoutY="14.0" orientation="VERTICAL" prefHeight="502.0" prefWidth="8.0" />
+      <VBox layoutY="13.0" prefHeight="518.0" prefWidth="650.0">
+         <children>
+              <Label prefHeight="38.0" prefWidth="218.0" styleClass="poppins" stylesheets="@../style.css" text="Inventario" textFill="#1f1f1f">
+                  <font>
+                      <Font name="Poppins Bold" size="36.0" />
+                  </font>
+               <VBox.margin>
+                  <Insets left="20.0" top="20.0" />
+               </VBox.margin>
+              </Label>
+            <HBox prefHeight="118.0" prefWidth="650.0" spacing="15.0">
+               <children>
+                  <Button fx:id="addVehicleBtn" mnemonicParsing="false" onMouseClicked="#addVehicleClicked" prefHeight="26.0" prefWidth="134.0" styleClass="red-button" stylesheets="@../style.css" text="Agregar  vehículo +" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <HBox.margin>
+                        <Insets left="300.0" top="10.0" />
+                     </HBox.margin>
+                  </Button>
+                    <Button fx:id="addPartBtn" mnemonicParsing="false" onMouseClicked="#addPartClicked" prefHeight="26.0" prefWidth="146.0" styleClass="red-button" stylesheets="@../style.css" text="Agregar  respuesto +" textFill="WHITE">
+                        <font>
+                            <Font name="System Bold" size="12.0" />
+                        </font>
+                        <cursor>
+                            <Cursor fx:constant="HAND" />
+                        </cursor>
+                     <HBox.margin>
+                        <Insets top="10.0" />
+                     </HBox.margin>
+                    </Button>
+               </children>
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+            </HBox>
+              <TabPane fx:id="inventoryTabpane" prefHeight="447.0" prefWidth="520.0" style="-fx-border-color: c9c9c9;" stylesheets="@../style.css">
+                  <tabs>
+                      <Tab text="Vehículos">
+                          <content>
+                              <TableView fx:id="vehicleTableview" prefHeight="200.0" prefWidth="495.0" styleClass="table-views" stylesheets="@../style.css">
+                                  <columns>
+                                      <TableColumn fx:id="colName" prefWidth="120.0" text="Nombre" />
+                                      <TableColumn fx:id="colPrice" prefWidth="100.0" text="Precio" />
+                                      <TableColumn fx:id="colHeadquarter" prefWidth="100.0" text="Sede" />
+                                      <TableColumn fx:id="colQuantity" prefWidth="100.0" text="Cantidad" />
+                                      <TableColumn fx:id="colOptions" prefWidth="100.0" text="Opciones" />
+                                  </columns>
+                              </TableView>
+                          </content>
+                      </Tab>
+                      <Tab text="Repuestos">
+                     <content>
+                        <TableView fx:id="partTableview" prefHeight="200.0" prefWidth="495.0" styleClass="table-views" stylesheets="@../style.css">
+                           <columns>
+                              <TableColumn fx:id="colNamePart" prefWidth="120.0" text="Nombre" />
+                              <TableColumn fx:id="colPricePart" prefWidth="100.0" text="Precio" />
+                              <TableColumn fx:id="colHeadquarterPart" prefWidth="100.0" text="Sede" />
+                              <TableColumn fx:id="colQuantityPart" prefWidth="100.0" text="Cantidad" />
+                              <TableColumn fx:id="colOptionsPart" prefWidth="100.0" text="Opciones" />
+                           </columns>
                         </TableView>
-                    </content>
-                </Tab>
-                <Tab text="Repuestos">
-               <content>
-                  <TableView fx:id="partTableview" prefHeight="200.0" prefWidth="495.0" styleClass="table-views" stylesheets="@../style.css">
-                     <columns>
-                        <TableColumn fx:id="colNamePart" prefWidth="120.0" text="Nombre" />
-                        <TableColumn fx:id="colPricePart" prefWidth="100.0" text="Precio" />
-                        <TableColumn fx:id="colHeadquarterPart" prefWidth="100.0" text="Sede" />
-                        <TableColumn fx:id="colQuantityPart" prefWidth="100.0" text="Cantidad" />
-                        <TableColumn fx:id="colOptionsPart" prefWidth="100.0" text="Opciones" />
-                     </columns>
-                  </TableView>
-               </content></Tab>
-            </tabs>
-        </TabPane>
-        <Separator orientation="VERTICAL" prefHeight="516.0" prefWidth="8.0" />
-        <Button fx:id="addBtn" layoutX="500.0" layoutY="74.0" mnemonicParsing="false" onMouseClicked="#addClicked" prefHeight="26.0" prefWidth="84.0" styleClass="red-button" stylesheets="@../style.css" text="Agregar  +" textFill="WHITE">
-            <font>
-                <Font name="System Bold" size="12.0" />
-            </font>
-            <cursor>
-                <Cursor fx:constant="HAND" />
-            </cursor>
-        </Button>
+                     </content>
+                  </Tab>
+                  </tabs>
+               <VBox.margin>
+                  <Insets left="50.0" right="80.0" />
+               </VBox.margin>
+              </TabPane>
+         </children>
+      </VBox>
     </children>
 </AnchorPane>

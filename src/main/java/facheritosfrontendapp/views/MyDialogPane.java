@@ -30,28 +30,7 @@ public class MyDialogPane extends DialogPane {
 
         clickedButton = dialog.showAndWait();
     }
-    public MyDialogPane(String fileName, int code) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(getClass().getResource("/facheritosfrontendapp/views/"+fileName+".fxml"));
-        DialogPane dialogPane = fxmlLoader.load();
-        //ConfirmationCancelController confirmationCancelController = fxmlLoader.getController();
 
-        Dialog<ButtonType> dialog = new Dialog<>();
-        dialog.setDialogPane(dialogPane);
-        //Select between adding car or part
-        if(code == 1){
-            Button carBtn = (Button) dialogPane.lookupButton(dialogPane.getButtonTypes().get(0));
-            Button partBtn = (Button) dialogPane.lookupButton(dialogPane.getButtonTypes().get(1));
-            carBtn.getStyleClass().add("blue-button");
-            partBtn.getStyleClass().add("blue-button");
-            carBtn.setText("Vehículo");
-            partBtn.setText("Repuesto");
-
-            dialog.setTitle("¿Qué quiere añadir al inventario?");
-        }
-
-        clickedButton = dialog.showAndWait();
-    }
 
     public Optional<ButtonType> getClickedButton(){
         return clickedButton;
