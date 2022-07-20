@@ -28,7 +28,7 @@
         <TableView fx:id="orderTableView" layoutX="34.0" layoutY="127.0" prefHeight="379.0" prefWidth="592.0" stylesheets="@../style.css">
             <columns>
                 <TableColumn fx:id="colId" prefWidth="55.0" text="Id" />
-            <TableColumn prefWidth="81.0" text="Trabajador" />
+            <TableColumn fx:id="colWorker" prefWidth="81.0" text="Trabajador" />
                 <TableColumn fx:id="colSeat" prefWidth="71.0" text="Sede" />
                 <TableColumn fx:id="colCustomerId" prefWidth="107.0" text="C.C. Cliente" />
                 <TableColumn fx:id="colDueDate" minWidth="3.0" prefWidth="116.0" text="Fecha de entrega" />

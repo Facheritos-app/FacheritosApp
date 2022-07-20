@@ -17,6 +17,8 @@ public class OrderRowView {
 
     private Integer idOrder;
 
+    private String workerName;
+
     private String seat;
 
     private String idCustomer;
@@ -27,8 +29,9 @@ public class OrderRowView {
 
     private VBox options;
 
-    public OrderRowView(Integer idOrder, String seat, String idCustomer, Date dueDate, String status){
+    public OrderRowView(Integer idOrder, String workerName, String seat, String idCustomer, Date dueDate, String status){
         this.idOrder = idOrder;
+        this.workerName = workerName;
         this.seat = seat;
         this.idCustomer = idCustomer;
         this.dueDate = dueDate.toLocalDate().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM));
@@ -46,11 +49,19 @@ public class OrderRowView {
         this.idOrder = idOrder;
     }
 
+    public String getWorkerName() {
+        return workerName;
+    }
+
+    public void setWorkerName(String workerName) {
+        this.seat = workerName;
+    }
+
     public String getSeat() {
         return seat;
     }
 
-    public void setSeat(String cc) {
+    public void setSeat(String seat) {
         this.seat = seat;
     }
 

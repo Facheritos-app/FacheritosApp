@@ -18,7 +18,14 @@ public class OrderEndpoint {
         HashMap<Boolean, ResultSet> response = new HashMap<>();
         try(Connection conn = ConnectionBD.connectDB().getConnection()){
             preparedStatement = conn.prepareStatement(
-                    "SELECT *, headquarter.name AS seat,  state.name AS status FROM person JOIN job_order ON person.id_person = job_order.id_customer JOIN state USING(id_state) JOIN headquarter USING(id_headquarter)");
+                    "SELECT job_order.id_job_order, worker_data.worker_name, headquarter.name AS seat, person.cc," +
+                            "job_order.due_date, state.name AS status FROM person JOIN job_order " +
+                            "ON person.id_person = job_order.id_customer JOIN state USING(id_state) JOIN headquarter " +
+                            "USING(id_headquarter) JOIN " +
+                            "(SELECT (person.first_name || ' ' || person.last_name) AS worker_name, worker_person.id_worker " +
+                            "FROM (SELECT worker.id_person, worker.id_worker FROM job_order JOIN worker " +
+                            "USING(id_worker)) as worker_person JOIN person ON worker_person.id_person = person.id_person) " +
+                            "as worker_data USING(id_worker)");
             resultSet = preparedStatement.executeQuery();
             response.put(true, resultSet);
         }catch (SQLException e){

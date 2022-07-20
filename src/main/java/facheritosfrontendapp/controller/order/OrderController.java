@@ -40,6 +40,9 @@ public class OrderController implements Initializable {
     private TableColumn<OrderRowView, String> colId;
 
     @FXML
+    private TableColumn<OrderRowView, String> colWorker;
+
+    @FXML
     private TableColumn<OrderRowView, String> colSeat;
 
     @FXML
@@ -106,8 +109,10 @@ public class OrderController implements Initializable {
     public void setOrdersData(ResultSet resultSet) throws SQLException {
         //As long as there are records left to show
         while(resultSet.next()){
-            OrderRowView orderRow = new OrderRowView(resultSet.getInt("id_job_order"), resultSet.getString("seat"), resultSet.getString("cc"),
-                    resultSet.getDate("due_date"), resultSet.getString("status"));
+            OrderRowView orderRow = new OrderRowView(resultSet.getInt("id_job_order"),
+                    resultSet.getString("worker_name"), resultSet.getString("seat"),
+                    resultSet.getString("cc"), resultSet.getDate("due_date"),
+                    resultSet.getString("status"));
             orderRowsArray.add(orderRow);
         }
 
@@ -117,6 +122,7 @@ public class OrderController implements Initializable {
         }
 
         colId.setCellValueFactory(new PropertyValueFactory<>("idOrder"));
+        colWorker.setCellValueFactory(new PropertyValueFactory<>("workerName"));
         colSeat.setCellValueFactory(new PropertyValueFactory<>("seat"));
         colCustomerId.setCellValueFactory(new PropertyValueFactory<>("idCustomer"));
         colDueDate.setCellValueFactory(new PropertyValueFactory<>("dueDate"));
