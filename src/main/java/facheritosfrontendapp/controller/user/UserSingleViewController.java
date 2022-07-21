@@ -41,7 +41,7 @@ public class UserSingleViewController implements Initializable {
 
     private UserController userController;
 
-    public Integer idPerson;
+    private Integer idPerson;
 
     //Here are all the @FXML components
     @FXML

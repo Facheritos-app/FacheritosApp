@@ -43,10 +43,18 @@ public class OrderEndpoint {
         ResultSet resultSet = null;
         HashMap<Boolean, ResultSet> response = new HashMap<>();
         try(Connection conn = ConnectionBD.connectDB().getConnection()){
-            preparedStatement = conn.prepareStatement("SELECT *, headquarter.name AS seat,  state.name AS status, " +
-                    "part.name AS partname, job_order.created_at AS createdOrder, job_order.price AS jobPrice FROM person " +
-                    "JOIN job_order ON person.id_person = job_order.id_customer JOIN state USING(id_state) JOIN headquarter U" +
-                    "SING(id_headquarter) JOIN job_order_part USING(id_job_order) JOIN part USING(id_part)  WHERE id_job_order = ?");
+            preparedStatement = conn.prepareStatement(
+                    "SELECT job_order.id_job_order, (person.first_name || ' ' || person.last_name) AS person_name, \n" +
+                            "person.cc,  person.cellphone, headquarter.id_headquarter, headquarter.name AS headquarter_name, \n" +
+                            "job_order.created_at, job_order.due_date, job_order.price, job_order.id_state, \n" +
+                            "state.name AS status\n" +
+                            "FROM person \n" +
+                            "JOIN job_order ON person.id_person = job_order.id_customer \n" +
+                            "JOIN state USING(id_state) \n" +
+                            "JOIN headquarter USING(id_headquarter) \n" +
+                            "JOIN job_order_part USING(id_job_order) \n" +
+                            "JOIN part USING(id_part)  \n" +
+                            "WHERE id_job_order = ?");
             preparedStatement.setInt(1,idOrder);
             resultSet = preparedStatement.executeQuery();
             resultSet.next();
@@ -59,28 +67,22 @@ public class OrderEndpoint {
     }
 
     /**
-     * getOrderByIdForView: Integer -> Map<Boolean, ResultSet>
-     * Purpose: gets an order from the database according to an input Id.
+     * getOrderParts: Integer -> Map<Boolean, ResultSet>
+     * Purpose: obtains the parts of an order from the database
      */
-    public Map<Boolean, ResultSet> getOrderByIdForView(Integer idOrder){
+    public Map<Boolean, ResultSet> getOrderParts(Integer idOrder){
         PreparedStatement preparedStatement;
         ResultSet resultSet = null;
         HashMap<Boolean, ResultSet> response = new HashMap<>();
         try(Connection conn = ConnectionBD.connectDB().getConnection()){
             preparedStatement = conn.prepareStatement(
-                    "SELECT job_order.id_job_order, (person.first_name || ' ' || person.last_name) AS person_name,\n" +
-                            "person.cc, person.cellphone, headquarter.name AS headquarter_name, job_order.created_at, \n" +
-                            "job_order.due_date, job_order.price, part.name AS part_name, state.name AS status\n" +
-                            "FROM person \n" +
-                            "JOIN job_order ON person.id_person = job_order.id_customer \n" +
-                            "JOIN state USING(id_state) \n" +
-                            "JOIN headquarter USING(id_headquarter) \n" +
+                    "SELECT part.name, part.price, job_order_part.quantity, part.id_part\n" +
+                            "FROM job_order \n" +
                             "JOIN job_order_part USING(id_job_order) \n" +
-                            "JOIN part USING(id_part) \n" +
+                            "JOIN part USING (id_part)\n" +
                             "WHERE id_job_order = ?");
-            preparedStatement.setInt(1,idOrder);
+            preparedStatement.setInt(1, idOrder);
             resultSet = preparedStatement.executeQuery();
-            resultSet.next();
             response.put(true, resultSet);
         }catch (SQLException e){
             e.printStackTrace();
@@ -88,5 +90,6 @@ public class OrderEndpoint {
         }
         return response;
     }
+
 
 }
