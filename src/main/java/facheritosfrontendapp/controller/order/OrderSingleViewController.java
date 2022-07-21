@@ -93,8 +93,8 @@ public class OrderSingleViewController implements Initializable {
       Purpose: shows the edit order view by pressing the 'Editar orden' button.
      */
     protected void editAction() throws IOException {
-        //orderEditController = (OrderEditController) dashboardController.changeContent("orders/ordersEdit", true);
-        //orderEditController.showForm(idOrder);
+        orderEditController = (OrderEditController) dashboardController.changeContent("orders/ordersEdit", true);
+        orderEditController.showForm(idOrder);
 
     }
 
