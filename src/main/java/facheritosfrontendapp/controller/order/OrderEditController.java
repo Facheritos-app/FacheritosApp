@@ -142,8 +142,6 @@ public class OrderEditController implements Initializable {
             orderSingleViewController = (OrderSingleViewController) dashboardController.changeContent("" +
                     "orders/ordersSingleView", true);
             orderSingleViewController.showForm(idOrder);
-        } else {
-            System.out.println("No");
         }
     }
 
@@ -168,8 +166,6 @@ public class OrderEditController implements Initializable {
                 } catch (Exception e) {
                     throw new RuntimeException(e);
                 }
-            } else {
-                System.out.println("No");
             }
         }
     }

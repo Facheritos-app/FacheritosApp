@@ -142,8 +142,6 @@ public class AddCustomerController implements Initializable {
         Optional<ButtonType> clickedButton = dialogPane.getClickedButton();
         if (clickedButton.get() == YES) {
             whereToGoBack(backTo);
-        } else {
-            System.out.println("No");
         }
     }
 
