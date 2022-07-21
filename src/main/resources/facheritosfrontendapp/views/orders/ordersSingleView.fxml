@@ -132,12 +132,12 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <ComboBox fx:id="headquarterCombo" disable="true" layoutX="118.0" layoutY="390.0" prefHeight="25.0" prefWidth="154.0" styleClass="input-text" stylesheets="@../style.css" visibleRowCount="3">
+            <ComboBox fx:id="headquarterCombo" disable="true" layoutX="118.0" layoutY="390.0" prefHeight="25.0" prefWidth="154.0" styleClass="input-text" stylesheets="@../style.css" visibleRowCount="0">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
             </ComboBox>
-            <ComboBox fx:id="statusCombo" disable="true" layoutX="118.0" layoutY="343.0" prefHeight="25.0" prefWidth="154.0" styleClass="input-text" stylesheets="@../style.css" visibleRowCount="2">
+            <ComboBox fx:id="statusCombo" disable="true" layoutX="118.0" layoutY="343.0" prefHeight="25.0" prefWidth="154.0" styleClass="input-text" stylesheets="@../style.css" visibleRowCount="0">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
@@ -250,7 +250,7 @@
                <columns>
                   <TableColumn fx:id="colNamePart" prefWidth="115.0" sortable="false" style="-fx-background-color: F4F4F4; -fx-text-fill: black;" text="Nombre" />
                   <TableColumn fx:id="colPricePart" prefWidth="84.0" style="-fx-background-color: F4F4F4; -fx-text-fill: black;" text="Precio" />
-                  <TableColumn fx:id="colQuantityPart" prefWidth="73.0" style="-fx-background-color: F4F4F4; -fx-text-fill: black;" text="Cantidad" />
+                  <TableColumn fx:id="colQuantityPart" prefWidth="72.0" style="-fx-background-color: F4F4F4; -fx-text-fill: black;" text="Cantidad" />
                </columns>
             </TableView>
          </children>

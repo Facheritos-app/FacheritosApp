@@ -6,9 +6,7 @@ import backend.endpoints.orderEndpoint.OrderEndpoint;
 import facheritosfrontendapp.ComboBoxView.HeadquarterView;
 import facheritosfrontendapp.controller.DashboardController;
 import facheritosfrontendapp.controller.MainController;
-import facheritosfrontendapp.controller.customer.CustomerController;
 import facheritosfrontendapp.controller.inventory.InventoryPartController;
-import facheritosfrontendapp.controller.inventory.InventoryVehicleController;
 import facheritosfrontendapp.objectRowView.inventoryRowView.PartRowView;
 import facheritosfrontendapp.objectRowView.inventoryRowView.VehicleRowView;
 import facheritosfrontendapp.validator.addUserValidator.AddUserValidator;
@@ -18,9 +16,10 @@ import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.layout.VBox;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -294,6 +293,7 @@ public class OrderSingleViewController implements Initializable {
                         ResultSet resultSet = response.get(true);
                         try {
                             setHeadquarterCombo();
+                            showParts();
                         } catch (ExecutionException e) {
                             throw new RuntimeException(e);
                         } catch (InterruptedException e) {
@@ -318,7 +318,52 @@ public class OrderSingleViewController implements Initializable {
 
     }
 
+    /**
+     * showParts: void -> void
+     * Purpose: fills the parts table
+     */
+    public void showParts(){
+        new Thread(() -> {
+            CompletableFuture<Map<Boolean, ResultSet>> partsCall = CompletableFuture.supplyAsync(() -> inventoryEndpoint.getPartsForTableView());
+            try {
+                partsCall.thenApply((response) -> {
+                    if(response.containsKey(true)){
+                        ResultSet resultSet = response.get(true);
+                        try {
+                            setPartsData(resultSet);
+                        } catch (SQLException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                    return true;
+                }).get();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            } catch (ExecutionException e) {
+                throw new RuntimeException(e);
+            }
+        }).start();
+    }
 
+    public void setPartsData(ResultSet resultSet) throws SQLException {
+        while(resultSet.next()){
+            PartRowView partRow = new PartRowView(resultSet.getString("name"), new BigDecimal(String.valueOf(resultSet.getDouble("price"))).toPlainString(),
+                    resultSet.getString("hq"), resultSet.getInt("quantity"),
+                    resultSet.getInt("id_part"));
+            //Add the data of every vehicle to the array
+            partRowViewList.add(partRow);
+        }
+
+        colNamePart.setCellValueFactory(new PropertyValueFactory<>("name"));
+        colPricePart.setCellValueFactory(new PropertyValueFactory<>("price"));
+        colQuantityPart.setCellValueFactory(new PropertyValueFactory<>("quantity"));
+        partTableview.setItems(FXCollections.observableArrayList(partRowViewList));
+    }
+
+    /**
+     * setHeadquarterCombo: void -> void
+     * Purpose: fills the headquarter combo
+     */
     public void setHeadquarterCombo() throws ExecutionException, InterruptedException {
         CompletableFuture<Map<Boolean, ResultSet>> headquarterCall = CompletableFuture.supplyAsync(() -> headquarterEndpoint.getHeadquarters());
 
@@ -362,9 +407,9 @@ public class OrderSingleViewController implements Initializable {
      * It is used to set the headquarter combobox given the id of the headquarter where the worker is settled.
      */
     public HeadquarterView findHeadquarterById(Integer id){
-        for(Integer i = 0; i < headquarterComboboxList.size(); i++){
-            if(id == headquarterComboboxList.get(i).getIdHeadquarter()){
-                return headquarterComboboxList.get(i);
+        for (HeadquarterView headquarterView : headquarterComboboxList) {
+            if (id == headquarterView.getIdHeadquarter()) {
+                return headquarterView;
             }
         }
         return new HeadquarterView(-100,"");
