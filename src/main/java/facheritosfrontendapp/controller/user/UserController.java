@@ -12,6 +12,7 @@ import facheritosfrontendapp.objectRowView.headquarterRowView.WorkerRowView;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -56,6 +57,13 @@ public class UserController implements Initializable {
     private TabPane usersTabpane;
     @FXML
     private TableView userTableView;
+
+    @FXML
+    private Button addUserButton;
+
+    @FXML
+    private Button addCustomerButton;
+
     @FXML
     private TableColumn<WorkerRowView, String> colId;
     @FXML
@@ -103,6 +111,20 @@ public class UserController implements Initializable {
     protected void addUserClicked() throws IOException {
         addUserController = (AddUserController) dashboardController.changeContent("users/usersAdd", true);
         addUserController.setView();
+    }
+
+    @FXML
+    protected void usersTabAction(){
+        //Workers Tab
+        if (usersTabpane.getTabs().get(0).isSelected()){
+            addUserButton.setVisible(true);
+            addCustomerButton.setVisible(false);
+        }
+        //Customers Tab
+        if (usersTabpane.getTabs().get(1).isSelected()){
+            addCustomerButton.setVisible(true);
+            addUserButton.setVisible(false);
+        }
     }
 
     @Override

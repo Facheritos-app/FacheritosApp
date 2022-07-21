@@ -191,8 +191,6 @@ public class UserSingleViewController implements Initializable {
             //SHOW THE USERS IN TABLEVIEW
             userController.showWorkers();
             userController.showCustomers();
-        } else {
-            System.out.println("No");
         }
     }
 
@@ -221,9 +219,8 @@ public class UserSingleViewController implements Initializable {
                 }catch (Exception e){
 
                 }
-            } else {
-                System.out.println("No");
-            }}
+            }
+        }
     }
 
     /**

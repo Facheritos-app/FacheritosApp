@@ -19,7 +19,7 @@
             <Font name="Poppins Bold" size="36.0" />
          </font>
       </Label>
-      <TabPane fx:id="usersTabpane" layoutX="33.0" layoutY="100.0" prefHeight="408.0" prefWidth="591.0" style="-fx-background-color: white; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: c9c9c9;" stylesheets="@../style.css">
+      <TabPane fx:id="usersTabpane" layoutX="33.0" layoutY="100.0" onMouseClicked="#usersTabAction" prefHeight="408.0" prefWidth="591.0" style="-fx-background-color: white; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: c9c9c9;" stylesheets="@../style.css">
         <tabs>
           <Tab closable="false" text="Empleados">
                <content>
@@ -66,7 +66,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="addCustomerButton" layoutX="367.0" layoutY="104.0" mnemonicParsing="false" onMouseClicked="#addCustomerAction" styleClass="red-button" stylesheets="@../style.css" text="Agregar cliente +" textFill="WHITE">
+      <Button fx:id="addCustomerButton" layoutX="498.0" layoutY="104.0" mnemonicParsing="false" onMouseClicked="#addCustomerAction" prefHeight="25.0" prefWidth="126.0" styleClass="red-button" stylesheets="@../style.css" text="Agregar cliente +" textFill="WHITE" visible="false">
          <font>
             <Font name="Poppins Bold" size="12.0" />
          </font>
