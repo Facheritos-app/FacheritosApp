@@ -256,8 +256,12 @@ public class InventoryPartController implements Initializable {
     }
 
     @FXML
-    void deleteClicked(MouseEvent event) {
-
+    void deleteClicked(MouseEvent event) throws IOException {
+        MyDialogPane dialogPane = new MyDialogPane("confirmationDelete");
+        Optional<ButtonType> option = dialogPane.getClickedButton();
+        if(option.get() == ButtonType.YES){
+            deletePart();
+        }
     }
 
 
@@ -358,6 +362,40 @@ public class InventoryPartController implements Initializable {
 
         return everythingCorrect;
     }
+    /**
+     * deletePart: ResultSet -> void
+     * Purpose: This method contains sets all the data from the specific part
+     */
+    public void deletePart(){
+        new Thread(() -> {
+            Boolean result = null;
+            try {
+                result = CompletableFuture.supplyAsync(() -> inventoryEndpoint.deletePart(this.idPart)).get();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            } catch (ExecutionException e) {
+                throw new RuntimeException(e);
+            }
+            if(result) {
+                Platform.runLater(() -> {
+                    Alert success = new Alert(Alert.AlertType.CONFIRMATION, "Repuesto eliminado exitosamente", OK);
+                    success.show();
+                    //Go to main user view
+                    try {
+                        inventoryController = (InventoryController) dashboardController.changeContent("inventory/inventory");
+                        //Show inventory
+                        inventoryController.showInventory();
+                        inventoryController.selectionTabpane(1); //car parts tab
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                });
 
+            } else {
+                Alert fail = new Alert(Alert.AlertType.ERROR, "Ha habido un problema, por favor intenta nuevamente", OK);
+                fail.show();
+            }
+        }).start();
+    }
 
 }

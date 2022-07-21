@@ -50,10 +50,13 @@ public class InventoryController implements Initializable {
     private TableColumn<VehicleRowView, Integer> colQuantity;
 
     @FXML
-    private TableView partTableview;
+    private Button addPartBtn;
 
     @FXML
-    private Button addBtn;
+    private Button addVehicleBtn;
+
+    @FXML
+    private TableView partTableview;
 
     @FXML
     private TableColumn<VehicleRowView, String> colHeadquarterPart;
@@ -95,24 +98,17 @@ public class InventoryController implements Initializable {
     }
 
     @FXML
-    protected void addClicked() throws IOException, ExecutionException, InterruptedException {
-        MyDialogPane dialogPane = new MyDialogPane("inventory/confirmationPart",1);
-        Optional<ButtonType> clickedButton = dialogPane.getClickedButton();
-        //Vehículo
-        if(clickedButton.get() == ButtonType.APPLY){
-            //Show form to add new caro
-            inventoryAddVehicleController = (InventoryAddVehicleController) dashboardController.changeContent("inventory/inventoryAddVehicle");
-            inventoryAddVehicleController.showForm(); //show the data in comboboxes
-        }
-        //Repuesto
-        else if (clickedButton.get() == ButtonType.OK){
-            //Show form to add car part
-            inventoryAddPartController = (InventoryAddPartController) dashboardController.changeContent("inventory/inventoryAddPart");
-            inventoryAddPartController.showHeadquarters(); //show headquarters in combobox
-        }
-        else {
+    protected void addVehicleClicked() throws IOException, ExecutionException, InterruptedException {
+        //Show form to add new vehicle
+        inventoryAddVehicleController = (InventoryAddVehicleController) dashboardController.changeContent("inventory/inventoryAddVehicle");
+        inventoryAddVehicleController.showForm(); //show the data in comboboxes
+    }
 
-        }
+    @FXML
+    protected void addPartClicked() throws IOException, ExecutionException, InterruptedException {
+        //Show form to add car part
+        inventoryAddPartController = (InventoryAddPartController) dashboardController.changeContent("inventory/inventoryAddPart");
+        inventoryAddPartController.showHeadquarters(); //show headquarters in combobox
     }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -122,7 +118,8 @@ public class InventoryController implements Initializable {
 
         //Only the manager can have the add elements to inventory button
         if(DashboardController.getCurrentWorker().getId_rol()!=1){
-            addBtn.setVisible(false);
+            addVehicleBtn.setVisible(false);
+            addPartBtn.setVisible(false);
         }
     }
     /**

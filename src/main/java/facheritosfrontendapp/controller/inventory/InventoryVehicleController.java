@@ -3,12 +3,11 @@ package facheritosfrontendapp.controller.inventory;
 import backend.endpoints.inventoryEndpoint.InventoryEndpoint;
 import facheritosfrontendapp.controller.DashboardController;
 import facheritosfrontendapp.controller.MainController;
+import facheritosfrontendapp.views.MyDialogPane;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -20,9 +19,12 @@ import java.net.URLConnection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Map;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
+
+import static javafx.scene.control.ButtonType.OK;
 
 public class InventoryVehicleController implements Initializable {
 
@@ -172,7 +174,47 @@ public class InventoryVehicleController implements Initializable {
     }
 
     @FXML
-    protected void deleteClicked(){
+    protected void deleteClicked() throws IOException {
+        MyDialogPane dialogPane = new MyDialogPane("confirmationDelete");
+        Optional<ButtonType> option = dialogPane.getClickedButton();
+        if(option.get() == ButtonType.YES){
+            deleteVehicle();
+        }
+    }
 
+    /**
+     * deleteVehicle: ResultSet -> void
+     * Purpose: This method contains sets all the data from the specific vehicle
+     */
+    public void deleteVehicle(){
+        new Thread(() -> {
+            Boolean result = null;
+            try {
+                result = CompletableFuture.supplyAsync(() -> inventoryEndpoint.deleteVehicle(this.idCar)).get();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            } catch (ExecutionException e) {
+                throw new RuntimeException(e);
+            }
+            if(result) {
+            Platform.runLater(() -> {
+                Alert success = new Alert(Alert.AlertType.CONFIRMATION, "Vehículo eliminado exitosamente", OK);
+                success.show();
+                //Go to main user view
+                try {
+                    inventoryController = (InventoryController) dashboardController.changeContent("inventory/inventory");
+                    //Show inventory
+                    inventoryController.showInventory();
+                    inventoryController.selectionTabpane(0); //cars tab
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            });
+
+        } else {
+            Alert fail = new Alert(Alert.AlertType.ERROR, "Ha habido un problema, por favor intenta nuevamente", OK);
+            fail.show();
+        }
+        }).start();
     }
 }
