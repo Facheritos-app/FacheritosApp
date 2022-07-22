@@ -32,7 +32,7 @@ public class OrderController implements Initializable {
 
     private ArrayList<OrderRowView> orderRowsArray;
 
-    //Customer tab components
+    //Table components
     @FXML
     private TableView orderTableView;
 
@@ -117,8 +117,8 @@ public class OrderController implements Initializable {
         }
 
         //Set the handle events for the labels
-        for(int i = 0; i < orderRowsArray.size(); i++){
-            orderRowsArray.get(i).getOptionsLabel().setOnMouseClicked(this::handleOptionLabel);
+        for (OrderRowView orderRowView : orderRowsArray) {
+            orderRowView.getOptionsLabel().setOnMouseClicked(this::handleOptionLabel);
         }
 
         colId.setCellValueFactory(new PropertyValueFactory<>("idOrder"));
@@ -138,11 +138,11 @@ public class OrderController implements Initializable {
      * Purpose: Listens to the events of both the view, edit and delete label.
      */
     private void handleOptionLabel(MouseEvent mouseEvent) {
-        for(int i = 0; i < orderRowsArray.size(); i++){
-            if(mouseEvent.getSource() == orderRowsArray.get(i).getOptionsLabel()){
+        for (OrderRowView orderRowView : orderRowsArray) {
+            if (mouseEvent.getSource() == orderRowView.getOptionsLabel()) {
                 try {
                     orderSingleViewController = (OrderSingleViewController) dashboardController.changeContent("orders/ordersSingleView", true);
-                    orderSingleViewController.showForm(orderRowsArray.get(i).getIdOrder());
+                    orderSingleViewController.showForm(orderRowView.getIdOrder());
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }

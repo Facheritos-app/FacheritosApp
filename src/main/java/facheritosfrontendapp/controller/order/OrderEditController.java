@@ -391,7 +391,7 @@ public class OrderEditController implements Initializable {
         nameLabel.setText("   "+resultSet.getString("person_name"));
         ccField.setText(resultSet.getString("cc"));
         cellphoneLabel.setText("   "+resultSet.getString("cellphone"));
-        headquarterCombo.getSelectionModel().select(findHeadquarterById(resultSet.getInt("id_headquarter")).toString());
+        headquarterCombo.getSelectionModel().select(findHeadquarterById(resultSet.getInt("id_headquarter")));
         creationDateLabel.setText("   "+resultSet.getDate("created_at").toLocalDate().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)));
         dueDatePicker.setValue(resultSet.getDate("due_date").toLocalDate());
         priceField.setText(resultSet.getString("price"));

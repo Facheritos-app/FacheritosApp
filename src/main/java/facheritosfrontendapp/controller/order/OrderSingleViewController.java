@@ -76,6 +76,12 @@ public class OrderSingleViewController implements Initializable {
     private Label priceLabel;
 
     @FXML
+    private Label totalPriceLabel;
+
+    @FXML
+    private Label quantityLabel;
+
+    @FXML
     private Label statusLabel;
 
     public OrderSingleViewController() {
@@ -87,11 +93,11 @@ public class OrderSingleViewController implements Initializable {
         this.idOrder = idOrder;
     }
 
-    @FXML
     /*
       editAction: event -> void
       Purpose: shows the edit order view by pressing the 'Editar orden' button.
      */
+    @FXML
     protected void editAction() throws IOException {
         orderEditController = (OrderEditController) dashboardController.changeContent("orders/ordersEdit", true);
         orderEditController.showForm(idOrder);
@@ -112,8 +118,43 @@ public class OrderSingleViewController implements Initializable {
      * showForm: Integer -> void
      * Purpose: This method contains all the other methods that together make showing the form possible
      */
+    public void setOrderTotalPrice(Integer id) {
+        new Thread(() -> {
+            CompletableFuture<Map<Boolean, ResultSet>>
+                    userCall = CompletableFuture.supplyAsync(() -> orderEndpoint.getTotalPriceAndQuantity(id));
+            try {
+                userCall.thenApply((response) -> {
+                    if (response.containsKey(true)) {
+                        ResultSet resultSet = response.get(true);
+                        Platform.runLater(() -> {
+                            try {
+                                setTotalPriceAndQuantity(resultSet);
+                            } catch (SQLException e) {
+                                throw new RuntimeException(e);
+                            }
+                        });
+                    }
+                    return true;
+                }).get();
+            } catch (InterruptedException | ExecutionException e) {
+                throw new RuntimeException(e);
+            }
+        }).start();
+    }
+
+    public void setTotalPriceAndQuantity(ResultSet resultSet) throws SQLException {
+        totalPriceLabel.setText(""+resultSet.getDouble("total"));
+        quantityLabel.setText(resultSet.getString("quantity"));
+    }
+
+    /**
+     * showForm: Integer -> void
+     * Purpose: This method contains all the other methods that together make showing the form possible
+     */
     public void showForm(Integer id) {
         setIdOrder(id);
+        setOrderTotalPrice(id);
+
         new Thread(() -> {
             CompletableFuture<Map<Boolean, ResultSet>>
                     userCall = CompletableFuture.supplyAsync(() -> orderEndpoint.getOrderById(id));
@@ -136,7 +177,6 @@ public class OrderSingleViewController implements Initializable {
                 throw new RuntimeException(e);
             }
         }).start();
-
     }
 
 
@@ -148,7 +188,7 @@ public class OrderSingleViewController implements Initializable {
         headquarterLabel.setText("   "+resultSet.getString("headquarter_name"));
         creationDateLabel.setText("   "+resultSet.getDate("created_at").toLocalDate().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)));
         dueDateLabel.setText("   "+resultSet.getDate("due_date").toLocalDate().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)));
-        priceLabel.setText("   "+resultSet.getString("price"));
+        priceLabel.setText("   "+resultSet.getDouble("price"));
         statusLabel.setText("   "+resultSet.getString("status"));
     }
 
@@ -184,6 +224,7 @@ public class OrderSingleViewController implements Initializable {
                     new BigDecimal(String.valueOf(resultSet.getDouble("price"))).toPlainString(),
                     "", resultSet.getInt("quantity"),
                     resultSet.getInt("id_part"));
+
             //Add the data of every vehicle to the array
             orderPartsRowViewList.add(orderPartRow);
         }

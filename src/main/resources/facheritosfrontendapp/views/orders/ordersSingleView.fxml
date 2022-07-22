@@ -157,7 +157,7 @@
                   <Font name="Poppins Regular" size="12.0" />
                </font>
             </Label>
-            <Label fx:id="priceLabel" alignment="CENTER_RIGHT" layoutX="441.0" layoutY="428.0" prefHeight="28.0" prefWidth="79.0" style="-fx-background-color: transparent;" stylesheets="@../style.css" textFill="#1f1f1f">
+            <Label fx:id="priceLabel" alignment="CENTER" layoutX="441.0" layoutY="428.0" prefHeight="28.0" prefWidth="79.0" style="-fx-background-color: transparent;" stylesheets="@../style.css" textFill="#1f1f1f">
                <font>
                   <Font name="Poppins Regular" size="12.0" />
                </font>
@@ -170,6 +170,16 @@
             <Label fx:id="cellphoneLabel" layoutX="48.0" layoutY="246.0" prefHeight="25.0" prefWidth="156.0" style="-fx-background-color: F4F4F4; -fx-background-radius: 10;" stylesheets="@../style.css" textFill="#1f1f1f">
                <font>
                   <Font name="Poppins Regular" size="12.0" />
+               </font>
+            </Label>
+            <Label fx:id="totalPriceLabel" alignment="CENTER" layoutX="442.0" layoutY="473.0" prefHeight="28.0" prefWidth="79.0" styleClass="poppins" stylesheets="@../style.css" textFill="WHITE">
+               <font>
+                  <Font name="Poppins Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label fx:id="quantityLabel" alignment="CENTER" layoutX="521.0" layoutY="473.0" prefHeight="28.0" prefWidth="73.0" styleClass="poppins" stylesheets="@../style.css" textFill="WHITE">
+               <font>
+                  <Font name="Poppins Bold" size="12.0" />
                </font>
             </Label>
          </children>
