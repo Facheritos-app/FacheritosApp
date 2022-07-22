@@ -2,6 +2,7 @@ package facheritosfrontendapp.controller.navbar;
 
 import facheritosfrontendapp.controller.DashboardController;
 import facheritosfrontendapp.controller.MainController;
+import facheritosfrontendapp.controller.dashboard.ManagerDashboardController;
 import facheritosfrontendapp.controller.headquarter.HeadquarterController;
 import facheritosfrontendapp.controller.inventory.InventoryController;
 import facheritosfrontendapp.controller.order.OrderController;
@@ -33,9 +34,12 @@ public class ManagerNavbar implements Initializable {
 
     private OrderController orderController;
 
+    private ManagerDashboardController managerDashboardController;
+
     @FXML
     protected void homeClicked() throws IOException {
-        dashboardController.changeContent("home");
+        managerDashboardController = (ManagerDashboardController) dashboardController.changeContent("dashboard/managerDashboard");
+        managerDashboardController.showDashboard();
     }
 
     @FXML

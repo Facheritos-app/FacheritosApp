@@ -4,6 +4,7 @@ import backend.dto.loginDTO.LoginDTO;
 import backend.dto.personDTO.WorkerDTO;
 import backend.endpoints.loginEndpoint.LoginEndpoint;
 
+import facheritosfrontendapp.controller.dashboard.ManagerDashboardController;
 import facheritosfrontendapp.controller.dashboard.SellerDashboardController;
 import facheritosfrontendapp.controller.profile.MyProfileViewController;
 import facheritosfrontendapp.views.FxmlLoader;
@@ -54,6 +55,8 @@ public class DashboardController implements Initializable {
 
     private SellerDashboardController sellerDashboardController;
 
+    private ManagerDashboardController managerDashboardController;
+
     public DashboardController() {
         loginEndpoint = new LoginEndpoint();
     }
@@ -97,7 +100,7 @@ public class DashboardController implements Initializable {
                 throw new RuntimeException("Error de login");
             }
             return true;
-        }).handle((result, ex) -> null != ex ? false : true).get();
+        }).get();//handle((result, ex) -> null != ex ? false : true).get();
     }
 
     /**
@@ -187,7 +190,8 @@ public class DashboardController implements Initializable {
         switch (currentWorker.getId_rol()) {
             //Manager
             case 1:
-                this.changeContent("home");
+                managerDashboardController = (ManagerDashboardController) changeContent("dashboard/managerDashboard", true);
+                managerDashboardController.showDashboard();
                 break;
             //Seller
             case 2:
