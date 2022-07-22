@@ -265,7 +265,8 @@ public class UserController implements Initializable {
             if(mouseEvent.getSource() == workerRowsArray.get(i).getOptionsLabel()){
                 //Here we will load the component to view, edit and delete the worker
                 try {
-                    userSingleViewController = (UserSingleViewController) dashboardController.changeContent("users/usersSingleView");
+                    userSingleViewController = (UserSingleViewController)
+                            dashboardController.changeContent("users/usersSingleView", true);
                     userSingleViewController.showForm(workerRowsArray.get(i).getIdPerson());
                 } catch (IOException e) {
                     throw new RuntimeException(e);

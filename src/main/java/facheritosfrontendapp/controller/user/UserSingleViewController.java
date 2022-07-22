@@ -12,6 +12,7 @@ import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
 
 import java.io.IOException;
 import java.net.URL;
@@ -123,6 +124,9 @@ public class UserSingleViewController implements Initializable {
     private Button saveButton;
 
     @FXML
+    public ImageView backToUsers;
+
+    @FXML
     /**
      * editAction: event -> void
      * Purpose: By pressing the 'Editar usuario' button the text fields are enabled,
@@ -148,6 +152,19 @@ public class UserSingleViewController implements Initializable {
 
         cancelButton.setVisible(true);
         saveButton.setVisible(true);
+
+        backToUsers.setVisible(false);
+    }
+
+    /**
+     * backToUsersClicked: void -> void
+     * Purpose: when the backArrow is clicked it returns to the users view
+     */
+    @FXML
+    protected void backToUsersClicked() throws IOException {
+        userController = (UserController) dashboardController.changeContent("users/users");
+        userController.showWorkers();
+        userController.showCustomers();
     }
 
     /**
@@ -394,7 +411,7 @@ public class UserSingleViewController implements Initializable {
         birthdayPicker.setValue(resultSet.getDate("birthday").toLocalDate());
         idField.setText(resultSet.getString("cc"));
         statusCombo.getSelectionModel().select(resultSet.getBoolean("state") ? 0 : 1); //Ternary if to convert boolean into integer.
-        salaryField.setText(String.valueOf(resultSet.getDouble("salary")));
+        salaryField.setText(resultSet.getString("salary"));
         cityCombo.setText((resultSet.getString("city_name")));
     }
 
