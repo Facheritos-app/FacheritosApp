@@ -101,7 +101,6 @@ public class OrderSingleViewController implements Initializable {
     protected void editAction() throws IOException {
         orderEditController = (OrderEditController) dashboardController.changeContent("orders/ordersEdit", true);
         orderEditController.showForm(idOrder);
-
     }
 
     /**
@@ -115,8 +114,8 @@ public class OrderSingleViewController implements Initializable {
     }
 
     /**
-     * showForm: Integer -> void
-     * Purpose: This method contains all the other methods that together make showing the form possible
+     * setOrderTotalPrice: Integer -> void
+     * Purpose: sets the total price and quantity of parts of an order
      */
     public void setOrderTotalPrice(Integer id) {
         new Thread(() -> {
@@ -143,7 +142,7 @@ public class OrderSingleViewController implements Initializable {
     }
 
     public void setTotalPriceAndQuantity(ResultSet resultSet) throws SQLException {
-        totalPriceLabel.setText(""+resultSet.getDouble("total"));
+        totalPriceLabel.setText("" + resultSet.getDouble("total"));
         quantityLabel.setText(resultSet.getString("quantity"));
     }
 
@@ -182,27 +181,27 @@ public class OrderSingleViewController implements Initializable {
 
     public void setForm(ResultSet resultSet) throws SQLException {
         orderLabel.setText(resultSet.getString("id_job_order"));
-        nameLabel.setText("   "+resultSet.getString("person_name"));
-        ccLabel.setText("   "+resultSet.getString("cc"));
-        cellphoneLabel.setText("   "+resultSet.getString("cellphone"));
-        headquarterLabel.setText("   "+resultSet.getString("headquarter_name"));
-        creationDateLabel.setText("   "+resultSet.getDate("created_at").toLocalDate().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)));
-        dueDateLabel.setText("   "+resultSet.getDate("due_date").toLocalDate().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)));
-        priceLabel.setText("   "+resultSet.getDouble("price"));
-        statusLabel.setText("   "+resultSet.getString("status"));
+        nameLabel.setText("   " + resultSet.getString("person_name"));
+        ccLabel.setText("   " + resultSet.getString("cc"));
+        cellphoneLabel.setText("   " + resultSet.getString("cellphone"));
+        headquarterLabel.setText("   " + resultSet.getString("headquarter_name"));
+        creationDateLabel.setText("   " + resultSet.getDate("created_at").toLocalDate().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)));
+        dueDateLabel.setText("   " + resultSet.getDate("due_date").toLocalDate().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)));
+        priceLabel.setText("   " + resultSet.getDouble("price"));
+        statusLabel.setText("   " + resultSet.getString("status"));
     }
 
     /**
      * showParts: void -> void
      * Purpose: fills the order parts table.
      */
-    public void showOrderParts(){
+    public void showOrderParts() {
         new Thread(() -> {
             CompletableFuture<Map<Boolean, ResultSet>> partsCall = CompletableFuture.supplyAsync(() ->
                     orderEndpoint.getOrderParts(idOrder));
             try {
                 partsCall.thenApply((response) -> {
-                    if(response.containsKey(true)){
+                    if (response.containsKey(true)) {
                         ResultSet resultSet = response.get(true);
                         try {
                             setOrderPartsData(resultSet);
@@ -219,7 +218,7 @@ public class OrderSingleViewController implements Initializable {
     }
 
     public void setOrderPartsData(ResultSet resultSet) throws SQLException {
-        while(resultSet.next()){
+        while (resultSet.next()) {
             PartRowView orderPartRow = new PartRowView(resultSet.getString("name"),
                     new BigDecimal(String.valueOf(resultSet.getDouble("price"))).toPlainString(),
                     "", resultSet.getInt("quantity"),

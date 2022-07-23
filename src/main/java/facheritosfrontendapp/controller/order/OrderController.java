@@ -1,4 +1,5 @@
 package facheritosfrontendapp.controller.order;
+
 import backend.endpoints.orderEndpoint.OrderEndpoint;
 import facheritosfrontendapp.controller.DashboardController;
 import facheritosfrontendapp.controller.MainController;
@@ -58,9 +59,9 @@ public class OrderController implements Initializable {
     private TableColumn<OrderRowView, VBox> colOptions;
 
 
-    public OrderController(){
+    public OrderController() {
         orderEndpoint = new OrderEndpoint();
-        orderRowsArray= new ArrayList<>();
+        orderRowsArray = new ArrayList<>();
         orderSingleViewController = new OrderSingleViewController();
     }
 
@@ -78,7 +79,7 @@ public class OrderController implements Initializable {
      * showOrders: void -> void
      * Purpose: shows the orders in the tableview.
      */
-    public void showOrders(){
+    public void showOrders() {
 
         new Thread(() -> {
             //Async call to the DB
@@ -86,7 +87,7 @@ public class OrderController implements Initializable {
 
             try {
                 customersCall.thenApply((response) -> {
-                    if(response.containsKey(true)){
+                    if (response.containsKey(true)) {
                         ResultSet resultSet = response.get(true);
                         try {
                             setOrdersData(resultSet);
@@ -108,7 +109,7 @@ public class OrderController implements Initializable {
      */
     public void setOrdersData(ResultSet resultSet) throws SQLException {
         //As long as there are records left to show
-        while(resultSet.next()){
+        while (resultSet.next()) {
             OrderRowView orderRow = new OrderRowView(resultSet.getInt("id_job_order"),
                     resultSet.getString("worker_name"), resultSet.getString("seat"),
                     resultSet.getString("cc"), resultSet.getDate("due_date"),
