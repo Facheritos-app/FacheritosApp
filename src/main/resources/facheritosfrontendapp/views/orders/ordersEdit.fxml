@@ -75,7 +75,7 @@
                         <Font name="Poppins Bold" size="14.0" />
                     </font>
                 </Label>
-                <TextField fx:id="ccField" layoutX="48.0" layoutY="199.0" prefHeight="25.0" prefWidth="156.0" style="-fx-background-color: F4F4F4; -fx-background-radius: 10;" stylesheets="@../style.css">
+                <TextField fx:id="ccField" layoutX="48.0" layoutY="199.0" prefHeight="25.0" prefWidth="156.0" style="-fx-background-color: F4F4F4; -fx-background-radius: 10;" stylesheets="@../style.css" text=" Cargando...">
                     <font>
                         <Font name="Poppins Regular" size="12.0" />
                     </font>
@@ -101,17 +101,17 @@
                         <Cursor fx:constant="HAND" />
                     </cursor>
                 </Button>
-                <ComboBox fx:id="headquarterCombo" layoutX="118.0" layoutY="406.0" prefHeight="25.0" prefWidth="154.0" style="-fx-background-color: F4F4F4; -fx-background-radius: 10;" styleClass="input-text" stylesheets="@../style.css" visibleRowCount="7">
+                <ComboBox fx:id="headquarterCombo" layoutX="118.0" layoutY="406.0" prefHeight="25.0" prefWidth="154.0" promptText="   Cargando..." style="-fx-background-color: F4F4F4; -fx-background-radius: 10;" styleClass="input-text" stylesheets="@../style.css" visibleRowCount="7">
                     <opaqueInsets>
                         <Insets />
                     </opaqueInsets>
                 </ComboBox>
-                <ComboBox fx:id="statusCombo" layoutX="118.0" layoutY="359.0" prefHeight="25.0" prefWidth="154.0" style="-fx-background-color: F4F4F4; -fx-background-radius: 10;" styleClass="input-text" stylesheets="@../style.css" visibleRowCount="3">
+                <ComboBox fx:id="statusCombo" layoutX="118.0" layoutY="359.0" prefHeight="25.0" prefWidth="154.0" promptText="   Cargando..." style="-fx-background-color: F4F4F4; -fx-background-radius: 10;" styleClass="input-text" stylesheets="@../style.css" visibleRowCount="3">
                     <opaqueInsets>
                         <Insets />
                     </opaqueInsets>
                 </ComboBox>
-                <DatePicker fx:id="dueDatePicker" editable="false" layoutX="48.0" layoutY="478.0" prefHeight="25.0" prefWidth="224.0" style="-fx-font-size: 12; -fx-font-family: Poppins;" stylesheets="@../style.css" />
+                <DatePicker fx:id="dueDatePicker" editable="false" layoutX="48.0" layoutY="478.0" prefHeight="25.0" prefWidth="224.0" promptText="   Cargando..." style="-fx-font-size: 12; -fx-font-family: Poppins;" stylesheets="@../style.css" />
                 <Separator orientation="VERTICAL" prefHeight="516.0" prefWidth="8.0" />
                 <Label fx:id="orderLabel" layoutX="237.0" layoutY="71.0" prefHeight="52.0" styleClass="poppins" stylesheets="@../style.css" textFill="#1f1f1f">
                     <font>
@@ -161,7 +161,7 @@
                         <Font name="Poppins Bold" size="14.0" />
                     </font>
                 </Label>
-                <Button alignment="CENTER" layoutX="522.0" layoutY="364.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="74.0" styleClass="blue-button" stylesheets="@../style.css" text="Añadir +" textFill="WHITE">
+                <Button alignment="CENTER" layoutX="522.0" layoutY="364.0" mnemonicParsing="false" onAction="#addClicked" prefHeight="25.0" prefWidth="74.0" styleClass="blue-button" stylesheets="@../style.css" text="Añadir +" textFill="WHITE">
                     <font>
                         <Font name="Poppins Bold" size="12.0" />
                     </font>
@@ -169,7 +169,7 @@
                         <Cursor fx:constant="HAND" />
                     </cursor>
                 </Button>
-                <Button alignment="CENTER" layoutX="436.0" layoutY="364.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="74.0" styleClass="red-button" stylesheets="@../style.css" text="Quitar -" textFill="WHITE">
+                <Button alignment="CENTER" layoutX="436.0" layoutY="364.0" mnemonicParsing="false" onAction="#removeClicked" prefHeight="25.0" prefWidth="74.0" styleClass="red-button" stylesheets="@../style.css" text="Quitar -" textFill="WHITE">
                     <font>
                         <Font name="Poppins Bold" size="12.0" />
                     </font>
@@ -214,22 +214,22 @@
                   <Font name="Poppins Bold" size="14.0" />
                </font>
             </Label>
-            <Label fx:id="cellphoneLabel" layoutX="48.0" layoutY="246.0" prefHeight="25.0" prefWidth="156.0" style="-fx-background-color: F4F4F4; -fx-background-radius: 10;" stylesheets="@../style.css" textFill="#1f1f1f">
+            <Label fx:id="cellphoneLabel" layoutX="48.0" layoutY="246.0" prefHeight="25.0" prefWidth="156.0" style="-fx-background-color: F4F4F4; -fx-background-radius: 10;" stylesheets="@../style.css" text="   Cargando..." textFill="#1f1f1f">
                <font>
                   <Font name="Poppins Regular" size="12.0" />
                </font>
             </Label>
-            <Label fx:id="nameLabel" layoutX="48.0" layoutY="152.0" prefHeight="25.0" prefWidth="224.0" style="-fx-background-color: F4F4F4; -fx-background-radius: 10;" stylesheets="@../style.css" textFill="#1f1f1f">
+            <Label fx:id="nameLabel" layoutX="48.0" layoutY="152.0" prefHeight="25.0" prefWidth="224.0" style="-fx-background-color: F4F4F4; -fx-background-radius: 10;" stylesheets="@../style.css" text="   Cargando..." textFill="#1f1f1f">
                <font>
                   <Font name="Poppins Regular" size="12.0" />
                </font>
             </Label>
-            <Label fx:id="creationDateLabel" layoutX="48.0" layoutY="312.0" prefHeight="25.0" prefWidth="224.0" style="-fx-background-color: F4F4F4; -fx-background-radius: 10;" stylesheets="@../style.css" textFill="#1f1f1f">
+            <Label fx:id="creationDateLabel" layoutX="48.0" layoutY="312.0" prefHeight="25.0" prefWidth="224.0" style="-fx-background-color: F4F4F4; -fx-background-radius: 10;" stylesheets="@../style.css" text="   Cargando..." textFill="#1f1f1f">
                <font>
                   <Font name="Poppins Regular" size="12.0" />
                </font>
             </Label>
-            <Label fx:id="totalPriceLabel" alignment="CENTER" layoutX="740.0" layoutY="473.0" prefHeight="28.0" prefWidth="80.0" styleClass="poppins" stylesheets="@../style.css" textFill="WHITE">
+            <Label fx:id="totalPriceLabel" alignment="CENTER" layoutX="740.0" layoutY="473.0" prefHeight="28.0" prefWidth="80.0" styleClass="poppins" stylesheets="@../style.css" text="   Cargando..." textFill="WHITE">
                <font>
                   <Font name="Poppins Bold" size="12.0" />
                </font>
@@ -247,6 +247,16 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
+            <Label fx:id="partLabel" alignment="CENTER_RIGHT" layoutX="413.0" layoutY="89.0" prefHeight="17.0" prefWidth="181.0" styleClass="poppins" stylesheets="@../style.css" textFill="RED">
+               <font>
+                  <Font name="Poppins Regular" size="12.0" />
+               </font>
+            </Label>
+            <Label fx:id="orderPartLabel" alignment="CENTER_RIGHT" layoutX="742.0" layoutY="89.0" prefHeight="17.0" prefWidth="152.0" styleClass="poppins" stylesheets="@../style.css" textFill="RED">
+               <font>
+                  <Font name="Poppins Regular" size="12.0" />
+               </font>
+            </Label>
             </children>
         </AnchorPane>
     </content>

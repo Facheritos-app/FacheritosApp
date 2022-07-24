@@ -9,7 +9,6 @@ import facheritosfrontendapp.ComboBoxView.HeadquarterView;
 import facheritosfrontendapp.controller.DashboardController;
 import facheritosfrontendapp.controller.MainController;
 import facheritosfrontendapp.objectRowView.inventoryRowView.PartRowView;
-import facheritosfrontendapp.objectRowView.inventoryRowView.VehicleRowView;
 import facheritosfrontendapp.validator.addUserValidator.AddUserValidator;
 import facheritosfrontendapp.views.MyDialogPane;
 import javafx.application.Platform;
@@ -66,21 +65,21 @@ public class OrderEditController implements Initializable {
     @FXML
     private TableView partTableview;
     @FXML
-    private TableColumn<VehicleRowView, String> colNamePart;
+    private TableColumn<PartRowView, String> colNamePart;
     @FXML
-    private TableColumn<VehicleRowView, Double> colPricePart;
+    private TableColumn<PartRowView, Double> colPricePart;
     @FXML
-    private TableColumn<VehicleRowView, Integer> colQuantityPart;
+    private TableColumn<PartRowView, Integer> colQuantityPart;
 
     //Order Summary table
     @FXML
     private TableView orderSummaryTableview;
     @FXML
-    private TableColumn<VehicleRowView, String> colNamePartS;
+    private TableColumn<PartRowView, String> colNamePartS;
     @FXML
-    private TableColumn<VehicleRowView, Double> colPricePartS;
+    private TableColumn<PartRowView, Double> colPricePartS;
     @FXML
-    private TableColumn<VehicleRowView, Integer> colQuantityPartS;
+    private TableColumn<PartRowView, Integer> colQuantityPartS;
 
     @FXML
     private Label orderLabel;
@@ -114,6 +113,12 @@ public class OrderEditController implements Initializable {
 
     @FXML
     private Label dueDateLabel;
+
+    @FXML
+    private Label partLabel;
+
+    @FXML
+    private Label orderPartLabel;
 
     @FXML
     private TextField priceField;
@@ -152,7 +157,7 @@ public class OrderEditController implements Initializable {
 
     /**
      * backToOrdersClicked: void -> void
-     * Purpose: when the backArrow is clicked  it returns to the orders view
+     * Purpose: when the backArrow is clicked  it returns to the orders view.
      */
     @FXML
     protected void backToOrdersClicked() throws IOException {
@@ -161,7 +166,7 @@ public class OrderEditController implements Initializable {
 
     /**
      * cancelAction: void -> void
-     * Purpose: when the cancel button is clicked it returns to the order view
+     * Purpose: when the cancel button is clicked it returns to the order view.
      */
     @FXML
     protected void cancelAction() throws IOException {
@@ -202,7 +207,7 @@ public class OrderEditController implements Initializable {
 
     /**
      * saveAction: void -> void
-     * Purpose: when the save button is clicked it updates the order and returns to the order view
+     * Purpose: when the save button is clicked it updates the order and returns to the order view.
      */
     @FXML
     protected void saveAction() throws IOException, NullPointerException {
@@ -238,17 +243,149 @@ public class OrderEditController implements Initializable {
         OrderDTO order = new OrderDTO();
         order.setId_order(newOrder.getId_order());
         order.setId_customer(newOrder.getId_customer());
-        order.setId_headquarter(1);
+        HeadquarterView headquarterView = findHeadquarterByName(String.valueOf(headquarterCombo.getSelectionModel().getSelectedItem()));
+        order.setId_headquarter(headquarterView.getIdHeadquarter());
         order.setId_status(statusCombo.getSelectionModel().getSelectedIndex() + 1);
         order.setDue_date(Date.valueOf(dueDatePicker.getValue()));
         order.setPrice(Double.parseDouble(priceField.getText()));
         return order;
     }
 
+    /**
+     * findHeadquarterByName: String -> HeadquarterView
+     * Purpose: This method finds a headquarter by its name.
+     * .
+     */
+    public HeadquarterView findHeadquarterByName(String name) {
+        for (Integer i = 0; i < headquarterComboboxList.size(); i++) {
+            if (name.equals(headquarterComboboxList.get(i).getName())) {
+                return headquarterComboboxList.get(i);
+            }
+        }
+        return new HeadquarterView(-100, "");
+    }
+
+    /**
+     * addClicked: void -> void
+     * Purpose: updates the order summary when a part of the inventory is added to the order.
+     */
+    @FXML
+    protected void addClicked() {
+        partLabel.setText("");
+        orderPartLabel.setText("");
+
+        if (!partTableview.getSelectionModel().isEmpty()) {
+
+            PartRowView selectedRow = partRowViewList.get(partTableview.getSelectionModel().getSelectedIndex());
+            int idPart = selectedRow.getIdPart();
+            boolean isInTheOrderSummary = false;
+
+            if (selectedRow.getQuantity() > 0) {
+                for (int i = 0; i < orderSummaryTableview.getItems().size(); i++) {
+                    if (orderPartsRowViewList.get(i).getIdPart().equals(idPart)) {
+                        PartRowView orderPartRow = orderPartsRowViewList.get(i);
+                        selectedRow.setQuantity(selectedRow.getQuantity() - 1);
+                        orderPartRow.setQuantity(orderPartRow.getQuantity() + 1);
+                        isInTheOrderSummary = true;
+                        break;
+                    }
+                }
+
+                if (!isInTheOrderSummary) {
+                    selectedRow.setQuantity(selectedRow.getQuantity() - 1);
+                    PartRowView addNewPartRow = new PartRowView(selectedRow.getName(), selectedRow.getPrice(),
+                            selectedRow.getHeadquarter(), 1, selectedRow.getIdPart());
+                    orderPartsRowViewList.add(addNewPartRow);
+                    orderSummaryTableview.setItems(FXCollections.observableArrayList(orderPartsRowViewList));
+                }
+
+                updateTotalPriceAndQuantity();
+                partTableview.refresh();
+                orderSummaryTableview.refresh();
+
+            } else {
+                partLabel.setText("No hay unidades suficientes");
+            }
+        } else {
+            partLabel.setText("Seleccione una parte");
+        }
+    }
+
+    /**
+     * removeClicked: void -> void
+     * Purpose: updates the order summary when a part is removed from the order.
+     */
+    @FXML
+    protected void removeClicked() {
+        partLabel.setText("");
+        orderPartLabel.setText("");
+
+        if (!orderSummaryTableview.getSelectionModel().isEmpty()) {
+
+            PartRowView selectedRow =
+                    orderPartsRowViewList.get(orderSummaryTableview.getSelectionModel().getSelectedIndex());
+            int idPart = selectedRow.getIdPart();
+            String headquarter = selectedRow.getHeadquarter();
+            boolean isInThePartsTable = false;
+
+            if (selectedRow.getQuantity() > 0) {
+                for (int i = 0; i < partTableview.getItems().size(); i++) {
+                    if (partRowViewList.get(i).getIdPart().equals(idPart) &&
+                            partRowViewList.get(i).getHeadquarter().equals(headquarter)) {
+                        PartRowView partRow = partRowViewList.get(i);
+                        selectedRow.setQuantity(selectedRow.getQuantity() - 1);
+                        partRow.setQuantity(partRow.getQuantity() + 1);
+                        isInThePartsTable = true;
+                        break;
+                    }
+                }
+
+                if (!isInThePartsTable) {
+                    selectedRow.setQuantity(selectedRow.getQuantity() - 1);
+                    PartRowView addNewPartRow = new PartRowView(selectedRow.getName(), selectedRow.getPrice(),
+                            selectedRow.getHeadquarter(), 1, selectedRow.getIdPart());
+                    partRowViewList.add(addNewPartRow);
+                    partTableview.setItems(FXCollections.observableArrayList(partRowViewList));
+                }
+
+                if (selectedRow.getQuantity().equals(0)) {
+                    orderPartsRowViewList.remove(selectedRow);
+                    orderSummaryTableview.setItems(FXCollections.observableArrayList(orderPartsRowViewList));
+                }
+
+                updateTotalPriceAndQuantity();
+                partTableview.refresh();
+                orderSummaryTableview.refresh();
+
+            } else {
+                orderPartLabel.setText("No hay unidades suficientes");
+            }
+        } else {
+            orderPartLabel.setText("Seleccione una parte");
+        }
+    }
+
+    /**
+     * updateTotalPriceAndQuantity: void -> void
+     * Purpose: updates the total price and the quantity of parts of the order.
+     */
+    private void updateTotalPriceAndQuantity() {
+        double totalPrice = 0.0;
+        int quantity = 0;
+        for (int i = 0; i < orderSummaryTableview.getItems().size(); i++) {
+            PartRowView order = orderPartsRowViewList.get(i);
+            double price = Double.parseDouble(order.getPrice());
+            totalPrice += price * order.getQuantity();
+            quantity += order.getQuantity();
+        }
+
+        totalPriceLabel.setText("" + totalPrice);
+        quantityLabel.setText("" + quantity);
+    }
 
     /**
      * allValidations: Void -> Boolean
-     * Purpose: group all the validations
+     * Purpose: group all the validations.
      */
     public Boolean allValidations() {
         cleanErrors();
@@ -458,7 +595,7 @@ public class OrderEditController implements Initializable {
         while (resultSet.next()) {
             PartRowView orderPartRow = new PartRowView(resultSet.getString("name"),
                     new BigDecimal(String.valueOf(resultSet.getDouble("price"))).toPlainString(),
-                    "", resultSet.getInt("quantity"),
+                    resultSet.getString("headquarter_name"), resultSet.getInt("quantity"),
                     resultSet.getInt("id_part"));
             //Add the data of every vehicle to the array
             orderPartsRowViewList.add(orderPartRow);
@@ -468,6 +605,7 @@ public class OrderEditController implements Initializable {
         colPricePartS.setCellValueFactory(new PropertyValueFactory<>("price"));
         colQuantityPartS.setCellValueFactory(new PropertyValueFactory<>("quantity"));
         orderSummaryTableview.setItems(FXCollections.observableArrayList(orderPartsRowViewList));
+        orderSummaryTableview.refresh();
     }
 
     /**

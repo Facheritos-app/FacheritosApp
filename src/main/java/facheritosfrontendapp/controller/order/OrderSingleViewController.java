@@ -4,7 +4,6 @@ import backend.endpoints.orderEndpoint.OrderEndpoint;
 import facheritosfrontendapp.controller.DashboardController;
 import facheritosfrontendapp.controller.MainController;
 import facheritosfrontendapp.objectRowView.inventoryRowView.PartRowView;
-import facheritosfrontendapp.objectRowView.inventoryRowView.VehicleRowView;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
@@ -45,11 +44,11 @@ public class OrderSingleViewController implements Initializable {
     @FXML
     private TableView orderSummaryTableview;
     @FXML
-    private TableColumn<VehicleRowView, String> colNamePartS;
+    private TableColumn<PartRowView, String> colNamePartS;
     @FXML
-    private TableColumn<VehicleRowView, Double> colPricePartS;
+    private TableColumn<PartRowView, Double> colPricePartS;
     @FXML
-    private TableColumn<VehicleRowView, Integer> colQuantityPartS;
+    private TableColumn<PartRowView, Integer> colQuantityPartS;
 
     @FXML
     private Label orderLabel;

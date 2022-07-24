@@ -77,10 +77,13 @@ public class OrderEndpoint {
         HashMap<Boolean, ResultSet> response = new HashMap<>();
         try (Connection conn = ConnectionBD.connectDB().getConnection()) {
             preparedStatement = conn.prepareStatement(
-                    "SELECT part.name, part.price, job_order_part.quantity, part.id_part\n" +
-                            "FROM job_order \n" +
+                    "SELECT part.name, part.price, headquarter.name AS headquarter_name,\n" +
+                            "job_order_part.quantity, part.id_part\n" +
+                            "FROM job_order\n" +
                             "JOIN job_order_part USING(id_job_order) \n" +
                             "JOIN part USING (id_part)\n" +
+                            "JOIN part_inventory USING(id_part)\n" +
+                            "JOIN headquarter ON part_inventory.id_headquarter = headquarter.id_headquarter\n" +
                             "WHERE id_job_order = ?");
             preparedStatement.setInt(1, idOrder);
             resultSet = preparedStatement.executeQuery();
