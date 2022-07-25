@@ -2,10 +2,7 @@ package facheritosfrontendapp.controller.order;
 
 import backend.dto.orderDTO.OrderDTO;
 import backend.endpoints.customerEndpoint.CustomerEndpoint;
-import backend.endpoints.headquarterEndpoint.HeadquarterEndpoint;
-import backend.endpoints.inventoryEndpoint.InventoryEndpoint;
 import backend.endpoints.orderEndpoint.OrderEndpoint;
-import facheritosfrontendapp.ComboBoxView.HeadquarterView;
 import facheritosfrontendapp.controller.DashboardController;
 import facheritosfrontendapp.controller.MainController;
 import facheritosfrontendapp.objectRowView.inventoryRowView.PartRowView;
@@ -37,8 +34,6 @@ import static javafx.scene.control.ButtonType.YES;
 public class OrderEditController implements Initializable {
 
     private final OrderEndpoint orderEndpoint;
-    private final HeadquarterEndpoint headquarterEndpoint;
-    private final InventoryEndpoint inventoryEndpoint;
 
     private final CustomerEndpoint customerEndpoint;
 
@@ -46,17 +41,19 @@ public class OrderEditController implements Initializable {
 
     private final AddUserValidator inputValidator;
 
-    private final ArrayList<HeadquarterView> headquarterComboboxList;
-
     private final ArrayList<PartRowView> partRowViewList;
 
     private final ArrayList<PartRowView> orderPartsRowViewList;
+
+    private final ArrayList<PartRowView> initialOrderParts;
 
     private DashboardController dashboardController;
 
     private OrderSingleViewController orderSingleViewController;
 
     private Integer idOrder;
+
+    private Integer idHeadquarter;
 
     private String customerCc;
 
@@ -103,9 +100,6 @@ public class OrderEditController implements Initializable {
     private Label creationDateLabel;
 
     @FXML
-    private ComboBox headquarterCombo;
-
-    @FXML
     private Label headquarterLabel;
 
     @FXML
@@ -138,21 +132,31 @@ public class OrderEditController implements Initializable {
     @FXML
     private Label quantityLabel;
 
+    @FXML
+    private TableView removeTableview;
+    @FXML
+    private TableColumn<PartRowView, String> colNamePart1;
+    @FXML
+    private TableColumn<PartRowView, Double> colPricePart1;
+    @FXML
+    private TableColumn<PartRowView, Integer> colQuantityPart1;
 
     public OrderEditController() {
         orderEndpoint = new OrderEndpoint();
-        headquarterEndpoint = new HeadquarterEndpoint();
         customerEndpoint = new CustomerEndpoint();
         newOrder = new OrderDTO();
-        headquarterComboboxList = new ArrayList<>();
         inputValidator = new AddUserValidator();
-        inventoryEndpoint = new InventoryEndpoint();
         partRowViewList = new ArrayList<>();
         orderPartsRowViewList = new ArrayList<>();
+        initialOrderParts = new ArrayList<>();
     }
 
     private void setIdOrder(Integer idOrder) {
         this.idOrder = idOrder;
+    }
+
+    private void setIdHeadquarter(Integer idHeadquarter) {
+        this.idHeadquarter = idHeadquarter;
     }
 
     /**
@@ -213,24 +217,91 @@ public class OrderEditController implements Initializable {
     protected void saveAction() throws IOException, NullPointerException {
         /*Show dialogPane to confirm*/
         if (allValidations()) {
+
             ccField.setText(customerCc);
             OrderDTO orderDTO = createOrder();
             MyDialogPane dialogPane = new MyDialogPane("confirmationSave");
             Optional<ButtonType> clickedButton = dialogPane.getClickedButton();
+
             if (clickedButton.get() == YES) {
                 try {
-                    orderEndpoint.updateOrder(orderDTO);
-                    Alert success = new Alert(Alert.AlertType.CONFIRMATION, "Orden actualizada exitosamente", OK);
-                    success.show();
-                    try {
-                        orderSingleViewController = (OrderSingleViewController) dashboardController.changeContent("" +
-                                "orders/ordersSingleView", true);
-                        orderSingleViewController.showForm(idOrder);
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
+
+                    Alert wait = new Alert(Alert.AlertType.CONFIRMATION, "Se está actualizando la orden, por favor espere", OK);
+                    wait.show();
+
+                    boolean changes = false;
+
+                    //Check if there were any changes in the order parts
+                    for (int i = 0; i < partRowViewList.size(); i++) {
+                        if (partRowViewList.get(i).getQuantity() != initialOrderParts.get(i).getQuantity()) {
+                            changes = true;
+                            break;
+                        }
                     }
+
+                    if (changes) {
+                        boolean enough = true;
+
+                        //Check in the inventory for parts availability
+                        for (PartRowView orderPartRow : orderPartsRowViewList) {
+                            Integer checkQuantity = orderEndpoint.getPartQuantity(orderPartRow.getIdPart(), idHeadquarter);
+                            if (orderPartRow.getQuantity() > checkQuantity) {
+                                enough = false;
+                                break;
+                            }
+                        }
+
+                        if (enough) {
+
+                            //Update oder data
+                            orderEndpoint.updateOrder(orderDTO);
+
+                            //Remove initial parts
+                            orderEndpoint.removeParts(idOrder);
+
+                            //Update each part of the inventory
+                            for (PartRowView partRow : partRowViewList) {
+                                orderEndpoint.updatePart(partRow.getIdPart(), idHeadquarter, partRow.getQuantity());
+                            }
+
+                            //Add the parts to the order
+                            for (PartRowView orderPartRow : orderPartsRowViewList) {
+                                orderEndpoint.addPart(orderPartRow.getIdPart(), idOrder, orderPartRow.getQuantity());
+                            }
+
+                            wait.close();
+                            Alert success = new Alert(Alert.AlertType.CONFIRMATION, "Orden actualizada exitosamente", OK);
+                            success.show();
+                            try {
+                                orderSingleViewController = (OrderSingleViewController) dashboardController.changeContent("" +
+                                        "orders/ordersSingleView", true);
+                                orderSingleViewController.showForm(idOrder);
+                            } catch (IOException e) {
+                                throw new RuntimeException(e);
+                            }
+                        } else {
+                            wait.close();
+                            Alert fail = new Alert(Alert.AlertType.ERROR, "Ha habido un problema, por favor intente nuevamente", OK);
+                            fail.show();
+                            showParts(idHeadquarter);
+                        }
+
+                    } else {
+                        wait.close();
+                        orderEndpoint.updateOrder(orderDTO);
+                        Alert success = new Alert(Alert.AlertType.CONFIRMATION, "Orden actualizada exitosamente", OK);
+                        success.show();
+                        try {
+                            orderSingleViewController = (OrderSingleViewController) dashboardController.changeContent("" +
+                                    "orders/ordersSingleView", true);
+                            orderSingleViewController.showForm(idOrder);
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+
                 } catch (Exception e) {
-                    Alert fail = new Alert(Alert.AlertType.ERROR, "Ha habido un problema, por favor intenta nuevamente", OK);
+                    Alert fail = new Alert(Alert.AlertType.ERROR, "Ha habido un problema, por favor intente nuevamente", OK);
                     fail.show();
                     throw new RuntimeException(e);
 
@@ -243,26 +314,10 @@ public class OrderEditController implements Initializable {
         OrderDTO order = new OrderDTO();
         order.setId_order(newOrder.getId_order());
         order.setId_customer(newOrder.getId_customer());
-        HeadquarterView headquarterView = findHeadquarterByName(String.valueOf(headquarterCombo.getSelectionModel().getSelectedItem()));
-        order.setId_headquarter(headquarterView.getIdHeadquarter());
         order.setId_status(statusCombo.getSelectionModel().getSelectedIndex() + 1);
         order.setDue_date(Date.valueOf(dueDatePicker.getValue()));
         order.setPrice(Double.parseDouble(priceField.getText()));
         return order;
-    }
-
-    /**
-     * findHeadquarterByName: String -> HeadquarterView
-     * Purpose: This method finds a headquarter by its name.
-     * .
-     */
-    public HeadquarterView findHeadquarterByName(String name) {
-        for (Integer i = 0; i < headquarterComboboxList.size(); i++) {
-            if (name.equals(headquarterComboboxList.get(i).getName())) {
-                return headquarterComboboxList.get(i);
-            }
-        }
-        return new HeadquarterView(-100, "");
     }
 
     /**
@@ -281,9 +336,9 @@ public class OrderEditController implements Initializable {
             boolean isInTheOrderSummary = false;
 
             if (selectedRow.getQuantity() > 0) {
-                for (int i = 0; i < orderSummaryTableview.getItems().size(); i++) {
-                    if (orderPartsRowViewList.get(i).getIdPart().equals(idPart)) {
-                        PartRowView orderPartRow = orderPartsRowViewList.get(i);
+
+                for (PartRowView orderPartRow : orderPartsRowViewList) {
+                    if (orderPartRow.getIdPart().equals(idPart)) {
                         selectedRow.setQuantity(selectedRow.getQuantity() - 1);
                         orderPartRow.setQuantity(orderPartRow.getQuantity() + 1);
                         isInTheOrderSummary = true;
@@ -294,7 +349,7 @@ public class OrderEditController implements Initializable {
                 if (!isInTheOrderSummary) {
                     selectedRow.setQuantity(selectedRow.getQuantity() - 1);
                     PartRowView addNewPartRow = new PartRowView(selectedRow.getName(), selectedRow.getPrice(),
-                            selectedRow.getHeadquarter(), 1, selectedRow.getIdPart());
+                            "", 1, selectedRow.getIdPart());
                     orderPartsRowViewList.add(addNewPartRow);
                     orderSummaryTableview.setItems(FXCollections.observableArrayList(orderPartsRowViewList));
                 }
@@ -325,27 +380,15 @@ public class OrderEditController implements Initializable {
             PartRowView selectedRow =
                     orderPartsRowViewList.get(orderSummaryTableview.getSelectionModel().getSelectedIndex());
             int idPart = selectedRow.getIdPart();
-            String headquarter = selectedRow.getHeadquarter();
-            boolean isInThePartsTable = false;
 
             if (selectedRow.getQuantity() > 0) {
-                for (int i = 0; i < partTableview.getItems().size(); i++) {
-                    if (partRowViewList.get(i).getIdPart().equals(idPart) &&
-                            partRowViewList.get(i).getHeadquarter().equals(headquarter)) {
-                        PartRowView partRow = partRowViewList.get(i);
+
+                for (PartRowView partRow : partRowViewList) {
+                    if (partRow.getIdPart().equals(idPart)) {
                         selectedRow.setQuantity(selectedRow.getQuantity() - 1);
                         partRow.setQuantity(partRow.getQuantity() + 1);
-                        isInThePartsTable = true;
                         break;
                     }
-                }
-
-                if (!isInThePartsTable) {
-                    selectedRow.setQuantity(selectedRow.getQuantity() - 1);
-                    PartRowView addNewPartRow = new PartRowView(selectedRow.getName(), selectedRow.getPrice(),
-                            selectedRow.getHeadquarter(), 1, selectedRow.getIdPart());
-                    partRowViewList.add(addNewPartRow);
-                    partTableview.setItems(FXCollections.observableArrayList(partRowViewList));
                 }
 
                 if (selectedRow.getQuantity().equals(0)) {
@@ -379,8 +422,36 @@ public class OrderEditController implements Initializable {
             quantity += order.getQuantity();
         }
 
+        if (servicePriceIsCorrect()) {
+            totalPrice += Double.parseDouble(priceField.getText());
+        }
+
         totalPriceLabel.setText("" + totalPrice);
         quantityLabel.setText("" + quantity);
+    }
+
+    /**
+     * priceAction: void -> void
+     * Purpose: when the service price changes, the total price is updated.
+     */
+    @FXML
+    protected void priceAction() {
+        updateTotalPriceAndQuantity();
+    }
+
+    /**
+     * servicePriceIsCorrect: void -> void
+     * Purpose: checks if the service price is correct.
+     */
+    @FXML
+    private Boolean servicePriceIsCorrect() {
+        if (!inputValidator.price(priceField, priceLabel, "Ingrese un precio válido")) {
+            inputValidator.setErrorStyles(priceField, priceLabel);
+            return false;
+        }
+        priceField.setStyle("-fx-background-color: #F4F4F4;\n " + "-fx-border-radius: 10;");
+        priceLabel.setText("");
+        return true;
     }
 
     /**
@@ -391,11 +462,6 @@ public class OrderEditController implements Initializable {
         cleanErrors();
         boolean everythingCorrect = true;
 
-        if (headquarterCombo.getSelectionModel().isEmpty()) {
-            everythingCorrect = false;
-            headquarterLabel.setText("Seleccione una sede");
-            inputValidator.setErrorStyles(headquarterCombo, headquarterLabel);
-        }
 
         if (!inputValidator.price(priceField, priceLabel, "Ingrese un precio válido")) {
             everythingCorrect = false;
@@ -408,13 +474,16 @@ public class OrderEditController implements Initializable {
             inputValidator.setErrorStyles(statusCombo, statusLabel);
         }
 
-
         if (dueDatePicker.getValue() == null || dueDatePicker.getValue().isBefore(LocalDate.now())) {
             everythingCorrect = false;
             dueDateLabel.setText("Indique una fecha válida");
             inputValidator.setErrorStyles(dueDatePicker, dueDateLabel);
         }
 
+        if (orderPartsRowViewList.isEmpty()) {
+            everythingCorrect = false;
+            orderPartLabel.setText("Añada alguna parte");
+        }
 
         return everythingCorrect;
     }
@@ -427,14 +496,13 @@ public class OrderEditController implements Initializable {
         ccField.setStyle("-fx-background-color: #F4F4F4;\n " + "-fx-border-radius: 10;");
         ccLabel.setText("");
         customerLabel.setText("");
-        headquarterCombo.setStyle("-fx-background-color: #F4F4F4;\n " + "-fx-border-radius: 10;");
-        headquarterLabel.setText("");
         dueDatePicker.setStyle("");
         dueDateLabel.setText("");
         priceField.setStyle("-fx-background-color: #F4F4F4;\n " + "-fx-border-radius: 10;");
         priceLabel.setText("");
         statusCombo.setStyle("-fx-background-color: #F4F4F4;\n " + "-fx-border-radius: 10;");
         statusLabel.setText("");
+        orderPartLabel.setText("");
     }
 
     /**
@@ -476,7 +544,6 @@ public class OrderEditController implements Initializable {
      */
     public void showForm(Integer id) {
         setIdOrder(id);
-        setOrderTotalPrice(id);
         newOrder.setId_order(id);
 
         new Thread(() -> {
@@ -486,16 +553,13 @@ public class OrderEditController implements Initializable {
                 userCall.thenApply((response) -> {
                     if (response.containsKey(true)) {
                         ResultSet resultSet = response.get(true);
-                        try {
-                            setHeadquarterCombo();
-                            showParts();
-                            showOrderParts();
-                        } catch (ExecutionException | InterruptedException e) {
-                            throw new RuntimeException(e);
-                        }
+                        showOrderParts();
                         Platform.runLater(() -> {
                             try {
+                                setIdHeadquarter(resultSet.getInt("id_headquarter"));
+                                showParts(idHeadquarter);
                                 setForm(resultSet);
+                                setOrderTotalPrice(id);
                                 customerCc = resultSet.getString("cc");
                                 newOrder.setId_customer(resultSet.getInt("id_person"));
                             } catch (SQLException e) {
@@ -517,7 +581,7 @@ public class OrderEditController implements Initializable {
         nameLabel.setText("   " + resultSet.getString("person_name"));
         ccField.setText(resultSet.getString("cc"));
         cellphoneLabel.setText("   " + resultSet.getString("cellphone"));
-        headquarterCombo.getSelectionModel().select(findHeadquarterById(resultSet.getInt("id_headquarter")));
+        headquarterLabel.setText("   " + resultSet.getString("headquarter_name"));
         creationDateLabel.setText("   " + resultSet.getDate("created_at").toLocalDate().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)));
         dueDatePicker.setValue(resultSet.getDate("due_date").toLocalDate());
         priceField.setText(resultSet.getString("price"));
@@ -525,13 +589,13 @@ public class OrderEditController implements Initializable {
     }
 
     /**
-     * showParts: void -> void
+     * showParts: Integer -> void
      * Purpose: fills the parts table
      */
-    public void showParts() {
+    public void showParts(Integer idHeadquarter) {
         new Thread(() -> {
             CompletableFuture<Map<Boolean, ResultSet>> partsCall = CompletableFuture.supplyAsync(() ->
-                    inventoryEndpoint.getPartsForTableView());
+                    orderEndpoint.getPartsFromInventory(idHeadquarter));
             try {
                 partsCall.thenApply((response) -> {
                     if (response.containsKey(true)) {
@@ -552,12 +616,24 @@ public class OrderEditController implements Initializable {
 
     public void setPartsData(ResultSet resultSet) throws SQLException {
         while (resultSet.next()) {
-            PartRowView partRow = new PartRowView(resultSet.getString("name"), new BigDecimal(String.valueOf(resultSet.getDouble("price"))).toPlainString(),
+            PartRowView partRow = new PartRowView(resultSet.getString("name"),
+                    new BigDecimal(String.valueOf(resultSet.getDouble("price"))).toPlainString(),
                     resultSet.getString("hq"), resultSet.getInt("quantity"),
                     resultSet.getInt("id_part"));
-            //Add the data of every vehicle to the array
             partRowViewList.add(partRow);
+
+            PartRowView initialPartRow = new PartRowView(resultSet.getString("name"),
+                    new BigDecimal(String.valueOf(resultSet.getDouble("price"))).toPlainString(),
+                    resultSet.getString("hq"), resultSet.getInt("quantity"),
+                    resultSet.getInt("id_part"));
+            initialOrderParts.add(initialPartRow);
         }
+
+        colNamePart1.setCellValueFactory(new PropertyValueFactory<>("name"));
+        colPricePart1.setCellValueFactory(new PropertyValueFactory<>("price"));
+        colQuantityPart1.setCellValueFactory(new PropertyValueFactory<>("quantity"));
+        removeTableview.setItems(FXCollections.observableArrayList(initialOrderParts));
+        removeTableview.refresh();
 
         colNamePart.setCellValueFactory(new PropertyValueFactory<>("name"));
         colPricePart.setCellValueFactory(new PropertyValueFactory<>("price"));
@@ -566,7 +642,7 @@ public class OrderEditController implements Initializable {
     }
 
     /**
-     * showParts: void -> void
+     * showOrderParts: void -> void
      * Purpose: fills the order parts table.
      */
     public void showOrderParts() {
@@ -595,7 +671,7 @@ public class OrderEditController implements Initializable {
         while (resultSet.next()) {
             PartRowView orderPartRow = new PartRowView(resultSet.getString("name"),
                     new BigDecimal(String.valueOf(resultSet.getDouble("price"))).toPlainString(),
-                    resultSet.getString("headquarter_name"), resultSet.getInt("quantity"),
+                    "", resultSet.getInt("quantity"),
                     resultSet.getInt("id_part"));
             //Add the data of every vehicle to the array
             orderPartsRowViewList.add(orderPartRow);
@@ -607,50 +683,6 @@ public class OrderEditController implements Initializable {
         orderSummaryTableview.setItems(FXCollections.observableArrayList(orderPartsRowViewList));
         orderSummaryTableview.refresh();
     }
-
-    /**
-     * setHeadquarterCombo: void -> void
-     * Purpose: fills the headquarters combo
-     */
-    public void setHeadquarterCombo() throws ExecutionException, InterruptedException {
-        CompletableFuture<Map<Boolean, ResultSet>> headquarterCall = CompletableFuture.supplyAsync(() -> headquarterEndpoint.getHeadquarters());
-
-        headquarterCall.thenApply((response) -> {
-            if (response.containsKey(true)) {
-                ResultSet resultSet = response.get(true);
-                try {
-                    fillHeadquarterCombo(resultSet);
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-            return true;
-        }).get();
-    }
-
-    public void fillHeadquarterCombo(ResultSet resultSet) throws SQLException {
-        while (resultSet.next()) {
-            Integer idHeadquarter = resultSet.getInt("id_headquarter");
-            String name = resultSet.getString("name");
-            headquarterComboboxList.add(new HeadquarterView(idHeadquarter, name));
-        }
-        headquarterCombo.setItems(FXCollections.observableArrayList(headquarterComboboxList));
-    }
-
-    /**
-     * findHeadquarterById: Integer -> HeadquarterView
-     * Purpose: This method finds a headquarters by its id.
-     * It is used to set the headquarters combobox given the id of the headquarters where the worker is settled.
-     */
-    public HeadquarterView findHeadquarterById(Integer id) {
-        for (HeadquarterView headquarterView : headquarterComboboxList) {
-            if (id == headquarterView.getIdHeadquarter()) {
-                return headquarterView;
-            }
-        }
-        return new HeadquarterView(-100, "");
-    }
-
 
     /**
      * changeCustomer: String -> void

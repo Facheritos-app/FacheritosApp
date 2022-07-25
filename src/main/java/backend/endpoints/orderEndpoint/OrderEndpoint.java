@@ -4,7 +4,6 @@ import backend.connectionBD.ConnectionBD;
 import backend.dto.orderDTO.OrderDTO;
 
 import java.sql.*;
-import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -77,15 +76,40 @@ public class OrderEndpoint {
         HashMap<Boolean, ResultSet> response = new HashMap<>();
         try (Connection conn = ConnectionBD.connectDB().getConnection()) {
             preparedStatement = conn.prepareStatement(
-                    "SELECT part.name, part.price, headquarter.name AS headquarter_name,\n" +
+                    "SELECT part.name, part.price,\n" +
                             "job_order_part.quantity, part.id_part\n" +
                             "FROM job_order\n" +
-                            "JOIN job_order_part USING(id_job_order) \n" +
+                            "JOIN job_order_part USING(id_job_order)\n" +
                             "JOIN part USING (id_part)\n" +
-                            "JOIN part_inventory USING(id_part)\n" +
-                            "JOIN headquarter ON part_inventory.id_headquarter = headquarter.id_headquarter\n" +
                             "WHERE id_job_order = ?");
             preparedStatement.setInt(1, idOrder);
+            resultSet = preparedStatement.executeQuery();
+            response.put(true, resultSet);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            response.put(false, resultSet);
+        }
+        return response;
+    }
+
+    /**
+     * getPartsFromInventory: Integer -> Map<Boolean, ResultSet>
+     * Purpose: obtains the parts inventory from the database.
+     */
+    public Map<Boolean, ResultSet> getPartsFromInventory(Integer idHeadquarter) {
+
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        HashMap<Boolean, ResultSet> response = new HashMap<>();
+        try (Connection conn = ConnectionBD.connectDB().getConnection()) {
+            preparedStatement = conn.prepareStatement("" +
+                    "SELECT *, headquarter.name AS hq \n" +
+                    "FROM part \n" +
+                    "JOIN part_inventory USING(id_part)\n" +
+                    "JOIN headquarter USING(id_headquarter)\n" +
+                    "JOIN city USING(id_city) \n" +
+                    "WHERE part.status = 'Activo' AND id_headquarter = ?");
+            preparedStatement.setInt(1, idHeadquarter);
             resultSet = preparedStatement.executeQuery();
             response.put(true, resultSet);
         } catch (SQLException e) {
@@ -133,19 +157,98 @@ public class OrderEndpoint {
         try (Connection conn = ConnectionBD.connectDB().getConnection()) {
             preparedStatement = conn.prepareStatement(
                     "UPDATE job_order \n" +
-                            "SET id_customer = ?, id_headquarter = ?, id_state = ?, due_date = ?, price = ?\n" +
+                            "SET id_customer = ?, id_state = ?, due_date = ?, price = ?\n" +
                             "WHERE id_job_order = ?");
             preparedStatement.setInt(1, orderDTO.getId_customer());
-            preparedStatement.setInt(2, orderDTO.getId_headquarter());
-            preparedStatement.setInt(3, orderDTO.getId_status());
-            preparedStatement.setDate(4, orderDTO.getDue_date());
-            preparedStatement.setDouble(5, orderDTO.getPrice());
-            preparedStatement.setInt(6, orderDTO.getId_order());
+            preparedStatement.setInt(2, orderDTO.getId_status());
+            preparedStatement.setDate(3, orderDTO.getDue_date());
+            preparedStatement.setDouble(4, orderDTO.getPrice());
+            preparedStatement.setInt(5, orderDTO.getId_order());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
+
+    /**
+     * updateParts: Integer, Integer, Integer -> void
+     * Purpose: updates the parts in the inventory
+     */
+    public void updatePart(Integer idPart, Integer idHeadquarter, Integer quantity) {
+        PreparedStatement preparedStatement;
+        try (Connection conn = ConnectionBD.connectDB().getConnection()) {
+            preparedStatement = conn.prepareStatement(
+                    "UPDATE part_inventory \n" +
+                            "SET quantity = ?\n" +
+                            "WHERE (id_part = ?  AND id_headquarter = ?)");
+            preparedStatement.setInt(1, quantity);
+            preparedStatement.setInt(2, idPart);
+            preparedStatement.setInt(3, idHeadquarter);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * removeParts: Integer -> void
+     * Purpose: remove the parts of an order
+     */
+    public void removeParts(Integer idOrder) {
+        PreparedStatement preparedStatement;
+        try (Connection conn = ConnectionBD.connectDB().getConnection()) {
+            preparedStatement = conn.prepareStatement(
+                    "DELETE FROM job_order_part WHERE id_job_order = ?");
+            preparedStatement.setInt(1, idOrder);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    /**
+     * addParts: Integer, Integer, Integer -> void
+     * Purpose: add parts to an order
+     */
+    public void addPart(Integer idPart, Integer idJobOrder, Integer quantity) {
+        PreparedStatement preparedStatement;
+        try (Connection conn = ConnectionBD.connectDB().getConnection()) {
+            preparedStatement = conn.prepareStatement(
+                    "INSERT INTO job_order_part VALUES(?, ?, ?);");
+            preparedStatement.setInt(1, idJobOrder);
+            preparedStatement.setInt(2, idPart);
+            preparedStatement.setInt(3, quantity);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * getPartQuantity: Integer -> Map<Boolean, ResultSet>
+     * Purpose: gets the quantity of a part from the inventory
+     */
+    public Integer getPartQuantity(Integer idPart, Integer idHeadquarter) throws SQLException {
+        PreparedStatement preparedStatement;
+        ResultSet resultSet = null;
+        HashMap<Boolean, ResultSet> response = new HashMap<>();
+        try (Connection conn = ConnectionBD.connectDB().getConnection()) {
+            preparedStatement = conn.prepareStatement(
+                    "SELECT quantity FROM part_inventory WHERE id_part = ? AND id_headquarter = ?");
+            preparedStatement.setInt(1, idPart);
+            preparedStatement.setInt(2, idHeadquarter);
+            resultSet = preparedStatement.executeQuery();
+            resultSet.next();
+            response.put(true, resultSet);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            response.put(false, resultSet);
+            return 0;
+        }
+        return resultSet.getInt("quantity");
+    }
+
 
 
 }

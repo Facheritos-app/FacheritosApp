@@ -6,8 +6,6 @@ public class OrderDTO {
 
     protected Integer id_order;
     protected Integer id_customer;
-
-    protected Integer id_headquarter;
     protected Integer id_status;
 
     protected Date due_date;
@@ -28,14 +26,6 @@ public class OrderDTO {
 
     public void setId_customer(Integer id_customer) {
         this.id_customer = id_customer;
-    }
-
-    public Integer getId_headquarter() {
-        return id_headquarter;
-    }
-
-    public void setId_headquarter(Integer id_headquarter) {
-        this.id_headquarter = id_headquarter;
     }
 
     public Integer getId_status() {

@@ -101,12 +101,7 @@
                         <Cursor fx:constant="HAND" />
                     </cursor>
                 </Button>
-                <ComboBox fx:id="headquarterCombo" layoutX="118.0" layoutY="406.0" prefHeight="25.0" prefWidth="154.0" promptText="   Cargando..." style="-fx-background-color: F4F4F4; -fx-background-radius: 10;" styleClass="input-text" stylesheets="@../style.css" visibleRowCount="7">
-                    <opaqueInsets>
-                        <Insets />
-                    </opaqueInsets>
-                </ComboBox>
-                <ComboBox fx:id="statusCombo" layoutX="118.0" layoutY="359.0" prefHeight="25.0" prefWidth="154.0" promptText="   Cargando..." style="-fx-background-color: F4F4F4; -fx-background-radius: 10;" styleClass="input-text" stylesheets="@../style.css" visibleRowCount="3">
+                <ComboBox fx:id="statusCombo" layoutX="118.0" layoutY="359.0" prefHeight="25.0" prefWidth="154.0" promptText=" Cargando..." style="-fx-background-color: F4F4F4; -fx-background-radius: 10;" styleClass="input-text" stylesheets="@../style.css" visibleRowCount="3">
                     <opaqueInsets>
                         <Insets />
                     </opaqueInsets>
@@ -127,11 +122,6 @@
                     </cursor>
                 </Button>
                 <Label fx:id="ccLabel" layoutX="117.0" layoutY="179.0" prefHeight="17.0" prefWidth="156.0" styleClass="poppins" stylesheets="@../style.css" textFill="#1f1f1f">
-                    <font>
-                        <Font name="Poppins Regular" size="12.0" />
-                    </font>
-                </Label>
-                <Label fx:id="headquarterLabel" layoutX="48.0" layoutY="434.0" prefHeight="1.0" styleClass="poppins" stylesheets="@../style.css" textFill="#1f1f1f">
                     <font>
                         <Font name="Poppins Regular" size="12.0" />
                     </font>
@@ -197,7 +187,7 @@
                         <Font name="Poppins Regular" size="12.0" />
                     </font>
                 </Label>
-                <TextField fx:id="priceField" alignment="CENTER" layoutX="740.0" layoutY="428.0" prefHeight="28.0" prefWidth="80.0" style="-fx-background-color: transparent;" stylesheets="@../style.css">
+                <TextField fx:id="priceField" alignment="CENTER" layoutX="740.0" layoutY="428.0" onKeyTyped="#priceAction" prefHeight="28.0" prefWidth="80.0" style="-fx-background-color: transparent;" stylesheets="@../style.css">
                     <font>
                         <Font name="Poppins Regular" size="12.0" />
                     </font>
@@ -253,6 +243,18 @@
                </font>
             </Label>
             <Label fx:id="orderPartLabel" alignment="CENTER_RIGHT" layoutX="742.0" layoutY="89.0" prefHeight="17.0" prefWidth="152.0" styleClass="poppins" stylesheets="@../style.css" textFill="RED">
+               <font>
+                  <Font name="Poppins Regular" size="12.0" />
+               </font>
+            </Label>
+            <TableView fx:id="removeTableview" cache="true" layoutX="323.0" layoutY="467.0" pickOnBounds="false" prefHeight="120.0" prefWidth="273.0" style="-fx-font-family: Poppins; -fx-font-size: 12; -fx-background-color: F4F4F4; -fx-background-radius: 10; -fx-border-radius: 10;" stylesheets="@../style.css">
+               <columns>
+                  <TableColumn fx:id="colNamePart1" prefWidth="115.0" sortable="false" style="-fx-background-color: F4F4F4; -fx-text-fill: black;" text="Nombre" />
+                  <TableColumn fx:id="colPricePart1" prefWidth="84.0" style="-fx-background-color: F4F4F4; -fx-text-fill: black;" text="Precio" />
+                  <TableColumn fx:id="colQuantityPart1" prefWidth="72.0" style="-fx-background-color: F4F4F4; -fx-text-fill: black;" text="Cantidad" />
+               </columns>
+            </TableView>
+            <Label fx:id="headquarterLabel" layoutX="118.0" layoutY="406.0" prefHeight="25.0" prefWidth="154.0" style="-fx-background-color: F4F4F4; -fx-background-radius: 10;" stylesheets="@../style.css" text="   Cargando..." textFill="#1f1f1f">
                <font>
                   <Font name="Poppins Regular" size="12.0" />
                </font>
