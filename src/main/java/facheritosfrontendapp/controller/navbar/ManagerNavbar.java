@@ -38,7 +38,7 @@ public class ManagerNavbar implements Initializable {
 
     @FXML
     protected void homeClicked() throws IOException {
-        managerDashboardController = (ManagerDashboardController) dashboardController.changeContent("dashboard/managerDashboard");
+        managerDashboardController = (ManagerDashboardController) dashboardController.changeContent("dashboard/managerDashboard", true);
         managerDashboardController.showDashboard();
     }
 

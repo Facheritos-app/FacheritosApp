@@ -345,6 +345,7 @@ public class InventoryAddVehicleController implements Initializable {
         modelCombobox.setItems(FXCollections.observableArrayList(modelComboboxList));
     }
 
+
     /**
      * showColors: void -> void
      * Purpose: This method contains all the steps to show all the colors in the combobox

@@ -1,7 +1,11 @@
 package facheritosfrontendapp.controller.dashboard;
 
+import backend.endpoints.dashboardEndpoint.ManagerDashboardEndpoint;
 import backend.endpoints.dashboardEndpoint.SellerDashboardEndpoint;
+import backend.endpoints.headquarterEndpoint.HeadquarterEndpoint;
+import backend.endpoints.inventoryEndpoint.InventoryEndpoint;
 import backend.endpoints.inventoryEndpoint.ModelEndpoint;
+import facheritosfrontendapp.ComboBoxView.HeadquarterView;
 import facheritosfrontendapp.ComboBoxView.ModelView;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -27,10 +31,10 @@ import java.util.concurrent.ExecutionException;
 
 public class ManagerDashboardController implements Initializable {
     @FXML
-    private BarChart<?, ?> salesChart;
+    private BarChart salesChart;
 
     @FXML
-    private BarChart<?, ?> customersChart;
+    private BarChart customersChart;
 
     @FXML
     private BarChart modelsChart;
@@ -67,6 +71,21 @@ public class ManagerDashboardController implements Initializable {
     @FXML
     private ChoiceBox<String> yearModelChoicebox;
 
+    @FXML
+    private ComboBox<String> selectionSellersCombobox;
+
+    @FXML
+    private ChoiceBox<String> yearSellersChoicebox;
+
+    @FXML
+    private ComboBox<String> idSellerCombobox;
+
+    @FXML
+    private BarChart sellersChart;
+
+    @FXML
+    private ComboBox<HeadquarterView> sellerHeadquarterCombobox;
+
     private SellerDashboardEndpoint sellerDashboardEndpoint;
 
     private ArrayList<String> categoryList;
@@ -91,8 +110,19 @@ public class ManagerDashboardController implements Initializable {
 
     private ArrayList<Integer> modelChartTotal;
 
+    private ArrayList<String> sellerChartList;
+
+    private ArrayList<Integer> sellerChartListTotal;
+
+    private ManagerDashboardEndpoint managerDashboardEndpoint;
+
+    private HeadquarterEndpoint headquarterEndpoint;
+
+    private ArrayList<HeadquarterView> sellerHeadquartersComboboxList;
     public ManagerDashboardController() {
         sellerDashboardEndpoint = new SellerDashboardEndpoint();
+        managerDashboardEndpoint = new ManagerDashboardEndpoint();
+        headquarterEndpoint = new HeadquarterEndpoint();
         modelEndpoint = new ModelEndpoint();
         modelComboboxList = new ArrayList<>();
         categoryList = new ArrayList<>();
@@ -106,6 +136,9 @@ public class ManagerDashboardController implements Initializable {
         customerChartTotal = new ArrayList<>();
         modelChartList = new ArrayList<>();
         modelChartTotal = new ArrayList<>();
+        sellerChartList = new ArrayList<>();
+        sellerChartListTotal = new ArrayList<>();
+        sellerHeadquartersComboboxList = new ArrayList<>();
     }
 
     @Override
@@ -128,6 +161,10 @@ public class ManagerDashboardController implements Initializable {
         //Models chart
         selectionModelsCombobox.setItems(FXCollections.observableArrayList("No. compras", "Valor de compra"));
         yearModelChoicebox.setItems(FXCollections.observableArrayList(years));
+        //top sellers chart
+        selectionSellersCombobox.setItems(FXCollections.observableArrayList("No. compras", "Valor de compra"));
+        yearSellersChoicebox.setItems(FXCollections.observableArrayList((years)));
+        idSellerCombobox.setItems(FXCollections.observableArrayList("Cédula", "Nombre"));
     }
     /**
      * preselectOptions: void -> void
@@ -144,6 +181,10 @@ public class ManagerDashboardController implements Initializable {
         //Models chart
         selectionModelsCombobox.getSelectionModel().select(0); //Number of sales
         yearModelChoicebox.getSelectionModel().select(0); //2022
+        //Sellers chart
+        selectionSellersCombobox.getSelectionModel().select(0); //Number of sales
+        yearSellersChoicebox.getSelectionModel().select(0); //2022
+        idSellerCombobox.getSelectionModel().select(0); //id number
     }
     /**
      * showDashboard: void ->  void
@@ -155,6 +196,75 @@ public class ManagerDashboardController implements Initializable {
         salesSeeClicked();
         customersViewClicked();
         showModels();
+        showHeadquarters();
+    }
+
+    /**
+     * showHeadquarters: void -> void
+     * Purpose: This method contains all the steps to show all the headquarters in the combobox
+     */
+    public void showHeadquarters()   {
+
+        new Thread(() -> {
+            //Set the call to the DB.
+            CompletableFuture<Map<Boolean, ResultSet>> headquartersCall = CompletableFuture.supplyAsync(() -> headquarterEndpoint.getHeadquarters());
+
+            //Use the response from the BD to fill the combobox
+            try {
+                headquartersCall.thenApply((response) -> {
+                    if (response.containsKey(true)) {
+                        ResultSet resultSet = response.get(true);
+                        try {
+                            setSellerCombobox(resultSet);
+                            Platform.runLater(() -> {
+                                sellerHeadquarterCombobox.getSelectionModel().select(0); //any headquarter
+                                sellersViewClicked(); //Show the chart data
+                            });
+                        } catch (SQLException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                    return true;
+                }).get();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            } catch (ExecutionException e) {
+                throw new RuntimeException(e);
+            }
+        }).start();
+
+    }
+    /**
+     * setSellerCombobox: ResultSet -> void
+     * Purpose: This method set the items of the sellers combobox according to the DB
+     */
+    public void setSellerCombobox(ResultSet resultSet) throws SQLException {
+        while (resultSet.next()) {
+            Integer idHeadquarter = resultSet.getInt("id_headquarter");
+            String name = resultSet.getString("name");
+            sellerHeadquartersComboboxList.add(new HeadquarterView(idHeadquarter, name));
+        }
+        sellerHeadquarterCombobox.setItems(FXCollections.observableArrayList(sellerHeadquartersComboboxList));
+        System.out.println("combobox lleno");
+    }
+
+    /**
+     * findHeadquarterByName: String -> HeadquarterView
+     * Purpose: This method finds a headquarter by its name.
+     * .
+     */
+    public HeadquarterView findHeadquarterByName(String name) {
+        for (Integer i = 0; i < sellerHeadquartersComboboxList.size(); i++) {
+            if (name.equals(sellerHeadquartersComboboxList.get(i).getName())) {
+                return sellerHeadquartersComboboxList.get(i);
+            }
+        }
+        return new HeadquarterView(-100, "");
+    }
+    @FXML
+    protected void sellersViewClicked(){
+        getSellers(selectionSellersCombobox.getSelectionModel().getSelectedIndex(), Integer.valueOf(yearSellersChoicebox.getSelectionModel().getSelectedItem()),
+                idSellerCombobox.getSelectionModel().getSelectedIndex(), findHeadquarterByName(String.valueOf(sellerHeadquarterCombobox.getSelectionModel().getSelectedItem())).getIdHeadquarter());
     }
     /**
      * showModels: void -> void
@@ -202,6 +312,61 @@ public class ManagerDashboardController implements Initializable {
             modelComboboxList.add(new ModelView(idModel, name));
         }
         modelsCombobox.setItems(FXCollections.observableArrayList(modelComboboxList));
+    }
+
+    /**
+     * getSellers void -> void
+     * Purpose: This method contains all the steps to show all the sellers in the combobox
+     */
+    public void getSellers(Integer selectionType, Integer year, Integer id, Integer idHeadquarter)   {
+
+        new Thread(() -> {
+            //Set the call to the DB.
+            CompletableFuture<Map<Boolean, ResultSet>> sellersCall = CompletableFuture.supplyAsync(() -> managerDashboardEndpoint.sellersChart(selectionType, year, id, idHeadquarter));
+
+            //Use the response from the BD to fill the combobox
+            try {
+                sellersCall.thenApply((response) -> {
+                    if (response.containsKey(true)) {
+                        ResultSet resultSet = response.get(true);
+                        try {
+                            Platform.runLater(() -> {
+                                try {
+                                    setSellersChart(resultSet);
+                                } catch (Exception e) {
+                                    throw new RuntimeException(e);
+                                }
+                            });
+                        } catch (Exception e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                    return true;
+                }).get();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            } catch (ExecutionException e) {
+                throw new RuntimeException(e);
+            }
+        }).start();
+
+    }
+    /**
+     * setSellersChart: ResultSet -> void
+     * Purpose: This method builds the sellets chart with the data from the DB.
+     */
+    public void setSellersChart(ResultSet resultSet) throws Exception {
+        clearDataToUpdate(3);
+        while (resultSet.next()) {
+            sellerChartList.add(resultSet.getString("data"));
+            sellerChartListTotal.add(resultSet.getInt("total"));
+        }
+        XYChart.Series series1 = new XYChart.Series();
+        for (Integer i = 0; i < sellerChartList.size(); i++) {
+            series1.getData().add(new XYChart.Data(sellerChartList.get(i), sellerChartListTotal.get(i)));
+        }
+        series1.setName(selectionSellersCombobox.getSelectionModel().getSelectedItem());
+        sellersChart.getData().addAll(series1);
     }
     /**
      * getSalesPerMonth: String, Integer -> void
@@ -261,6 +426,12 @@ public class ManagerDashboardController implements Initializable {
                 modelChartTotal.clear();
                 modelsChart.getData().clear();
                 modelsChart.layout();
+                break;
+            case 3:
+                sellerChartList.clear();
+                sellerChartListTotal.clear();
+                sellersChart.getData().clear();
+                sellersChart.layout();
                 break;
             default:
                 throw new Exception("ERROR: impossible to clear data from the chart");
@@ -444,4 +615,6 @@ public class ManagerDashboardController implements Initializable {
         series1.setName(selectionModelsCombobox.getSelectionModel().getSelectedItem());
         modelsChart.getData().addAll(series1);
     }
+
+
 }
