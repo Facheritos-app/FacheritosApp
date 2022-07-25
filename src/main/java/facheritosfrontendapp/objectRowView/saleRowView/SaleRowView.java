@@ -25,7 +25,7 @@ public class SaleRowView {
 
     private String headquarter;
 
-    private Double priceSale;
+    private String priceSale;
 
     private VBox options;
 
@@ -37,8 +37,8 @@ public class SaleRowView {
         return (Label) getEditHBox().getChildren().get(1);
     }
 
-    public SaleRowView(Integer idSale, String nameSeller, String nameClient, Date dateSeller, String paymentMethod,String headquarter,
-                              Double priceSale) throws FileNotFoundException {
+    public SaleRowView(Integer idSale, String nameSeller, String nameClient, Date dateSeller, String paymentMethod, String headquarter,
+                       String priceSale) throws FileNotFoundException {
         this.idSale = idSale;
         this.nameSeller = nameSeller;
         this.nameClient = nameClient;
@@ -90,13 +90,10 @@ public class SaleRowView {
         this.headquarter = headquarter;
     }
 
-    public Double getPriceSale() {
+    public String getPriceSale() {
         return priceSale;
     }
 
-    public void setPriceSale(String model) {
-        this.priceSale = priceSale;
-    }
 
     public VBox getOptions() {
         return options;

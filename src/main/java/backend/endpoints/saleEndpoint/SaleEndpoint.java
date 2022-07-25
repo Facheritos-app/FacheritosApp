@@ -17,7 +17,7 @@ public class SaleEndpoint {
         HashMap<Boolean, ResultSet> response = new HashMap<>();
         try (Connection conn = ConnectionBD.connectDB().getConnection()) {
             preparedStatement = conn.prepareStatement("select sale.id_sale,sale.id_worker,sale.id_customer,sale.id_headquarter,sale.id_payment_method,\n" +
-                    "\t\t\tsale.sale_date,sale.price, sale.name_seller, sale.name_client, sale.payment_method , headquarter.name\n" +
+                    "\t\t\tsale.sale_date, sale.price, sale.name_seller, sale.name_client, sale.payment_method , headquarter.name\n" +
                     "from (select sale.id_sale,sale.id_worker,sale.id_customer,sale.id_headquarter,sale.id_payment_method,\n" +
                     "\t\t\tsale.sale_date,sale.price, sale.name_seller, sale.name_client, payment.payment_method\n" +
                     "from (select sale.id_sale,sale.id_worker,sale.id_customer,sale.id_headquarter,sale.id_payment_method,\n" +
