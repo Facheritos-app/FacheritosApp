@@ -85,7 +85,7 @@
                         <Font name="Poppins Bold" size="36.0" />
                     </font>
                 </Label>
-                <Button alignment="CENTER" layoutX="687.0" layoutY="534.0" mnemonicParsing="false" onAction="#cancelAction" prefHeight="32.0" prefWidth="98.0" styleClass="red-button" stylesheets="@../style.css" text="Cancelar" textFill="WHITE">
+                <Button fx:id="cancelButton" alignment="CENTER" layoutX="687.0" layoutY="534.0" mnemonicParsing="false" onAction="#cancelAction" prefHeight="32.0" prefWidth="98.0" styleClass="red-button" stylesheets="@../style.css" text="Cancelar" textFill="WHITE">
                     <font>
                         <Font name="Poppins Bold" size="12.0" />
                     </font>
@@ -93,7 +93,7 @@
                         <Cursor fx:constant="HAND" />
                     </cursor>
                 </Button>
-                <Button alignment="CENTER" layoutX="797.0" layoutY="534.0" mnemonicParsing="false" onAction="#saveAction" prefHeight="32.0" prefWidth="98.0" styleClass="blue-button" stylesheets="@../style.css" text="Guardar" textFill="WHITE">
+                <Button fx:id="saveButton" alignment="CENTER" layoutX="797.0" layoutY="534.0" mnemonicParsing="false" onAction="#saveAction" prefHeight="32.0" prefWidth="98.0" styleClass="blue-button" stylesheets="@../style.css" text="Guardar" textFill="WHITE">
                     <font>
                         <Font name="Poppins Bold" size="12.0" />
                     </font>
@@ -247,13 +247,6 @@
                   <Font name="Poppins Regular" size="12.0" />
                </font>
             </Label>
-            <TableView fx:id="removeTableview" cache="true" layoutX="323.0" layoutY="467.0" pickOnBounds="false" prefHeight="120.0" prefWidth="273.0" style="-fx-font-family: Poppins; -fx-font-size: 12; -fx-background-color: F4F4F4; -fx-background-radius: 10; -fx-border-radius: 10;" stylesheets="@../style.css">
-               <columns>
-                  <TableColumn fx:id="colNamePart1" prefWidth="115.0" sortable="false" style="-fx-background-color: F4F4F4; -fx-text-fill: black;" text="Nombre" />
-                  <TableColumn fx:id="colPricePart1" prefWidth="84.0" style="-fx-background-color: F4F4F4; -fx-text-fill: black;" text="Precio" />
-                  <TableColumn fx:id="colQuantityPart1" prefWidth="72.0" style="-fx-background-color: F4F4F4; -fx-text-fill: black;" text="Cantidad" />
-               </columns>
-            </TableView>
             <Label fx:id="headquarterLabel" layoutX="118.0" layoutY="406.0" prefHeight="25.0" prefWidth="154.0" style="-fx-background-color: F4F4F4; -fx-background-radius: 10;" stylesheets="@../style.css" text="   Cargando..." textFill="#1f1f1f">
                <font>
                   <Font name="Poppins Regular" size="12.0" />

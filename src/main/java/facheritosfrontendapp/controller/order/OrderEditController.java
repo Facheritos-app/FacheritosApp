@@ -133,13 +133,11 @@ public class OrderEditController implements Initializable {
     private Label quantityLabel;
 
     @FXML
-    private TableView removeTableview;
+    private Button saveButton;
+
     @FXML
-    private TableColumn<PartRowView, String> colNamePart1;
-    @FXML
-    private TableColumn<PartRowView, Double> colPricePart1;
-    @FXML
-    private TableColumn<PartRowView, Integer> colQuantityPart1;
+    private Button cancelButton;
+
 
     public OrderEditController() {
         orderEndpoint = new OrderEndpoint();
@@ -217,18 +215,16 @@ public class OrderEditController implements Initializable {
     protected void saveAction() throws IOException, NullPointerException {
         /*Show dialogPane to confirm*/
         if (allValidations()) {
-
             ccField.setText(customerCc);
             OrderDTO orderDTO = createOrder();
             MyDialogPane dialogPane = new MyDialogPane("confirmationSave");
             Optional<ButtonType> clickedButton = dialogPane.getClickedButton();
 
             if (clickedButton.get() == YES) {
+                saveButton.setDisable(true);
+                cancelButton.setDisable(true);
+
                 try {
-
-                    Alert wait = new Alert(Alert.AlertType.CONFIRMATION, "Se está actualizando la orden, por favor espere", OK);
-                    wait.show();
-
                     boolean changes = false;
 
                     //Check if there were any changes in the order parts
@@ -240,54 +236,67 @@ public class OrderEditController implements Initializable {
                     }
 
                     if (changes) {
-                        boolean enough = true;
+                        Alert wait = new Alert(Alert.AlertType.CONFIRMATION, "", OK);
+                        wait.setHeaderText("Se está actualizando la orden, por favor espere");
+                        wait.show();
 
-                        //Check in the inventory for parts availability
-                        for (PartRowView orderPartRow : orderPartsRowViewList) {
-                            Integer checkQuantity = orderEndpoint.getPartQuantity(orderPartRow.getIdPart(), idHeadquarter);
-                            if (orderPartRow.getQuantity() > checkQuantity) {
-                                enough = false;
-                                break;
-                            }
-                        }
+                        new Thread(() -> {
+                            boolean enough = true;
 
-                        if (enough) {
-
-                            //Update oder data
-                            orderEndpoint.updateOrder(orderDTO);
-
-                            //Remove initial parts
-                            orderEndpoint.removeParts(idOrder);
-
-                            //Update each part of the inventory
-                            for (PartRowView partRow : partRowViewList) {
-                                orderEndpoint.updatePart(partRow.getIdPart(), idHeadquarter, partRow.getQuantity());
-                            }
-
-                            //Add the parts to the order
+                            //Check in the inventory for parts availability
                             for (PartRowView orderPartRow : orderPartsRowViewList) {
-                                orderEndpoint.addPart(orderPartRow.getIdPart(), idOrder, orderPartRow.getQuantity());
+                                Integer checkQuantity = null;
+                                try {
+                                    checkQuantity = orderEndpoint.getPartQuantity(orderPartRow.getIdPart(), idHeadquarter);
+                                } catch (SQLException e) {
+                                    throw new RuntimeException(e);
+                                }
+                                if (orderPartRow.getQuantity() > checkQuantity) {
+                                    enough = false;
+                                    break;
+                                }
                             }
 
-                            wait.close();
-                            Alert success = new Alert(Alert.AlertType.CONFIRMATION, "Orden actualizada exitosamente", OK);
-                            success.show();
-                            try {
-                                orderSingleViewController = (OrderSingleViewController) dashboardController.changeContent("" +
-                                        "orders/ordersSingleView", true);
-                                orderSingleViewController.showForm(idOrder);
-                            } catch (IOException e) {
-                                throw new RuntimeException(e);
+                            if (enough) {
+
+                                //Update oder data
+                                orderEndpoint.updateOrder(orderDTO);
+
+                                //Remove initial parts
+                                orderEndpoint.removeParts(idOrder);
+
+                                //Update each part of the inventory
+                                for (PartRowView partRow : partRowViewList) {
+                                    orderEndpoint.updatePart(partRow.getIdPart(), idHeadquarter, partRow.getQuantity());
+                                }
+
+                                //Add the parts to the order
+                                for (PartRowView orderPartRow : orderPartsRowViewList) {
+                                    orderEndpoint.addPart(orderPartRow.getIdPart(), idOrder, orderPartRow.getQuantity());
+                                }
+                                Platform.runLater(() -> {
+                                    Alert success = new Alert(Alert.AlertType.CONFIRMATION, "Orden actualizada exitosamente", OK);
+                                    success.show();
+                                    try {
+                                        orderSingleViewController = (OrderSingleViewController) dashboardController.changeContent("" +
+                                                "orders/ordersSingleView", true);
+                                        orderSingleViewController.showForm(idOrder);
+                                    } catch (IOException e) {
+                                        throw new RuntimeException(e);
+                                    }
+                                });
+
+                            } else {
+                                Platform.runLater(() -> {
+                                    Alert fail = new Alert(Alert.AlertType.ERROR, "Ha habido un problema, por favor intente nuevamente", OK);
+                                    fail.show();
+                                    showParts(idHeadquarter);
+                                });
                             }
-                        } else {
-                            wait.close();
-                            Alert fail = new Alert(Alert.AlertType.ERROR, "Ha habido un problema, por favor intente nuevamente", OK);
-                            fail.show();
-                            showParts(idHeadquarter);
-                        }
+                        }).start();
+
 
                     } else {
-                        wait.close();
                         orderEndpoint.updateOrder(orderDTO);
                         Alert success = new Alert(Alert.AlertType.CONFIRMATION, "Orden actualizada exitosamente", OK);
                         success.show();
@@ -628,12 +637,6 @@ public class OrderEditController implements Initializable {
                     resultSet.getInt("id_part"));
             initialOrderParts.add(initialPartRow);
         }
-
-        colNamePart1.setCellValueFactory(new PropertyValueFactory<>("name"));
-        colPricePart1.setCellValueFactory(new PropertyValueFactory<>("price"));
-        colQuantityPart1.setCellValueFactory(new PropertyValueFactory<>("quantity"));
-        removeTableview.setItems(FXCollections.observableArrayList(initialOrderParts));
-        removeTableview.refresh();
 
         colNamePart.setCellValueFactory(new PropertyValueFactory<>("name"));
         colPricePart.setCellValueFactory(new PropertyValueFactory<>("price"));
