@@ -412,7 +412,7 @@ public class EditSaleController implements Initializable {
                 }
             }else{
 
-                saleEndpoint.borrarCarros(saleDTOnew,saleCarRowViewCurrent.get(i).getIdCar());
+                saleEndpoint.deleteCar(saleDTOnew,saleCarRowViewCurrent.get(i).getIdCar());
                 saleEndpoint.changeCarsQuantityReject(saleCarRowViewCurrent.get(i).getIdCar(),saleCarRowViewCurrent.get(i).getQuantity(),saleDTOcurrent.getId_headquarter());
             }
         }
@@ -431,7 +431,7 @@ public class EditSaleController implements Initializable {
 
             }else{
 
-                saleEndpoint.insertarCarros(saleCarRowsArray2.get(i).getIdCar(), Integer.valueOf(idSaleLabel.getText()),saleCarRowsArray2.get(i).getQuantity());
+                saleEndpoint.insertCar(saleCarRowsArray2.get(i).getIdCar(), Integer.valueOf(idSaleLabel.getText()),saleCarRowsArray2.get(i).getQuantity());
                 saleEndpoint.changeCarsQuantityRestar(saleCarRowsArray2.get(i).getIdCar(), Double.valueOf(saleCarRowsArray2.get(i).getQuantity()),saleDTOcurrent.getId_headquarter());
             }
         }
