@@ -1,5 +1,5 @@
 ﻿# FacheritosApp
-# Proyecto de final del curso de Desarrollo de Software I 2022.
+# Proyecto final del curso de Desarrollo de Software I 2022
 
 Desarrollo de una aplicación de escritorio para ser usado por miembros de una empresa que venden carros y prestan servicio de reparaciones.
 
