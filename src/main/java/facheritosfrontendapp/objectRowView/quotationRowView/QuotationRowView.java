@@ -88,7 +88,7 @@ public class QuotationRowView {
     }
 
     public void setOptions() {
-        URL iconEditURL = Main.class.getResource("/facheritosfrontendapp/icons/icon-edit.png");
+        URL iconEditURL = Main.class.getResource("/facheritosfrontendapp/icons/icon-view.png");
         Image editImage = new Image(String.valueOf(iconEditURL));
         HBox hboxOptions = new HBox(new ImageView(editImage), new Label("Ver más"));
         hboxOptions.setSpacing(5);

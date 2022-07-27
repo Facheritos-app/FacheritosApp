@@ -103,7 +103,7 @@ public class AddUserController implements Initializable {
             userController.showWorkers();
             userController.showCustomers();
         } else {
-            System.out.println("No");
+
         }
     }
 
@@ -218,6 +218,22 @@ public class AddUserController implements Initializable {
                 break;
         }
         return rolId;
+    }
+
+    /**
+     * backToUsersClicked: void -> void
+     * Purpose: when the backArrow is clicked it returns to the users view
+     */
+    @FXML
+    protected void backToUsersClicked() throws IOException {
+        /*Show dialogPane to confirm*/
+        MyDialogPane dialogPane = new MyDialogPane("confirmationCancel");
+        Optional<ButtonType> clickedButton = dialogPane.getClickedButton();
+        if (clickedButton.get() == YES) {
+            userController = (UserController) dashboardController.changeContent("users/users");
+            userController.showWorkers();
+            userController.showCustomers();
+        }
     }
 
     /**

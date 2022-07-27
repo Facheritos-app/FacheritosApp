@@ -98,9 +98,11 @@ public class CustomerRowView {
     }
 
     public void setOptions() {
+        URL iconViewURL = Main.class.getResource("/facheritosfrontendapp/icons/icon-view.png");
         URL iconEditURL = Main.class.getResource("/facheritosfrontendapp/icons/icon-edit.png");
         Image editImage = new Image(String.valueOf(iconEditURL));
-        HBox hboxOptions = new HBox(new ImageView(editImage), new Label("Ver más"));
+        Image viewImage = new Image(String.valueOf(iconViewURL));
+        HBox hboxOptions = new HBox(new ImageView(viewImage), new Label("Ver más"));
         HBox hboxEdit = new HBox(new ImageView(editImage), new Label("Editar"));
         hboxOptions.setSpacing(5);
         hboxOptions.setAlignment(Pos.CENTER);

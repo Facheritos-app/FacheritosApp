@@ -6,15 +6,16 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="684.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="facheritosfrontendapp.controller.headquarter.EditHeadquarterController">
+<Pane minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="684.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="facheritosfrontendapp.controller.headquarter.EditHeadquarterController">
    <children>
-      <Label layoutX="66.0" prefHeight="106.0" prefWidth="278.0" styleClass="poppins" text="Editar sede" textFill="#1f1f1f">
+      <Label layoutX="1.0" layoutY="43.0" prefHeight="106.0" prefWidth="278.0" styleClass="poppins" text="Editar sede" textFill="#1f1f1f">
          <font>
             <Font name="Poppins Bold" size="36.0" />
          </font>
@@ -22,25 +23,25 @@
             <Insets left="20.0" />
          </padding>
       </Label>
-      <Label layoutX="27.0" layoutY="92.0" prefHeight="20.0" prefWidth="77.0" text="Nombre:">
+      <Label layoutX="29.0" layoutY="129.0" prefHeight="20.0" prefWidth="77.0" text="Nombre:">
          <font>
             <Font name="Poppins Regular" size="14.0" />
          </font>
       </Label>
-      <TextField fx:id="nam" layoutX="27.0" layoutY="119.0" prefHeight="36.0" prefWidth="273.0" promptText="ej. Sede 5" styleClass="input-text" stylesheets="@../style.css" />
-      <Label layoutX="30.0" layoutY="180.0" prefHeight="20.0" prefWidth="77.0" text="Celular:">
+      <TextField fx:id="nam" layoutX="29.0" layoutY="156.0" prefHeight="36.0" prefWidth="273.0" promptText="ej. Sede 5" styleClass="input-text" stylesheets="@../style.css" />
+      <Label layoutX="32.0" layoutY="217.0" prefHeight="20.0" prefWidth="77.0" text="Celular:">
          <font>
             <Font name="Poppins Regular" size="14.0" />
          </font>
       </Label>
-      <TextField fx:id="cellp" layoutX="30.0" layoutY="200.0" prefHeight="36.0" prefWidth="273.0" promptText="ej. 3726289" styleClass="input-text" stylesheets="@../style.css" />
-      <Label layoutX="30.0" layoutY="257.0" prefHeight="20.0" prefWidth="77.0" text="Ciudad:">
+      <TextField fx:id="cellp" layoutX="32.0" layoutY="237.0" prefHeight="36.0" prefWidth="273.0" promptText="ej. 3726289" styleClass="input-text" stylesheets="@../style.css" />
+      <Label layoutX="32.0" layoutY="294.0" prefHeight="20.0" prefWidth="77.0" text="Ciudad:">
          <font>
             <Font name="Poppins Regular" size="14.0" />
          </font>
       </Label>
-      <ChoiceBox fx:id="city" layoutX="30.0" layoutY="285.0" prefHeight="36.0" prefWidth="273.0" style="-fx-background-color: D3D3D3; -fx-background-radius: 10; -fx-font-family: Poppins;" />
-      <Button fx:id="cancelButton" layoutX="328.0" layoutY="336.0" mnemonicParsing="false" onMouseClicked="#cancelButtonClicked" prefHeight="36.0" prefWidth="120.0" stylesheets="@../style.css" text="Cancelar" textFill="WHITE">
+      <ChoiceBox fx:id="city" layoutX="32.0" layoutY="322.0" prefHeight="36.0" prefWidth="273.0" style="-fx-background-color: D3D3D3; -fx-background-radius: 10; -fx-font-family: Poppins;" />
+      <Button fx:id="cancelButton" layoutX="375.0" layoutY="358.0" mnemonicParsing="false" onMouseClicked="#cancelButtonClicked" prefHeight="36.0" prefWidth="120.0" stylesheets="@../style.css" text="Cancelar" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
@@ -49,7 +50,7 @@
             <String fx:value="select-button" />
          </styleClass>
       </Button>
-      <Button fx:id="saveButton" layoutX="466.0" layoutY="336.0" mnemonicParsing="false" onMouseClicked="#saveButtonClicked" prefHeight="49.0" prefWidth="114.0" stylesheets="@../style.css" text="Guardar">
+      <Button fx:id="saveButton" layoutX="513.0" layoutY="358.0" mnemonicParsing="false" onMouseClicked="#saveButtonClicked" prefHeight="49.0" prefWidth="114.0" stylesheets="@../style.css" text="Guardar">
          <styleClass>
             <String fx:value="blue-button" />
             <String fx:value="select-button" />
@@ -58,24 +59,24 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <Label layoutX="333.0" layoutY="89.0" prefHeight="27.0" prefWidth="110.0" text="Dirección:">
+      <Label layoutX="335.0" layoutY="126.0" prefHeight="27.0" prefWidth="110.0" text="Dirección:">
          <font>
             <Font name="Poppins Regular" size="14.0" />
          </font>
       </Label>
-      <TextField fx:id="addr" layoutX="328.0" layoutY="119.0" prefHeight="36.0" prefWidth="297.0" promptText="ej. Cra 14D # 67-98" styleClass="input-text" stylesheets="@../style.css" />
-      <Label layoutX="333.0" layoutY="177.0" prefHeight="27.0" prefWidth="110.0" text="Correo:">
+      <TextField fx:id="addr" layoutX="330.0" layoutY="156.0" prefHeight="36.0" prefWidth="297.0" promptText="ej. Cra 14D # 67-98" styleClass="input-text" stylesheets="@../style.css" />
+      <Label layoutX="335.0" layoutY="214.0" prefHeight="27.0" prefWidth="110.0" text="Correo:">
          <font>
             <Font name="Poppins Regular" size="14.0" />
          </font>
       </Label>
-      <TextField fx:id="eml" layoutX="332.0" layoutY="200.0" prefHeight="36.0" prefWidth="289.0" promptText="ej. sede5@gmail.com" styleClass="input-text" stylesheets="@../style.css" />
+      <TextField fx:id="eml" layoutX="334.0" layoutY="237.0" prefHeight="36.0" prefWidth="297.0" promptText="ej. sede5@gmail.com" styleClass="input-text" stylesheets="@../style.css" />
       <Label fx:id="nameLabel" layoutX="28.0" layoutY="155.0" prefHeight="21.0" prefWidth="152.0" />
       <Label fx:id="addressLabel" layoutX="328.0" layoutY="155.0" prefHeight="21.0" prefWidth="94.0" />
       <Label fx:id="cellphoneLabel" layoutX="30.0" layoutY="231.0" prefHeight="21.0" prefWidth="110.0" />
       <Label fx:id="cityLabel" layoutX="35.0" layoutY="326.0" prefHeight="21.0" prefWidth="68.0" />
       <Label fx:id="emailLabel" layoutX="333.0" layoutY="242.0" prefHeight="21.0" prefWidth="94.0" />
-      <ImageView fitHeight="53.0" fitWidth="68.0" layoutX="22.0" layoutY="10.0" onMouseClicked="#backArrowClicked" pickOnBounds="true" preserveRatio="true" styleClass="back-arrow">
+      <ImageView fitHeight="52.0" fitWidth="46.0" layoutX="28.0" layoutY="20.0" onMouseClicked="#backArrowClicked" pickOnBounds="true" preserveRatio="true" styleClass="back-arrow">
          <image>
             <Image url="@../../icons/back-arrow.png" />
          </image>
@@ -83,5 +84,6 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
+      <Separator layoutX="1.0" layoutY="5.0" orientation="VERTICAL" prefHeight="516.0" prefWidth="8.0" />
    </children>
 </Pane>
