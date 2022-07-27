@@ -293,7 +293,7 @@ public class AddSaleController implements Initializable {
             new Thread(() -> {
                 Boolean result = null;
                 try {
-                    result = CompletableFuture.supplyAsync(() -> saleEndpoint.insertarCarros(
+                    result = CompletableFuture.supplyAsync(() -> saleEndpoint.insertCar(
                             saleCarRowsArray2.get(finalElem1).getIdCar(),
                             id_sale,saleCarRowsArray2.get(finalElem1).getQuantity())).get();
                 } catch (InterruptedException e) {
