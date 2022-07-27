@@ -1,19 +1,18 @@
 package facheritosfrontendapp.controller.order;
 
-import backend.endpoints.headquarterEndpoint.HeadquarterEndpoint;
 import backend.endpoints.orderEndpoint.OrderEndpoint;
-import facheritosfrontendapp.ComboBoxView.HeadquarterView;
 import facheritosfrontendapp.controller.DashboardController;
 import facheritosfrontendapp.controller.MainController;
-import facheritosfrontendapp.controller.customer.CustomerController;
-import facheritosfrontendapp.views.MyDialogPane;
+import facheritosfrontendapp.objectRowView.inventoryRowView.PartRowView;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -21,101 +20,86 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.ArrayList;
 import java.util.Map;
-import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
-import static javafx.scene.control.ButtonType.YES;
-
 public class OrderSingleViewController implements Initializable {
 
-    private OrderEndpoint orderEndpoint;
-    private HeadquarterEndpoint headquarterEndpoint;
-
-    private ArrayList<HeadquarterView> headquarterComboboxList;
+    private final OrderEndpoint orderEndpoint;
 
     private DashboardController dashboardController;
 
     private OrderController orderController;
 
+    private OrderEditController orderEditController;
+
+    private final ArrayList<PartRowView> orderPartsRowViewList;
+
+    private Integer idOrder;
+
     //Here are all the @FXML components
+
+    //Order Summary table
+    @FXML
+    private TableView orderSummaryTableview;
+    @FXML
+    private TableColumn<PartRowView, String> colNamePartS;
+    @FXML
+    private TableColumn<PartRowView, Double> colPricePartS;
+    @FXML
+    private TableColumn<PartRowView, Integer> colQuantityPartS;
+
     @FXML
     private Label orderLabel;
 
     @FXML
-    private TextField nameField;
+    private Label nameLabel;
 
     @FXML
-    private TextField ccField;
+    private Label ccLabel;
 
     @FXML
-    private TextField creationDateField;
+    private Label cellphoneLabel;
 
     @FXML
-    private ComboBox headquarterCombo;
+    private Label creationDateLabel;
 
     @FXML
-    private DatePicker dueDatePicker;
+    private Label headquarterLabel;
 
     @FXML
-    private TextField priceField;
+    private Label dueDateLabel;
 
     @FXML
-    private TextField partField;
+    private Label priceLabel;
 
     @FXML
-    private ComboBox statusCombo;
+    private Label totalPriceLabel;
 
     @FXML
-    private Button deleteOrderButton;
+    private Label quantityLabel;
 
     @FXML
-    private Button editOrderButton;
+    private Label statusLabel;
 
-    @FXML
-    private Button cancelButton;
-
-    @FXML
-    private Button saveButton;
-
-    @FXML
-    private Button searchButton;
-
-    @FXML
-    /**
-     * editAction: event -> void
-     * Purpose: By pressing the 'Editar orden' button the text fields are enabled,
-     * the title becomes visible and the 'Guardar' and 'Cancelar' buttons are enabled.
-     */
-    protected void editAction() {
-        ccField.setDisable(false);
-        headquarterCombo.setDisable(false);
-        priceField.setDisable(false);
-        dueDatePicker.setDisable(false);
-        priceField.setDisable(false);
-        partField.setDisable(false);
-        statusCombo.setDisable(false);
-
-        deleteOrderButton.setVisible(false);
-        editOrderButton.setVisible(false);
-
-        cancelButton.setVisible(true);
-        saveButton.setVisible(true);
-        searchButton.setVisible(true);
+    public OrderSingleViewController() {
+        orderEndpoint = new OrderEndpoint();
+        orderPartsRowViewList = new ArrayList<>();
     }
 
+    private void setIdOrder(Integer idOrder) {
+        this.idOrder = idOrder;
+    }
+
+    /*
+      editAction: event -> void
+      Purpose: shows the edit order view by pressing the 'Editar orden' button.
+     */
     @FXML
-    protected void cancelAction() throws IOException {
-        /*Show dialogPane to confirm*/
-        MyDialogPane dialogPane = new MyDialogPane("confirmationCancel");
-        Optional<ButtonType> clickedButton = dialogPane.getClickedButton();
-        if (clickedButton.get() == YES) {
-            orderController = (OrderController) dashboardController.changeContent("orders/orders");
-            orderController.showOrders();
-        } else {
-            System.out.println("No");
-        }
+    protected void editAction() throws IOException {
+        orderEditController = (OrderEditController) dashboardController.changeContent("orders/ordersEdit", true);
+        orderEditController.showForm(idOrder);
     }
 
     /**
@@ -128,33 +112,21 @@ public class OrderSingleViewController implements Initializable {
         orderController.showOrders();
     }
 
-    public OrderSingleViewController() {
-        orderEndpoint = new OrderEndpoint();
-        headquarterEndpoint = new HeadquarterEndpoint();
-        headquarterComboboxList = new ArrayList<>();
-    }
-
     /**
-     * showForm: Integer -> void
-     * Purpose: This method contains all the other methods that together make showing the form possible
+     * setOrderTotalPrice: Integer -> void
+     * Purpose: sets the total price and quantity of parts of an order
      */
-    public void showForm(Integer id) {
+    public void setOrderTotalPrice(Integer id) {
         new Thread(() -> {
-            CompletableFuture<Map<Boolean, ResultSet>> userCall = CompletableFuture.supplyAsync(() -> orderEndpoint.getOrderById(id));
+            CompletableFuture<Map<Boolean, ResultSet>>
+                    userCall = CompletableFuture.supplyAsync(() -> orderEndpoint.getTotalPriceAndQuantity(id));
             try {
                 userCall.thenApply((response) -> {
                     if (response.containsKey(true)) {
                         ResultSet resultSet = response.get(true);
-                        try {
-                            setHeadquarterCombo();
-                        } catch (ExecutionException e) {
-                            throw new RuntimeException(e);
-                        } catch (InterruptedException e) {
-                            throw new RuntimeException(e);
-                        }
                         Platform.runLater(() -> {
                             try {
-                                setForm(resultSet);
+                                setTotalPriceAndQuantity(resultSet);
                             } catch (SQLException e) {
                                 throw new RuntimeException(e);
                             }
@@ -162,71 +134,107 @@ public class OrderSingleViewController implements Initializable {
                     }
                     return true;
                 }).get();
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            } catch (ExecutionException e) {
+            } catch (InterruptedException | ExecutionException e) {
                 throw new RuntimeException(e);
             }
         }).start();
-
     }
 
-
-    public void setHeadquarterCombo() throws ExecutionException, InterruptedException {
-        CompletableFuture<Map<Boolean, ResultSet>> headquarterCall = CompletableFuture.supplyAsync(() -> headquarterEndpoint.getHeadquarters());
-
-        headquarterCall.thenApply((response) -> {
-            if(response.containsKey(true)){
-                ResultSet resultSet = response.get(true);
-                try {
-                    fillHeadquarterCombo(resultSet);
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-            return true;
-        }).get();
-    }
-
-    public void fillHeadquarterCombo(ResultSet resultSet) throws SQLException {
-        while(resultSet.next()){
-            Integer idHeadquarter = resultSet.getInt("id_headquarter");
-            String name = resultSet.getString("name");
-            headquarterComboboxList.add(new HeadquarterView(idHeadquarter, name));
-        }
-        headquarterCombo.setItems(FXCollections.observableArrayList(headquarterComboboxList));
-    }
-
-    public void setForm(ResultSet resultSet) throws SQLException {
-        orderLabel.setText(resultSet.getString("id_job_order"));
-        nameField.setText(resultSet.getString("first_name")+" "+resultSet.getString("last_name"));
-        ccField.setText(resultSet.getString("cc"));
-        headquarterCombo.getSelectionModel().select(findHeadquarterById(resultSet.getInt("id_headquarter")).toString());
-        creationDateField.setText(resultSet.getDate("createdOrder").toLocalDate().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)));
-        dueDatePicker.setValue(resultSet.getDate("due_date").toLocalDate());
-        priceField.setText(resultSet.getString("jobPrice"));
-        partField.setText(resultSet.getString("partname"));
-        statusCombo.getSelectionModel().select(resultSet.getInt("id_state")-1);
+    public void setTotalPriceAndQuantity(ResultSet resultSet) throws SQLException {
+        totalPriceLabel.setText("" + resultSet.getDouble("total"));
+        quantityLabel.setText(resultSet.getString("quantity"));
     }
 
     /**
-     * findHeadquarterById: Integer -> HeadquarterView
-     * Purpose: This method finds a headquarter by its id.
-     * It is used to set the headquarter combobox given the id of the headquarter where the worker is settled.
+     * showForm: Integer -> void
+     * Purpose: This method contains all the other methods that together make showing the form possible
      */
-    public HeadquarterView findHeadquarterById(Integer id){
-        for(Integer i = 0; i < headquarterComboboxList.size(); i++){
-            if(id == headquarterComboboxList.get(i).getIdHeadquarter()){
-                return headquarterComboboxList.get(i);
+    public void showForm(Integer id) {
+        setIdOrder(id);
+        setOrderTotalPrice(id);
+
+        new Thread(() -> {
+            CompletableFuture<Map<Boolean, ResultSet>>
+                    userCall = CompletableFuture.supplyAsync(() -> orderEndpoint.getOrderById(id));
+            try {
+                userCall.thenApply((response) -> {
+                    if (response.containsKey(true)) {
+                        ResultSet resultSet = response.get(true);
+                        Platform.runLater(() -> {
+                            try {
+                                setForm(resultSet);
+                                showOrderParts();
+                            } catch (SQLException e) {
+                                throw new RuntimeException(e);
+                            }
+                        });
+                    }
+                    return true;
+                }).get();
+            } catch (InterruptedException | ExecutionException e) {
+                throw new RuntimeException(e);
             }
-        }
-        return new HeadquarterView(-100,"");
+        }).start();
     }
 
+
+    public void setForm(ResultSet resultSet) throws SQLException {
+        orderLabel.setText(resultSet.getString("id_job_order"));
+        nameLabel.setText("   " + resultSet.getString("person_name"));
+        ccLabel.setText("   " + resultSet.getString("cc"));
+        cellphoneLabel.setText("   " + resultSet.getString("cellphone"));
+        headquarterLabel.setText("   " + resultSet.getString("headquarter_name"));
+        creationDateLabel.setText("   " + resultSet.getDate("created_at").toLocalDate().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)));
+        dueDateLabel.setText("   " + resultSet.getDate("due_date").toLocalDate().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)));
+        priceLabel.setText("   " + resultSet.getDouble("price"));
+        statusLabel.setText("   " + resultSet.getString("status"));
+    }
+
+    /**
+     * showParts: void -> void
+     * Purpose: fills the order parts table.
+     */
+    public void showOrderParts() {
+        new Thread(() -> {
+            CompletableFuture<Map<Boolean, ResultSet>> partsCall = CompletableFuture.supplyAsync(() ->
+                    orderEndpoint.getOrderParts(idOrder));
+            try {
+                partsCall.thenApply((response) -> {
+                    if (response.containsKey(true)) {
+                        ResultSet resultSet = response.get(true);
+                        try {
+                            setOrderPartsData(resultSet);
+                        } catch (SQLException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                    return true;
+                }).get();
+            } catch (InterruptedException | ExecutionException e) {
+                throw new RuntimeException(e);
+            }
+        }).start();
+    }
+
+    public void setOrderPartsData(ResultSet resultSet) throws SQLException {
+        while (resultSet.next()) {
+            PartRowView orderPartRow = new PartRowView(resultSet.getString("name"),
+                    new BigDecimal(String.valueOf(resultSet.getDouble("price"))).toPlainString(),
+                    "", resultSet.getInt("quantity"),
+                    resultSet.getInt("id_part"));
+
+            //Add the data of every vehicle to the array
+            orderPartsRowViewList.add(orderPartRow);
+        }
+
+        colNamePartS.setCellValueFactory(new PropertyValueFactory<>("name"));
+        colPricePartS.setCellValueFactory(new PropertyValueFactory<>("price"));
+        colQuantityPartS.setCellValueFactory(new PropertyValueFactory<>("quantity"));
+        orderSummaryTableview.setItems(FXCollections.observableArrayList(orderPartsRowViewList));
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         dashboardController = MainController.getDashboardController();
-        statusCombo.setItems(FXCollections.observableArrayList("Asignado", "En proceso", "Realizado"));
     }
 }

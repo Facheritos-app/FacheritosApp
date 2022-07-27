@@ -1,4 +1,5 @@
 package facheritosfrontendapp.controller.order;
+
 import backend.endpoints.orderEndpoint.OrderEndpoint;
 import facheritosfrontendapp.controller.DashboardController;
 import facheritosfrontendapp.controller.MainController;
@@ -32,12 +33,15 @@ public class OrderController implements Initializable {
 
     private ArrayList<OrderRowView> orderRowsArray;
 
-    //Customer tab components
+    //Table components
     @FXML
     private TableView orderTableView;
 
     @FXML
     private TableColumn<OrderRowView, String> colId;
+
+    @FXML
+    private TableColumn<OrderRowView, String> colWorker;
 
     @FXML
     private TableColumn<OrderRowView, String> colSeat;
@@ -55,9 +59,9 @@ public class OrderController implements Initializable {
     private TableColumn<OrderRowView, VBox> colOptions;
 
 
-    public OrderController(){
+    public OrderController() {
         orderEndpoint = new OrderEndpoint();
-        orderRowsArray= new ArrayList<>();
+        orderRowsArray = new ArrayList<>();
         orderSingleViewController = new OrderSingleViewController();
     }
 
@@ -75,7 +79,7 @@ public class OrderController implements Initializable {
      * showOrders: void -> void
      * Purpose: shows the orders in the tableview.
      */
-    public void showOrders(){
+    public void showOrders() {
 
         new Thread(() -> {
             //Async call to the DB
@@ -83,7 +87,7 @@ public class OrderController implements Initializable {
 
             try {
                 customersCall.thenApply((response) -> {
-                    if(response.containsKey(true)){
+                    if (response.containsKey(true)) {
                         ResultSet resultSet = response.get(true);
                         try {
                             setOrdersData(resultSet);
@@ -105,18 +109,21 @@ public class OrderController implements Initializable {
      */
     public void setOrdersData(ResultSet resultSet) throws SQLException {
         //As long as there are records left to show
-        while(resultSet.next()){
-            OrderRowView orderRow = new OrderRowView(resultSet.getInt("id_job_order"), resultSet.getString("seat"), resultSet.getString("cc"),
-                    resultSet.getDate("due_date"), resultSet.getString("status"));
+        while (resultSet.next()) {
+            OrderRowView orderRow = new OrderRowView(resultSet.getInt("id_job_order"),
+                    resultSet.getString("worker_name"), resultSet.getString("seat"),
+                    resultSet.getString("cc"), resultSet.getDate("due_date"),
+                    resultSet.getString("status"));
             orderRowsArray.add(orderRow);
         }
 
         //Set the handle events for the labels
-        for(int i = 0; i < orderRowsArray.size(); i++){
-            orderRowsArray.get(i).getOptionsLabel().setOnMouseClicked(this::handleOptionLabel);
+        for (OrderRowView orderRowView : orderRowsArray) {
+            orderRowView.getOptionsLabel().setOnMouseClicked(this::handleOptionLabel);
         }
 
         colId.setCellValueFactory(new PropertyValueFactory<>("idOrder"));
+        colWorker.setCellValueFactory(new PropertyValueFactory<>("workerName"));
         colSeat.setCellValueFactory(new PropertyValueFactory<>("seat"));
         colCustomerId.setCellValueFactory(new PropertyValueFactory<>("idCustomer"));
         colDueDate.setCellValueFactory(new PropertyValueFactory<>("dueDate"));
@@ -132,11 +139,11 @@ public class OrderController implements Initializable {
      * Purpose: Listens to the events of both the view, edit and delete label.
      */
     private void handleOptionLabel(MouseEvent mouseEvent) {
-        for(int i = 0; i < orderRowsArray.size(); i++){
-            if(mouseEvent.getSource() == orderRowsArray.get(i).getOptionsLabel()){
+        for (OrderRowView orderRowView : orderRowsArray) {
+            if (mouseEvent.getSource() == orderRowView.getOptionsLabel()) {
                 try {
-                    orderSingleViewController = (OrderSingleViewController) dashboardController.changeContent("orders/ordersSingleView");
-                    orderSingleViewController.showForm(orderRowsArray.get(i).getIdOrder());
+                    orderSingleViewController = (OrderSingleViewController) dashboardController.changeContent("orders/ordersSingleView", true);
+                    orderSingleViewController.showForm(orderRowView.getIdOrder());
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }

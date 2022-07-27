@@ -130,8 +130,6 @@ public class EditCustomerController implements Initializable {
         Optional<ButtonType> clickedButton = dialogPane.getClickedButton();
         if (clickedButton.get() == YES) {
             whereToGoBack(backTo);
-        } else {
-            System.out.println("No");
         }
     }
 
@@ -156,8 +154,6 @@ public class EditCustomerController implements Initializable {
                 } catch (Exception e) {
                     throw new RuntimeException(e);
                 }
-            } else {
-                System.out.println("No");
             }
         }
     }

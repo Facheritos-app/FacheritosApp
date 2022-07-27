@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<ScrollPane style="-fx-background-color: #FFFFFF;" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="facheritosfrontendapp.controller.order.OrderEditController">
+    <content>
+        <AnchorPane cache="true" focusTraversable="true" prefHeight="600.0" prefWidth="950.0" style="-fx-background-color: #FFFFFF;">
+            <children>
+                <Label layoutX="622.0" layoutY="471.0" prefHeight="32.0" prefWidth="273.0" style="-fx-background-color: #1F1F1F; -fx-background-radius: 10;" styleClass="poppins" stylesheets="@../style.css" textFill="#1f1f1f">
+                    <font>
+                        <Font name="Poppins Regular" size="12.0" />
+                    </font>
+                </Label>
+                <TextField editable="false" layoutX="622.0" layoutY="403.0" prefHeight="56.0" prefWidth="273.0" style="-fx-background-color: F4F4F4; -fx-background-radius: 10; -fx-border-radius: 10;" stylesheets="@../style.css">
+                    <font>
+                        <Font name="Poppins Regular" size="12.0" />
+                    </font>
+                    <cursor>
+                        <Cursor fx:constant="DEFAULT" />
+                    </cursor>
+                </TextField>
+                <TableView fx:id="orderSummaryTableview" cache="true" layoutX="622.0" layoutY="110.0" pickOnBounds="false" prefHeight="310.0" prefWidth="273.0" style="-fx-font-family: Poppins; -fx-font-size: 12; -fx-background-color: F4F4F4; -fx-background-radius: 10; -fx-border-radius: 10;" stylesheets="@../style.css">
+                    <columns>
+                        <TableColumn fx:id="colNamePartS" editable="false" prefWidth="115.0" sortable="false" style="-fx-background-color: F4F4F4; -fx-text-fill: black;" text="Nombre" />
+                        <TableColumn fx:id="colPricePartS" editable="false" prefWidth="84.0" style="-fx-background-color: F4F4F4; -fx-text-fill: black;" text="Precio" />
+                        <TableColumn fx:id="colQuantityPartS" editable="false" prefWidth="72.0" style="-fx-background-color: F4F4F4; -fx-text-fill: black;" text="Cantidad" />
+                    </columns>
+                </TableView>
+                <Label layoutX="48.0" layoutY="127.0" prefHeight="25.0" prefWidth="83.0" styleClass="poppins" stylesheets="@../style.css" text="Cliente:" textFill="#1f1f1f">
+                    <font>
+                        <Font name="Poppins Bold" size="14.0" />
+                    </font>
+                </Label>
+                <Label layoutX="48.0" layoutY="174.0" prefHeight="25.0" prefWidth="65.0" styleClass="poppins" stylesheets="@../style.css" text="Cédula:" textFill="#1f1f1f">
+                    <font>
+                        <Font name="Poppins Bold" size="14.0" />
+                    </font>
+                </Label>
+                <Label layoutX="48.0" layoutY="453.0" prefHeight="25.0" prefWidth="182.0" styleClass="poppins" stylesheets="@../style.css" text="Fecha de entrega:" textFill="#1f1f1f">
+                    <font>
+                        <Font name="Poppins Bold" size="14.0" />
+                    </font>
+                </Label>
+                <Label layoutX="48.0" layoutY="359.0" prefHeight="25.0" prefWidth="65.0" styleClass="poppins" stylesheets="@../style.css" text="Estado:" textFill="#1f1f1f">
+                    <font>
+                        <Font name="Poppins Bold" size="14.0" />
+                    </font>
+                </Label>
+                <Label layoutX="48.0" layoutY="406.0" prefHeight="25.0" prefWidth="62.0" styleClass="poppins" stylesheets="@../style.css" text="Sede:" textFill="#1f1f1f">
+                    <font>
+                        <Font name="Poppins Bold" size="14.0" />
+                    </font>
+                </Label>
+                <Label layoutX="48.0" layoutY="287.0" prefHeight="25.0" prefWidth="150.0" styleClass="poppins" stylesheets="@../style.css" text="Fecha de creación:" textFill="#1f1f1f">
+                    <font>
+                        <Font name="Poppins Bold" size="14.0" />
+                    </font>
+                </Label>
+                <Label layoutX="323.0" layoutY="85.0" prefHeight="25.0" prefWidth="90.0" styleClass="poppins" stylesheets="@../style.css" text="Repuestos:" textFill="#1f1f1f">
+                    <font>
+                        <Font name="Poppins Bold" size="14.0" />
+                    </font>
+                </Label>
+                <TextField fx:id="ccField" layoutX="48.0" layoutY="199.0" prefHeight="25.0" prefWidth="156.0" style="-fx-background-color: F4F4F4; -fx-background-radius: 10;" stylesheets="@../style.css" text=" Cargando...">
+                    <font>
+                        <Font name="Poppins Regular" size="12.0" />
+                    </font>
+                </TextField>
+                <Label layoutX="48.0" layoutY="71.0" prefHeight="52.0" prefWidth="182.0" styleClass="poppins" stylesheets="@../style.css" text="Orden No." textFill="#1f1f1f">
+                    <font>
+                        <Font name="Poppins Bold" size="36.0" />
+                    </font>
+                </Label>
+                <Button fx:id="cancelButton" alignment="CENTER" layoutX="687.0" layoutY="534.0" mnemonicParsing="false" onAction="#cancelAction" prefHeight="32.0" prefWidth="98.0" styleClass="red-button" stylesheets="@../style.css" text="Cancelar" textFill="WHITE">
+                    <font>
+                        <Font name="Poppins Bold" size="12.0" />
+                    </font>
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                </Button>
+                <Button fx:id="saveButton" alignment="CENTER" layoutX="797.0" layoutY="534.0" mnemonicParsing="false" onAction="#saveAction" prefHeight="32.0" prefWidth="98.0" styleClass="blue-button" stylesheets="@../style.css" text="Guardar" textFill="WHITE">
+                    <font>
+                        <Font name="Poppins Bold" size="12.0" />
+                    </font>
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                </Button>
+                <ComboBox fx:id="statusCombo" layoutX="118.0" layoutY="359.0" prefHeight="25.0" prefWidth="154.0" promptText=" Cargando..." style="-fx-background-color: F4F4F4; -fx-background-radius: 10;" styleClass="input-text" stylesheets="@../style.css" visibleRowCount="3">
+                    <opaqueInsets>
+                        <Insets />
+                    </opaqueInsets>
+                </ComboBox>
+                <DatePicker fx:id="dueDatePicker" editable="false" layoutX="48.0" layoutY="478.0" prefHeight="25.0" prefWidth="224.0" promptText="   Cargando..." style="-fx-font-size: 12; -fx-font-family: Poppins;" stylesheets="@../style.css" />
+                <Separator orientation="VERTICAL" prefHeight="516.0" prefWidth="8.0" />
+                <Label fx:id="orderLabel" layoutX="237.0" layoutY="71.0" prefHeight="52.0" styleClass="poppins" stylesheets="@../style.css" textFill="#1f1f1f">
+                    <font>
+                        <Font name="Poppins Bold" size="36.0" />
+                    </font>
+                </Label>
+                <Button alignment="CENTER" layoutX="209.0" layoutY="199.0" mnemonicParsing="false" onAction="#searchButtonAction" prefHeight="25.0" prefWidth="63.0" styleClass="blue-button" stylesheets="@../style.css" text="Buscar" textFill="WHITE">
+                    <font>
+                        <Font name="Poppins Bold" size="12.0" />
+                    </font>
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                </Button>
+                <Label fx:id="ccLabel" layoutX="117.0" layoutY="179.0" prefHeight="17.0" prefWidth="156.0" styleClass="poppins" stylesheets="@../style.css" textFill="#1f1f1f">
+                    <font>
+                        <Font name="Poppins Regular" size="12.0" />
+                    </font>
+                </Label>
+                <Label fx:id="priceLabel" alignment="CENTER_RIGHT" layoutX="391.0" layoutY="433.0" prefHeight="17.0" prefWidth="204.0" styleClass="poppins" stylesheets="@../style.css" textFill="#1f1f1f">
+                    <font>
+                        <Font name="Poppins Regular" size="12.0" />
+                    </font>
+                </Label>
+                <Label fx:id="statusLabel" layoutX="48.0" layoutY="384.0" prefHeight="1.0" styleClass="poppins" stylesheets="@../style.css" textFill="#1f1f1f">
+                    <font>
+                        <Font name="Poppins Regular" size="12.0" />
+                    </font>
+                </Label>
+                <Label fx:id="dueDateLabel" layoutX="48.0" layoutY="509.0" prefHeight="17.0" styleClass="poppins" stylesheets="@../style.css" textFill="#1f1f1f">
+                    <font>
+                        <Font name="Poppins Regular" size="12.0" />
+                    </font>
+                </Label>
+                <Label fx:id="customerLabel" layoutX="141.0" layoutY="131.0" prefHeight="17.0" styleClass="poppins" stylesheets="@../style.css" textFill="#1f1f1f">
+                    <font>
+                        <Font name="Poppins Regular" size="12.0" />
+                    </font>
+                </Label>
+                <Label layoutX="621.0" layoutY="85.0" prefHeight="25.0" prefWidth="132.0" styleClass="poppins" stylesheets="@../style.css" text="Resumen orden:" textFill="#1f1f1f">
+                    <font>
+                        <Font name="Poppins Bold" size="14.0" />
+                    </font>
+                </Label>
+                <Button alignment="CENTER" layoutX="522.0" layoutY="364.0" mnemonicParsing="false" onAction="#addClicked" prefHeight="25.0" prefWidth="74.0" styleClass="blue-button" stylesheets="@../style.css" text="Añadir +" textFill="WHITE">
+                    <font>
+                        <Font name="Poppins Bold" size="12.0" />
+                    </font>
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                </Button>
+                <Button alignment="CENTER" layoutX="436.0" layoutY="364.0" mnemonicParsing="false" onAction="#removeClicked" prefHeight="25.0" prefWidth="74.0" styleClass="red-button" stylesheets="@../style.css" text="Quitar -" textFill="WHITE">
+                    <font>
+                        <Font name="Poppins Bold" size="12.0" />
+                    </font>
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                </Button>
+                <Label layoutX="629.0" layoutY="479.0" prefHeight="1.0" styleClass="poppins" stylesheets="@../style.css" text="Total:" textFill="WHITE">
+                    <font>
+                        <Font name="Poppins Bold" size="12.0" />
+                    </font>
+                </Label>
+                <Label layoutX="730.0" layoutY="479.0" prefHeight="1.0" styleClass="poppins" stylesheets="@../style.css" text="\$" textFill="WHITE">
+                    <font>
+                        <Font name="Poppins Bold" size="12.0" />
+                    </font>
+                </Label>
+                <Label layoutX="628.0" layoutY="434.0" prefHeight="1.0" styleClass="poppins" stylesheets="@../style.css" text="Precio servicio:" textFill="#1f1f1f">
+                    <font>
+                        <Font name="Poppins Regular" size="12.0" />
+                    </font>
+                </Label>
+                <Label layoutX="729.0" layoutY="434.0" prefHeight="1.0" styleClass="poppins" stylesheets="@../style.css" text="\$" textFill="#1f1f1f">
+                    <font>
+                        <Font name="Poppins Regular" size="12.0" />
+                    </font>
+                </Label>
+                <TextField fx:id="priceField" alignment="CENTER" layoutX="740.0" layoutY="428.0" onKeyTyped="#priceAction" prefHeight="28.0" prefWidth="80.0" style="-fx-background-color: transparent;" stylesheets="@../style.css">
+                    <font>
+                        <Font name="Poppins Regular" size="12.0" />
+                    </font>
+                </TextField>
+                <TableView fx:id="partTableview" cache="true" layoutX="323.0" layoutY="110.0" pickOnBounds="false" prefHeight="243.0" prefWidth="273.0" style="-fx-font-family: Poppins; -fx-font-size: 12; -fx-background-color: F4F4F4; -fx-background-radius: 10; -fx-border-radius: 10;" stylesheets="@../style.css">
+                    <columns>
+                        <TableColumn fx:id="colNamePart" prefWidth="115.0" sortable="false" style="-fx-background-color: F4F4F4; -fx-text-fill: black;" text="Nombre" />
+                        <TableColumn fx:id="colPricePart" prefWidth="84.0" style="-fx-background-color: F4F4F4; -fx-text-fill: black;" text="Precio" />
+                        <TableColumn fx:id="colQuantityPart" prefWidth="72.0" style="-fx-background-color: F4F4F4; -fx-text-fill: black;" text="Cantidad" />
+                    </columns>
+                </TableView>
+            <Label layoutX="48.0" layoutY="221.0" prefHeight="25.0" prefWidth="66.0" styleClass="poppins" stylesheets="@../style.css" text="Celular:" textFill="#1f1f1f">
+               <font>
+                  <Font name="Poppins Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="cellphoneLabel" layoutX="48.0" layoutY="246.0" prefHeight="25.0" prefWidth="156.0" style="-fx-background-color: F4F4F4; -fx-background-radius: 10;" stylesheets="@../style.css" text="   Cargando..." textFill="#1f1f1f">
+               <font>
+                  <Font name="Poppins Regular" size="12.0" />
+               </font>
+            </Label>
+            <Label fx:id="nameLabel" layoutX="48.0" layoutY="152.0" prefHeight="25.0" prefWidth="224.0" style="-fx-background-color: F4F4F4; -fx-background-radius: 10;" stylesheets="@../style.css" text="   Cargando..." textFill="#1f1f1f">
+               <font>
+                  <Font name="Poppins Regular" size="12.0" />
+               </font>
+            </Label>
+            <Label fx:id="creationDateLabel" layoutX="48.0" layoutY="312.0" prefHeight="25.0" prefWidth="224.0" style="-fx-background-color: F4F4F4; -fx-background-radius: 10;" stylesheets="@../style.css" text="   Cargando..." textFill="#1f1f1f">
+               <font>
+                  <Font name="Poppins Regular" size="12.0" />
+               </font>
+            </Label>
+            <Label fx:id="totalPriceLabel" alignment="CENTER" layoutX="740.0" layoutY="473.0" prefHeight="28.0" prefWidth="80.0" styleClass="poppins" stylesheets="@../style.css" text="   Cargando..." textFill="WHITE">
+               <font>
+                  <Font name="Poppins Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label fx:id="quantityLabel" alignment="CENTER" layoutX="820.0" layoutY="473.0" prefHeight="28.0" prefWidth="73.0" styleClass="poppins" stylesheets="@../style.css" textFill="WHITE">
+               <font>
+                  <Font name="Poppins Bold" size="12.0" />
+               </font>
+            </Label>
+            <ImageView fx:id="backToOrders" fitHeight="36.0" fitWidth="36.0" layoutX="48.0" layoutY="22.0" onMouseClicked="#backToOrdersClicked" pickOnBounds="true" preserveRatio="true" styleClass="back-arrow">
+               <image>
+                  <Image url="@../../icons/back-arrow.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <Label fx:id="partLabel" alignment="CENTER_RIGHT" layoutX="413.0" layoutY="89.0" prefHeight="17.0" prefWidth="181.0" styleClass="poppins" stylesheets="@../style.css" textFill="RED">
+               <font>
+                  <Font name="Poppins Regular" size="12.0" />
+               </font>
+            </Label>
+            <Label fx:id="orderPartLabel" alignment="CENTER_RIGHT" layoutX="742.0" layoutY="89.0" prefHeight="17.0" prefWidth="152.0" styleClass="poppins" stylesheets="@../style.css" textFill="RED">
+               <font>
+                  <Font name="Poppins Regular" size="12.0" />
+               </font>
+            </Label>
+            <Label fx:id="headquarterLabel" layoutX="118.0" layoutY="406.0" prefHeight="25.0" prefWidth="154.0" style="-fx-background-color: F4F4F4; -fx-background-radius: 10;" stylesheets="@../style.css" text="   Cargando..." textFill="#1f1f1f">
+               <font>
+                  <Font name="Poppins Regular" size="12.0" />
+               </font>
+            </Label>
+            </children>
+        </AnchorPane>
+    </content>
+</ScrollPane>
