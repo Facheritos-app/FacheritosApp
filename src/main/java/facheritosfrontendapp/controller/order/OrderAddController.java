@@ -47,11 +47,9 @@ public class OrderAddController implements Initializable {
 
     private DashboardController dashboardController;
 
-    private OrderSingleViewController orderSingleViewController;
-
     private Integer idHeadquarter;
 
-    private String customerCc;
+    private String customerCc = "";
 
     //Here are all the @FXML components
     //Parts table
@@ -189,8 +187,72 @@ public class OrderAddController implements Initializable {
      */
     @FXML
     protected void saveAction() throws IOException, NullPointerException {
-        /*Show dialogPane to confirm*/
+        if (customerCc.isBlank()) {
+            searchButtonAction();
+        }
+        if (allValidations() && !customerCc.isBlank()) {
+            ccField.setText(customerCc);
+            OrderDTO orderDTO = createOrder();
+            MyDialogPane dialogPane = new MyDialogPane("confirmationSave");
+            Optional<ButtonType> clickedButton = dialogPane.getClickedButton();
 
+            if (clickedButton.get() == YES) {
+                saveButton.setDisable(true);
+                cancelButton.setDisable(true);
+
+                try {
+                    Alert wait = new Alert(Alert.AlertType.CONFIRMATION, "", OK);
+                    wait.setHeaderText("Creando orden, por favor espere");
+                    wait.show();
+
+                    new Thread(() -> {
+
+                        try {
+                            Map<Boolean, ResultSet> response = orderEndpoint.createOrder(orderDTO,
+                                    DashboardController.getCurrentWorker().getId_worker(), idHeadquarter);
+
+                            if (response.containsKey(true)) {
+                                ResultSet resultSet = response.get(true);
+                                try {
+
+                                    Integer idOrder = resultSet.getInt("id_job_order");
+
+                                    //Update each part of the inventory
+                                    for (PartRowView partRow : partRowViewList) {
+                                        orderEndpoint.updatePart(partRow.getIdPart(), idHeadquarter, partRow.getQuantity());
+                                    }
+
+                                    //Add the parts to the order
+                                    for (PartRowView orderPartRow : orderPartsRowViewList) {
+                                        orderEndpoint.addPart(orderPartRow.getIdPart(), idOrder, orderPartRow.getQuantity());
+                                    }
+
+                                    Platform.runLater(() -> {
+                                        Alert success = new Alert(Alert.AlertType.CONFIRMATION, "Orden creada exitosamente", OK);
+                                        success.show();
+                                        try {
+                                            orderController = (OrderController) dashboardController.changeContent("orders/orders");
+                                            orderController.showOrders();
+                                        } catch (IOException e) {
+                                            throw new RuntimeException(e);
+                                        }
+                                    });
+                                } catch (SQLException e) {
+                                    throw new RuntimeException(e);
+                                }
+                            }
+                        } catch (Exception e) {
+                            throw new RuntimeException(e);
+                        }
+                    }).start();
+
+                } catch (Exception e) {
+                    Alert fail = new Alert(Alert.AlertType.ERROR, "Ha habido un problema, por favor intente nuevamente", OK);
+                    fail.show();
+                    throw new RuntimeException(e);
+                }
+            }
+        }
     }
 
     private OrderDTO createOrder() {
@@ -311,7 +373,7 @@ public class OrderAddController implements Initializable {
             totalPrice += Double.parseDouble(priceField.getText());
         }
 
-        totalPriceLabel.setText("" + totalPrice);
+        totalPriceLabel.setText("" + new BigDecimal(totalPrice));
         quantityLabel.setText("" + quantity);
     }
 
