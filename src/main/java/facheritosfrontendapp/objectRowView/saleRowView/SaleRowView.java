@@ -112,9 +112,9 @@ public class SaleRowView {
     }
 
     public void setOptions() {
-        URL iconEditURL = Main.class.getResource("/facheritosfrontendapp/icons/icon-edit.png");
+        URL iconEditURL = Main.class.getResource("/facheritosfrontendapp/icons/icon-view.png");
         Image editImage = new Image(String.valueOf(iconEditURL));
-        HBox hboxEdit = new HBox(new ImageView(editImage), new Label("Opciones"));
+        HBox hboxEdit = new HBox(new ImageView(editImage), new Label("Ver más"));
         hboxEdit.setAlignment(Pos.CENTER);
         options.getChildren().add(hboxEdit);
         options.setAlignment(Pos.CENTER);

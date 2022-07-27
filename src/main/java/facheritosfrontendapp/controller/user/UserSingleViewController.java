@@ -132,17 +132,18 @@ public class UserSingleViewController implements Initializable {
     protected void editAction() {
         editUserLabel.setVisible(true);
 
-        nameField.setDisable(false);
-        lastNameField.setDisable(false);
-        roleCombo.setDisable(false);
-        headquarterCombo.setDisable(false);
-        phoneField.setDisable(false);
-        emailField.setDisable(false);
+        nameField.setEditable(true);
+        lastNameField.setEditable(true);
+        roleCombo.setEditable(true);
+        headquarterCombo.setEditable(true);
+        phoneField.setEditable(true);
+        emailField.setEditable(true);
+        birthdayPicker.setEditable(true);
         birthdayPicker.setDisable(false);
-        idField.setDisable(false);
-        statusCombo.setDisable(false);
-        salaryField.setDisable(false);
-        cityCombo.setDisable(false);
+        idField.setEditable(true);
+        statusCombo.setEditable(true);
+        salaryField.setEditable(true);
+        cityCombo.setEditable(true);
 
         editUserButton.setVisible(false);
 

@@ -73,6 +73,7 @@ public class SaleController implements Initializable {
 
     private ArrayList<SaleRowView> saleRowsArray;
 
+
     public SaleController()  {
         saleEndpoint = new SaleEndpoint();
         saleRowsArray = new ArrayList<>();
@@ -148,6 +149,10 @@ public class SaleController implements Initializable {
         }).start();
     }
 
+    @FXML
+    protected void backArrowClicked() throws IOException {
+       dashboardController.changeContent("sales/chooseOption");
+    }
     public void setDataTable(ResultSet resultSet) throws SQLException, FileNotFoundException {
 
        /* (Integer idSale, String nameSeller, String nameClient, Date dateSeller, String paymentMethod,String headquarter,

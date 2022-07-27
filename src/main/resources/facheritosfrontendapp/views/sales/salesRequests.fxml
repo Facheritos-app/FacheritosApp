@@ -22,7 +22,7 @@
                   <Insets left="20.0" top="20.0" />
                </VBox.margin>
             </Label>
-            <TableView fx:id="saleRequestTableview" prefHeight="197.0" prefWidth="672.0" styleClass="table-views" stylesheets="@../style.css">
+            <TableView fx:id="saleRequestTableview" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="197.0" prefWidth="672.0" styleClass="table-views" stylesheets="@../style.css">
                <columns>
                   <TableColumn fx:id="saleNumberCol" prefWidth="90.0" text="No. de venta" />
                   <TableColumn fx:id="sellerCol" prefWidth="90.0" text="Vendedor" />
@@ -35,6 +35,9 @@
                <VBox.margin>
                   <Insets left="20.0" right="20.0" top="30.0" />
                </VBox.margin>
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
             </TableView>
          </children>
       </VBox>

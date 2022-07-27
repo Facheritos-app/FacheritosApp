@@ -125,6 +125,11 @@ public class QuotationController implements Initializable {
        quotationAddController = (QuotationAddController) dashboardController.changeContent("quotations/quotationsAdd",true);
        quotationAddController.showInventory();
     }
+
+    @FXML
+    protected void backArrowClicked() throws IOException {
+        dashboardController.changeContent("sales/chooseOption");
+    }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         dashboardController = MainController.getDashboardController();

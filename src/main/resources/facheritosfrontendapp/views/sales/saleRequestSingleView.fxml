@@ -19,7 +19,7 @@
 
 <ScrollPane fx:id="scrollpane" prefHeight="620.0" prefWidth="700.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="facheritosfrontendapp.controller.sale.SaleRequestSingleViewController">
    <content>
-      <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="620.0" prefWidth="700.0" style="-fx-background-color: white;">
+      <GridPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="620.0" prefWidth="700.0" style="-fx-background-color: white;">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="392.8000122070313" minWidth="10.0" prefWidth="358.3999877929688" />
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="388.4000244140625" minWidth="10.0" prefWidth="341.20001220703125" />
