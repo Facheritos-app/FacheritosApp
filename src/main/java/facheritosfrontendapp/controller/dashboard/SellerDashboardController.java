@@ -127,7 +127,7 @@ public class SellerDashboardController implements Initializable {
         yearCustomersChoicebox.setItems(FXCollections.observableArrayList(years));
         idCombobox.setItems(FXCollections.observableArrayList("Cédula", "Nombre"));
         //Models chart
-        selectionModelsCombobox.setItems(FXCollections.observableArrayList("No. compras", "Valor de compra"));
+        selectionModelsCombobox.setItems(FXCollections.observableArrayList("No. de elementos vendidos", "Valor de elementos vendidos"));
         yearModelChoicebox.setItems(FXCollections.observableArrayList(years));
     }
     /**

@@ -2,6 +2,7 @@ package facheritosfrontendapp.controller.navbar;
 
 import facheritosfrontendapp.controller.DashboardController;
 import facheritosfrontendapp.controller.MainController;
+import facheritosfrontendapp.controller.dashboard.MechanicDashboardController;
 import facheritosfrontendapp.controller.inventory.InventoryController;
 import facheritosfrontendapp.controller.order.OrderController;
 import javafx.fxml.FXML;
@@ -17,9 +18,12 @@ public class MechanicNavbar implements Initializable {
 
     private InventoryController inventoryController;
 
+    private MechanicDashboardController mechanicDashboardController;
+
     @FXML
     public void homeClicked() throws IOException {
-        dashboardController.changeContent("home");
+        mechanicDashboardController = (MechanicDashboardController) dashboardController.changeContent("dashboard/mechanicDashboard", true);
+        mechanicDashboardController.showDashboard();
     }
 
     @FXML

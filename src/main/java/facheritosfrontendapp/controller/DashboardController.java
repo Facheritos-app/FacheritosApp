@@ -5,6 +5,7 @@ import backend.dto.personDTO.WorkerDTO;
 import backend.endpoints.loginEndpoint.LoginEndpoint;
 
 import facheritosfrontendapp.controller.dashboard.ManagerDashboardController;
+import facheritosfrontendapp.controller.dashboard.MechanicDashboardController;
 import facheritosfrontendapp.controller.dashboard.SellerDashboardController;
 import facheritosfrontendapp.controller.profile.MyProfileViewController;
 import facheritosfrontendapp.views.FxmlLoader;
@@ -57,6 +58,8 @@ public class DashboardController implements Initializable {
 
     private ManagerDashboardController managerDashboardController;
 
+    private MechanicDashboardController mechanicDashboardController;
+
     public DashboardController() {
         loginEndpoint = new LoginEndpoint();
     }
@@ -100,7 +103,7 @@ public class DashboardController implements Initializable {
                 throw new RuntimeException("Error de login");
             }
             return true;
-        }).get();//handle((result, ex) -> null != ex ? false : true).get();
+        }).handle((result, ex) -> null != ex ? false : true).get();
     }
 
     /**
@@ -200,7 +203,8 @@ public class DashboardController implements Initializable {
                 break;
             //Mechanic
             case 3:
-                this.changeContent("home");
+                mechanicDashboardController = (MechanicDashboardController) changeContent("dashboard/mechanicDashboard", true);
+                mechanicDashboardController.showDashboard();
                 break;
             default:
                 throw new RuntimeException("Wrong user type");
