@@ -71,7 +71,7 @@ public class OrderController implements Initializable {
     @FXML
     protected void addOrderAction() throws IOException {
         orderAddController = (OrderAddController) dashboardController.changeContent("orders/ordersAdd", true);
-       // orderAddController.showParts();
+        orderAddController.showParts(DashboardController.getCurrentWorker().getId_headquarter());
     }
 
     @Override

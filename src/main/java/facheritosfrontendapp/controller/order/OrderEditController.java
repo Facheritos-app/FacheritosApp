@@ -241,23 +241,6 @@ public class OrderEditController implements Initializable {
                         wait.show();
 
                         new Thread(() -> {
-                            boolean enough = true;
-
-                            //Check in the inventory for parts availability
-                            for (PartRowView orderPartRow : orderPartsRowViewList) {
-                                Integer checkQuantity = null;
-                                try {
-                                    checkQuantity = orderEndpoint.getPartQuantity(orderPartRow.getIdPart(), idHeadquarter);
-                                } catch (SQLException e) {
-                                    throw new RuntimeException(e);
-                                }
-                                if (orderPartRow.getQuantity() > checkQuantity) {
-                                    enough = false;
-                                    break;
-                                }
-                            }
-
-                            if (enough) {
 
                                 //Update oder data
                                 orderEndpoint.updateOrder(orderDTO);
@@ -286,16 +269,7 @@ public class OrderEditController implements Initializable {
                                     }
                                 });
 
-                            } else {
-                                Platform.runLater(() -> {
-                                    Alert fail = new Alert(Alert.AlertType.ERROR, "Ha habido un problema, por favor intente nuevamente", OK);
-                                    fail.show();
-                                    showParts(idHeadquarter);
-                                });
-                            }
-                        }).start();
-
-
+                            }).start();
                     } else {
                         orderEndpoint.updateOrder(orderDTO);
                         Alert success = new Alert(Alert.AlertType.CONFIRMATION, "Orden actualizada exitosamente", OK);

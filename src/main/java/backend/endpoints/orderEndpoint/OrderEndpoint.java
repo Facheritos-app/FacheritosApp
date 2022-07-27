@@ -2,6 +2,7 @@ package backend.endpoints.orderEndpoint;
 
 import backend.connectionBD.ConnectionBD;
 import backend.dto.orderDTO.OrderDTO;
+import backend.dto.saleDTO.SaleDTO;
 
 import java.sql.*;
 import java.util.HashMap;
@@ -247,6 +248,31 @@ public class OrderEndpoint {
             return 0;
         }
         return resultSet.getInt("quantity");
+    }
+
+    public Map<Boolean, ResultSet> createOrder(OrderDTO orderDTO, Integer idWorker, Integer idHeadquarter){
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        HashMap<Boolean, ResultSet> response = new HashMap<>();
+        try (Connection conn = ConnectionBD.connectDB().getConnection()) {
+            preparedStatement = conn.prepareStatement(
+                    "INSERT INTO job_order \n" +
+                            "VALUES(default, ?, ?, ?, ?, default, ?, ?) \n" +
+                            "returning id_job_order");
+            preparedStatement.setInt(1, idWorker);
+            preparedStatement.setInt(2, orderDTO.getId_customer());
+            preparedStatement.setInt(3, idHeadquarter);
+            preparedStatement.setInt(4, orderDTO.getId_status());
+            preparedStatement.setDate(5, orderDTO.getDue_date());
+            preparedStatement.setDouble(6, orderDTO.getPrice());
+            resultSet = preparedStatement.executeQuery();
+            resultSet.next();
+            response.put(true, resultSet);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            response.put(false, resultSet);
+        }
+        return response;
     }
 
 

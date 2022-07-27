@@ -172,12 +172,12 @@
                         <Font name="Poppins Bold" size="14.0" />
                     </font>
                 </Label>
-                <Label fx:id="cellphoneLabel" layoutX="48.0" layoutY="246.0" prefHeight="25.0" prefWidth="156.0" style="-fx-background-color: F4F4F4; -fx-background-radius: 10;" stylesheets="@../style.css" text="   Cargando..." textFill="#1f1f1f">
+                <Label fx:id="cellphoneLabel" layoutX="48.0" layoutY="246.0" prefHeight="25.0" prefWidth="156.0" style="-fx-background-color: F4F4F4; -fx-background-radius: 10;" stylesheets="@../style.css" textFill="#1f1f1f">
                     <font>
                         <Font name="Poppins Regular" size="12.0" />
                     </font>
                 </Label>
-                <Label fx:id="nameLabel" layoutX="48.0" layoutY="152.0" prefHeight="25.0" prefWidth="224.0" style="-fx-background-color: F4F4F4; -fx-background-radius: 10;" stylesheets="@../style.css" text="   Cargando..." textFill="#1f1f1f">
+                <Label fx:id="nameLabel" layoutX="48.0" layoutY="152.0" prefHeight="25.0" prefWidth="224.0" style="-fx-background-color: F4F4F4; -fx-background-radius: 10;" stylesheets="@../style.css" textFill="#1f1f1f">
                     <font>
                         <Font name="Poppins Regular" size="12.0" />
                     </font>
