@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<ScrollPane style="-fx-background-color: FFFFFF;" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="facheritosfrontendapp.controller.sale.SaleSingleViewController">
+<ScrollPane style="-fx-background-color: FFFFFF;" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="facheritosfrontendapp.controller.sale.SaleSingleViewController">
   <content>
     <AnchorPane focusTraversable="true" style="-fx-background-color: FFFFFF;">
          <children>
@@ -199,12 +199,6 @@
                   <Font name="System Bold" size="20.0" />
                </font>
             </Label>
-            <Button layoutX="373.0" layoutY="501.0" mnemonicParsing="false" stylesheets="@../style.css" text="Eliminar">
-               <styleClass>
-                  <String fx:value="red-button" />
-                  <String fx:value="select-button" />
-               </styleClass>
-            </Button>
             <Button layoutX="496.0" layoutY="501.0" mnemonicParsing="false" onMouseClicked="#editOnClicked" stylesheets="@../style.css" text="Editar">
                <styleClass>
                   <String fx:value="blue-button" />
