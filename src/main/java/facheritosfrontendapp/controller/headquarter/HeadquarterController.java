@@ -102,9 +102,7 @@ public class HeadquarterController implements Initializable {
                     throw new RuntimeException(e);
                 }
             }
-            if(mouseEvent.getSource() == headquarterRowsArray.get(i).getDeleteLabel()){
-                //Here we will load the component to delete a headquarter
-            }
+
         }
     }
 
@@ -158,7 +156,7 @@ public class HeadquarterController implements Initializable {
         //Set the handle events for the labels
         for(Integer i = 0; i < headquarterRowsArray.size(); i++){
             headquarterRowsArray.get(i).getEditLabel().setOnMouseClicked(this::handleOptionLabel);
-            headquarterRowsArray.get(i).getDeleteLabel().setOnMouseClicked(this::handleOptionLabel);
+
         }
 
         //Add every element from our array to the observable list array that will show on the table

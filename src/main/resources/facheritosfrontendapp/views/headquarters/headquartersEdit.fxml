@@ -33,13 +33,13 @@
             <Font name="Poppins Regular" size="14.0" />
          </font>
       </Label>
-      <TextField fx:id="cellp" layoutX="30.0" layoutY="200.0" prefHeight="19.0" prefWidth="246.0" promptText="ej. 3726289" styleClass="input-text" stylesheets="@../style.css" />
+      <TextField fx:id="cellp" layoutX="30.0" layoutY="200.0" prefHeight="36.0" prefWidth="273.0" promptText="ej. 3726289" styleClass="input-text" stylesheets="@../style.css" />
       <Label layoutX="30.0" layoutY="257.0" prefHeight="20.0" prefWidth="77.0" text="Ciudad:">
          <font>
             <Font name="Poppins Regular" size="14.0" />
          </font>
       </Label>
-      <ChoiceBox fx:id="city" layoutX="30.0" layoutY="285.0" prefHeight="13.0" prefWidth="246.0" style="-fx-background-color: D3D3D3; -fx-background-radius: 10; -fx-font-family: Poppins;" />
+      <ChoiceBox fx:id="city" layoutX="30.0" layoutY="285.0" prefHeight="36.0" prefWidth="273.0" style="-fx-background-color: D3D3D3; -fx-background-radius: 10; -fx-font-family: Poppins;" />
       <Button fx:id="cancelButton" layoutX="328.0" layoutY="336.0" mnemonicParsing="false" onMouseClicked="#cancelButtonClicked" prefHeight="36.0" prefWidth="120.0" stylesheets="@../style.css" text="Cancelar" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
@@ -69,7 +69,7 @@
             <Font name="Poppins Regular" size="14.0" />
          </font>
       </Label>
-      <TextField fx:id="eml" layoutX="333.0" layoutY="200.0" prefHeight="13.0" prefWidth="246.0" promptText="ej. sede5@gmail.com" styleClass="input-text" stylesheets="@../style.css" />
+      <TextField fx:id="eml" layoutX="332.0" layoutY="200.0" prefHeight="36.0" prefWidth="289.0" promptText="ej. sede5@gmail.com" styleClass="input-text" stylesheets="@../style.css" />
       <Label fx:id="nameLabel" layoutX="28.0" layoutY="155.0" prefHeight="21.0" prefWidth="152.0" />
       <Label fx:id="addressLabel" layoutX="328.0" layoutY="155.0" prefHeight="21.0" prefWidth="94.0" />
       <Label fx:id="cellphoneLabel" layoutX="30.0" layoutY="231.0" prefHeight="21.0" prefWidth="110.0" />

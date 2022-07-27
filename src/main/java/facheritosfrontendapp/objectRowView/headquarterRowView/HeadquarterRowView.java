@@ -119,16 +119,16 @@ public class HeadquarterRowView {
     }
 
     public void setOptions() {
-        URL iconDeleteURL = Main.class.getResource("/facheritosfrontendapp/icons/icon-delete.png");
+
         URL iconEditURL = Main.class.getResource("/facheritosfrontendapp/icons/icon-edit.png");
-        Image deleteImage = new Image(String.valueOf(iconDeleteURL));
+
         Image editImage = new Image(String.valueOf(iconEditURL));
         HBox hboxEdit = new HBox(new ImageView(editImage), new Label("Editar"));
-        HBox hboxDelete = new HBox(new ImageView(deleteImage), new Label("Eliminar"));
+
         hboxEdit.setAlignment(Pos.CENTER);
-        hboxDelete.setAlignment(Pos.CENTER);
+
         options.getChildren().add(hboxEdit);
-        options.getChildren().add(hboxDelete);
+       
         options.setAlignment(Pos.CENTER);
     }
 
