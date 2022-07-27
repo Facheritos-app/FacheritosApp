@@ -19,6 +19,7 @@ import javafx.scene.layout.VBox;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -156,7 +157,7 @@ public class SaleController implements Initializable {
             SaleRowView sale = new SaleRowView(resultSet.getInt("id_sale"), resultSet.getString("name_seller"),
                     resultSet.getString("name_client"), resultSet.getDate("sale_date"),
                     resultSet.getString("payment_method"), resultSet.getString("name"),
-                    resultSet.getDouble("price"));
+                    new BigDecimal(String.valueOf(resultSet.getDouble("price"))).toPlainString());
             saleRowsArray.add(sale); //Add every element to the array.
         }
 
