@@ -24,6 +24,7 @@ import javafx.scene.layout.VBox;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -478,7 +479,7 @@ public class AddSaleController implements Initializable {
 
 
                     SaleCarRowView car = new SaleCarRowView(selectedCar.getIdCar(), selectedCar.getModel(), selectedCar.getColor(),
-                            selectedCar.getPrice(),
+                            selectedCar.getPrice().toString(),
                             1,selectedCar.getDate());
 
                     saleCarRowsArray2.add(car);
@@ -489,7 +490,7 @@ public class AddSaleController implements Initializable {
                 }
 
                 cantidad.setText(String.valueOf(Integer.valueOf(cantidad.getText())+1));
-                priceLabel.setText(String.valueOf(Double.valueOf(priceLabel.getText())+selectedCar.getPrice()));
+                priceLabel.setText(new BigDecimal(Double.valueOf(priceLabel.getText())+Double.valueOf(selectedCar.getPrice())).toPlainString());
             }
         }
     }
@@ -552,7 +553,7 @@ public class AddSaleController implements Initializable {
 
             //carTableViewSell.getItems().remove(selectedCar);
             cantidad.setText(String.valueOf(Integer.valueOf(cantidad.getText())-1));
-            priceLabel.setText(String.valueOf(Double.valueOf(priceLabel.getText())-selectedCar.getPrice()));
+            priceLabel.setText(new BigDecimal(Double.valueOf(priceLabel.getText())-Double.valueOf(selectedCar.getPrice())).toPlainString());
 
 
         }
@@ -680,8 +681,10 @@ public class AddSaleController implements Initializable {
         while(resultSet.next()){
             //Create the object that will contain all the data shown on the table
             SaleCarRowView car = new SaleCarRowView(resultSet.getInt("id_car"), resultSet.getString("description"), resultSet.getString("color"),
-                    resultSet.getDouble("price"),
-                    resultSet.getInt("quantity"),resultSet.getString("assemble_year"));
+                    new BigDecimal
+                            (resultSet.getDouble("price")).toPlainString() ,
+                    resultSet.getInt("quantity")
+                    ,resultSet.getString("assemble_year"));
             saleCarRowsArray.add(car); //Add every element to the array.
         }
 
@@ -718,7 +721,7 @@ public class AddSaleController implements Initializable {
 
         saleTable.setId_payment_method(pay);
 
-        saleTable.setId_confirmation(1);
+        saleTable.setId_confirmation(2);
 
         saleTable.setPrice(Double.valueOf(priceLabel.getText()));
 

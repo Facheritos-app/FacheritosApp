@@ -1,24 +1,19 @@
 package facheritosfrontendapp.objectRowView.saleRowView;
 
-import facheritosfrontendapp.views.Main;
 import javafx.geometry.Pos;
 import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 import java.io.FileNotFoundException;
-import java.net.URL;
 
 public class SaleCarRowView {
     private Integer idCar;
 
     private String model;
 
-    private Double price;
+    private String price;
 
     private Integer quantity;
 
@@ -30,7 +25,7 @@ public class SaleCarRowView {
 
     private VBox options2;
 
-    public SaleCarRowView(Integer idCar, String model,String color, Double price , Integer quantity,String date ) throws FileNotFoundException {
+    public SaleCarRowView(Integer idCar, String model, String color, String price , Integer quantity, String date ) throws FileNotFoundException {
         this.idCar = idCar;
         this.model= model;
         this.color = color;
@@ -75,11 +70,11 @@ public class SaleCarRowView {
         this.model = model;
     }
 
-    public Double getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(String price) {
         this.price = price;
     }
 

@@ -27,6 +27,7 @@ import javafx.scene.layout.VBox;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.net.URL;
 import java.net.URLConnection;
 import java.sql.ResultSet;
@@ -295,12 +296,14 @@ public class SaleSingleViewController implements Initializable{
         while(resultSet.next()){
             //Create the object that will contain all the data shown on the table
             SaleSingleRowView car = new SaleSingleRowView(resultSet.getInt("id_car"), resultSet.getString("description"),
-                    resultSet.getString("color"), resultSet.getDouble("price"),
+                    resultSet.getString("color"), new BigDecimal
+                    (resultSet.getDouble("price")).toPlainString(),
                     resultSet.getInt("quantity"));
             saleSingleRowsArray.add(car); //Add every element to the array.
 
             SaleCarRowView car2 = new SaleCarRowView(resultSet.getInt("id_car"), resultSet.getString("description"), resultSet.getString("color"),
-                    resultSet.getDouble("price"),
+                    new BigDecimal
+                            (resultSet.getDouble("price")).toPlainString(),
                     resultSet.getInt("quantity"),resultSet.getString("assemble_year"));
             saleCarRowsArray.add(car2);
 

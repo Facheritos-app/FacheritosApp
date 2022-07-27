@@ -18,7 +18,7 @@ public class SaleSingleRowView {
 
     private String color;
 
-    private Double price;
+    private String price;
 
     private Integer quantity;
 
@@ -32,7 +32,7 @@ public class SaleSingleRowView {
         return (Label) getEditHBox().getChildren().get(1);
     }
 
-    public SaleSingleRowView(Integer idCar, String  model, String color, Double price, Integer quantity) throws FileNotFoundException {
+    public SaleSingleRowView(Integer idCar, String  model, String color, String price, Integer quantity) throws FileNotFoundException {
         this.idCar = idCar;
         this.model= model;
         this.color = color;
@@ -66,11 +66,11 @@ public class SaleSingleRowView {
         this.color = color;
     }
 
-    public Double getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(String price) {
         this.price = price;
     }
 

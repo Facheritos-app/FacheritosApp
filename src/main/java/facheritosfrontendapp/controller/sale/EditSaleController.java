@@ -27,6 +27,7 @@ import javafx.scene.layout.VBox;
 import javax.naming.SizeLimitExceededException;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -623,7 +624,7 @@ public class EditSaleController implements Initializable {
 
 
                         SaleCarRowView car = new SaleCarRowView(selectedCar.getIdCar(), selectedCar.getModel(), selectedCar.getColor(),
-                                selectedCar.getPrice(),
+                                selectedCar.getPrice().toString(),
                                 1,selectedCar.getDate());
 
                         saleCarRowsArray2.add(car);
@@ -635,7 +636,7 @@ public class EditSaleController implements Initializable {
 
                // carTableViewSell.getItems().add(selectedCar);
                 cantidad.setText(String.valueOf(Integer.valueOf(cantidad.getText())+1));
-                priceLabel.setText(String.valueOf(Double.valueOf(priceLabel.getText())+selectedCar.getPrice()));
+                priceLabel.setText(new BigDecimal(Double.valueOf(priceLabel.getText())+Double.valueOf(selectedCar.getPrice())).toPlainString());
             }
         }
     }
@@ -690,7 +691,7 @@ public class EditSaleController implements Initializable {
             //selectedCar.setQuantity(selectedCar.getQuantity()+1);
             //carTableViewSell.getItems().remove(selectedCar);
             cantidad.setText(String.valueOf(Integer.valueOf(cantidad.getText())-1));
-            priceLabel.setText(String.valueOf(Double.valueOf(priceLabel.getText())-selectedCar.getPrice()));
+            priceLabel.setText(new BigDecimal(Double.valueOf(priceLabel.getText())-Double.valueOf(selectedCar.getPrice())).toPlainString());
 
 
         }
@@ -754,7 +755,7 @@ public class EditSaleController implements Initializable {
 
         saleDTOnew.setId_payment_method(pay);
 
-        saleDTOnew.setId_confirmation(1);
+        saleDTOnew.setId_confirmation(2);
 
         saleDTOnew.setPrice(Double.valueOf(priceLabel.getText()));
 
@@ -872,13 +873,14 @@ public class EditSaleController implements Initializable {
         while(resultSet.next()){
             //Create the object that will contain all the data shown on the table
             SaleCarRowView car = new SaleCarRowView(resultSet.getInt("id_car"), resultSet.getString("description"), resultSet.getString("color"),
-                    resultSet.getDouble("price"),
+                    new BigDecimal
+                            (resultSet.getDouble("price")).toPlainString(),
                     resultSet.getInt("quantity"),resultSet.getString("assemble_year"));
             saleCarRowsArray2.add(car);
             Integer i=1;
             while(resultSet.getInt("quantity")>=i){
                  //Add every element to the array.
-                precio = precio + car.getPrice();
+                precio = precio + Double.valueOf(car.getPrice());
                     cantidad2 = cantidad2 +1;
                 i++;
             }
@@ -886,7 +888,7 @@ public class EditSaleController implements Initializable {
         }
         //cantidad.setText(String.valueOf(saleCarRowsArray2.size()));
         cantidad.setText(String.valueOf(cantidad2));
-        priceLabel.setText(String.valueOf(precio));
+        priceLabel.setText(new BigDecimal(precio).toPlainString());
 
 
 
@@ -912,7 +914,8 @@ public class EditSaleController implements Initializable {
         while(resultSet.next()){
             //Create the object that will contain all the data shown on the table
             SaleCarRowView car = new SaleCarRowView(resultSet.getInt("id_car"), resultSet.getString("description"), resultSet.getString("color"),
-                    resultSet.getDouble("price"),
+                    new BigDecimal
+                            (resultSet.getDouble("price")).toPlainString(),
                     resultSet.getInt("quantity"),resultSet.getString("assemble_year"));
             saleCarRowsArray.add(car); //Add every element to the array.
         }
