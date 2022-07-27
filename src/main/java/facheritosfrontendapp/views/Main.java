@@ -18,7 +18,7 @@ public class Main extends Application {
 
         //Scene Welcome Manager
         Scene scene = new Scene(fxmlLoader.load());
-        stage.getIcons().add(new Image("file:src/main/resources/facheritosfrontendapp/icons/welcome-manager.png"));
+        stage.getIcons().add(new Image("file:src/main/resources/facheritosfrontendapp/icons/ft logo2.png"));
         String css = this.getClass().getResource("style.css").toExternalForm();
         scene.getStylesheets().add(css);
         stage.setScene(scene);

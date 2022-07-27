@@ -67,9 +67,6 @@
          <image>
             <Image url="@../icons/ft%20little.png" />
          </image>
-         <cursor>
-            <Cursor fx:constant="NONE" />
-         </cursor>
       </ImageView>
    </children>
 </Pane>

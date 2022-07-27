@@ -57,7 +57,7 @@
    <top>
       <BorderPane prefHeight="50.0" prefWidth="842.0" style="-fx-background-color: #005296;" BorderPane.alignment="CENTER">
          <left>
-            <Label prefHeight="23.0" prefWidth="171.0" text="FT Corp." textFill="WHITE" BorderPane.alignment="CENTER">
+            <Label prefHeight="23.0" prefWidth="171.0" text=" FT Corp." textFill="WHITE" BorderPane.alignment="CENTER">
                <font>
                   <Font name="Poppins Medium" size="24.0" />
                </font>
@@ -67,7 +67,7 @@
                <graphic>
                   <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../icons/ft%20logo.png" />
+                        <Image url="@../icons/ft%20logo2.png" />
                      </image>
                   </ImageView>
                </graphic>
