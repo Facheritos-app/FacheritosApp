@@ -30,7 +30,7 @@
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label layoutX="367.0" layoutY="360.0" text="Cliente">
+            <Label layoutX="368.0" layoutY="360.0" text="Cliente">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
@@ -50,7 +50,7 @@
                   <TableColumn fx:id="colYear" minWidth="0.0" prefWidth="101.0" text="Ensamblaje" />
                </columns>
             </TableView>
-            <ImageView fitHeight="53.0" fitWidth="61.0" layoutX="14.0" layoutY="14.0" onMouseClicked="#backArrowClicked" pickOnBounds="true" preserveRatio="true" styleClass="back-arrow">
+            <ImageView fitHeight="53.0" fitWidth="61.0" layoutX="20.0" layoutY="14.0" onMouseClicked="#backArrowClicked" pickOnBounds="true" preserveRatio="true" styleClass="back-arrow" AnchorPane.topAnchor="14.0">
                <image>
                   <Image url="@../../icons/back-arrow.png" />
                </image>
@@ -112,14 +112,19 @@
             </Label>
             <TextField fx:id="emailSeller" layoutX="140.0" layoutY="486.0" prefHeight="36.0" prefWidth="207.0" promptText="cargando..." styleClass="input-text" stylesheets="@../style.css" />
             <TextField fx:id="numberSeller" layoutX="140.0" layoutY="534.0" prefHeight="36.0" prefWidth="209.0" promptText="cargando..." styleClass="input-text" stylesheets="@../style.css" />
-            <Button fx:id="searchClient" layoutX="395.0" layoutY="613.0" mnemonicParsing="false" onMouseClicked="#searchClientClicked" prefWidth="129.0" stylesheets="@../style.css" text="Buscar cliente">
+            <Button fx:id="searchClient" layoutX="399.0" layoutY="613.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#searchClientClicked" prefHeight="38.0" prefWidth="174.0" stylesheets="@../style.css" text="Buscar cliente">
                <styleClass>
                   <String fx:value="red-button" />
                   <String fx:value="select-button" />
+                  <String fx:value="button" />
                </styleClass>
             </Button>
-            <Button fx:id="editClient" layoutX="537.0" layoutY="612.0" mnemonicParsing="false" onMouseClicked="#editClientClicked" prefHeight="38.0" prefWidth="149.0" styleClass="red-button" stylesheets="@../style.css" text="Cambiar cliente" />
-            <Button fx:id="saveSale" layoutX="953.0" layoutY="650.0" mnemonicParsing="false" onMouseClicked="#saveClicked" prefHeight="31.0" prefWidth="137.0" styleClass="blue-button" stylesheets="@../style.css" text="Guardar venta" />
+            <Button fx:id="editClient" layoutX="537.0" layoutY="612.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#editClientClicked" prefHeight="38.0" prefWidth="112.0" stylesheets="@../style.css" text="Cambiar cliente">
+               <styleClass>
+                  <String fx:value="red-button" />
+                  <String fx:value="button" />
+               </styleClass></Button>
+            <Button fx:id="saveSale" layoutX="953.0" layoutY="650.0" mnemonicParsing="false" onMouseClicked="#saveClicked" prefHeight="38.0" prefWidth="137.0" styleClass="blue-button" stylesheets="@../style.css" text="Guardar venta" />
             <Label layoutX="706.0" layoutY="386.0" prefHeight="38.0" prefWidth="123.0" text="Cantidad:">
                <font>
                   <Font size="16.0" />
@@ -142,24 +147,21 @@
                   <String fx:value="select-button" />
                </styleClass>
             </Button>
-            <Button fx:id="addSell" layoutX="254.0" layoutY="59.0" mnemonicParsing="false" onMouseClicked="#addCarSell" styleClass="blue-button" stylesheets="@../style.css" text="Agregar a la venta" />
-            <Label layoutX="479.0" layoutY="56.0" prefHeight="38.0" prefWidth="164.0" text="Resumen venta:">
+            <Button fx:id="addSell" layoutX="265.0" layoutY="103.0" mnemonicParsing="false" onMouseClicked="#addCarSell" styleClass="blue-button" stylesheets="@../style.css" text="Agregar a la venta" />
+            <Label layoutX="483.0" layoutY="97.0" prefHeight="38.0" prefWidth="164.0" text="Resumen venta:">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>
             </Label>
-            <Button fx:id="searchClient1" layoutX="722.0" layoutY="75.0" mnemonicParsing="false" onMouseClicked="#deleteCarSeller" prefWidth="167.0" styleClass="red-button" stylesheets="@../style.css" text="Eliminar de la venta" />
-            <Label layoutX="73.0" layoutY="14.0" text="Crear venta">
+            <Button fx:id="searchClient1" layoutX="716.0" layoutY="104.0" mnemonicParsing="false" onMouseClicked="#deleteCarSeller" styleClass="red-button" stylesheets="@../style.css" text="Eliminar de la venta" />
+            <Label layoutX="17.0" layoutY="63.0" text="Crear venta">
                <font>
                   <Font name="System Bold" size="36.0" />
                </font>
             </Label>
-            <HBox alignment="CENTER" layoutX="706.0" layoutY="495.0" prefHeight="54.0" prefWidth="337.0" spacing="10.0" style="-fx-background-color: black;" styleClass="quotation-price-button" stylesheets="@../style.css">
+            <HBox alignment="CENTER" layoutX="706.0" layoutY="495.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="54.0" prefWidth="337.0" spacing="10.0" style="-fx-background-color: black;" styleClass="quotation-price-button" stylesheets="@../style.css" AnchorPane.rightAnchor="47.0">
                <children>
-                  <Label alignment="TOP_LEFT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="20.0" prefWidth="284.0" text="Precio:" textFill="WHITE">
-                     <padding>
-                        <Insets right="10.0" />
-                     </padding>
+                  <Label alignment="TOP_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="20.0" prefWidth="62.0" text="Precio:" textFill="WHITE">
                      <font>
                         <Font name="System Bold Italic" size="14.0" />
                      </font>
@@ -183,6 +185,9 @@
                      </font>
                   </Label>
                </children>
+               <padding>
+                  <Insets left="20.0" right="10.0" />
+               </padding>
             </HBox>
             <Label fx:id="noFound" layoutX="479.0" layoutY="571.0" prefHeight="38.0" prefWidth="243.0" textFill="RED">
                <font>
@@ -209,7 +214,7 @@
                   <Font name="System Bold" size="15.0" />
                </font>
             </Label>
-            <Label fx:id="noFoundTabla" alignment="CENTER" layoutX="483.0" layoutY="109.0" prefHeight="21.0" prefWidth="363.0" textFill="RED">
+            <Label fx:id="noFoundTabla" alignment="CENTER" layoutX="483.0" layoutY="109.0" prefHeight="21.0" textFill="RED">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
