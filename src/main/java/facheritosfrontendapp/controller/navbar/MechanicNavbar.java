@@ -23,7 +23,7 @@ public class MechanicNavbar implements Initializable {
     @FXML
     public void homeClicked() throws IOException {
         mechanicDashboardController = (MechanicDashboardController) dashboardController.changeContent("dashboard/mechanicDashboard", true);
-        //mechanicDashboardController.showDashboard();
+        mechanicDashboardController.showDashboard();
     }
 
     @FXML

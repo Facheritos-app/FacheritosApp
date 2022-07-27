@@ -29,7 +29,7 @@ public class MechanicDashboardEnpoint {
             }
             //Price of parts sold
             else if(selectionType == 1){
-                preparedStatement = conn.prepareStatement("SELECT DATE_PART('month', job_order.created_at) AS data, SUM(part.price.) AS total " +
+                preparedStatement = conn.prepareStatement("SELECT DATE_PART('month', job_order.created_at) AS data, SUM(part.price) AS total " +
                         " FROM job_order JOIN job_order_part USING(id_job_order) " +
                         " JOIN part USING(id_part)" +
                         " WHERE job_order_part.id_part = ? AND DATE_PART('year', job_order.created_at) = ?" +
