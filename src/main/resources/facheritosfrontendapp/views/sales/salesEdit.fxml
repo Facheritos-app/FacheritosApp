@@ -16,9 +16,9 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="517.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="facheritosfrontendapp.controller.sale.EditSaleController">
+<ScrollPane style="-fx-background-color: white;" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="facheritosfrontendapp.controller.sale.EditSaleController">
   <content>
-    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="517.0" prefWidth="700.0" style="-fx-background-color: FFFFF;">
+    <AnchorPane focusTraversable="true" style="-fx-background-color: FFFFF;">
          <children>
             <Label layoutX="706.0" layoutY="360.0" text="Venta:">
                <font>
