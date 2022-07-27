@@ -2,7 +2,6 @@ package backend.endpoints.orderEndpoint;
 
 import backend.connectionBD.ConnectionBD;
 import backend.dto.orderDTO.OrderDTO;
-import backend.dto.saleDTO.SaleDTO;
 
 import java.sql.*;
 import java.util.HashMap;
@@ -250,6 +249,10 @@ public class OrderEndpoint {
         return resultSet.getInt("quantity");
     }
 
+    /**
+     * createOrder: OrderDTO, Integer, Integer -> Map<Boolean, ResultSet>
+     * Purpose: creates an order
+     */
     public Map<Boolean, ResultSet> createOrder(OrderDTO orderDTO, Integer idWorker, Integer idHeadquarter){
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;

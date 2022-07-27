@@ -64,6 +64,13 @@
                <BorderPane.margin>
                   <Insets left="20.0" />
                </BorderPane.margin>
+               <graphic>
+                  <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../icons/ft%20logo.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
             </Label>
          </left>
          <right>
