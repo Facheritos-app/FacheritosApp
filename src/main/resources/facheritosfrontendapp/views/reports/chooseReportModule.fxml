@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="517.0" prefWidth="647.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="facheritosfrontendapp.controller.report.ReportController">
+<AnchorPane prefHeight="517.0" prefWidth="647.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="facheritosfrontendapp.controller.report.ReportController">
    <children>
       <Label layoutX="14.0" layoutY="14.0" text="Elige una opción">
          <font>
@@ -194,6 +194,43 @@
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
+               <HBox.margin>
+                  <Insets left="2.0" />
+               </HBox.margin>
+            </VBox>
+            <VBox onMouseClicked="#carsClicked" prefHeight="202.0" prefWidth="182.0" styleClass="card" stylesheets="@../style.css">
+               <children>
+                  <ImageView fitHeight="65.0" fitWidth="68.0">
+                     <image>
+                        <Image url="@../../icons/carIcon.png" />
+                     </image>
+                     <VBox.margin>
+                        <Insets left="60.0" top="40.0" />
+                     </VBox.margin>
+                  </ImageView>
+                  <Label alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="71.0" prefWidth="170.0" text="Carros" textAlignment="CENTER" wrapText="true">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="10.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label alignment="CENTER" contentDisplay="BOTTOM" ellipsisString="" prefHeight="44.0" prefWidth="140.0" text="Listado de carros" textAlignment="CENTER" wrapText="true">
+                     <VBox.margin>
+                        <Insets bottom="20.0" left="30.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </Label>
+               </children>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <HBox.margin>
+                  <Insets left="10.0" />
+               </HBox.margin>
             </VBox>
          </children>
       </HBox>
