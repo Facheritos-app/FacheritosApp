@@ -16,9 +16,9 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<ScrollPane style="-fx-background-color: white;" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="facheritosfrontendapp.controller.sale.AddSaleController">
+<ScrollPane stylesheets="@../style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="facheritosfrontendapp.controller.sale.AddSaleController">
   <content>
-    <AnchorPane focusTraversable="true" style="-fx-background-color: FFFFF;">
+    <AnchorPane focusTraversable="true">
          <children>
             <Label layoutX="706.0" layoutY="360.0" text="Venta:">
                <font>
@@ -194,17 +194,17 @@
                   <Font name="System Bold" size="16.0" />
                </font>
             </Label>
-            <Label fx:id="deleteLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="483.0" layoutY="109.0" prefHeight="21.0" prefWidth="362.0" textAlignment="CENTER" textFill="RED">
+            <Label fx:id="deleteLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="483.0" layoutY="76.0" textAlignment="CENTER" textFill="RED">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
             </Label>
-            <Label fx:id="addLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="37.0" layoutY="109.0" prefHeight="21.0" prefWidth="362.0" textAlignment="CENTER" textFill="RED">
+            <Label fx:id="addLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="100.0" layoutY="41.0" prefHeight="21.0" prefWidth="350.0" textAlignment="CENTER" textFill="RED">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
             </Label>
-            <Label fx:id="noQuantity" alignment="CENTER" contentDisplay="CENTER" layoutX="37.0" layoutY="109.0" prefHeight="21.0" prefWidth="362.0" textAlignment="CENTER" textFill="RED">
+            <Label fx:id="noQuantity" alignment="CENTER" contentDisplay="CENTER" layoutX="183.0" layoutY="30.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="21.0" prefWidth="216.0" textAlignment="CENTER" textFill="RED">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
@@ -214,7 +214,7 @@
                   <Font name="System Bold" size="15.0" />
                </font>
             </Label>
-            <Label fx:id="noFoundTabla" alignment="CENTER" layoutX="483.0" layoutY="109.0" prefHeight="21.0" textFill="RED">
+            <Label fx:id="noFoundTabla" alignment="CENTER" layoutX="482.0" layoutY="41.0" textFill="RED">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
