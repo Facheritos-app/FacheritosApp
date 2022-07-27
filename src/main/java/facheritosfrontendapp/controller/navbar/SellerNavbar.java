@@ -30,7 +30,7 @@ public class SellerNavbar implements Initializable {
 
     @FXML
     public void homeClicked() throws IOException {
-        sellerDashboardController = (SellerDashboardController) dashboardController.changeContent("dashboard/sellerDashboard");
+        sellerDashboardController = (SellerDashboardController) dashboardController.changeContent("dashboard/sellerDashboard", true);
         sellerDashboardController.showDashboard();
     }
 

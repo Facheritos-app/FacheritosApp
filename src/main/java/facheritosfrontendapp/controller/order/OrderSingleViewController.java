@@ -141,7 +141,7 @@ public class OrderSingleViewController implements Initializable {
     }
 
     public void setTotalPriceAndQuantity(ResultSet resultSet) throws SQLException {
-        totalPriceLabel.setText("" + resultSet.getDouble("total"));
+        totalPriceLabel.setText("" + new BigDecimal(resultSet.getDouble("total")));
         quantityLabel.setText(resultSet.getString("quantity"));
     }
 
@@ -186,7 +186,7 @@ public class OrderSingleViewController implements Initializable {
         headquarterLabel.setText("   " + resultSet.getString("headquarter_name"));
         creationDateLabel.setText("   " + resultSet.getDate("created_at").toLocalDate().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)));
         dueDateLabel.setText("   " + resultSet.getDate("due_date").toLocalDate().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)));
-        priceLabel.setText("   " + resultSet.getDouble("price"));
+        priceLabel.setText("   " + new BigDecimal(resultSet.getDouble("price")));
         statusLabel.setText("   " + resultSet.getString("status"));
     }
 

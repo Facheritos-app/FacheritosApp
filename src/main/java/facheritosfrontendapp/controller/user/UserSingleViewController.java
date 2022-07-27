@@ -112,9 +112,6 @@ public class UserSingleViewController implements Initializable {
     private TextField cityCombo;
 
     @FXML
-    private Button deleteUserButton;
-
-    @FXML
     private Button editUserButton;
 
     @FXML
@@ -147,7 +144,6 @@ public class UserSingleViewController implements Initializable {
         salaryField.setDisable(false);
         cityCombo.setDisable(false);
 
-        deleteUserButton.setVisible(false);
         editUserButton.setVisible(false);
 
         cancelButton.setVisible(true);

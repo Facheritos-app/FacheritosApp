@@ -29,6 +29,8 @@ public class OrderController implements Initializable {
 
     private OrderSingleViewController orderSingleViewController;
 
+    private OrderAddController orderAddController;
+
     private OrderEndpoint orderEndpoint;
 
     private ArrayList<OrderRowView> orderRowsArray;
@@ -63,11 +65,13 @@ public class OrderController implements Initializable {
         orderEndpoint = new OrderEndpoint();
         orderRowsArray = new ArrayList<>();
         orderSingleViewController = new OrderSingleViewController();
+        orderAddController = new OrderAddController();
     }
 
     @FXML
-    protected void addOrderAction() {
-
+    protected void addOrderAction() throws IOException {
+        orderAddController = (OrderAddController) dashboardController.changeContent("orders/ordersAdd", true);
+       // orderAddController.showParts();
     }
 
     @Override

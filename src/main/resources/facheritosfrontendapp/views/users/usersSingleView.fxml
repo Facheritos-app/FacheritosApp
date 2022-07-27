@@ -86,14 +86,6 @@
                   <Font name="Poppins Regular" size="12.0" />
                </font>
             </TextField>
-            <Button fx:id="deleteUserButton" alignment="CENTER" layoutX="268.0" layoutY="570.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="132.0" styleClass="red-button" stylesheets="@../style.css" text="Eliminar usuario" textFill="WHITE">
-               <font>
-                  <Font name="Poppins Bold" size="12.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
             <TextField fx:id="phoneField" disable="true" layoutX="44.0" layoutY="276.0" prefHeight="25.0" prefWidth="224.0" style="-fx-background-radius: 10; -fx-background-color: D3D3D3;" styleClass="input-text" stylesheets="@../style.css">
                <font>
                   <Font name="Poppins Regular" size="12.0" />
